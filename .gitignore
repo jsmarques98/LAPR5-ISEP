@@ -48,3 +48,12 @@ Thumbs.db
 *.mov
 *.wmv
 
+# misc
+.DS_Store
+.env*
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+build
