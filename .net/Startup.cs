@@ -8,8 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using DDDSample1.Infrastructure;
 using DDDSample1.Infrastructure.Shared;
 using DDDSample1.Infrastructure.Trucks;
+using DDDSample1.Infrastructure.Warehouses;
 using DDDSample1.Domain.Shared;
 using DDDSample1.Domain.Trucks;
+using DDDSample1.Domain.Warehouses;
 
 namespace DDDSample1
 {
@@ -67,6 +69,9 @@ namespace DDDSample1
 
             services.AddTransient<ITruckRepository,TruckRepository>();
             services.AddTransient<TruckService>();
+
+            services.AddTransient<IWarehouseRepository,WarehouseRepository>();
+            services.AddTransient<WarehouseService>();
         }
     }
 }

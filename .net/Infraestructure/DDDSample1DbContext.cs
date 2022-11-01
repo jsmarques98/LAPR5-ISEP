@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 
 using DDDSample1.Domain.Trucks;
+using DDDSample1.Domain.Warehouses;
 
 using DDDSample1.Infrastructure.Trucks;
+using DDDSample1.Infrastructure.Warehouses;
 
 namespace DDDSample1.Infrastructure
 {
@@ -12,6 +14,8 @@ namespace DDDSample1.Infrastructure
 
         public DbSet<Truck> Trucks { get; set; }
 
+        public DbSet<Warehouse> Warehouses { get; set; }
+
         public DDDSample1DbContext(DbContextOptions options) : base(options)
         {
 
@@ -20,6 +24,8 @@ namespace DDDSample1.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new TruckEntityTypeConfiguration());
+
+             modelBuilder.ApplyConfiguration(new WarehouseEntityTypeConfiguration());
         }
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\luisa\\Desktop\\lei22_23_s5_3di_50\\DDDNetCore.csproj": {}
+    "C:\\Users\\João Marques\\Documents\\lei22_23_s5_3di_50\\.net\\DDDNetCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\luisa\\Desktop\\lei22_23_s5_3di_50\\DDDNetCore.csproj": {
+    "C:\\Users\\João Marques\\Documents\\lei22_23_s5_3di_50\\.net\\DDDNetCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\luisa\\Desktop\\lei22_23_s5_3di_50\\DDDNetCore.csproj",
+        "projectUniqueName": "C:\\Users\\João Marques\\Documents\\lei22_23_s5_3di_50\\.net\\DDDNetCore.csproj",
         "projectName": "DDDNetCore",
-        "projectPath": "C:\\Users\\luisa\\Desktop\\lei22_23_s5_3di_50\\DDDNetCore.csproj",
-        "packagesPath": "C:\\Users\\luisa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\luisa\\Desktop\\lei22_23_s5_3di_50\\obj\\",
+        "projectPath": "C:\\Users\\João Marques\\Documents\\lei22_23_s5_3di_50\\.net\\DDDNetCore.csproj",
+        "packagesPath": "C:\\Users\\João Marques\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\João Marques\\Documents\\lei22_23_s5_3di_50\\.net\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\luisa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\João Marques\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp5.0"
@@ -42,11 +42,6 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "Microsoft.AspNetCore.Razor.Design": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -70,8 +65,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -83,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     }
