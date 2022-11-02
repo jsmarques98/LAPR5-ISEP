@@ -5,6 +5,7 @@ import Logger from './logger';
 
 import config from '../../config';
 
+
 export default async ({ expressApp }) => {
   const mongoConnection = await mongooseLoader();
   Logger.info('✌️ DB loaded and connected!');
@@ -21,14 +22,30 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/roleSchema',
   };
 
+  const truckSchema = {
+    // compare with the approach followed in repos and services
+    name: 'truckSchema',
+    schema: '../persistence/schemas/truckSchema',
+  };
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
   }
 
+  const truckController = {
+    name: config.controllers.truck.name,
+    path: config.controllers.truck.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
+  }
+
+  const truckRepo = {
+    name: config.repos.truck.name,
+    path: config.repos.truck.path
   }
 
   const userRepo = {
@@ -41,21 +58,32 @@ export default async ({ expressApp }) => {
     path: config.services.role.path
   }
 
+  const truckService = {
+    name: config.services.truck.name,
+    path: config.services.truck.path
+  }
+
+
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
       userSchema,
-      roleSchema
+      roleSchema,
+      truckSchema
     ],
     controllers: [
-      roleController
+      roleController,
+      truckController
     ],
     repos: [
       roleRepo,
-      userRepo
+      userRepo,
+      truckRepo
     ],
     services: [
-      roleService
+      roleService,
+      truckService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

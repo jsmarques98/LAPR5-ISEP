@@ -29,4 +29,11 @@ export default (app: Router) => {
       }),
     }),
     (req, res, next) => ctrl.updateRole(req, res, next) );
+    route.get('',
+    celebrate({
+      body: Joi.object({
+        id: Joi.string().required()
+      }),
+    }),
+    (req, res, next) => ctrl.getRole(req, res, next));
 };

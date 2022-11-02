@@ -56,9 +56,22 @@ export default class RoleRepo implements IRoleRepo {
   }
 
   public async findByDomainId (roleId: RoleId | string): Promise<Role> {
+    console.log(roleId);
     const query = { domainId: roleId};
     const roleRecord = await this.roleSchema.findOne( query as FilterQuery<IRolePersistence & Document> );
+    console.log(roleRecord);
+    if( roleRecord != null) {
+      return RoleMap.toDomain(roleRecord);
+    }
+    else
+      return null;
+  }
 
+  public async findByName (roleName:  string): Promise<Role> {
+ 
+    const query = { name: roleName};
+    const roleRecord = await this.roleSchema.findOne( query as FilterQuery<IRolePersistence & Document> );
+    console.log(roleRecord);
     if( roleRecord != null) {
       return RoleMap.toDomain(roleRecord);
     }
