@@ -6,4 +6,5 @@ export interface ITruckPersistence {
     playload: string;
     tare: string;
     baterryChargingTime: string;
+    plate :string;
   }

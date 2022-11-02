@@ -64,8 +64,8 @@ export default class TruckRepo implements ITruckRepo {
       return null;
   }
 
-  public async findByMatricula (truckMatricula:  string): Promise<Truck> {
-     const query = { matricula: truckMatricula};
+  public async findByPlate (truckPlate:  string): Promise<Truck> {
+     const query = { plate: truckPlate};
      const truckRecord = await this.truckSchema.findOne( query as FilterQuery<ITruckPersistence & Document> );
  
      if( truckRecord != null) {

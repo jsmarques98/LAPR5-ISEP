@@ -40,7 +40,7 @@ export default (app: Router) => {
     route.get('',
     celebrate({
       body: Joi.object({
-        matricula: Joi.string().required()
+        plate: Joi.string().required()
       }),
     }),
     (req, res, next) => ctrl.getTruck(req, res, next));
