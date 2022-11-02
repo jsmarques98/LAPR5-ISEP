@@ -37,12 +37,13 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateTruck(req, res, next) );
 
+   
+
     route.get('',
     celebrate({
-      body: Joi.object({
-        plate: Joi.string().required()
-      }),
+      params: Joi.object({
+      })
     }),
-    (req, res, next) => ctrl.getTruck(req, res, next));
+    (req, res, next) => ctrl.getAllTrucks(req, res, next));
 };
 

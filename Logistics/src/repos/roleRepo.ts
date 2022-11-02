@@ -56,7 +56,7 @@ export default class RoleRepo implements IRoleRepo {
   }
 
   public async findByDomainId (roleId: RoleId | string): Promise<Role> {
-    console.log(roleId);
+
     const query = { domainId: roleId};
     const roleRecord = await this.roleSchema.findOne( query as FilterQuery<IRolePersistence & Document> );
     console.log(roleRecord);
@@ -78,4 +78,11 @@ export default class RoleRepo implements IRoleRepo {
     else
       return null;
   }
+
+  public async findAll(): Promise<Role[]> {
+    const roleRecord = await this.roleSchema.find();
+    return roleRecord !== null ? roleRecord.map((postRecord) => RoleMap.toDomain(postRecord)): null  
+}
+
+  
 }

@@ -59,4 +59,22 @@ export default class TruckController implements ITruckController /* TODO: extend
     }
   };
 
+  public async getAllTrucks(req: Request, res: Response, next: NextFunction) {
+    try {
+      
+      const roleOrError = await this.truckServiceInstance.getAllTrucks() as Result<ITruckDTO[]>
+
+      if (roleOrError.isFailure) {
+          return res.status(400).send();
+      }
+
+      const rolePosts = roleOrError.getValue();
+      res.status(200);
+      return  res.json(rolePosts);
+    }
+    catch (e) {
+      return next(e);
+    }
+  };
+
 }

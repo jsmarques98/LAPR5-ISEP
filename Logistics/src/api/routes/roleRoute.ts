@@ -31,9 +31,8 @@ export default (app: Router) => {
     (req, res, next) => ctrl.updateRole(req, res, next) );
     route.get('',
     celebrate({
-      body: Joi.object({
-        id: Joi.string().required()
-      }),
+      params: Joi.object({
+      })
     }),
-    (req, res, next) => ctrl.getRole(req, res, next));
+    (req, res, next) => ctrl.getAllRole(req, res, next));
 };

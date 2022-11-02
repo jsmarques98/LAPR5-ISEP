@@ -62,4 +62,23 @@ export default class RoleController implements IRoleController /* TODO: extends 
       return next(e);
     }
   };
+  public async getAllRole(req: Request, res: Response, next: NextFunction) {
+    try {
+      
+      const roleOrError = await this.roleServiceInstance.getAllRoles() as Result<IRoleDTO[]>
+
+      if (roleOrError.isFailure) {
+          return res.status(400).send();
+      }
+
+      const rolePosts = roleOrError.getValue();
+      res.status(200);
+      return  res.json(rolePosts);
+    }
+    catch (e) {
+      return next(e);
+    }
+  };
+
+
 }

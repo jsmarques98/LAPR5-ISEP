@@ -29,6 +29,22 @@ export default class TruckService implements ITruckService {
     }
   }
 
+  public async getAllTrucks(): Promise<Result<ITruckDTO[]>> {
+    try {
+      const alllTruck = await this.truckRepo.findAll();
+
+      if (alllTruck === null) {
+          return Result.fail<ITruckDTO[]>("Não existem camiões registados.");
+      }
+
+      const resultado = alllTruck.map((alllTruck) => TruckMap.toDTO(alllTruck) as ITruckDTO);
+      return Result.ok<ITruckDTO[]>(resultado);
+  } catch(e) {
+      throw e;
+  }
+    
+  }
+
 
   public async createTruck(truckDTO: ITruckDTO): Promise<Result<ITruckDTO>> {
     try {

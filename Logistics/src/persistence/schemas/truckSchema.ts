@@ -5,16 +5,14 @@ const TruckSchema = new mongoose.Schema(
   {
     domainId: { type: String, unique: true },
     name: { type: String, unique: true },
-    maxBattery:{type: String, unique:false},
-    autonomy:{type: String, unique:false},
-    playload:{type: String, unique:false},
-    tare:{type: String, unique:false},
-    baterryChargingTime:{type: String, unique:false},
+    maxBattery:{type: String},
+    autonomy:{type: String,},
+    playload:{type: String},
+    tare:{type: String},
+    baterryChargingTime:{type: String},
     plate:{type: String, unique:true},
   },
-  {
-    timestamps: true
-  }
+  { timestamps: true},
 );
 
 export default mongoose.model<ITruckPersistence & mongoose.Document>('Truck', TruckSchema);
