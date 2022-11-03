@@ -23,4 +23,8 @@ export class Plate extends ValueObject<PlateProps> {
       return Result.ok<Plate>(new Plate({ value: plate }))
     }
   }
+
+  toString() {
+    return String(this.props.value)
+  }
 }

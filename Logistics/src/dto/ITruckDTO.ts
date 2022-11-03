@@ -3,7 +3,7 @@ export default interface ITruckDTO {
     name: string;
     maxBattery: string; 
     autonomy: string;
-    playload: string;
+    payLoad: string;
     tare: string;
     baterryChargingTime: string;
     plate: string;

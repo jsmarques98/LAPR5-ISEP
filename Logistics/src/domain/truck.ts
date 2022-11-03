@@ -5,7 +5,7 @@ import { Result } from "../core/logic/Result";
 import { TruckId } from "./truckId";
 import { MaxBattery } from "./maxBattery";
 import { Autonomy} from "./autonomy";
-import { PlayLoad} from "./playLoad";
+import { PayLoad} from "./payload";
 import {Tare} from "./tare";
 import { BaterryChargingTime} from "./baterryChargingTime";
 import { Plate } from "./plate";
@@ -18,7 +18,7 @@ interface TruckProps {
   name: string;
   maxBattery: MaxBattery; 
   autonomy: Autonomy;
-  playload: PlayLoad;
+  payLoad: PayLoad;
   tare: Tare;
   baterryChargingTime: BaterryChargingTime;
   plate: Plate;
@@ -49,8 +49,8 @@ export class Truck extends AggregateRoot<TruckProps> {
 
   
 
-  get playload(): PlayLoad {
-    return this.props.playload;
+  get payLoad(): PayLoad {
+    return this.props.payLoad;
   }
 
   get tare(): Tare {
@@ -68,6 +68,21 @@ export class Truck extends AggregateRoot<TruckProps> {
     this.props.name = value;
   } 
 
+  set autonomy(value: Autonomy){
+    this.props.autonomy=value;
+  }
+  set maxBattery(value: MaxBattery){
+    this.props.maxBattery=value;
+  }
+  set payLoad(value: PayLoad){
+    this.props.payLoad=value;
+  }
+  set tare(value: Tare){
+    this.props.tare=value;
+  }
+  set baterryChargingTime(value: BaterryChargingTime){
+    this.props.baterryChargingTime=value;
+  }
 
   private constructor (props: TruckProps, id?: UniqueEntityID) {
     super(props, id);
@@ -82,7 +97,7 @@ export class Truck extends AggregateRoot<TruckProps> {
     } else {
 
       const truck = new Truck({ name: name,maxBattery: MaxBattery.create(truckDTO.maxBattery).getValue(),
-        autonomy: Autonomy.create(truckDTO.autonomy).getValue(), playload: PlayLoad.create(truckDTO.playload).getValue(), tare: Tare.create(truckDTO.tare).getValue(),
+        autonomy: Autonomy.create(truckDTO.autonomy).getValue(), payLoad: PayLoad.create(truckDTO.payLoad).getValue(), tare: Tare.create(truckDTO.tare).getValue(),
         baterryChargingTime:  BaterryChargingTime.create(truckDTO.baterryChargingTime).getValue(),plate:  Plate.create(truckDTO.plate).getValue()}, id);
 
       return Result.ok<Truck>( truck )

@@ -16,7 +16,7 @@ export class TruckMap extends Mapper<Truck> {
       name: truck.name.toString(),
       maxBattery: truck.maxBattery.toString(), 
       autonomy: truck.autonomy.toString(),
-      playload: truck.playload.toString(),
+      payLoad: truck.payLoad.toString(),
       tare: truck.tare.toString(),
       baterryChargingTime: truck.baterryChargingTime.toString(),
       plate: truck.plate.toString(),
@@ -35,12 +35,13 @@ export class TruckMap extends Mapper<Truck> {
   }
 
   public static toPersistence (truck: Truck): any {
+
     return {
       domainId: truck.id.toString(),
       name: truck.name,
       maxBattery: truck.maxBattery.value,
       autonomy: truck.autonomy.value,
-      playload: truck.playload.value,
+      payLoad: truck.payLoad.value,
       tare: truck.tare.value,
       baterryChargingTime: truck.baterryChargingTime.value,
       plate: truck.plate.value,

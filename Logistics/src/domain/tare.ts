@@ -23,4 +23,8 @@ export class Tare extends ValueObject<TareProps> {
       return Result.ok<Tare>(new Tare({ value: tare }))
     }
   }
+
+  toString() {
+    return String(this.props.value)
+  }
 }

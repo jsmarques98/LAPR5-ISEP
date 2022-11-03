@@ -24,4 +24,8 @@ export class BaterryChargingTime extends ValueObject<BaterryChargingTimeProps> {
       return Result.ok<BaterryChargingTime>(new BaterryChargingTime({ value: baterryChargingTime }))
     }
   }
+
+  toString() {
+    return String(this.props.value)
+  }
 }

@@ -23,4 +23,7 @@ export class Autonomy extends ValueObject<AutonomyProps> {
       return Result.ok<Autonomy>(new Autonomy({ value: autonomy }))
     }
   }
+  public toString() : string{
+    return String(this.props.value)
+  }
 }

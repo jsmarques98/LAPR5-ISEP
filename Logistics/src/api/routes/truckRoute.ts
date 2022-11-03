@@ -19,7 +19,7 @@ export default (app: Router) => {
         name: Joi.string().required(),
         autonomy: Joi.string().required(),
         maxBattery: Joi.string().required(),
-        playload: Joi.string().required(),
+        payLoad: Joi.string().required(),
         tare: Joi.string().required(),
         baterryChargingTime: Joi.string().required(),
         plate:Joi.string().required(),
@@ -31,8 +31,13 @@ export default (app: Router) => {
   route.put('',
     celebrate({
       body: Joi.object({
-        id: Joi.string().required(),
-        name: Joi.string().required()
+        name: Joi.string().required(),
+        autonomy: Joi.string().required(),
+        maxBattery: Joi.string().required(),
+        payLoad: Joi.string().required(),
+        tare: Joi.string().required(),
+        baterryChargingTime: Joi.string().required(),
+        plate:Joi.string().required(),
       }),
     }),
     (req, res, next) => ctrl.updateTruck(req, res, next) );

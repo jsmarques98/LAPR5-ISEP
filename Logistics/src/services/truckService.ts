@@ -6,6 +6,11 @@ import ITruckRepo from './IRepos/ITruckRepo';
 import ITruckService from './IServices/ITruckService';
 import { Result } from "../core/logic/Result";
 import { TruckMap } from "../mappers/TruckMap";
+import { Autonomy } from '../domain/autonomy';
+import { Tare } from '../domain/tare';
+import { BaterryChargingTime } from '../domain/baterryChargingTime';
+import { PayLoad } from '../domain/payLoad';
+import { MaxBattery } from '../domain/maxBattery';
 
 @Service()
 export default class TruckService implements ITruckService {
@@ -63,13 +68,20 @@ export default class TruckService implements ITruckService {
 
   public async updateTruck(truckDTO: ITruckDTO): Promise<Result<ITruckDTO>> {
     try {
-      const truck = await this.truckRepo.findByDomainId(truckDTO.id);
+      const truck = await this.truckRepo.findByPlate(truckDTO.plate);
 
       if (truck === null) {
         return Result.fail<ITruckDTO>("truck not found");
       }
       else {
+       
         truck.name = truckDTO.name;
+        truck.maxBattery=MaxBattery.create(truckDTO.maxBattery).getValue(); 
+        truck.autonomy=Autonomy.create(truckDTO.autonomy).getValue();
+        truck.payLoad=PayLoad.create(truckDTO.payLoad).getValue();
+        truck.tare=Tare.create(truckDTO.tare).getValue();
+        truck.baterryChargingTime=BaterryChargingTime.create(truckDTO.baterryChargingTime).getValue();
+       
         await this.truckRepo.save(truck);
 
         const truckDTOResult = TruckMap.toDTO( truck ) as ITruckDTO;

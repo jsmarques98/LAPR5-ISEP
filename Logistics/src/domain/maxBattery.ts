@@ -24,4 +24,7 @@ export class MaxBattery extends ValueObject<MaxBatteryProps> {
       return Result.ok<MaxBattery>(new MaxBattery({ value: maxBattery }))
     }
   }
+  toString() {
+    return String(this.props.value)
+  }
 }

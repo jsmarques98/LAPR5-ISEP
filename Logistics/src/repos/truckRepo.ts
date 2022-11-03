@@ -37,13 +37,16 @@ export default class TruckRepo implements ITruckRepo {
     const truckDocument = await this.truckSchema.findOne( query );
     try {
       if (truckDocument === null ) {
-     
         const rawTruck: any = TruckMap.toPersistence(truck);
         const truckCreated = await this.truckSchema.create(rawTruck);
-    
         return TruckMap.toDomain(truckCreated);
       } else {
         truckDocument.name = truck.name;
+        truckDocument.maxBattery= truck.maxBattery.value; 
+        truckDocument.autonomy= truck.autonomy.value;
+        truckDocument.payLoad= truck.payLoad.value;
+        truckDocument.tare= truck.tare.value;
+        truckDocument.baterryChargingTime= truck.baterryChargingTime.value;
         await truckDocument.save();
         return truck;
       }

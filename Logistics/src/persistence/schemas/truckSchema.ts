@@ -7,7 +7,7 @@ const TruckSchema = new mongoose.Schema(
     name: { type: String, unique: true },
     maxBattery:{type: String},
     autonomy:{type: String,},
-    playload:{type: String},
+    payLoad:{type: String},
     tare:{type: String},
     baterryChargingTime:{type: String},
     plate:{type: String, unique:true},
