@@ -12,7 +12,9 @@ namespace DDDSample1.Infrastructure.Warehouses
             
             //builder.ToTable("Warehouses", SchemaNames.DDDSample1);
             builder.HasKey(b => b.Id);
-            //builder.Property<bool>("_active").HasColumnName("Active");
+            builder.OwnsOne(b => b.Address);
+            builder.OwnsOne(b => b.Coordinates);
+            builder.OwnsOne(b => b.Designation);
         }
     }
 }

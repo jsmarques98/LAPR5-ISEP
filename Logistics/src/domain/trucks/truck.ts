@@ -1,17 +1,17 @@
-import { AggregateRoot } from "../core/domain/AggregateRoot";
-import { UniqueEntityID } from "../core/domain/UniqueEntityID";
+import { AggregateRoot } from "../../core/domain/AggregateRoot";
+import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 
-import { Result } from "../core/logic/Result";
+import { Result } from "../../core/logic/Result";
 import { TruckId } from "./truckId";
 import { MaxBattery } from "./maxBattery";
 import { Autonomy} from "./autonomy";
-import { PayLoad} from "./payload";
+import { PayLoad} from "./payLoad";
 import {Tare} from "./tare";
 import { BaterryChargingTime} from "./baterryChargingTime";
 import { Plate } from "./plate";
 
 
-import ITruckDTO from "../dto/ITruckDTO";
+import ITruckDTO from "../../dto/ITruckDTO";
 
 
 interface TruckProps {

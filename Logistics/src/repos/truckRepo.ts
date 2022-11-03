@@ -1,8 +1,8 @@
 import { Service, Inject } from 'typedi';
 
 import ITruckRepo from '../services/IRepos/ITruckRepo';
-import { Truck } from "../domain/truck";
-import { TruckId } from "../domain/truckId";
+import { Truck } from "../domain/trucks/truck";
+import { TruckId } from "../domain/trucks/truckId";
 import { TruckMap } from "../mappers/TruckMap";
 
 import { Document, FilterQuery, Model } from 'mongoose';

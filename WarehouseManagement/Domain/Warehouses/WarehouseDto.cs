@@ -6,12 +6,12 @@ namespace DDDSample1.Domain.Warehouses
     {
         public String Id { get; set; }
         public string Designation { get; set; }
-        public string Street {get; private set;}
-        public int DoorNumber {get; private set;}
-        public string PostCode {get; private set;}
-        public string City {get; private set;}
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
-        public string Altitude { get; set; }
+        public string Street {get; set;}
+        public int DoorNumber {get; set;}
+        public string PostCode {get; set;}
+        public string City {get; set;}
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public double Altitude { get; set; }
     }
 }

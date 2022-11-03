@@ -21,10 +21,10 @@ namespace DDDSample1.Domain.Warehouses
             
             List<WarehouseDto> listDto = list.ConvertAll<WarehouseDto>(war => 
                 new WarehouseDto{Id = war.Id.AsString(), Designation = war.Designation.Value(),
-                Street = war.Address.Street(), DoorNumber = war.Address.DoorNumber(),
-                PostCode = war.Address.PostCode(), City = war.Address.City(),
-                Latitude = war.Coordinates.Latitude(), Longitutde = war.Coordinates.Longitude(),
-                Altitude = war.Coordinates.Altitude()});
+                Street = war.Address.Street, DoorNumber = war.Address.DoorNumber,
+                PostCode = war.Address.PostCode, City = war.Address.City,
+                Latitude = war.Coordinates.Latitude, Longitude = war.Coordinates.Longitude,
+                Altitude = war.Coordinates.Altitude});
 
             return listDto;
         }
@@ -37,10 +37,10 @@ namespace DDDSample1.Domain.Warehouses
                 return null;
 
             return new WarehouseDto{Id = war.Id.AsString(), Designation = war.Designation.Value(),
-                Street = war.Address.Street(), DoorNumber = war.Address.DoorNumber(),
-                PostCode = war.Address.PostCode(), City = war.Address.City(),
-                Latitude = war.Coordinates.Latitude(), Longitutde = war.Coordinates.Longitude(),
-                Altitude = war.Coordinates.Altitude()};
+                Street = war.Address.Street, DoorNumber = war.Address.DoorNumber,
+                PostCode = war.Address.PostCode, City = war.Address.City,
+                Latitude = war.Coordinates.Latitude, Longitude = war.Coordinates.Longitude,
+                Altitude = war.Coordinates.Altitude};
         }
 
         public async Task<WarehouseDto> AddAsync(WarehouseDto dto)
@@ -51,11 +51,11 @@ namespace DDDSample1.Domain.Warehouses
 
             await this._unitOfWork.CommitAsync();
 
-            return new WarehouseDto{Id = war.Id.AsString(), Designation = war.Designation.Value(),
-                Street = war.Address.Street(), DoorNumber = war.Address.DoorNumber(),
-                PostCode = war.Address.PostCode(), City = war.Address.City(),
-                Latitude = war.Coordinates.Latitude(), Longitutde = war.Coordinates.Longitude(),
-                Altitude = war.Coordinates.Altitude()};
+            return new WarehouseDto{Id = warehouse.Id.AsString(), Designation = warehouse.Designation.Value(),
+                Street = warehouse.Address.Street, DoorNumber = warehouse.Address.DoorNumber,
+                PostCode = warehouse.Address.PostCode, City = warehouse.Address.City,
+                Latitude = warehouse.Coordinates.Latitude, Longitude = warehouse.Coordinates.Longitude,
+                Altitude = warehouse.Coordinates.Altitude};
         }
 
         public async Task<WarehouseDto> UpdateAsync(WarehouseDto dto)
@@ -68,15 +68,15 @@ namespace DDDSample1.Domain.Warehouses
             // change all fields
             warehouse.ChangeDesignation(new Designation(dto.Designation));
             warehouse.ChangeAddress(new Address(dto.Street, dto.DoorNumber, dto.PostCode, dto.City));
-            warehouse.ChangeCoordinates(new Coordinates(dto.Latitude, dto.Longitude, dto.Altitude);
+            warehouse.ChangeCoordinates(new Coordinates(dto.Latitude, dto.Longitude, dto.Altitude));
             
             await this._unitOfWork.CommitAsync();
 
-            return new WarehouseDto{Id = war.Id.AsString(), Designation = war.Designation.Value(),
-                Street = war.Address.Street(), DoorNumber = war.Address.DoorNumber(),
-                PostCode = war.Address.PostCode(), City = war.Address.City(),
-                Latitude = war.Coordinates.Latitude(), Longitutde = war.Coordinates.Longitude(),
-                Altitude = war.Coordinates.Altitude()});
+            return new WarehouseDto{Id = warehouse.Id.AsString(), Designation = warehouse.Designation.Value(),
+                Street = warehouse.Address.Street, DoorNumber = warehouse.Address.DoorNumber,
+                PostCode = warehouse.Address.PostCode, City = warehouse.Address.City,
+                Latitude = warehouse.Coordinates.Latitude, Longitude = warehouse.Coordinates.Longitude,
+                Altitude = warehouse.Coordinates.Altitude};
         }
         
 
@@ -92,11 +92,11 @@ namespace DDDSample1.Domain.Warehouses
             
             await this._unitOfWork.CommitAsync();
 
-            return new WarehouseDto{Id = war.Id.AsString(), Designation = war.Designation.Value(),
-                Street = war.Address.Street(), DoorNumber = war.Address.DoorNumber(),
-                PostCode = war.Address.PostCode(), City = war.Address.City(),
-                Latitude = war.Coordinates.Latitude(), Longitutde = war.Coordinates.Longitude(),
-                Altitude = war.Coordinates.Altitude()};
+            return new WarehouseDto{Id = warehouse.Id.AsString(), Designation = warehouse.Designation.Value(),
+                Street = warehouse.Address.Street, DoorNumber = warehouse.Address.DoorNumber,
+                PostCode = warehouse.Address.PostCode, City = warehouse.Address.City,
+                Latitude = warehouse.Coordinates.Latitude, Longitude = warehouse.Coordinates.Longitude,
+                Altitude = warehouse.Coordinates.Altitude};
         }
         
 
@@ -113,11 +113,11 @@ namespace DDDSample1.Domain.Warehouses
             this._repo.Remove(warehouse);
             await this._unitOfWork.CommitAsync();
 
-            return return new WarehouseDto{Id = war.Id.AsString(), Designation = war.Designation.Value(),
-                Street = war.Address.Street(), DoorNumber = war.Address.DoorNumber(),
-                PostCode = war.Address.PostCode(), City = war.Address.City(),
-                Latitude = war.Coordinates.Latitude(), Longitutde = war.Coordinates.Longitude(),
-                Altitude = war.Coordinates.Altitude()};
+            return new WarehouseDto{Id = warehouse.Id.AsString(), Designation = warehouse.Designation.Value(),
+                Street = warehouse.Address.Street, DoorNumber = warehouse.Address.DoorNumber,
+                PostCode = warehouse.Address.PostCode, City = warehouse.Address.City,
+                Latitude = warehouse.Coordinates.Latitude, Longitude = warehouse.Coordinates.Longitude,
+                Altitude = warehouse.Coordinates.Altitude};
         }
     }
 }

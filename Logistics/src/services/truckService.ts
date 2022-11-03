@@ -1,16 +1,16 @@
 import { Service, Inject } from 'typedi';
 import config from "../../config";
 import ITruckDTO from '../dto/ITruckDTO';
-import { Truck } from "../domain/truck";
+import { Truck } from "../domain/trucks/truck";
 import ITruckRepo from './IRepos/ITruckRepo';
 import ITruckService from './IServices/ITruckService';
 import { Result } from "../core/logic/Result";
 import { TruckMap } from "../mappers/TruckMap";
-import { Autonomy } from '../domain/autonomy';
-import { Tare } from '../domain/tare';
-import { BaterryChargingTime } from '../domain/baterryChargingTime';
-import { PayLoad } from '../domain/payLoad';
-import { MaxBattery } from '../domain/maxBattery';
+import { Autonomy } from '../domain/trucks/autonomy';
+import { Tare } from '../domain/trucks/tare';
+import { BaterryChargingTime } from '../domain/trucks/baterryChargingTime';
+import { PayLoad } from '../domain/trucks/payLoad';
+import { MaxBattery } from '../domain/trucks/maxBattery';
 
 @Service()
 export default class TruckService implements ITruckService {

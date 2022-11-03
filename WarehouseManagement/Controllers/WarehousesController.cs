@@ -27,7 +27,7 @@ namespace DDDSample1.Controllers
 
         // GET: api/Warehouses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<WarehouseDto>> GetGetById(Guid id)
+        public async Task<ActionResult<WarehouseDto>> GetGetById(String id)
         {
             var war = await _service.GetByIdAsync(new WarehouseId(id));
 
@@ -41,7 +41,7 @@ namespace DDDSample1.Controllers
 
         // POST: api/Warehouses
         [HttpPost]
-        public async Task<ActionResult<WarehouseDto>> Create(CreatingWarehouseDto dto)
+        public async Task<ActionResult<WarehouseDto>> Create(WarehouseDto dto)
         {
             var war = await _service.AddAsync(dto);
 
@@ -51,7 +51,7 @@ namespace DDDSample1.Controllers
         
         // PUT: api/Warehouses/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<WarehouseDto>> Update(Guid id, WarehouseDto dto)
+        public async Task<ActionResult<WarehouseDto>> Update(String id, WarehouseDto dto)
         {
             if (id != dto.Id)
             {
@@ -76,7 +76,7 @@ namespace DDDSample1.Controllers
 
         // Inactivate: api/Warehouses/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<WarehouseDto>> SoftDelete(Guid id)
+        public async Task<ActionResult<WarehouseDto>> SoftDelete(String id)
         {
             var war = await _service.InactivateAsync(new WarehouseId(id));
 
@@ -90,7 +90,7 @@ namespace DDDSample1.Controllers
         
         // DELETE: api/Warehouses/5
         [HttpDelete("{id}/hard")]
-        public async Task<ActionResult<WarehouseDto>> HardDelete(Guid id)
+        public async Task<ActionResult<WarehouseDto>> HardDelete(String id)
         {
             try
             {

@@ -18,21 +18,8 @@ namespace DDDSample1.Domain.Warehouses{
             this.City = city;
         }
 
-        public string Street(){
-            return Street;
-        }
+        
 
-        public int DoorNumber(){
-            return DoorNumber;
-        }
-
-        public string PostCode(){
-            return PostCode;
-        }
-
-        public string City(){
-            return City;
-        }
 
         private Boolean Validate(int DoorNumber){
             if(DoorNumber >= 0)
