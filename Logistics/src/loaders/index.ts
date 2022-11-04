@@ -28,6 +28,12 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/truckSchema',
   };
 
+  const sectionSchema = {
+    // compare with the approach followed in repos and services
+    name: 'sectionSchema',
+    schema: '../persistence/schemas/sectionSchema',
+  };
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
@@ -38,6 +44,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.truck.path
   }
 
+  const sectionController = {
+    name: config.controllers.section.name,
+    path: config.controllers.section.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -46,6 +57,11 @@ export default async ({ expressApp }) => {
   const truckRepo = {
     name: config.repos.truck.name,
     path: config.repos.truck.path
+  }
+
+  const sectionRepo = {
+    name: config.repos.section.name,
+    path: config.repos.section.path
   }
 
   const userRepo = {
@@ -63,6 +79,11 @@ export default async ({ expressApp }) => {
     path: config.services.truck.path
   }
 
+  const sectionService = {
+    name: config.services.section.name,
+    path: config.services.section.path
+  }
+
 
 
   await dependencyInjectorLoader({
@@ -70,20 +91,24 @@ export default async ({ expressApp }) => {
     schemas: [
       userSchema,
       roleSchema,
-      truckSchema
+      truckSchema,
+      sectionSchema
     ],
     controllers: [
       roleController,
-      truckController
+      truckController,
+      sectionController
     ],
     repos: [
       roleRepo,
       userRepo,
-      truckRepo
+      truckRepo,
+      sectionRepo
     ],
     services: [
       roleService,
-      truckService
+      truckService,
+      sectionService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

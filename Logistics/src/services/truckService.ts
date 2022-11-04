@@ -39,7 +39,7 @@ export default class TruckService implements ITruckService {
       const alllTruck = await this.truckRepo.findAll();
 
       if (alllTruck === null) {
-          return Result.fail<ITruckDTO[]>("Não existem camiões registados.");
+          return Result.fail<ITruckDTO[]>("There is no registred trucks.");
       }
 
       const resultado = alllTruck.map((alllTruck) => TruckMap.toDTO(alllTruck) as ITruckDTO);
