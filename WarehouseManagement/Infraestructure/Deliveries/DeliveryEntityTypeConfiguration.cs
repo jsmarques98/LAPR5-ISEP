@@ -14,6 +14,7 @@ namespace DDDSample1.Infrastructure.Deliveries
             builder.OwnsOne(b => b.LoadTime);
             builder.OwnsOne(b => b.UnloadTime);
             builder.OwnsOne(b => b.TotalWeight);
+            builder.Property(b => b.DeliveryWarehouseId);
         }
     }
 }

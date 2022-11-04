@@ -10,6 +10,7 @@ namespace DDDSample1.Domain.Deliveries
         public int LoadTime { get;  set; }
         public int UnloadTime { get;  set; }
         public double TotalWeight { get;  set; }
+        public string DeliveryWarehouseId { get;  set; }
         
     }
 }

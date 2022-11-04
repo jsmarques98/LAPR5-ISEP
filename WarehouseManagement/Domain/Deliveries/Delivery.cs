@@ -1,5 +1,6 @@
 using System;
 using DDDSample1.Domain.Shared;
+using DDDSample1.Domain.Warehouses;
 namespace DDDSample1.Domain.Deliveries
 {
 
@@ -10,6 +11,7 @@ namespace DDDSample1.Domain.Deliveries
         public LoadTime LoadTime { get;  private set; }
         public UnloadTime UnloadTime{ get;  private set; }
         public TotalWeight TotalWeight {get; private set;}
+        public WarehouseId DeliveryWarehouseId {get; private set;}
         public bool Active{ get;  private set; }
 
 
@@ -18,8 +20,11 @@ namespace DDDSample1.Domain.Deliveries
             this.Active = true;
         }
 
-        public Delivery(String deliveryId,DeliveryDate deliveryDate, LoadTime loadTime,UnloadTime unloadTime,TotalWeight totalWeight )
+        public Delivery(String deliveryId,DeliveryDate deliveryDate, LoadTime loadTime,UnloadTime unloadTime,TotalWeight totalWeight, WarehouseId deliveryWarehouseId )
         {
+            if (deliveryWarehouseId == null)
+                throw new BusinessRuleValidationException("Every delivery requires a delivery warehouse.");
+            this.DeliveryWarehouseId= deliveryWarehouseId;
             this.Id = new DeliveryId(deliveryId);
             this.DeliveryDate = deliveryDate;
             this.LoadTime = loadTime;
@@ -55,6 +60,18 @@ namespace DDDSample1.Domain.Deliveries
                 throw new BusinessRuleValidationException("It is not possible to change the total weight to an inactive delivery.");
             this.TotalWeight = totalWeight;
         }
+
+        
+        public void ChangeDeliveryWarehouseId(WarehouseId deliveryWarehouseId)
+        {
+            if (!this.Active)
+                throw new BusinessRuleValidationException("It is not possible to change the delivery warehouse of an inactive delivery.");
+            if (deliveryWarehouseId == null)
+                throw new BusinessRuleValidationException("Every delivery requires a delivery Warehouse.");
+            this.DeliveryWarehouseId = deliveryWarehouseId;;
+        }
+
+
         public void MarkAsInative()
         {
             this.Active = false;
