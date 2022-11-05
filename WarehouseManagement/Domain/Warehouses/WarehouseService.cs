@@ -19,43 +19,30 @@ namespace DDDSample1.Domain.Warehouses
         {
             var list = await this._repo.GetAllAsync();
             
-            List<WarehouseDto> listDto = list.ConvertAll<WarehouseDto>(war => 
-                new WarehouseDto{Id = war.Id.AsString(), Designation = war.Designation.Value(),
-                Street = war.Address.Street, DoorNumber = war.Address.DoorNumber,
-                PostCode = war.Address.PostCode, City = war.Address.City,
-                Latitude = war.Coordinates.Latitude, Longitude = war.Coordinates.Longitude,
-                Altitude = war.Coordinates.Altitude});
+            List<WarehouseDto> listDto = list.ConvertAll<WarehouseDto>(warehouse => WarehouseMapper.toDTO(warehouse));
 
             return listDto;
         }
 
         public async Task<WarehouseDto> GetByIdAsync(WarehouseId id)
         {
-            var war = await this._repo.GetByIdAsync(id);
+            var warehouse = await this._repo.GetByIdAsync(id);
             
-            if(war == null)
+            if(warehouse == null)
                 return null;
 
-            return new WarehouseDto{Id = war.Id.AsString(), Designation = war.Designation.Value(),
-                Street = war.Address.Street, DoorNumber = war.Address.DoorNumber,
-                PostCode = war.Address.PostCode, City = war.Address.City,
-                Latitude = war.Coordinates.Latitude, Longitude = war.Coordinates.Longitude,
-                Altitude = war.Coordinates.Altitude};
+            return WarehouseMapper.toDTO(warehouse);
         }
 
         public async Task<WarehouseDto> AddAsync(WarehouseDto dto)
         {
-            var warehouse = new Warehouse(dto.Id, new Designation(dto.Designation), new Address(dto.Street, dto.DoorNumber, dto.PostCode, dto.City), new Coordinates(dto.Latitude, dto.Longitude, dto.Altitude));
+            var warehouse = WarehouseMapper.toWarehouse(dto);
 
             await this._repo.AddAsync(warehouse);
 
             await this._unitOfWork.CommitAsync();
 
-            return new WarehouseDto{Id = warehouse.Id.AsString(), Designation = warehouse.Designation.Value(),
-                Street = warehouse.Address.Street, DoorNumber = warehouse.Address.DoorNumber,
-                PostCode = warehouse.Address.PostCode, City = warehouse.Address.City,
-                Latitude = warehouse.Coordinates.Latitude, Longitude = warehouse.Coordinates.Longitude,
-                Altitude = warehouse.Coordinates.Altitude};
+            return WarehouseMapper.toDTO(warehouse);
         }
 
         public async Task<WarehouseDto> UpdateAsync(WarehouseDto dto)
@@ -72,11 +59,7 @@ namespace DDDSample1.Domain.Warehouses
             
             await this._unitOfWork.CommitAsync();
 
-            return new WarehouseDto{Id = warehouse.Id.AsString(), Designation = warehouse.Designation.Value(),
-                Street = warehouse.Address.Street, DoorNumber = warehouse.Address.DoorNumber,
-                PostCode = warehouse.Address.PostCode, City = warehouse.Address.City,
-                Latitude = warehouse.Coordinates.Latitude, Longitude = warehouse.Coordinates.Longitude,
-                Altitude = warehouse.Coordinates.Altitude};
+            return WarehouseMapper.toDTO(warehouse);
         }
         
 
@@ -92,11 +75,7 @@ namespace DDDSample1.Domain.Warehouses
             
             await this._unitOfWork.CommitAsync();
 
-            return new WarehouseDto{Id = warehouse.Id.AsString(), Designation = warehouse.Designation.Value(),
-                Street = warehouse.Address.Street, DoorNumber = warehouse.Address.DoorNumber,
-                PostCode = warehouse.Address.PostCode, City = warehouse.Address.City,
-                Latitude = warehouse.Coordinates.Latitude, Longitude = warehouse.Coordinates.Longitude,
-                Altitude = warehouse.Coordinates.Altitude};
+            return WarehouseMapper.toDTO(warehouse);
         }
         
 
@@ -113,11 +92,7 @@ namespace DDDSample1.Domain.Warehouses
             this._repo.Remove(warehouse);
             await this._unitOfWork.CommitAsync();
 
-            return new WarehouseDto{Id = warehouse.Id.AsString(), Designation = warehouse.Designation.Value(),
-                Street = warehouse.Address.Street, DoorNumber = warehouse.Address.DoorNumber,
-                PostCode = warehouse.Address.PostCode, City = warehouse.Address.City,
-                Latitude = warehouse.Coordinates.Latitude, Longitude = warehouse.Coordinates.Longitude,
-                Altitude = warehouse.Coordinates.Altitude};
+            return WarehouseMapper.toDTO(warehouse);
         }
     }
 }
