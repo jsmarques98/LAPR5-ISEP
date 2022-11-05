@@ -49,5 +49,13 @@ export default (app: Router) => {
       })
     }),
     (req, res, next) => ctrl.getAllTrucks(req, res, next));
+
+    route.get('/:plate',
+    celebrate({
+      params: Joi.object({
+        plate:Joi.string().required()
+      })
+    }),
+    (req, res, next) => ctrl.getTruck(req, res, next));
 };
 

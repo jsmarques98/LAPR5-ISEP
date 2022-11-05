@@ -26,6 +26,9 @@ export default {
    */
   jwtSecret: process.env.JWT_SECRET || "my sakdfho2390asjod$%jl)!sdjas0i secret",
 
+  
+  warehousesAPIWarehouseManagementURL: "https://localhost:5001/api/warehouses/",
+  
   /**
    * Used by winston logger
    */
