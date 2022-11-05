@@ -16,14 +16,13 @@ export default (app: Router) => {
   route.post('',
     celebrate({
       body: Joi.object({
+        plate:Joi.string().required(),
         name: Joi.string().required(),
         autonomy: Joi.string().required(),
         maxBattery: Joi.string().required(),
         payLoad: Joi.string().required(),
         tare: Joi.string().required(),
         baterryChargingTime: Joi.string().required(),
-        plate:Joi.string().required(),
-
       })
     }),
     (req, res, next) => ctrl.createTruck(req, res, next) );
@@ -31,13 +30,13 @@ export default (app: Router) => {
   route.put('',
     celebrate({
       body: Joi.object({
+        plate:Joi.string().required(),
         name: Joi.string().required(),
         autonomy: Joi.string().required(),
         maxBattery: Joi.string().required(),
         payLoad: Joi.string().required(),
         tare: Joi.string().required(),
         baterryChargingTime: Joi.string().required(),
-        plate:Joi.string().required(),
       }),
     }),
     (req, res, next) => ctrl.updateTruck(req, res, next) );

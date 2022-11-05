@@ -49,7 +49,10 @@ export default {
       name: "TruckController",
       path: "../controllers/truckController"
     },
-
+    section: {
+      name: "SectionController",
+      path: "../controllers/sectionController"
+    },
   },
 
   repos: {
@@ -64,6 +67,10 @@ export default {
     truck: {
       name: "TruckRepo",
       path: "../repos/truckRepo"
+    },
+    section: {
+      name: "SectionRepo",
+      path: "../repos/sectionRepo"
     }
   },
 
@@ -75,6 +82,10 @@ export default {
     truck: {
       name: "TruckService",
       path: "../services/truckService"
+    },
+    section: {
+      name: "SectionService",
+      path: "../services/sectionService"
     }
   },
 };
