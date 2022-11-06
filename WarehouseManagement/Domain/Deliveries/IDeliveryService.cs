@@ -14,9 +14,7 @@ namespace DDDSample1.Domain.Deliveries
 
         Task<DeliveryDTO> UpdateAsync(DeliveryDTO dto);
 
-        Task<DeliveryDTO> InactivateAsync(DeliveryId id);
 
-        Task<DeliveryDTO> DeleteAsync(DeliveryId id);
 
     }
 }
