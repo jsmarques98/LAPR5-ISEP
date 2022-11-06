@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "c4a70e12-0ed0-42b0-8bcf-e8288b59cae4",
+		"name": "WarehousesTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23424930"
+	},
+	"item": [
+		{
+			"name": "Test Post Warehouses",
+			"item": [
+				{
+					"name": "Get Warehouse to be created",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get Warehouse to be created should return 404\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Warehouses/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Warehouses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Warehouse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Create Warehouse should return 201\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Id\":\"1\",\"Designation\":\"warehouse1\",\"Street\":\"warehouseStreet\",\"DoorNumber\":1,\"PostCode\":\"4400\",\"City\": \"Porto\",\"Latitude\":60.0, \"Longitude\":60.0,\"Altitude\":10.0}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Warehouses",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Warehouses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Created Warehouse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get Created Warehouse should return 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Warehouses/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Warehouses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Get Warehouses",
+			"item": [
+				{
+					"name": "Post Warehouse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Create Warehouse should return 201\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Id\":\"2\",\"Designation\":\"warehouse2\",\"Street\":\"warehouseStree2\",\"DoorNumber\":2,\"PostCode\":\"4400\",\"City\": \"Port2\",\"Latitude\":60.0, \"Longitude\":60.0,\"Altitude\":10.0}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Warehouses",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Warehouses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Warehouse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get Created Warehouse should return 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Warehouses/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Warehouses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Warehouses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get Created Warehouses should return 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Warehouses",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Warehouses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Put Warehouses",
+			"item": [
+				{
+					"name": "Get Warehouse to be Updated",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get Created Warehouse should return 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get Warehouse to be updated right data \", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.expect(responseJson.id).to.eql(\"1\");\r",
+									"  pm.expect(responseJson.designation).to.eql(\"warehouse1\");\r",
+									"  pm.expect(responseJson.street).to.eql(\"warehouseStreet\");\r",
+									"  pm.expect(responseJson.doorNumber).to.eql(1);\r",
+									"  pm.expect(responseJson.postCode).to.eql(\"4400\");\r",
+									"  pm.expect(responseJson.city).to.eql(\"Porto\");\r",
+									"  pm.expect(responseJson.latitude).to.eql(60.0);\r",
+									"  pm.expect(responseJson.longitude).to.eql(60.0);\r",
+									"  pm.expect(responseJson.altitude).to.eql(10.0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Warehouses/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Warehouses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Warehouse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Update Warehouse should return 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Id\":\"1\",\"Designation\":\"warehouse111\",\"Street\":\"warehouseStreet\",\"DoorNumber\":111,\"PostCode\":\"4400\",\"City\": \"Porto\",\"latitude\":65.0, \"longitude\":65.0,\"altitude\":15.0}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Warehouses/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Warehouses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Updated Warehouse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get Updated Warehouse should return 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get Warehouse to be updated right data \", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.expect(responseJson.id).to.eql(\"1\");\r",
+									"  pm.expect(responseJson.designation).to.eql(\"warehouse111\");\r",
+									"  pm.expect(responseJson.street).to.eql(\"warehouseStreet\");\r",
+									"  pm.expect(responseJson.doorNumber).to.eql(111);\r",
+									"  pm.expect(responseJson.postCode).to.eql(\"4400\");\r",
+									"  pm.expect(responseJson.city).to.eql(\"Porto\");\r",
+									"  pm.expect(responseJson.latitude).to.eql(65.0);\r",
+									"  pm.expect(responseJson.longitude).to.eql(65.0);\r",
+									"  pm.expect(responseJson.altitude).to.eql(15.0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Warehouses/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Warehouses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
