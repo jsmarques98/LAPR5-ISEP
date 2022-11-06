@@ -16,6 +16,7 @@ export default (app: Router) => {
   route.post('',
     celebrate({
       body: Joi.object({
+        domainId:Joi.string(),
         plate:Joi.string().required(),
         name: Joi.string().required(),
         autonomy: Joi.number().required(),

@@ -71,13 +71,14 @@ describe('truck controller', function () {
     
 
     it('returns json with id+name+autonomy+maxBattery+payLoad+tare+baterryChargingTime+plate values when updateTruck', async function () {
-        let body = { "plate":"truck2s1254511",
+        let body = {"autonomy":1,
+        "baterryChargingTime":1,
+        "domainId":"1",
+        "maxBattery":1,
         "name":"truck12s1251",
-        "autonomy":"1",
-        "maxBattery":"1",
-        "payLoad":"1",
-        "tare":"1",
-        "baterryChargingTime":"1",
+        "payLoad":1,
+        "plate":"truck224-MT-77s1254511",
+        "tare":1,
        };
         let req: Partial<Request> = {};
         req.body = body;

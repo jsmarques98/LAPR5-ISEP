@@ -107,7 +107,7 @@ export default class TruckService implements ITruckService {
         await this.truckRepo.save(truck);
 
         const truckDTOResult = TruckMap.toDTO( truck ) as ITruckDTO;
-        return Result.ok<ITruckDTO>( truckDTOResult )
+      return Result.ok<ITruckDTO>( truckDTOResult )
         }
     } catch (e) {
       throw e;
