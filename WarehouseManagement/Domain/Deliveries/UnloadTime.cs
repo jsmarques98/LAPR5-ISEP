@@ -8,8 +8,9 @@ namespace DDDSample1.Domain.Deliveries{
         public int Time{get; private set;}
 
         public UnloadTime (int time){
-            if(Validate(time))
+            if(Validate(time)){
                 this.Time = time;
+            }
         }
 
         public int Value(){
