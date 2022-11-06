@@ -13,9 +13,10 @@ import { EnergySpent } from '../domain/sections/energySpent';
 import { ExtraTime } from '../domain/sections/extraTime';
 import { response } from 'express';
 import { threadId } from 'worker_threads';
+import { UniqueEntityID } from '../core/domain/UniqueEntityID';
 
 const axios = require('axios');
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 @Service()
 export default class SectionService implements ISectionService {
@@ -43,8 +44,15 @@ export default class SectionService implements ISectionService {
   public async createSection(sectionDTO: ISectionDTO): Promise<Result<ISectionDTO>> {
     try {
       await this.checkIfWarehousesExist(sectionDTO); 
-      
-      const sectionOrError = await Section.create( sectionDTO);
+      let sectionOrError;
+
+      if(sectionDTO.id===undefined){
+        sectionOrError = await Section.create( sectionDTO);
+        
+       }else{
+        sectionOrError= await Section.create( sectionDTO,new UniqueEntityID( sectionDTO.id));
+
+       }
       if (sectionOrError.isFailure) {
         return Result.fail<ISectionDTO>(sectionOrError.errorValue());
       }
@@ -60,7 +68,7 @@ export default class SectionService implements ISectionService {
   }
 
   public async updateSection(sectionDTO: ISectionDTO): Promise<Result<ISectionDTO>> {
-
+    console.log("service")
     try {
       const section = await this.sectionRepo.findByDomainId(sectionDTO.id);
 
@@ -68,10 +76,11 @@ export default class SectionService implements ISectionService {
         return Result.fail<ISectionDTO>("section not found");
       }
       else {
-        section.distance= Distance.create(sectionDTO.distance).getValue();
-        section.duration=Duration.create(sectionDTO.duration).getValue();
-        section.energySpent=EnergySpent.create(sectionDTO.energySpent).getValue();
-        section.extraTime=ExtraTime.create(sectionDTO.extraTime).getValue();
+        section.props.distance=Distance.create(sectionDTO.distance).getValue();
+        section.props.duration=Duration.create(sectionDTO.duration).getValue();
+        section.props.energySpent=EnergySpent.create(sectionDTO.energySpent).getValue();
+        section.props.extraTime=ExtraTime.create(sectionDTO.extraTime).getValue();
+     
         await this.sectionRepo.save(section);
 
         const sectionDTOResult = SectionMap.toDTO( section ) as ISectionDTO;
@@ -103,4 +112,3 @@ export default class SectionService implements ISectionService {
 function displayOutput(response: any) {
   throw new Error('Function not implemented.');
 }
-
