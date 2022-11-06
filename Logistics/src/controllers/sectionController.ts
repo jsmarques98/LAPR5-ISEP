@@ -36,7 +36,7 @@ export default class SectionController implements ISectionController /* TODO: ex
       }
 
       const sectionDTO = sectionOrError.getValue();
-      return res.status(201).json( sectionDTO );
+      return res.json( sectionDTO).status(201);
     }
     catch (e) {
       return next(e);
@@ -53,8 +53,7 @@ export default class SectionController implements ISectionController /* TODO: ex
       }
 
       const sectionPosts = sectionOrError.getValue();
-      res.status(200);
-      return  res.json(sectionPosts);
+      return  res.json(sectionPosts).status(201);
     }
     catch (e) {
       return next(e);

@@ -3,11 +3,11 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface DistanceProps {
-  value: string;
+  value: number;
 }
 
 export class Distance extends ValueObject<DistanceProps> {
-  get value (): string {
+  get value (): number {
     return this.props.value;
   }
   
@@ -15,7 +15,10 @@ export class Distance extends ValueObject<DistanceProps> {
     super(props);
   }
 
-  public static create (distance: string): Result<Distance> {
+  public static create (distance: number): Result<Distance> {
+    if(distance<0){
+      return Result.fail<Distance>("distance needs to be greater than to 0");
+     }
     const guardResult = Guard.againstNullOrUndefined(distance, 'distance');
     if (!guardResult.succeeded) {
       return Result.fail<Distance>(guardResult.message);

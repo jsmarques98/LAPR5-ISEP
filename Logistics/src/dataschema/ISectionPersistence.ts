@@ -1,8 +1,8 @@
 export interface ISectionPersistence {
-    duration: string;
+    duration: number;
     warehouseOrigin: string;
     warehouseDestiny: string;
-    distance: string;
-    energySpent: string; 
-    extraTime: string;
+    distance: number;
+    energySpent: number; 
+    extraTime: number;
   }

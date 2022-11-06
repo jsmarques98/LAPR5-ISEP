@@ -3,11 +3,11 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface ExtraTimeProps {
-  value: string;
+  value: number;
 }
 
 export class ExtraTime extends ValueObject<ExtraTimeProps> {
-  get value (): string {
+  get value (): number {
     return this.props.value;
   }
   
@@ -15,7 +15,10 @@ export class ExtraTime extends ValueObject<ExtraTimeProps> {
     super(props);
   }
 
-  public static create (extraTime: string): Result<ExtraTime> {
+  public static create (extraTime: number): Result<ExtraTime> {
+    if(extraTime<0){
+      return Result.fail<ExtraTime>("extraTime needs to be greater than to 0");
+     }
     const guardResult = Guard.againstNullOrUndefined(extraTime, 'extraTime');
     if (!guardResult.succeeded) {
       return Result.fail<ExtraTime>(guardResult.message);

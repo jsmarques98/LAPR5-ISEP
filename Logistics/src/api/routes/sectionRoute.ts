@@ -18,10 +18,10 @@ export default (app: Router) => {
         id: Joi.string(),
         warehouseOrigin: Joi.string().required(),
         warehouseDestiny: Joi.string().required(),
-        duration: Joi.string().required(),
-        distance: Joi.string().required(),
-        energySpent: Joi.string().required(),
-        extraTime: Joi.string().required(),
+        duration: Joi.number().required(),
+        distance: Joi.number().required(),
+        energySpent: Joi.number().required(),
+        extraTime: Joi.number().required(),
 
       })
     }),
@@ -31,10 +31,10 @@ export default (app: Router) => {
     celebrate({
       body: Joi.object({
         id: Joi.string().required(),
-        duration: Joi.string().required(),
-        distance: Joi.string().required(),
-        energySpent: Joi.string().required(),
-        extraTime: Joi.string().required(),
+        duration: Joi.number().required(),
+        distance: Joi.number().required(),
+        energySpent: Joi.number().required(),
+        extraTime: Joi.number().required(),
       }),
     }),
     (req, res, next) => ctrl.updateSection(req, res, next) );

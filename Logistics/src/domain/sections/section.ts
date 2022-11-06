@@ -86,16 +86,12 @@ export class Section extends AggregateRoot<SectionProps> {
 
 
   public static create (sectionDTO: ISectionDTO, id?: UniqueEntityID): Result<Section> {
-    const duration = sectionDTO.duration;
 
-    if (!!duration === false || duration.length === 0) {
-      return Result.fail<Section>('Must provide a Section duration')
-    } else {
       const section = new Section({ duration: Duration.create(sectionDTO.duration).getValue(),distance: Distance.create(sectionDTO.distance).getValue(),
         energySpent: EnergySpent.create(sectionDTO.energySpent).getValue(), extraTime: ExtraTime.create(sectionDTO.extraTime).getValue(),
       warehouses: WareHouses.create(sectionDTO.warehouseOrigin,sectionDTO.warehouseDestiny).getValue()}, id);
 
       return Result.ok<Section>( section )
-    }
+    
   }
 }

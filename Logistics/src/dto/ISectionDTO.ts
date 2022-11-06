@@ -1,9 +1,9 @@
 export default interface ISectionDTO {
     id: string;
-    duration: string;
-    distance: string; 
-    energySpent: string;
-    extraTime: string;
+    duration: number;
+    distance: number; 
+    energySpent: number;
+    extraTime: number;
     warehouseOrigin: string;
     warehouseDestiny: string;
 }

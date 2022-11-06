@@ -4,10 +4,10 @@ import mongoose from 'mongoose';
 const SectionSchema = new mongoose.Schema(
   {
     domainId: { type: String, unique:true},
-    duration: { type: String},
-    distance:{type: String},
-    extraTime:{type: String},
-    energySpent:{type: String},
+    duration: { type: Number},
+    distance:{type: Number},
+    extraTime:{type: Number},
+    energySpent:{type: Number},
     warehouseDestiny:{type: String} ,
     warehouseOrigin:{type: String},
   },

@@ -43,10 +43,10 @@ export default class SectionRepo implements ISectionRepo {
         const sectionCreated = await this.sectionSchema.create(rawSection);
         return SectionMap.toDomain(sectionCreated);
       } else {
-        sectionDocument.duration = section.duration.toString();
-        sectionDocument.distance = section.distance.toString();
-        sectionDocument.extraTime = section.extraTime.toString();
-        sectionDocument.energySpent = section.energySpent.toString();
+        sectionDocument.duration = section.duration.value;
+        sectionDocument.distance = section.distance.value;
+        sectionDocument.extraTime = section.extraTime.value;
+        sectionDocument.energySpent = section.energySpent.value;
         sectionDocument.warehouseDestiny = section.warehouseDestiny.toString();
         sectionDocument.warehouseOrigin = section.warehouseOrigin.toString();
         await sectionDocument.save();

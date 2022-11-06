@@ -13,10 +13,10 @@ export class SectionMap extends Mapper<Section> {
   public static toDTO( section: Section): ISectionDTO {
     return {
       id: section.id.toString(),
-      duration: section.duration.toString(),
-      distance: section.distance.toString(), 
-      energySpent: section.energySpent.toString(),
-      extraTime: section.extraTime.toString(),
+      duration: section.duration.value,
+      distance: section.distance.value, 
+      energySpent: section.energySpent.value,
+      extraTime: section.extraTime.value,
       warehouseDestiny: section.warehouses.warehouseDestiny,
       warehouseOrigin: section.warehouses.warehouseOrigin,
     } as ISectionDTO;
