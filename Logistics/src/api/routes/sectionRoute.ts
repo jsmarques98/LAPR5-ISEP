@@ -45,5 +45,13 @@ export default (app: Router) => {
       }),
     }),
     (req, res, next) => ctrl.getAllSections(req, res, next));
+
+    route.get('/:plate',
+    celebrate({
+      body: Joi.object({
+        plate:Joi.string().required()
+      })
+    }),
+    (req, res, next) => ctrl.getAllSections(req, res, next));
 };
 

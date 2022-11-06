@@ -40,6 +40,22 @@ export default class SectionService implements ISectionService {
 
   }
 
+  public async getSection(id: string): Promise<Result<ISectionDTO>> {
+    try {
+      const section = await this.sectionRepo.findByDomainId(new UniqueEntityID(id));
+
+      if (section === null) {
+        return Result.fail<ISectionDTO>("truck not found");
+      }
+      else {
+        const truckDTOResult = SectionMap.toDTO( section ) as ISectionDTO;
+        return Result.ok<ISectionDTO>( truckDTOResult )
+        }
+    } catch (e) {
+      throw e;
+    }
+  }
+
 
   public async createSection(sectionDTO: ISectionDTO): Promise<Result<ISectionDTO>> {
     try {

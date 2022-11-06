@@ -60,4 +60,21 @@ export default class SectionController implements ISectionController /* TODO: ex
     }
   };
 
+  public async getSection(req: Request, res: Response, next: NextFunction) {
+    try {
+      
+      const sectionOrError = await this.sectionServiceInstance.getSection(req.body.id) as Result<ISectionDTO>
+
+      if (sectionOrError.isFailure) {
+          return res.status(400).send();
+      }
+
+      const sectionPosts = sectionOrError.getValue();
+      return  res.json(sectionPosts).status(201);
+    }
+    catch (e) {
+      return next(e);
+    }
+  };
+
 }
