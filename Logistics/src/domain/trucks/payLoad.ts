@@ -3,11 +3,11 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface PayLoadProps {
-  value: string;
+  value: number;
 }
 
 export class PayLoad extends ValueObject<PayLoadProps> {
-  get value (): string {
+  get value (): number {
     return this.props.value;
   }
   
@@ -15,7 +15,11 @@ export class PayLoad extends ValueObject<PayLoadProps> {
     super(props);
   }
 
-  public static create (payLoad: string): Result<PayLoad> {
+  public static create (payLoad: number): Result<PayLoad> {
+
+    if(payLoad<=0){
+      return Result.fail<PayLoad>("payLoad needs to be greater than to 0");
+     }
     const guardResult = Guard.againstNullOrUndefined(payLoad, 'payLoad');
     if (!guardResult.succeeded) {
       return Result.fail<PayLoad>(guardResult.message);

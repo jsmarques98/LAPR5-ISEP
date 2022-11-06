@@ -12,18 +12,19 @@ export class TruckMap extends Mapper<Truck> {
   
   public static toDTO( truck: Truck): ITruckDTO {
     return {
-      id: truck.id.toString(),
+      domainId: truck.id.toString(),
       name: truck.name.toString(),
-      maxBattery: truck.maxBattery.toString(), 
-      autonomy: truck.autonomy.toString(),
-      payLoad: truck.payLoad.toString(),
-      tare: truck.tare.toString(),
-      baterryChargingTime: truck.baterryChargingTime.toString(),
+      maxBattery: truck.maxBattery.value, 
+      autonomy: truck.autonomy.value,
+      payLoad: truck.payLoad.value,
+      tare: truck.tare.value,
+      baterryChargingTime: truck.baterryChargingTime.value,
       plate: truck.plate.toString(),
     } as ITruckDTO;
   }
 
   public static toDomain (truck: any | Model<ITruckPersistence & Document> ): Truck {
+   
     const truckOrError = Truck.create(
         truck,
       new UniqueEntityID(truck.domainId)
@@ -39,7 +40,7 @@ export class TruckMap extends Mapper<Truck> {
     return {
       domainId: truck.id.toString(),
       name: truck.name,
-      maxBattery: truck.maxBattery.value,
+      maxBattery: truck.maxBattery.value, 
       autonomy: truck.autonomy.value,
       payLoad: truck.payLoad.value,
       tare: truck.tare.value,

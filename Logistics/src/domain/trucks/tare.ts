@@ -3,11 +3,11 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface TareProps {
-  value: string;
+  value: number;
 }
 
 export class Tare extends ValueObject<TareProps> {
-  get value (): string {
+  get value (): number {
     return this.props.value;
   }
   
@@ -15,7 +15,10 @@ export class Tare extends ValueObject<TareProps> {
     super(props);
   }
 
-  public static create (tare: string): Result<Tare> {
+  public static create (tare: number): Result<Tare> {
+    if(tare<=0){
+      return Result.fail<Tare>("tare needs to be greater than to 0");
+     }
     const guardResult = Guard.againstNullOrUndefined(tare, 'tare');
     if (!guardResult.succeeded) {
       return Result.fail<Tare>(guardResult.message);

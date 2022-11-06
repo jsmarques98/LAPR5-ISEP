@@ -13,7 +13,6 @@ import { Plate } from "./plate";
 
 import ITruckDTO from "../../dto/ITruckDTO";
 
-
 interface TruckProps {
   name: string;
   maxBattery: MaxBattery; 
@@ -22,7 +21,6 @@ interface TruckProps {
   tare: Tare;
   baterryChargingTime: BaterryChargingTime;
   plate: Plate;
-
 }
 
 export class Truck extends AggregateRoot<TruckProps> {
@@ -90,6 +88,7 @@ export class Truck extends AggregateRoot<TruckProps> {
 
 
   public static create (truckDTO: ITruckDTO, id?: UniqueEntityID): Result<Truck> {
+
     const name = truckDTO.name;
 
     if (!!name === false || name.length === 0) {
@@ -99,7 +98,6 @@ export class Truck extends AggregateRoot<TruckProps> {
       const truck = new Truck({ name: name,maxBattery: MaxBattery.create(truckDTO.maxBattery).getValue(),
         autonomy: Autonomy.create(truckDTO.autonomy).getValue(), payLoad: PayLoad.create(truckDTO.payLoad).getValue(), tare: Tare.create(truckDTO.tare).getValue(),
         baterryChargingTime:  BaterryChargingTime.create(truckDTO.baterryChargingTime).getValue(),plate:  Plate.create(truckDTO.plate).getValue()}, id);
-
       return Result.ok<Truck>( truck )
     }
   }

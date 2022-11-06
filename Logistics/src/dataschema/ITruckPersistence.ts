@@ -1,10 +1,10 @@
 export interface ITruckPersistence {
     domainId: string;
     name: string;
-    maxBattery: string; 
-    autonomy: string;
-    payLoad: string;
-    tare: string;
-    baterryChargingTime: string;
+    maxBattery: number; 
+    autonomy: number;
+    payLoad: number;
+    tare: number;
+    baterryChargingTime: number;
     plate :string;
   }

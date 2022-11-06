@@ -16,7 +16,7 @@ export class Plate extends ValueObject<PlateProps> {
   }
 
   public static create (plate: string): Result<Plate> {
-    const guardResult = Guard.againstNullOrUndefined(plate, 'matricula');
+    const guardResult = Guard.againstNullOrUndefined(plate, 'plate');
     if (!guardResult.succeeded) {
       return Result.fail<Plate>(guardResult.message);
     } else {

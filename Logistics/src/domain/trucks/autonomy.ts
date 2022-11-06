@@ -3,11 +3,11 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface AutonomyProps {
-  value: string;
+  value: number;
 }
 
 export class Autonomy extends ValueObject<AutonomyProps> {
-  get value (): string {
+  get value (): number {
     return this.props.value;
   }
   
@@ -15,7 +15,10 @@ export class Autonomy extends ValueObject<AutonomyProps> {
     super(props);
   }
 
-  public static create (autonomy: string): Result<Autonomy> {
+  public static create (autonomy: number): Result<Autonomy> {
+   if(autonomy<0){
+    return Result.fail<Autonomy>("autonomy needs to be greater than or equal to 0");
+   }
     const guardResult = Guard.againstNullOrUndefined(autonomy, 'autonomy');
     if (!guardResult.succeeded) {
       return Result.fail<Autonomy>(guardResult.message);

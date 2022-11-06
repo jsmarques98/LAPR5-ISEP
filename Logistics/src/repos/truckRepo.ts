@@ -7,6 +7,7 @@ import { TruckMap } from "../mappers/TruckMap";
 
 import { Document, FilterQuery, Model } from 'mongoose';
 import { ITruckPersistence } from '../dataschema/ITruckPersistence';
+import { Plate } from '../domain/trucks/plate';
 
 @Service()
 export default class TruckRepo implements ITruckRepo {
@@ -37,8 +38,11 @@ export default class TruckRepo implements ITruckRepo {
     const truckDocument = await this.truckSchema.findOne( query );
     try {
       if (truckDocument === null ) {
+       
         const rawTruck: any = TruckMap.toPersistence(truck);
+
         const truckCreated = await this.truckSchema.create(rawTruck);
+
         return TruckMap.toDomain(truckCreated);
       } else {
         truckDocument.name = truck.name;
@@ -67,7 +71,7 @@ export default class TruckRepo implements ITruckRepo {
       return null;
   }
 
-  public async findByPlate (truckPlate:  string): Promise<Truck> {
+  public async findByPlate (truckPlate:  Plate): Promise<Truck> {
      const query = { plate: truckPlate};
      const truckRecord = await this.truckSchema.findOne( query as FilterQuery<ITruckPersistence & Document> );
  

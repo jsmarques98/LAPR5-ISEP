@@ -18,25 +18,25 @@ export default (app: Router) => {
       body: Joi.object({
         plate:Joi.string().required(),
         name: Joi.string().required(),
-        autonomy: Joi.string().required(),
-        maxBattery: Joi.string().required(),
-        payLoad: Joi.string().required(),
-        tare: Joi.string().required(),
-        baterryChargingTime: Joi.string().required(),
+        autonomy: Joi.number().required(),
+        maxBattery: Joi.number().required(),
+        payLoad: Joi.number().required(),
+        tare: Joi.number().required(),
+        baterryChargingTime: Joi.number().required(),
       })
     }),
     (req, res, next) => ctrl.createTruck(req, res, next) );
 
-  route.put('',
+  route.patch('',
     celebrate({
       body: Joi.object({
         plate:Joi.string().required(),
-        name: Joi.string().required(),
-        autonomy: Joi.string().required(),
-        maxBattery: Joi.string().required(),
-        payLoad: Joi.string().required(),
-        tare: Joi.string().required(),
-        baterryChargingTime: Joi.string().required(),
+        name: Joi.string(),
+        autonomy: Joi.number(),
+        maxBattery: Joi.number(),
+        payLoad: Joi.number(),
+        tare: Joi.number(),
+        baterryChargingTime: Joi.number(),
       }),
     }),
     (req, res, next) => ctrl.updateTruck(req, res, next) );
@@ -45,14 +45,14 @@ export default (app: Router) => {
 
     route.get('',
     celebrate({
-      params: Joi.object({
+      body: Joi.object({
       })
     }),
     (req, res, next) => ctrl.getAllTrucks(req, res, next));
 
     route.get('/:plate',
     celebrate({
-      params: Joi.object({
+      body: Joi.object({
         plate:Joi.string().required()
       })
     }),

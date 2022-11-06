@@ -3,12 +3,12 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface BaterryChargingTimeProps {
-  value: string;
+  value: number;
 }
 
 export class BaterryChargingTime extends ValueObject<BaterryChargingTimeProps> {
   
-  get value (): string {
+  get value (): number {
     return this.props.value;
   }
   
@@ -16,7 +16,11 @@ export class BaterryChargingTime extends ValueObject<BaterryChargingTimeProps> {
     super(props);
   }
 
-  public static create (baterryChargingTime: string): Result<BaterryChargingTime> {
+  public static create (baterryChargingTime: number): Result<BaterryChargingTime> {
+
+    if(baterryChargingTime<=0){
+      return Result.fail<BaterryChargingTime>("baterryChargingTime needs to be greater than to 0");
+     }
     const guardResult = Guard.againstNullOrUndefined(baterryChargingTime, 'baterryChargingTime');
     if (!guardResult.succeeded) {
       return Result.fail<BaterryChargingTime>(guardResult.message);

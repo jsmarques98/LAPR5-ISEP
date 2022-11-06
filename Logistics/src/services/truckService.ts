@@ -10,7 +10,9 @@ import { Autonomy } from '../domain/trucks/autonomy';
 import { Tare } from '../domain/trucks/tare';
 import { BaterryChargingTime } from '../domain/trucks/baterryChargingTime';
 import { PayLoad } from '../domain/trucks/payLoad';
+import { Plate } from '../domain/trucks/plate';
 import { MaxBattery } from '../domain/trucks/maxBattery';
+import { UniqueEntityID } from '../core/domain/UniqueEntityID';
 
 @Service()
 export default class TruckService implements ITruckService {
@@ -18,9 +20,9 @@ export default class TruckService implements ITruckService {
       @Inject(config.repos.truck.name) private truckRepo : ITruckRepo
   ) {}
 
-  public async getTruck( truckId: string): Promise<Result<ITruckDTO>> {
+  public async getTruck( plate: string): Promise<Result<ITruckDTO>> {
     try {
-      const truck = await this.truckRepo.findByPlate(truckId);
+      const truck = await this.truckRepo.findByPlate(Plate.create(plate).getValue());
 
       if (truck === null) {
         return Result.fail<ITruckDTO>("truck not found");
@@ -37,7 +39,6 @@ export default class TruckService implements ITruckService {
   public async getAllTrucks(): Promise<Result<ITruckDTO[]>> {
     try {
       const alllTruck = await this.truckRepo.findAll();
-
       if (alllTruck === null) {
           return Result.fail<ITruckDTO[]>("There is no registred trucks.");
       }
@@ -53,7 +54,13 @@ export default class TruckService implements ITruckService {
 
   public async createTruck(truckDTO: ITruckDTO): Promise<Result<ITruckDTO>> {
     try {
-      const truckOrError = await Truck.create( truckDTO );
+      let truckOrError;
+      if(truckDTO.domainId===undefined){
+       truckOrError = await Truck.create( truckDTO );
+       
+      }else{
+       truckOrError = await Truck.create( truckDTO ,new UniqueEntityID( truckDTO.domainId));
+      }
       if (truckOrError.isFailure) {
         return Result.fail<ITruckDTO>(truckOrError.errorValue());
       }
@@ -68,20 +75,35 @@ export default class TruckService implements ITruckService {
 
   public async updateTruck(truckDTO: ITruckDTO): Promise<Result<ITruckDTO>> {
     try {
-      const truck = await this.truckRepo.findByPlate(truckDTO.plate);
+  
+
+      const truck = await this.truckRepo.findByPlate(Plate.create(truckDTO.plate).getValue());
+   
 
       if (truck === null) {
         return Result.fail<ITruckDTO>("truck not found");
       }
       else {
-       
+
+        if(truckDTO.name!=null){
         truck.name = truckDTO.name;
+        }
+        if(truckDTO.maxBattery!=null){
         truck.maxBattery=MaxBattery.create(truckDTO.maxBattery).getValue(); 
+        }
+        if(truckDTO.autonomy!=null){
         truck.autonomy=Autonomy.create(truckDTO.autonomy).getValue();
+        }
+         if(truckDTO.payLoad!=null){
         truck.payLoad=PayLoad.create(truckDTO.payLoad).getValue();
+         }
+        if(truckDTO.tare!=null){
         truck.tare=Tare.create(truckDTO.tare).getValue();
+        }
+        if(truckDTO.baterryChargingTime!=null){
         truck.baterryChargingTime=BaterryChargingTime.create(truckDTO.baterryChargingTime).getValue();
-       
+        }
+
         await this.truckRepo.save(truck);
 
         const truckDTOResult = TruckMap.toDTO( truck ) as ITruckDTO;

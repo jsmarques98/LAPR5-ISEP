@@ -3,11 +3,11 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface MaxBatteryProps {
-  value: string;
+  value: number;
 }
 
 export class MaxBattery extends ValueObject<MaxBatteryProps> {
-  get value (): string {
+  get value (): number {
     
     return this.props.value;
   }
@@ -16,7 +16,10 @@ export class MaxBattery extends ValueObject<MaxBatteryProps> {
     super(props);
   }
 
-  public static create (maxBattery: string): Result<MaxBattery> {
+  public static create (maxBattery: number): Result<MaxBattery> {
+    if(maxBattery<=0){
+      return Result.fail<MaxBattery>("maxBattery needs to be greater than to 0");
+     }
     const guardResult = Guard.againstNullOrUndefined(maxBattery, 'MaxBattery');
     if (!guardResult.succeeded) {
       return Result.fail<MaxBattery>(guardResult.message);
