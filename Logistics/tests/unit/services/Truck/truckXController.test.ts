@@ -79,6 +79,7 @@ describe('truck controller', function () {
         "payLoad":1,
         "plate":"truck224-MT-77s1254511",
         "tare":1,
+
        };
         let req: Partial<Request> = {};
         req.body = body;

@@ -65,8 +65,8 @@ export default class TruckService implements ITruckService {
         return Result.fail<ITruckDTO>(truckOrError.errorValue());
       }
       const truckResult = truckOrError.getValue();
-      
-      if((await this.truckRepo.exists(truckResult)).valueOf()){
+      let aux =await this.truckRepo.exists(truckResult);
+      if((aux).valueOf()){
         return Result.fail<ITruckDTO>("Ja existe um camiao com este domainId");
     }else{
       await this.truckRepo.save(truckResult);

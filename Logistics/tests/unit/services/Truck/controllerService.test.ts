@@ -45,7 +45,7 @@ describe('truck controller  Service', function () {
          Container.set("TruckRepo", truckRepoInstance);
          truckRepoInstance = Container.get("TruckRepo");
          sinon.stub(truckRepoInstance, "save").returns( Result.ok<Truck>());
- 
+         sinon.stub(truckRepoInstance, "exists").returns( false);
          const Service = new TruckService(truckRepoInstance as ITruckRepo );
  
          const truckController = new TruckController(Service as ITruckServiice );
