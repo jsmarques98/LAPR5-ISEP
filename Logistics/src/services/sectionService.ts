@@ -96,6 +96,7 @@ export default class SectionService implements ISectionService {
         section.props.duration=Duration.create(sectionDTO.duration).getValue();
         section.props.energySpent=EnergySpent.create(sectionDTO.energySpent).getValue();
         section.props.extraTime=ExtraTime.create(sectionDTO.extraTime).getValue();
+        console.log(section.props);
      
         await this.sectionRepo.save(section);
 

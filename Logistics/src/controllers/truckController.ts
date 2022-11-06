@@ -52,7 +52,7 @@ export default class TruckController implements ITruckController /* TODO: extend
       }
 
       const truckDTO = truckOrError.getValue();
-      return res.json( truckDTO ).status(201);
+      return res.json( truckDTO ).status(200);
     }
     catch (e) {
       return next(e);
@@ -65,12 +65,12 @@ export default class TruckController implements ITruckController /* TODO: extend
       const roleOrError = await this.truckServiceInstance.getAllTrucks() as Result<ITruckDTO[]>
 
       if (roleOrError.isFailure) {
-          return res.status(400).send();
+          return res.status(404).send();
       }
 
       const rolePosts = roleOrError.getValue();
       
-      return  res.json(rolePosts).status(201);
+      return  res.json(rolePosts).status(200);
     }
     catch (e) {
       return next(e);

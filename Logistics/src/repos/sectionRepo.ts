@@ -47,8 +47,6 @@ export default class SectionRepo implements ISectionRepo {
         sectionDocument.distance = section.distance.value;
         sectionDocument.extraTime = section.extraTime.value;
         sectionDocument.energySpent = section.energySpent.value;
-        sectionDocument.warehouseDestiny = section.warehouseDestiny.toString();
-        sectionDocument.warehouseOrigin = section.warehouseOrigin.toString();
         await sectionDocument.save();
         return section;
       }
