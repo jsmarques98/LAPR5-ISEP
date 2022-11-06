@@ -71,7 +71,7 @@ namespace DDDSample1
             services.AddTransient<IDeliveryService,DeliveryService>();
 
             services.AddTransient<IWarehouseRepository,WarehouseRepository>();
-            services.AddTransient<WarehouseService>();
+            services.AddTransient<IWarehouseService, WarehouseService>();
         }
     }
 }

@@ -4,7 +4,7 @@ using DDDSample1.Domain.Shared;
 
 namespace DDDSample1.Domain.Warehouses
 {
-    public class WarehouseService
+    public class WarehouseService : IWarehouseService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWarehouseRepository _repo;
@@ -62,38 +62,6 @@ namespace DDDSample1.Domain.Warehouses
             return WarehouseMapper.toDTO(warehouse);
         }
         
-
-        public async Task<WarehouseDto> InactivateAsync(WarehouseId id)
-        {
-            var warehouse = await this._repo.GetByIdAsync(id); 
-
-            if (warehouse == null)
-                return null;   
-
-            // change all fields
-            warehouse.MarkAsInative();
-            
-            await this._unitOfWork.CommitAsync();
-
-            return WarehouseMapper.toDTO(warehouse);
-        }
-        
-
-         public async Task<WarehouseDto> DeleteAsync(WarehouseId id)
-        {
-            var warehouse = await this._repo.GetByIdAsync(id); 
-
-            if (warehouse == null)
-                return null;   
-
-            if (warehouse.Active)
-                throw new BusinessRuleValidationException("It is not possible to delete an active warehouse.");
-            
-            this._repo.Remove(warehouse);
-            await this._unitOfWork.CommitAsync();
-
-            return WarehouseMapper.toDTO(warehouse);
-        }
     }
 }
     

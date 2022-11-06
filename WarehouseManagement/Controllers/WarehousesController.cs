@@ -11,9 +11,9 @@ namespace DDDSample1.Controllers
     [ApiController]
     public class WarehousesController : ControllerBase
     {
-        private readonly WarehouseService _service;
+        private readonly IWarehouseService _service;
 
-        public WarehousesController(WarehouseService service)
+        public WarehousesController(IWarehouseService service)
         {
             _service = service;
         }
@@ -74,39 +74,5 @@ namespace DDDSample1.Controllers
             }
         }
 
-        // Inactivate: api/Warehouses/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<WarehouseDto>> SoftDelete(String id)
-        {
-            var war = await _service.InactivateAsync(new WarehouseId(id));
-
-            if (war == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(war);
-        }
-        
-        // DELETE: api/Warehouses/5
-        [HttpDelete("{id}/hard")]
-        public async Task<ActionResult<WarehouseDto>> HardDelete(String id)
-        {
-            try
-            {
-                var war = await _service.DeleteAsync(new WarehouseId(id));
-
-                if (war == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(war);
-            }
-            catch(BusinessRuleValidationException ex)
-            {
-               return BadRequest(new {Message = ex.Message});
-            }
-        }
     }
 }
