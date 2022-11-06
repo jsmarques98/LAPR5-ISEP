@@ -7,7 +7,7 @@ using DDDSample1.Domain.Warehouses;
 
 namespace DDDSample1.Domain.Deliveries
 {
-    public class DeliveryService
+    public class DeliveryService : IDeliveryService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDeliveryRepository _repo;
@@ -47,7 +47,6 @@ namespace DDDSample1.Domain.Deliveries
             var deliveryWarehouseId = new WarehouseId(dto.DeliveryWarehouseId);
             await checkDeliveryWarehouseIdAsync(deliveryWarehouseId);
             var delivery = DeliveryMapper.toDelivery(dto);
-
             await this._repo.AddAsync(delivery);
 
             await this._unitOfWork.CommitAsync();
@@ -74,39 +73,6 @@ namespace DDDSample1.Domain.Deliveries
 
             return  DeliveryMapper.toDTO(delivery);
         }
-
-
-        public async Task<DeliveryDTO> InactivateAsync(DeliveryId id)
-        {
-            var delivery = await this._repo.GetByIdAsync(id); 
-
-            if (delivery == null)
-                return null;   
-
-            delivery.MarkAsInative();
-            
-            await this._unitOfWork.CommitAsync();
-
-            return DeliveryMapper.toDTO(delivery);
-
-        }
-
-        public async Task<DeliveryDTO> DeleteAsync(DeliveryId id)
-        {
-            var delivery = await this._repo.GetByIdAsync(id); 
-
-            if (delivery == null)
-                return null;   
-
-            if (delivery.Active)
-                throw new BusinessRuleValidationException("It is not possible to delete an active delivery.");
-            
-            this._repo.Remove(delivery);
-            await this._unitOfWork.CommitAsync();
-
-            return DeliveryMapper.toDTO(delivery);
-        }
-
 
         private async Task checkDeliveryWarehouseIdAsync(WarehouseId deliveryWarehouseId)
         {

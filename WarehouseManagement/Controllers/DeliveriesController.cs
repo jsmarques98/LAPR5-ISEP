@@ -12,9 +12,9 @@ namespace DDDSample1.Controllers
     [ApiController]
     public class DeliveriesController : ControllerBase
     {
-        private readonly DeliveryService _service;
+        private readonly IDeliveryService _service;
 
-        public DeliveriesController(DeliveryService service)
+        public DeliveriesController(IDeliveryService service)
         {
             _service = service;
         }
@@ -36,7 +36,7 @@ namespace DDDSample1.Controllers
             {
                 return NotFound();
             }
-
+            
             return delivery;
         }
 
@@ -47,7 +47,6 @@ namespace DDDSample1.Controllers
             try
             {
                 var delivery = await _service.AddAsync(dto);
-
                 return CreatedAtAction(nameof(GetGetById), new { id = delivery.Id }, delivery);
             }
             catch(BusinessRuleValidationException ex)
@@ -79,41 +78,6 @@ namespace DDDSample1.Controllers
             catch(BusinessRuleValidationException ex)
             {
                 return BadRequest(new {Message = ex.Message});
-            }
-        }
-
-        // Inactivate: api/Deliveries/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<DeliveryDTO>> SoftDelete(String id)
-        {
-            var delivery = await _service.InactivateAsync(new DeliveryId(id));
-
-            if (delivery == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(delivery);
-        }
-        
-        // DELETE: api/Deliveries/5
-        [HttpDelete("{id}/hard")]
-        public async Task<ActionResult<DeliveryDTO>> HardDelete(String id)
-        {
-            try
-            {
-                var delivery = await _service.DeleteAsync(new DeliveryId(id));
-
-                if (delivery == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(delivery);
-            }
-            catch(BusinessRuleValidationException ex)
-            {
-               return BadRequest(new {Message = ex.Message});
             }
         }
     }
