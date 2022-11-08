@@ -8,7 +8,7 @@ namespace DDDSample1.Infrastructure.Warehouses
     
         public WarehouseRepository(DDDSample1DbContext context):base(context.Warehouses)
         {
-           
+           context.Database.EnsureCreated();
         }
 
 

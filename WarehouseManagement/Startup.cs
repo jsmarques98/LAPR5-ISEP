@@ -28,8 +28,8 @@ namespace DDDSample1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DDDSample1DbContext>(opt =>
-                opt.UseInMemoryDatabase("DDDSample1DB")
-                .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());
+                opt.UseSqlServer("server=vsgate-s1.dei.isep.ipp.pt,10465;Database=WarehouseManagementDB;User Id=sa;Password=XfyFn0OVMw==Xa5")
+                    .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());
 
             ConfigureMyServices(services);
             
