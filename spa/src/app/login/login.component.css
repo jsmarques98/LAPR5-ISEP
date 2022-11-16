@@ -1,0 +1,72 @@
+* {
+  font-family: 'Spartan', sans-serif;
+  font-weight: 300;
+}
+
+.form-control {
+  min-height: 3.125rem;
+  line-height: initial;
+}
+.form-control:focus {
+  outline: none;
+}
+
+
+
+input[type = "email"], input[type ="password"]{
+  border:0;
+  display: block;
+  margin: auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 20%;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+
+input[type = "email"]:not(:placeholder-shown):not(:focus),input[type = "password"]:not(:placeholder-shown):not(:focus){
+  border-color: #3498db;
+}
+
+input[type = "email"]:focus::placeholder, input[type = "password"]:focus::placeholder{
+  color: transparent;
+}
+
+input.is-not-valid {
+  color: #a2b8ce;
+  border-color: red;
+}
+
+p {
+  font-weight: 510;
+  margin: 0px 0px 50px 0px;
+}
+
+.btn{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  font-weight: 510;
+  border: 2px solid #3498db;
+  padding: 14px 40px;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+  color: black;
+}
+
+.btn[type = "submit"]:hover{
+  color: white;
+  border: #3498db;
+  background: #3498db;
+}
+
+a {
+  font-weight: 510;
+}

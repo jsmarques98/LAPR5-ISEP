@@ -4,11 +4,11 @@ import mongoose from 'mongoose';
 const TruckSchema = new mongoose.Schema(
   {
     domainId: { type: String, unique: true },
-    positionX: { type: String },
+    positionX: { type: Number },
     positionY:{type: Number},
     positionZ:{type: Number,},
-    truckId:{type: Number},
-    deliveryId:{type: Number},
+    truckId:{type: String},
+    deliveryId:{type: String},
   },
   { timestamps: true},
 );

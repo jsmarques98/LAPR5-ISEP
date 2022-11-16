@@ -29,7 +29,6 @@ export class PackagingMap extends Mapper<Packaging> {
       packaging,
       new UniqueEntityID(packaging.domainId)
     );
-    console.log(packagingOrError)
 
     packagingOrError.isFailure ? console.log(packagingOrError.error) : '';
     return packagingOrError.isSuccess ? packagingOrError.getValue() : null;

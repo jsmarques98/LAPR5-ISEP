@@ -71,7 +71,6 @@ export default class PackagingService implements IPackagingService {
   }
 
   public async updatePackaging(packagingDto: IPackagingDTO): Promise<Result<IPackagingDTO>> {
-    console.log("service")
     try {
       const packaging = await this.packagingRepo.findByDomainId(packagingDto.id);
 
