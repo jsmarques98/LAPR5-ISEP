@@ -34,6 +34,12 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/sectionSchema',
   };
 
+  const packagingSchema = {
+    // compare with the approach followed in repos and services
+    name: 'packagingSchema',
+    schema: '../persistence/schemas/packagingSchema',
+  };
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
@@ -49,6 +55,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.section.path
   }
 
+  const packagingController = {
+    name: config.controllers.packaging.name,
+    path: config.controllers.packaging.path
+  }
+  
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -69,6 +80,11 @@ export default async ({ expressApp }) => {
     path: config.repos.user.path
   }
 
+  const packagingRepo = {
+    name: config.repos.packaging.name,
+    path: config.repos.packaging.path
+  }
+
   const roleService = {
     name: config.services.role.name,
     path: config.services.role.path
@@ -84,6 +100,11 @@ export default async ({ expressApp }) => {
     path: config.services.section.path
   }
 
+  const packagingService = {
+    name: config.services.packaging.name,
+    path: config.services.packaging.path
+  }
+
 
 
   await dependencyInjectorLoader({
@@ -92,23 +113,27 @@ export default async ({ expressApp }) => {
       userSchema,
       roleSchema,
       truckSchema,
-      sectionSchema
+      sectionSchema,
+      packagingSchema
     ],
     controllers: [
       roleController,
       truckController,
-      sectionController
+      sectionController,
+      packagingController
     ],
     repos: [
       roleRepo,
       userRepo,
       truckRepo,
-      sectionRepo
+      sectionRepo,
+      packagingRepo
     ],
     services: [
       roleService,
       truckService,
-      sectionService
+      sectionService,
+      packagingService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

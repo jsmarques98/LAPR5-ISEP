@@ -19,7 +19,7 @@ export default {
   /**
    * That long string from mlab
    */
-  databaseURL: process.env.MONGODB_URI || "mongodb://mongoadmin:1e33b85af13926504d7034fb@vsgate-s1.dei.isep.ipp.pt:10470/?authMechanism=DEFAULT",
+  databaseURL: process.env.MONGODB_URI || "mongodb://localhost:27017/test",
 
   /**
    * Your secret sauce
@@ -28,6 +28,8 @@ export default {
 
   
   warehousesAPIWarehouseManagementURL: "https://localhost:5001/api/warehouses/",
+  deliveriesAPIWarehouseManagementURL: "https://localhost:5001/api/deliveries/",
+
   
   /**
    * Used by winston logger
@@ -56,6 +58,10 @@ export default {
       name: "SectionController",
       path: "../controllers/sectionController"
     },
+    packaging: {
+      name: "PackagingController",
+      path: "../controllers/packagingController"
+    }
   },
 
   repos: {
@@ -74,6 +80,10 @@ export default {
     section: {
       name: "SectionRepo",
       path: "../repos/sectionRepo"
+    },
+    packaging: {
+      name: "PackagingRepo",
+      path: "../repos/packagingRepo"
     }
   },
 
@@ -89,6 +99,10 @@ export default {
     section: {
       name: "SectionService",
       path: "../services/sectionService"
+    },
+    packaging: {
+      name: "PackagingService",
+      path: "../services/packagingService"
     }
   },
 };
