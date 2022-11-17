@@ -1,0 +1,31 @@
+<section>
+    <form [formGroup] = "packagingForm">
+        <h1>Packaging Information:</h1>
+        <div  >
+            <input type="text" class="form-control" id="packagingId" placeholder="Id" formControlName="id">
+        </div>
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Delivery Id" id="packagingDeliveryId" formControlName="packagingDeliveryId">
+        </div>
+        <br>
+        <div  >
+            <input type="text" class="form-control" id="packagingTruckId" placeholder="Packaging Truck Id" formControlName="packagingTruckId">
+        </div>
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Position X" id="packagingPositionX" formControlName="packagingPositionX">
+        </div>
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Position Y" id="packagingPositionY" formControlName="packagingPositionY">
+        </div>
+        <br>
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Position Z" id="packagingPositionZ" formControlName="packagingPositionZ">
+        </div>
+        <br>
+                  <button type="submit" class="btn btn-primary w-100" (click)="createPackaging()">Save</button>
+          </form>
+</section>
+
