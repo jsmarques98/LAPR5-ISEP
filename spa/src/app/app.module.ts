@@ -13,6 +13,8 @@ import { PackagingsComponent } from './packagings/packagings.component';
 import { CreatePackagingsComponent } from './packagings/create-packagings/create-packagings.component';
 import { TrucksComponent } from './trucks/trucks.component';
 import { CreateTrucksComponent } from './trucks/create-trucks/create-trucks.component';
+import { SectionsComponent } from './sections/sections.component';
+import { CreateSectionsComponent } from './sections/create-sections/create-sections.component';
 
 
 
@@ -26,7 +28,9 @@ import { CreateTrucksComponent } from './trucks/create-trucks/create-trucks.comp
     PackagingsComponent,
     CreatePackagingsComponent,
     TrucksComponent,
-    CreateTrucksComponent
+    CreateTrucksComponent,
+    SectionsComponent,
+    CreateSectionsComponent
   ],
   imports: [
     BrowserModule,

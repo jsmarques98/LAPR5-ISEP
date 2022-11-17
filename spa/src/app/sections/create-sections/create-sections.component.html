@@ -1,0 +1,35 @@
+<section>
+    <form [formGroup] = "sectionForm">
+        <h1>Section Information:</h1>
+        <div  >
+            <input type="text" class="form-control" id="sectionId" placeholder="Id" formControlName="id">
+        </div>
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="WarehouseOrigin Id" id="warehouseOrigin" formControlName="warehouseOrigin">
+        </div>
+        <br>
+        <div  >
+            <input type="text" class="form-control" id="warehouseDestiny" placeholder="warehouseDestiny Id" formControlName="warehouseDestiny">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="duration" id="duration" formControlName="duration">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="distance" id="distance" formControlName="distance">
+        </div>
+        <br>
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="energySpent" id="energySpent" formControlName="energySpent">
+        </div>
+        <br>
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="extraTime" id="extraTime" formControlName="extraTime">
+        </div>
+        <br>
+                  <button type="submit" class="btn btn-primary w-100" (click)="createSection()">Save</button>
+          </form>
+</section>
+

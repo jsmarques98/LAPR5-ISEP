@@ -7,6 +7,7 @@ import { CreateDeliveriesComponent } from './deliveries/create-deliveries/create
 import { HttpClientModule } from '@angular/common/http';
 import { CreatePackagingsComponent } from './packagings/create-packagings/create-packagings.component';
 import { CreateTrucksComponent } from './trucks/create-trucks/create-trucks.component';
+import { CreateSectionsComponent } from './sections/create-sections/create-sections.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'createDeliveries', component: CreateDeliveriesComponent },
   { path: 'createPackagings', component: CreatePackagingsComponent },
   { path: 'createTrucks', component: CreateTrucksComponent },
+  { path: 'createSections', component: CreateSectionsComponent },
 ];
 
 @NgModule({
