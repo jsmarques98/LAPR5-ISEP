@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { CreateDeliveriesComponent } from './deliveries/create-deliveries/create-deliveries.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CreatePackagingsComponent } from './packagings/create-packagings/create-packagings.component';
+import { UpdatePackagingsComponent } from './packagings/update-packagings/update-packagings.component';
 import { CreateTrucksComponent } from './trucks/create-trucks/create-trucks.component';
 import { CreateSectionsComponent } from './sections/create-sections/create-sections.component';
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'home', component: PosLoginPageComponent },
   { path: 'createDeliveries', component: CreateDeliveriesComponent },
   { path: 'createPackagings', component: CreatePackagingsComponent },
+  { path: 'updatePackagings', component: UpdatePackagingsComponent },
   { path: 'createTrucks', component: CreateTrucksComponent },
   { path: 'createSections', component: CreateSectionsComponent },
 ];

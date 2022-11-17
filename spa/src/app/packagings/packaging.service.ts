@@ -28,6 +28,21 @@ export class PackagingService {
     }));
   }
 
+  updatePackaging(packaging:Packaging): Observable<any> {
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify(packaging);
+    return this.http.put(this.logisticsURL + 'packagings', body,{'headers':headers}).pipe(catchError(err => {
+      if (err.status == 200) {
+        this.mostrarNotificacao('Empacotamento alterado com sucesso!',false);
+      }
+      if (err.status == 500) {
+        
+        this.mostrarNotificacao(err,true);
+      }
+      return throwError(err);
+    }));
+  }
+
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
     this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});

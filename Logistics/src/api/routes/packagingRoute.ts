@@ -17,9 +17,9 @@ export default (app: Router) => {
     celebrate({
       body: Joi.object({
         id: Joi.string(),
-        positionX: Joi.string().required(),
-        positionY: Joi.string().required(),
-        positionZ: Joi.string().required(),
+        positionX: Joi.number().required(),
+        positionY: Joi.number().required(),
+        positionZ: Joi.number().required(),
         truckId: Joi.string().required(),
         deliveryId: Joi.string().required(),
 
@@ -31,9 +31,9 @@ export default (app: Router) => {
     celebrate({
       body: Joi.object({
         id: Joi.string(),
-        positionX: Joi.string().required(),
-        positionY: Joi.string().required(),
-        positionZ: Joi.string().required(),
+        positionX: Joi.number().required(),
+        positionZ: Joi.number().required(),
+        positionY: Joi.number().required(),
         truckId: Joi.string().required(),
         deliveryId: Joi.string().required(),
       }),
