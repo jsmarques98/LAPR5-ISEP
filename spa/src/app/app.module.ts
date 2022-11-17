@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { UsersComponent } from './users/users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +16,6 @@ import { CreatePackagingsComponent } from './packagings/create-packagings/create
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
     LoginComponent,
     PosLoginPageComponent,
     DeliveriesComponent,
