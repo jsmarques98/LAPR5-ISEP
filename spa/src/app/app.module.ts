@@ -11,6 +11,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PackagingsComponent } from './packagings/packagings.component';
 import { CreatePackagingsComponent } from './packagings/create-packagings/create-packagings.component';
+import { TrucksComponent } from './trucks/trucks.component';
+import { CreateTrucksComponent } from './trucks/create-trucks/create-trucks.component';
+
 
 
 @NgModule({
@@ -21,7 +24,9 @@ import { CreatePackagingsComponent } from './packagings/create-packagings/create
     DeliveriesComponent,
     CreateDeliveriesComponent,
     PackagingsComponent,
-    CreatePackagingsComponent
+    CreatePackagingsComponent,
+    TrucksComponent,
+    CreateTrucksComponent
   ],
   imports: [
     BrowserModule,

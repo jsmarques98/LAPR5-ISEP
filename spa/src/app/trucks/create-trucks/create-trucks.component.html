@@ -1,0 +1,38 @@
+<section>
+    <form [formGroup] = "truckForm">
+        <h1>Delivery Information:</h1>
+        <div  >
+            <input type="text" class="form-control" id="truckId" placeholder="Id" formControlName="id">
+        </div>
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Plate" id="plate" formControlName="plate">
+        </div>
+        <br>
+        <div  >
+            <input type="text" class="form-control" id="name" placeholder="name" formControlName="name">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="autonomy" id="autonomy" formControlName="autonomy">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="maxBattery" id="maxBattery" formControlName="maxBattery">
+        </div>
+        <br>
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="payLoad" id="payLoad" formControlName="payLoad">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="tare" id="tare" formControlName="tare">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="baterryChargingTime" id="Baterry ChargingTime" formControlName="baterryChargingTime">
+        </div>
+        <br>
+                  <button type="submit" class="btn btn-primary w-100" (click)="createDelivery()">Save</button>
+          </form>
+</section>

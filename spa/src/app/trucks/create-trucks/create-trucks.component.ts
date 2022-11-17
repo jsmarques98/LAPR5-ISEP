@@ -1,0 +1,65 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators,FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Truck } from '../truck';
+import { TruckService } from '../truck.service';
+import {MatSnackBar} from "@angular/material/snack-bar";
+
+
+@Component({
+  selector: 'app-create-trucks',
+  templateUrl: './create-trucks.component.html',
+  styleUrls: ['./create-trucks.component.css']
+})
+export class CreateTrucksComponent implements OnInit {
+
+  truckForm = this.fb.group({
+    id: [''],
+    plate: [''],
+    name: [''],
+    autonomy: [],
+    maxBattery: [],
+    payLoad:[],
+    tare:[],
+    baterryChargingTime:[],
+
+
+  });
+
+  truck = new Truck();
+
+  constructor(private fb: FormBuilder,private router: Router, private service : TruckService,private notification:MatSnackBar) { }
+
+  ngOnInit(): void {
+  }
+
+  createDelivery(){
+    
+    this.truck.domainId=this.truckForm.value.id!;
+    this.truck.plate=this.truckForm.value.plate!;
+    this.truck.name=this.truckForm.value.name!;
+    this.truck.autonomy=this.truckForm.value.autonomy!;
+    this.truck.maxBattery=this.truckForm.value.maxBattery!;
+    this.truck.payLoad=this.truckForm.value.payLoad!;
+    this.truck.tare=this.truckForm.value.tare!;
+    this.truck.baterryChargingTime=this.truckForm.value.baterryChargingTime!;
+
+
+    this.service.addTruck(this.truck).subscribe(res => {
+      if (res != null) {
+
+        this.mostrarNotificacao('Post Efetuado com sucesso!',false)
+      }else{
+        this.mostrarNotificacao('Post não efetuado!',true)
+      };
+
+    this.router.navigate(['/home']);
+  });
+  
+}
+
+private mostrarNotificacao(mensagem: string, falha: boolean) {
+  var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
+  this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
+}
+}
