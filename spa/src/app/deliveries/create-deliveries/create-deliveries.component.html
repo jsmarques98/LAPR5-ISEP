@@ -1,0 +1,31 @@
+<section>
+    <form [formGroup] = "deliveryForm">
+        <h1>Delivery Information:</h1>
+        <div  >
+            <input type="text" class="form-control" id="deliveryId" placeholder="Id" formControlName="id">
+        </div>
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Warehouse Id" id="deliveryWarehouseId" formControlName="deliveryWarehouseId">
+        </div>
+        <br>
+        <div  >
+            <input type="date" class="form-control" id="deliveryDate" placeholder="Delivery Date" formControlName="deliveryDate">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="Load Time" id="deliveryLoadTime" formControlName="deliveryLoadTime">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="Unload Time" id="deliveryUnloadTime" formControlName="deliveryUnoadTime">
+        </div>
+        <br>
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="Total Weight" id="deliveryTotalWeight" formControlName="deliveryTotalWeight">
+        </div>
+        <br>
+                  <button type="submit" class="btn btn-primary w-100" (click)="createDelivery()">Save</button>
+          </form>
+</section>
+
