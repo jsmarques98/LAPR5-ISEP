@@ -1,0 +1,43 @@
+<section>
+    <form [formGroup] = "warehouseForm">
+        <h1>Warehouse Information:</h1>
+        <div  >
+            <input type="text" class="form-control" id="warehouseId" placeholder="Id" formControlName="Id">
+        </div>
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Designation" id="warehouseDesignation" formControlName="warehouseDesignation">
+        </div>
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Street" id="warehouseStreet" formControlName="warehouseStreet">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="Door Number" id="warehouseDoorNumber" formControlName="warehouseDoorNumber">
+        </div>
+        <br>
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Post Code" id="warehousePostCode" formControlName="warehousePostCode">
+        </div>
+        <br>
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="City" id="warehouseCity" formControlName="warehouseCity">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="Latitude" id="warehouseLatitude" formControlName="warehouseLatitude">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="Longitude" id="warehouseLongitude" formControlName="warehouseLongitude">
+        </div>
+        <br> 
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="Altitude" id="warehouseAltitude" formControlName="warehouseAltitude">
+        </div>
+        <br>
+                  <button type="submit" class="btn btn-primary w-100" (click)="createWarehouse()">Save</button>
+          </form>
+</section>
+
