@@ -9,6 +9,8 @@ import { CreatePackagingsComponent } from './packagings/create-packagings/create
 import { UpdatePackagingsComponent } from './packagings/update-packagings/update-packagings.component';
 import { CreateTrucksComponent } from './trucks/create-trucks/create-trucks.component';
 import { CreateSectionsComponent } from './sections/create-sections/create-sections.component';
+import { CreateWarehousesComponent } from './warehouses/create-warehouses/create-warehouses.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,6 +20,7 @@ const routes: Routes = [
   { path: 'updatePackagings', component: UpdatePackagingsComponent },
   { path: 'createTrucks', component: CreateTrucksComponent },
   { path: 'createSections', component: CreateSectionsComponent },
+  { path: 'createWarehouses', component: CreateWarehousesComponent }
 ];
 
 @NgModule({
