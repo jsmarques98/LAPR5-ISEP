@@ -17,6 +17,7 @@ import { CreateTrucksComponent } from './trucks/create-trucks/create-trucks.comp
 import { SectionsComponent } from './sections/sections.component';
 import { CreateSectionsComponent } from './sections/create-sections/create-sections.component';
 import { CreateWarehousesComponent } from './warehouses/create-warehouses/create-warehouses.component';
+import { WarehousesComponent } from './warehouses/warehouses.component';
 
 
 
@@ -34,6 +35,7 @@ import { CreateWarehousesComponent } from './warehouses/create-warehouses/create
     SectionsComponent,
     CreateSectionsComponent,
     UpdatePackagingsComponent,
+    WarehousesComponent,
     CreateWarehousesComponent
   ],
   imports: [
