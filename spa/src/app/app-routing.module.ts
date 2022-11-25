@@ -10,6 +10,7 @@ import { UpdatePackagingsComponent } from './packagings/update-packagings/update
 import { CreateTrucksComponent } from './trucks/create-trucks/create-trucks.component';
 import { CreateSectionsComponent } from './sections/create-sections/create-sections.component';
 import { CreateWarehousesComponent } from './warehouses/create-warehouses/create-warehouses.component';
+import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-route/check-best-possible-route.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,9 @@ const routes: Routes = [
   { path: 'updatePackagings', component: UpdatePackagingsComponent },
   { path: 'createTrucks', component: CreateTrucksComponent },
   { path: 'createSections', component: CreateSectionsComponent },
-  { path: 'createWarehouses', component: CreateWarehousesComponent }
+  { path: 'createWarehouses', component: CreateWarehousesComponent },
+  { path: 'checkBestPossibleRoute', component: CheckBestPossibleRouteComponent }
+
 ];
 
 @NgModule({

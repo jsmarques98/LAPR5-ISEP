@@ -18,6 +18,7 @@ import { SectionsComponent } from './sections/sections.component';
 import { CreateSectionsComponent } from './sections/create-sections/create-sections.component';
 import { CreateWarehousesComponent } from './warehouses/create-warehouses/create-warehouses.component';
 import { WarehousesComponent } from './warehouses/warehouses.component';
+import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-route/check-best-possible-route.component';
 
 
 
@@ -36,7 +37,8 @@ import { WarehousesComponent } from './warehouses/warehouses.component';
     CreateSectionsComponent,
     UpdatePackagingsComponent,
     WarehousesComponent,
-    CreateWarehousesComponent
+    CreateWarehousesComponent,
+    CheckBestPossibleRouteComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+<section>
+    <form [formGroup] = "planningForm">
+        <h1>Insert Truck and Date to see planning route:</h1>
+            <div  >
+                <input type="text" class="form-control" id="truckPlate" placeholder="Truck Plate " formControlName="truckPlate">
+            </div>
+            <br> 
+            <div>
+                <input type="date" class="form-control mb-3" placeholder="Delivery Date" id="deliveryDate" formControlName="deliveryDate">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary w-100" (click)="checkBestPossibleRoute()">Find</button>
+    </form>
+</section>
