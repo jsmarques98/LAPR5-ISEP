@@ -31,14 +31,14 @@ export class CreateDeliveriesComponent implements OnInit {
   createDelivery(){
     
     this.delivery.id=this.deliveryForm.value.id!;
-    this.delivery.DeliveryDate=this.deliveryForm.value.deliveryDate!;
-    this.delivery.DeliveryWarehouseId=this.deliveryForm.value.deliveryWarehouseId!;
-    this.delivery.LoadTime=this.deliveryForm.value.deliveryLoadTime!;
-    this.delivery.UnloadTime=this.deliveryForm.value.deliveryUnoadTime!;
-    this.delivery.TotalWeight=this.deliveryForm.value.deliveryTotalWeight!;
+    this.delivery.deliveryDate=this.deliveryForm.value.deliveryDate!;
+    this.delivery.deliveryWarehouseId=this.deliveryForm.value.deliveryWarehouseId!;
+    this.delivery.loadTime=this.deliveryForm.value.deliveryLoadTime!;
+    this.delivery.unloadTime=this.deliveryForm.value.deliveryUnoadTime!;
+    this.delivery.totalWeight=this.deliveryForm.value.deliveryTotalWeight!;
 
-    const strNum = this.delivery.DeliveryDate.replace(/[^0-9]/g, '')
-    this.delivery.DeliveryDate= strNum;
+    const strNum = this.delivery.deliveryDate.replace(/[^0-9]/g, '')
+    this.delivery.deliveryDate= strNum;
 
     this.service.addDelivery(this.delivery).subscribe(res => {
       if (res != null) {

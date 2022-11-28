@@ -32,6 +32,19 @@ export class DeliveryService {
     }));
   }
 
+  getDeliveries(): Observable<any> {
+      
+    return this.http.get<Delivery[]>(this.deliveriesWarehouseManagementURL + 'deliveries/').pipe(catchError(err => {
+      if (err.status == 200) {
+        this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
+      }
+      if (err.status == 400) {
+        this.mostrarNotificacao('Erro ao obter entregas!',true);
+      }
+      return throwError(err);
+    }));
+  }
+
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
     this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});

@@ -1,0 +1,28 @@
+<section>
+    <h2>Trucks</h2>
+    <ul class="trucks">
+    <li *ngFor="let truck of trucks">
+      <button [class.selected]="truck === selectedTruck" type="button" (click)="onSelect(truck)">
+        <span class="name">{{truck.name}}</span>
+      </button>
+    </li>
+    </ul>
+    
+    <button type="submit" class="btn btn-primary w-100" (click)="getTrucks()">Find</button>
+  
+    <div *ngIf="selectedTruck">
+    <h2>Truck {{selectedTruck.name | uppercase}} Details</h2>
+    <div>Plate: {{selectedTruck.plate}}</div>
+    <div>Autonomy: {{selectedTruck.autonomy}}</div>
+    <div>Max Battery: {{selectedTruck.maxBattery}}</div>
+    <div>Pay Load: {{selectedTruck.payLoad}}</div>
+    <div>Tare: {{selectedTruck.tare}}</div>  
+    <div>Baterry Charging Time: {{selectedTruck.baterryChargingTime}}</div>  
+    </div>
+    
+    <br> 
+    <br> 
+    <button routerLink="/home">Exit</button>
+    
+    <section>
+  

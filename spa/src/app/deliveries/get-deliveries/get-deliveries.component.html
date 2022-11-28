@@ -1,0 +1,26 @@
+    <section>
+  <h2>Deliveries</h2>
+  <ul class="deliveries">
+  <li *ngFor="let delivery of deliveries">
+    <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
+      <span class="name">{{delivery.id}}</span>
+    </button>
+  </li>
+  </ul>
+  
+  <button type="submit" class="btn btn-primary w-100" (click)="getDeliveries()">Find</button>
+
+  <div *ngIf="selectedDelivery">
+  <h2>Delivery {{selectedDelivery.id | uppercase}} Details</h2>
+  <div>DeliveryDate: {{selectedDelivery.deliveryDate}}</div>
+  <div>LoadTime: {{selectedDelivery.loadTime}}</div>
+  <div>UnloadTime: {{selectedDelivery.unloadTime}}</div>
+  <div>TotalWeight: {{selectedDelivery.totalWeight}}</div>
+  <div>DeliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>  
+  </div>
+  
+  <br> 
+  <br> 
+  <button routerLink="/home">Exit</button>
+  
+  <section>

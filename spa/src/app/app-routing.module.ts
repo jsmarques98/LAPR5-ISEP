@@ -10,7 +10,9 @@ import { UpdatePackagingsComponent } from './packagings/update-packagings/update
 import { CreateTrucksComponent } from './trucks/create-trucks/create-trucks.component';
 import { CreateSectionsComponent } from './sections/create-sections/create-sections.component';
 import { CreateWarehousesComponent } from './warehouses/create-warehouses/create-warehouses.component';
-import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-route/check-best-possible-route.component';
+import { GetDeliveriesComponent } from './deliveries/get-deliveries/get-deliveries.component';
+import { GetSectionsComponent } from './sections/get-sections/get-sections.component';
+import { GetTrucksComponent } from './trucks/get-trucks/get-trucks.component';
 
 
 const routes: Routes = [
@@ -22,7 +24,9 @@ const routes: Routes = [
   { path: 'createTrucks', component: CreateTrucksComponent },
   { path: 'createSections', component: CreateSectionsComponent },
   { path: 'createWarehouses', component: CreateWarehousesComponent },
-  { path: 'checkBestPossibleRoute', component: CheckBestPossibleRouteComponent }
+  { path: 'getDeliveries', component: GetDeliveriesComponent },
+  { path: 'getSections', component: GetSectionsComponent },
+  { path: 'getTrucks', component: GetTrucksComponent }
 
 ];
 

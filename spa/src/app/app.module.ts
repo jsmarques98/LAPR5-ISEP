@@ -18,7 +18,9 @@ import { SectionsComponent } from './sections/sections.component';
 import { CreateSectionsComponent } from './sections/create-sections/create-sections.component';
 import { CreateWarehousesComponent } from './warehouses/create-warehouses/create-warehouses.component';
 import { WarehousesComponent } from './warehouses/warehouses.component';
-import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-route/check-best-possible-route.component';
+import { GetDeliveriesComponent } from './deliveries/get-deliveries/get-deliveries.component';
+import { GetSectionsComponent } from './sections/get-sections/get-sections.component';
+import { GetTrucksComponent } from './trucks/get-trucks/get-trucks.component';
 
 
 
@@ -38,7 +40,9 @@ import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-
     UpdatePackagingsComponent,
     WarehousesComponent,
     CreateWarehousesComponent,
-    CheckBestPossibleRouteComponent
+    GetDeliveriesComponent,
+    GetSectionsComponent,
+    GetTrucksComponent
   ],
   imports: [
     BrowserModule,

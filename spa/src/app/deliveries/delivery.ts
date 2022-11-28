@@ -1,8 +1,8 @@
 export class Delivery {
     id:string
-    DeliveryDate:string
-    LoadTime:number
-    UnloadTime:number
-    TotalWeight:number
-    DeliveryWarehouseId:string
+    deliveryDate:string
+    loadTime:number
+    unloadTime:number
+    totalWeight:number
+    deliveryWarehouseId:string
 }

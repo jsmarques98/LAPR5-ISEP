@@ -1,0 +1,26 @@
+<section>
+    <h2>Sections</h2>
+    <ul class="sections">
+    <li *ngFor="let section of sections">
+      <button [class.selected]="section === selectedSection" type="button" (click)="onSelect(section)">
+        <span class="name">{{section.warehouseOrigin}} to {{section.warehouseDestiny}}</span>
+      </button>
+    </li>
+    </ul>
+    
+    <button type="submit" class="btn btn-primary w-100" (click)="getSections()">Find</button>
+  
+    <div *ngIf="selectedSection">
+    <h2>Section {{selectedSection.warehouseOrigin | uppercase}} to {{selectedSection.warehouseDestiny | uppercase}} Details</h2>
+    <div>duration: {{selectedSection.duration}}</div>
+    <div>distance: {{selectedSection.distance}}</div>
+    <div>energySpent: {{selectedSection.energySpent}}</div>
+    <div>extraTime: {{selectedSection.extraTime}}</div>
+    </div>
+    
+    <br> 
+    <br> 
+    <button routerLink="/home">Exit</button>
+    
+    <section>
+  
