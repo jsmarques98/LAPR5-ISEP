@@ -36,7 +36,7 @@ pipelines:
             variables:
              USER: 'root'
              SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
-             REMOTE_PATH: '/logistics'
+             REMOTE_PATH: '/logisticsMD'
              LOCAL_PATH: './Logistics'
              SSH_KEY: $MYKEY
              EXTRA_ARGS: ["-P","10698"]
