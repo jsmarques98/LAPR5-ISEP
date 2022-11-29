@@ -6,8 +6,6 @@
 # To run your pipeline on a Windows machine, create a self-hosted Windows runner.
 # For instructions on setting up a Windows runner, see https://support.atlassian.com/bitbucket-cloud/docs/set-up-runners-for-windows/
 
-image: mcr.microsoft.com/dotnet/core/sdk:5.0
-
 pipelines:
   default:
     - parallel:
@@ -17,7 +15,28 @@ pipelines:
             caches:
               - dotnetcore
             script:
-              - export MD=WarehouseManagement
+              - export WM=WarehouseManagement
               - dotnet restore ./WarehouseManagement
-              - dotnet build $MD
-              - dotnet test $MD
+              - dotnet build $WM
+              - dotnet test $WM
+        -  step:
+            name: Build and Test Logistics
+            image: node:16
+            caches:
+              - node
+            script:
+              - cd ./Logistics
+              - npm install
+              - npm test
+    - step:
+        name: Deployment to execute on Virtual Machine
+        deployment: Production
+        script: 
+          - pipe: atlassian/scp-deploy:1.2.1
+            variables:
+             USER: 'root'
+             SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+             REMOTE_PATH: '/logistics'
+             LOCAL_PATH: './Logistics'
+             SSH_KEY: $MYKEY
+             EXTRA_ARGS: ["-P","10698"]
