@@ -21,6 +21,7 @@ import { WarehousesComponent } from './warehouses/warehouses.component';
 import { GetDeliveriesComponent } from './deliveries/get-deliveries/get-deliveries.component';
 import { GetSectionsComponent } from './sections/get-sections/get-sections.component';
 import { GetTrucksComponent } from './trucks/get-trucks/get-trucks.component';
+import { GetWarehousesComponent } from './warehouses/get-warehouses/get-warehouses.component';
 
 
 
@@ -42,7 +43,8 @@ import { GetTrucksComponent } from './trucks/get-trucks/get-trucks.component';
     CreateWarehousesComponent,
     GetDeliveriesComponent,
     GetSectionsComponent,
-    GetTrucksComponent
+    GetTrucksComponent,
+    GetWarehousesComponent
   ],
   imports: [
     BrowserModule,

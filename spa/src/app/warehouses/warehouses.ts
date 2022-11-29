@@ -1,12 +1,12 @@
 export class Warehouse {
-    Id:string
-    Designation:string
-    Street:string
-    DoorNumber:number
-    PostCode:string
-    City:string
-    Latitude:number
-    Longitude:number
-    Altitude:number
+    id:string
+    designation:string
+    street:string
+    doorNumber:number
+    postCode:string
+    city:string
+    latitude:number
+    longitude:number
+    altitude:number
 
 }

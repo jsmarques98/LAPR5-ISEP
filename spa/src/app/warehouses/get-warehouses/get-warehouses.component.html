@@ -1,0 +1,30 @@
+<section>
+    <h2>Warehouses</h2>
+    <ul class="warehouses">
+    <li *ngFor="let warehouse of warehouses">
+      <button [class.selected]="warehouse === selectedWarehouse" type="button" (click)="onSelect(warehouse)">
+        <span class="name">{{warehouse.id}}</span>
+      </button>
+    </li>
+    </ul>
+    
+    <button type="submit" class="btn btn-primary w-100" (click)="getWarehouses()">Find</button>
+  
+    <div *ngIf="selectedWarehouse">
+    <h2>Warehouse {{selectedWarehouse.id | uppercase}} Details</h2>
+    <div>Designation: {{selectedWarehouse.designation}}</div>
+    <div>Street: {{selectedWarehouse.street}}</div>
+    <div>Door Number: {{selectedWarehouse.doorNumber}}</div>
+    <div>Post Code: {{selectedWarehouse.postCode}}</div>  
+    <div>City: {{selectedWarehouse.city}}</div> 
+    <div>Latitude: {{selectedWarehouse.latitude}}</div> 
+    <div>Longitude: {{selectedWarehouse.longitude}}</div> 
+    <div>Altitude: {{selectedWarehouse.altitude}}</div>  
+    </div>
+    
+    <br> 
+    <br> 
+    <button routerLink="/home">Exit</button>
+    
+    <section>
+  

@@ -13,7 +13,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class CreateWarehousesComponent implements OnInit {
 
   warehouseForm = this.fb.group({
-    Id: [''],
+    id: [''],
     warehouseDesignation: [''],
     warehouseStreet: [],
     warehouseDoorNumber: [],
@@ -33,15 +33,15 @@ export class CreateWarehousesComponent implements OnInit {
 
   createWarehouse(){
     
-    this.warehouse.Id=this.warehouseForm.value.Id!;
-    this.warehouse.Designation=this.warehouseForm.value.warehouseDesignation!;
-    this.warehouse.Street=this.warehouseForm.value.warehouseStreet!;
-    this.warehouse.DoorNumber=this.warehouseForm.value.warehouseDoorNumber!;
-    this.warehouse.PostCode=this.warehouseForm.value.warehousePostCode!;
-    this.warehouse.City=this.warehouseForm.value.warehouseCity!;
-    this.warehouse.Latitude=this.warehouseForm.value.warehouseLatitude!;
-    this.warehouse.Longitude=this.warehouseForm.value.warehouseLongitude!;
-    this.warehouse.Altitude=this.warehouseForm.value.warehouseAltitude!;
+    this.warehouse.id=this.warehouseForm.value.id!;
+    this.warehouse.designation=this.warehouseForm.value.warehouseDesignation!;
+    this.warehouse.street=this.warehouseForm.value.warehouseStreet!;
+    this.warehouse.doorNumber=this.warehouseForm.value.warehouseDoorNumber!;
+    this.warehouse.postCode=this.warehouseForm.value.warehousePostCode!;
+    this.warehouse.city=this.warehouseForm.value.warehouseCity!;
+    this.warehouse.latitude=this.warehouseForm.value.warehouseLatitude!;
+    this.warehouse.longitude=this.warehouseForm.value.warehouseLongitude!;
+    this.warehouse.altitude=this.warehouseForm.value.warehouseAltitude!;
 
     
     this.service.addWarehouse(this.warehouse).subscribe(res => {

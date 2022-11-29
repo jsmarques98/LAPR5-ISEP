@@ -13,6 +13,7 @@ import { CreateWarehousesComponent } from './warehouses/create-warehouses/create
 import { GetDeliveriesComponent } from './deliveries/get-deliveries/get-deliveries.component';
 import { GetSectionsComponent } from './sections/get-sections/get-sections.component';
 import { GetTrucksComponent } from './trucks/get-trucks/get-trucks.component';
+import { GetWarehousesComponent } from './warehouses/get-warehouses/get-warehouses.component';
 
 
 const routes: Routes = [
@@ -26,8 +27,8 @@ const routes: Routes = [
   { path: 'createWarehouses', component: CreateWarehousesComponent },
   { path: 'getDeliveries', component: GetDeliveriesComponent },
   { path: 'getSections', component: GetSectionsComponent },
-  { path: 'getTrucks', component: GetTrucksComponent }
-
+  { path: 'getTrucks', component: GetTrucksComponent },
+  { path: 'getWarehouses', component: GetWarehousesComponent }
 ];
 
 @NgModule({
