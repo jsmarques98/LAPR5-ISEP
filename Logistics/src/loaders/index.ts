@@ -15,6 +15,12 @@ export default async ({ expressApp }) => {
     name: 'userSchema',
     schema: '../persistence/schemas/userSchema',
   };
+  
+  const planningSchema = {
+    // compare with the approach followed in repos and services
+    name: 'planningSchema',
+    schema: '../persistence/schemas/planningSchema',
+  };
 
   const roleSchema = {
     // compare with the approach followed in repos and services
@@ -58,6 +64,11 @@ export default async ({ expressApp }) => {
   const packagingController = {
     name: config.controllers.packaging.name,
     path: config.controllers.packaging.path
+  }
+  
+  const planningController = {
+    name: config.controllers.planning.name,
+    path: config.controllers.planning.path
   }
   
   const roleRepo = {
@@ -104,6 +115,11 @@ export default async ({ expressApp }) => {
     name: config.services.packaging.name,
     path: config.services.packaging.path
   }
+  
+  const planningService = {
+    name: config.services.planning.name,
+    path: config.services.planning.path
+  }
 
 
 
@@ -114,13 +130,15 @@ export default async ({ expressApp }) => {
       roleSchema,
       truckSchema,
       sectionSchema,
-      packagingSchema
+      packagingSchema,
+      planningSchema,
     ],
     controllers: [
       roleController,
       truckController,
       sectionController,
-      packagingController
+      packagingController,
+      planningController
     ],
     repos: [
       roleRepo,
@@ -133,7 +151,8 @@ export default async ({ expressApp }) => {
       roleService,
       truckService,
       sectionService,
-      packagingService
+      packagingService,
+      planningService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

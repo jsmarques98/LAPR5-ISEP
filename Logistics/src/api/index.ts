@@ -5,6 +5,7 @@ import role from './routes/roleRoute';
 import truck from './routes/truckRoute';
 import section from './routes/sectionRoute';
 import packaging from './routes/packagingRoute';
+import planning from './routes/planningRoute';
 
 
 export default () => {
@@ -16,6 +17,7 @@ export default () => {
 	truck(app);
 	section(app);
 	packaging(app);
+	planning(app);
 	
 	
 	return app

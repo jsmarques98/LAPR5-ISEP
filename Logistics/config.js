@@ -19,7 +19,7 @@ export default {
   /**
    * That long string from mlab
    */
-  databaseURL: process.env.MONGODB_URI || "mongodb://localhost:27017/test",
+  databaseURL: process.env.MONGODB_URI || "mongodb://mongoadmin:37d07434c42748d928f9ae9c@vsgate-s1.dei.isep.ipp.pt:10470/admin?authMechanism=DEFAULT",
 
   /**
    * Your secret sauce
@@ -29,6 +29,7 @@ export default {
   
   warehousesAPIWarehouseManagementURL: "https://localhost:5001/api/warehouses/",
   deliveriesAPIWarehouseManagementURL: "https://localhost:5001/api/deliveries/",
+  planningAPIAllPosibleRoutesURL: "http://localhost:8000/allPossibleRoutes",
 
   
   /**
@@ -61,6 +62,10 @@ export default {
     packaging: {
       name: "PackagingController",
       path: "../controllers/packagingController"
+    },
+    planning: {
+      name: "PlanningController",
+      path: "../controllers/planningController"
     }
   },
 
@@ -103,6 +108,10 @@ export default {
     packaging: {
       name: "PackagingService",
       path: "../services/packagingService"
+    },
+    planning: {
+      name: "PlanningService",
+      path: "../services/planningService"
     }
   },
 };
