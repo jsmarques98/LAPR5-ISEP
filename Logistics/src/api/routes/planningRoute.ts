@@ -9,17 +9,42 @@ import config from "../../../config";
 const route = Router();
 
 export default (app: Router) => {
-  console.log("sdfdsd------------")
   app.use('/plannings', route);
   const ctrl = Container.get(config.controllers.planning.name) as IPlanningController;
 
-    route.get('/:ola',
+    route.get('/bestRoute',
     celebrate({
       query: Joi.object().keys({
-        truckPlate:Joi.string(),
+        truckName:Joi.string(),
         deliveryDate:Joi.string()
       })
     }),
-    (req, res, next) => ctrl.getAllRoutes(req, res, next));
-};
+    (req, res, next) => ctrl.getBestRoute(req, res, next));
 
+    route.get('/routeHeuristicTime',
+    celebrate({
+      query: Joi.object().keys({
+        truckName:Joi.string(),
+        deliveryDate:Joi.string()
+      })
+    }),
+    (req, res, next) => ctrl.getRouteHeuristicTime(req, res, next));
+
+    route.get('/routeHeuristicMass',
+    celebrate({
+      query: Joi.object().keys({
+        truckName:Joi.string(),
+        deliveryDate:Joi.string()
+      })
+    }),
+    (req, res, next) => ctrl.getRouteHeuristicMass(req, res, next));
+
+    route.get('/routeHeuristicTimeAndMass',
+    celebrate({
+      query: Joi.object().keys({
+        truckName:Joi.string(),
+        deliveryDate:Joi.string()
+      })
+    }),
+    (req, res, next) => ctrl.getRouteHeuristicTimeAndMass(req, res, next));
+};

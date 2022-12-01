@@ -1,7 +1,7 @@
 import { List } from "lodash";
 
 export default interface IPlanningDTO {
-    truckPlate: string;
+    truckName: string;
     deliveryDate:string;
     routeList: Array<string>; 
 }

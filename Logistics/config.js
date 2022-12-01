@@ -27,9 +27,10 @@ export default {
   jwtSecret: process.env.JWT_SECRET || "my sakdfho2390asjod$%jl)!sdjas0i secret",
 
   
-  warehousesAPIWarehouseManagementURL: "https://localhost:5001/api/warehouses/",
-  deliveriesAPIWarehouseManagementURL: "https://localhost:5001/api/deliveries/",
-  planningAPIAllPosibleRoutesURL: "http://localhost:8000/allPossibleRoutes",
+  planningAPIBestRoutesURL: "http://localhost:8000/bestRoute",
+  planningAPIHeuristicTimeURL: "http://localhost:8000/heuristicTime",
+  planningAPIHeuristicMassURL: "http://localhost:8000/heuristicMass",
+  planningAPIHeuristicTimeAndMassURL: "http://localhost:8000/heuristicTimeAndMass",
 
   
   /**
