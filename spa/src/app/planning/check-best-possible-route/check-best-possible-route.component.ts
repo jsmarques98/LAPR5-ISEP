@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { Planning } from '../planning';
 import { PlanningComponent } from '../planning.component';
 import { PlanningService } from '../planning.service';
+import {Warehouse} from '../../warehouses/warehouses'
+import { Delivery } from 'src/app/deliveries/delivery';
+import { DeliveryService } from 'src/app/deliveries/delivery.service';
+
 
 @Component({
   selector: 'app-check-best-possible-route',
@@ -14,32 +18,167 @@ import { PlanningService } from '../planning.service';
 export class CheckBestPossibleRouteComponent implements OnInit {
 
   planningForm = this.fb.group({
-    truckPlate: [''],
+    truckName: [''],
     deliveryDate: [''],
   });
 
   planning = new Planning();
 
-  constructor(private fb: FormBuilder,private router: Router, private service : PlanningService,private notification:MatSnackBar) { }
+  deliveriesIDs;
+  deliveries;
+  custo;
+
+  selectedDelivery?: Delivery;
+
+  constructor(private fb: FormBuilder,private router: Router, private servicePlanning : PlanningService,private notification:MatSnackBar,private deliveryService : DeliveryService) { }
 
   ngOnInit(): void {
   }
 
-  checkBestPossibleRoute(){
-    this.planning.truckPlate=this.planningForm.value.truckPlate!;
+  checkBestPossibleRoute(){ 
+    this.planning.truckName=this.planningForm.value.truckName!;
     this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
 
     const strNum = this.planning.deliveryDate.replace(/[^0-9]/g, '')
     this.planning.deliveryDate= strNum;
 
-    this.service.checkBestPossibleRoute(this.planning).subscribe(res => {
-      if (res != null) {
-        this.mostrarNotificacao('Empacotamento criado com sucesso!',false)
-        console.log(res);
+
+    this.servicePlanning.checkBestPossibleRoute(this.planning).subscribe(res => {
+      
+      if (res != null && res.routeList!=undefined) {
+        this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
+        this.deliveriesIDs = res.routeList[0];
+        this.custo=res.routeList[1] + " min";
+
+         const arr: string[] = [];
+         for (let i = 0; i < this.deliveriesIDs.length; i++) {
+          
+          this.deliveryService.getDelivery(this.deliveriesIDs[i]).subscribe(res =>{
+            if (res != null) {
+              arr[i] = res;
+            }else{
+              console.log("Erro")
+            };
+          })
+        }
+        this.deliveries= arr;
       }else{
-        this.mostrarNotificacao('Erro ao criar empacotamento!',true)
+        this.deliveries=null;
+        this.custo=null;
+        this.mostrarNotificacao('Não existem entregas para o camião ou a data selecionadas!',true)
       };
-  });
+    });
+
+
+  }
+
+  checkRouteHeuristicMass(){ 
+    this.planning.truckName=this.planningForm.value.truckName!;
+    this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
+
+    const strNum = this.planning.deliveryDate.replace(/[^0-9]/g, '')
+    this.planning.deliveryDate= strNum;
+
+    this.servicePlanning.checkRouteHeuristicMass(this.planning).subscribe(res => {
+      if (res != null && res.routeList!=undefined) {
+        this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
+         this.deliveriesIDs = res.routeList[0];
+         this.custo=res.routeList[1] + " min";
+
+
+         const arr: string[] = [];
+         for (let i = 0; i < this.deliveriesIDs.length; i++) {
+          
+          this.deliveryService.getDelivery(this.deliveriesIDs[i]).subscribe(res =>{
+            if (res != null) {
+              arr[i] = res;
+            }else{
+              console.log("Erro")
+            };
+          })
+        }
+        this.deliveries= arr;
+      }else{
+        this.deliveries=null;
+        this.custo=null;
+
+        this.mostrarNotificacao('Não existem entregas para o camião ou a data selecionadas!',true)
+      };
+    });
+  }
+
+  checkRouteHeuristicTime(){ 
+    this.planning.truckName=this.planningForm.value.truckName!;
+    this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
+
+    const strNum = this.planning.deliveryDate.replace(/[^0-9]/g, '')
+    this.planning.deliveryDate= strNum;
+
+    this.servicePlanning.checkRouteHeuristicTime(this.planning).subscribe(res => {
+      if (res != null && res.routeList!=undefined) {
+        this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
+         this.deliveriesIDs = res.routeList[0];
+         this.custo=res.routeList[1] + " min";
+
+
+         const arr: string[] = [];
+         for (let i = 0; i < this.deliveriesIDs.length; i++) {
+          
+          this.deliveryService.getDelivery(this.deliveriesIDs[i]).subscribe(res =>{
+            if (res != null) {
+              arr[i] = res;
+            }else{
+              console.log("Erro")
+            };
+          })
+        }
+        this.deliveries= arr;
+      }else{
+        this.deliveries=null;
+        this.custo=null;
+
+        this.mostrarNotificacao('Não existem entregas para o camião ou a data selecionadas!',true)
+      };
+    });
+  }
+
+  checkRouteHeuristicTimeAndMass(){ 
+    this.planning.truckName=this.planningForm.value.truckName!;
+    this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
+
+    const strNum = this.planning.deliveryDate.replace(/[^0-9]/g, '')
+    this.planning.deliveryDate= strNum;
+
+    this.servicePlanning.checkRouteHeuristicTimeAndMass(this.planning).subscribe(res => {
+      if (res != null && res.routeList!=undefined) {
+        this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
+         this.deliveriesIDs = res.routeList[0];
+         this.custo=res.routeList[1] + " min";
+
+
+         const arr: string[] = [];
+         for (let i = 0; i < this.deliveriesIDs.length; i++) {
+          
+          this.deliveryService.getDelivery(this.deliveriesIDs[i]).subscribe(res =>{
+            if (res != null) {
+              arr[i] = res;
+            }else{
+              console.log("Erro")
+            };
+          })
+        }
+        this.deliveries= arr;
+      }else{
+        this.deliveries=null;
+        this.custo=null;
+
+        this.mostrarNotificacao('Não existem entregas para o camião ou a data selecionadas!',true)
+      };
+    });
+  }
+
+onSelect(delivery: Delivery): void {
+  this.selectedDelivery = delivery;
 }
 
 

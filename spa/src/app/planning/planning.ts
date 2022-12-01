@@ -1,4 +1,4 @@
 export class Planning {
-    truckPlate:string
+    truckName:string
     deliveryDate:string
 }

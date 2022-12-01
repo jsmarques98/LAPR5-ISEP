@@ -14,6 +14,7 @@ import { GetDeliveriesComponent } from './deliveries/get-deliveries/get-deliveri
 import { GetSectionsComponent } from './sections/get-sections/get-sections.component';
 import { GetTrucksComponent } from './trucks/get-trucks/get-trucks.component';
 import { GetWarehousesComponent } from './warehouses/get-warehouses/get-warehouses.component';
+import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-route/check-best-possible-route.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'getDeliveries', component: GetDeliveriesComponent },
   { path: 'getSections', component: GetSectionsComponent },
   { path: 'getTrucks', component: GetTrucksComponent },
-  { path: 'getWarehouses', component: GetWarehousesComponent }
+  { path: 'getWarehouses', component: GetWarehousesComponent },
+  { path: 'checkBestRoute', component: CheckBestPossibleRouteComponent },
 ];
 
 @NgModule({

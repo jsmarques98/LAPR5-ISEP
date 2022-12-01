@@ -3,6 +3,8 @@ import { Planning } from './planning';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { Warehouse } from '../warehouses/warehouses';
+import { Truck } from '../trucks/truck';
 
 @Injectable({providedIn:'root'})
 export class PlanningService {
@@ -15,13 +17,55 @@ export class PlanningService {
 
  
   checkBestPossibleRoute(planning:Planning): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(planning);
-
-
-    let params = new HttpParams().set('truckPlate', planning.truckPlate).set('deliveryDate', planning.deliveryDate);
+      
+    let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get(this.logisticsURL + 'plannings/allRoutes',{ params: params }).pipe(catchError(err => {
+    return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/bestRoute',{ params: params }).pipe(catchError(err => {
+      if (err.status == 200) {
+        this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
+      }
+      if (err.status == 400) {
+        this.mostrarNotificacao('Erro ao criar empacotamento!',true);
+      }
+      return throwError(err);
+    }));
+  }
+
+
+  checkRouteHeuristicMass(planning:Planning): Observable<any> {
+    let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
+    
+    return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/routeHeuristicMass',{ params: params }).pipe(catchError(err => {
+      if (err.status == 200) {
+        this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
+      }
+      if (err.status == 400) {
+        this.mostrarNotificacao('Erro ao criar empacotamento!',true);
+      }
+      return throwError(err);
+    }));
+  }
+
+  checkRouteHeuristicTime(planning:Planning): Observable<any> {
+      
+    let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
+    
+    return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/routeHeuristicTime',{ params: params }).pipe(catchError(err => {
+      if (err.status == 200) {
+        this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
+      }
+      if (err.status == 400) {
+        this.mostrarNotificacao('Erro ao criar empacotamento!',true);
+      }
+      return throwError(err);
+    }));
+  }
+
+  checkRouteHeuristicTimeAndMass(planning:Planning): Observable<any> {
+      
+    let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
+    
+    return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/routeHeuristicTimeAndMass',{ params: params }).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
       }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Delivery } from './delivery';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -35,6 +35,19 @@ export class DeliveryService {
   getDeliveries(): Observable<any> {
       
     return this.http.get<Delivery[]>(this.deliveriesWarehouseManagementURL + 'deliveries/').pipe(catchError(err => {
+      if (err.status == 200) {
+        this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
+      }
+      if (err.status == 400) {
+        this.mostrarNotificacao('Erro ao obter entregas!',true);
+      }
+      return throwError(err);
+    }));
+  }
+
+  getDelivery(id : string): Observable<any> {
+    
+    return this.http.get<Delivery>(this.deliveriesWarehouseManagementURL + 'deliveries/'+id).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
       }

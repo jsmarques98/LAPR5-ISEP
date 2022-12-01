@@ -1,6 +1,6 @@
 <h1>{{tittle}}</h1>
-<nav>
-    <button routerLink="/login">Login</button>
-</nav>
+<div *ngIf="toDisplay">
+    <button (click)="toggleData()">Login</button>
+</div>
 <router-outlet></router-outlet>
 

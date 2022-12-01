@@ -1,14 +1,51 @@
 <section>
-    <form [formGroup] = "planningForm">
-        <h1>Insert Truck and Date to see planning route:</h1>
-            <div  >
-                <input type="text" class="form-control" id="truckPlate" placeholder="Truck Plate " formControlName="truckPlate">
-            </div>
-            <br> 
-            <div>
-                <input type="date" class="form-control mb-3" placeholder="Delivery Date" id="deliveryDate" formControlName="deliveryDate">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary w-100" (click)="checkBestPossibleRoute()">Find</button>
-    </form>
+  <form [formGroup] = "planningForm">
+      <h1>Insert Truck and Date to see planning route:</h1>
+          <div  >
+              <input type="text" class="form-control" id="truckName" placeholder="Truck Name " formControlName="truckName">
+          </div>
+          <br> 
+          <div>
+              <input type="date" class="form-control mb-3" placeholder="Delivery Date" id="deliveryDate" formControlName="deliveryDate">
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary w-100" (click)="checkBestPossibleRoute()">Best Route</button>
+          <br>
+          <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicMass()">Heuristic Mass</button>
+          <br>
+          <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicTime()">Heuristic Time</button>
+          <br>
+          <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicTimeAndMass()">Heuristic Time and Mass</button>
+  </form>
 </section>
+
+<section>
+<h2>Route:</h2>
+<div> Tempo total: {{custo}}</div>
+<ul class="deliveries">
+<li *ngFor="let delivery of deliveries">
+  <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
+    <span class="name">{{delivery.id}}</span>
+  </button>
+  <div></div>
+</li>
+</ul>
+
+
+<div *ngIf="selectedDelivery">
+<h2>{{selectedDelivery.id | uppercase}} Details</h2>
+<div>deliveryDate: {{selectedDelivery.deliveryDate}}</div>
+<div>loadTime: {{selectedDelivery.loadTime}}</div>
+<div>unloadTime: {{selectedDelivery.unloadTime}}</div>
+<div>totalWeight: {{selectedDelivery.totalWeight}}</div>
+<div>deliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>
+
+
+</div>
+
+<br> 
+<br> 
+<button routerLink="/home">Exit</button>
+
+<section>
+

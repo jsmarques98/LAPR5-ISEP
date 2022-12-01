@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pos-login-page.component.css']
 })
 export class PosLoginPageComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
