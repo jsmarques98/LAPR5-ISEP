@@ -22,10 +22,10 @@ export class PlanningService {
     
     return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/bestRoute',{ params: params }).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
+        this.mostrarNotificacao('Melhor caminho encontrado com sucesso!',false);
       }
       if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao criar empacotamento!',true);
+        this.mostrarNotificacao('Erro ao encontrar o melhor caminho!',true);
       }
       return throwError(err);
     }));
@@ -37,10 +37,10 @@ export class PlanningService {
     
     return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/routeHeuristicMass',{ params: params }).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
+        this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística da massa!',false);
       }
       if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao criar empacotamento!',true);
+        this.mostrarNotificacao('Erro ao encontrar caminho!',true);
       }
       return throwError(err);
     }));
@@ -52,10 +52,10 @@ export class PlanningService {
     
     return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/routeHeuristicTime',{ params: params }).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
+        this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística do tempo!',false);
       }
       if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao criar empacotamento!',true);
+        this.mostrarNotificacao('Erro ao encontrar caminho!',true);
       }
       return throwError(err);
     }));
@@ -67,10 +67,10 @@ export class PlanningService {
     
     return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/routeHeuristicTimeAndMass',{ params: params }).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
+        this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística da massa e tempo em conjunto!',false);
       }
       if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao criar empacotamento!',true);
+        this.mostrarNotificacao('Erro ao encontrar caminho!',true);
       }
       return throwError(err);
     }));
