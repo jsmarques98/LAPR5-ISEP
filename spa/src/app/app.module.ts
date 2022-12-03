@@ -23,6 +23,8 @@ import { GetSectionsComponent } from './sections/get-sections/get-sections.compo
 import { GetTrucksComponent } from './trucks/get-trucks/get-trucks.component';
 import { GetWarehousesComponent } from './warehouses/get-warehouses/get-warehouses.component';
 import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-route/check-best-possible-route.component';
+import { UpdateWarehousesComponent } from './warehouses/update-warehouses/update-warehouses.component';
+import { GetWarehousesByIdComponent } from './warehouses/get-warehouses-by-id/get-warehouses-by-id.component';
 
 
 
@@ -47,7 +49,9 @@ import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-
     GetTrucksComponent,
     GetWarehousesComponent,
     CheckBestPossibleRouteComponent,
-    GetWarehousesComponent
+    GetWarehousesComponent,
+    UpdateWarehousesComponent,
+    GetWarehousesByIdComponent
   ],
   imports: [
     BrowserModule,

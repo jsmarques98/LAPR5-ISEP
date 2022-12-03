@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators,FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Warehouse } from '../warehouses';
@@ -9,22 +10,27 @@ import { WarehouseService } from '../warehouse.service';
   templateUrl: './get-warehouses-by-id.component.html',
   styleUrls: ['./get-warehouses-by-id.component.css']
 })
-export class GetWarehousesComponent implements OnInit {
+export class GetWarehousesByIdComponent implements OnInit {
 
   warehouse;
-  selectedWarehouse?: Warehouse;
 
-  constructor(private router: Router, private service : WarehouseService,private notification:MatSnackBar) { }
+  warehouseForm = this.fb.group({
+    id: [''],
+  });
+  visible ?: Warehouse;
+
+  constructor(private fb: FormBuilder, private router: Router, private service : WarehouseService,private notification:MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
-  getWarehouseById(warehouseId: String){ 
+  getWarehouseById(){ 
 
-    this.service.getWarehouseById(warehouseId).subscribe(res => {
+    this.service.getWarehouseById(this.warehouseForm.value.id!).subscribe(res => {
       if (res != null) {
         this.mostrarNotificacao('Armazém obtido com sucesso!',false)
         this.warehouse = res;
+        this.visible = this.warehouse;
       }else{
         this.mostrarNotificacao('Erro ao obter o armazém!',true)
       };
@@ -32,9 +38,6 @@ export class GetWarehousesComponent implements OnInit {
   }
 
   
-  onSelect(warehouse: Warehouse): void {
-    this.selectedWarehouse = warehouse;
-  }
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';

@@ -1,1 +1,74 @@
-<p>get-warehouses-by-id works!</p>
+<section>
+    <style> 
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 10%;
+            background-color: #0090a3a5;
+            height: 90%;
+            position: absolute;
+            overflow: auto;
+        }
+        
+        li a {
+            text-align: center;
+            border-bottom: 1px solid #555;
+            display: block;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+  
+        li a:hover {
+            background-color: #00d643;
+            color: white;
+        }
+        
+    </style>
+      
+      
+    <ul style="border: 1px solid #555;">
+      <li><a href="/createDeliveries">Create Deliveries</a></li>
+      <li><a href="/createPackagings">Create Packagings</a></li>
+      <li><a href="/updatePackagings">Update Packagings</a></li>
+      <li><a href="/createTrucks">Create Trucks</a></li>
+      <li><a href="/createSections">Create Sections</a></li>
+      <li><a href="/createWarehouses">Create Warehouses</a></li>
+      <li><a href="/checkBestRoute">Check Route Planning</a></li>
+      <li><a href="/getDeliveries">Get Deliveries</a></li>
+      <li><a href="/getSections">Get Sections</a></li>
+      <li><a href="/getTrucks">Get Trucks</a></li>
+      <li><a href="/getWarehouses">Get Warehouses</a></li>
+      <li><a href="/updateWarehouses">Update Warehouses</a></li>
+      <li><a href="/getWarehousesById">Get Warehouses by Id</a></li>
+    </ul>
+  </section>
+  
+  <section style="margin-left:10%;padding:1px 16px;height:100%;">
+    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Warehouses</h2>
+    <form [formGroup] = "warehouseForm">
+        <div>
+            <input type="text" class="form-control" id="warehouseId" placeholder="Id" formControlName="id">
+        </div>
+        <button type="submit" class="btn btn-primary w-100" (click)="getWarehouseById()">Find</button>
+    </form>
+  </section>
+  
+  <section style="margin-left:10%;padding:1px 16px;height:auto;">
+    <div *ngIf="visible" style="margin-left: 15%;">
+      <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Warehouse {{warehouse.id | uppercase}} Details</h2>
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Designation: {{warehouse.designation}}</div>
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Street: {{warehouse.street}}</div>
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Door Number: {{warehouse.doorNumber}}</div>
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Post Code: {{warehouse.postCode}}</div>  
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">City: {{warehouse.city}}</div> 
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Latitude: {{warehouse.latitude}}</div> 
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Longitude: {{warehouse.longitude}}</div> 
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Altitude: {{warehouse.altitude}}</div>
+      <!--<button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" (click)="deleteWarehouse(selectedWarehouse.id)">Delete Warehouse</button> -->
+    </div>  
+  </section>  
+    
+  

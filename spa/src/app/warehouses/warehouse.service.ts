@@ -47,16 +47,27 @@ export class WarehouseService {
 
   getWarehouseById(warehouseId: String): Observable<Warehouse>{
 
-    const params = new HttpParams().set('warehouse.warehouseId', JSON.stringify(warehouseId));
-
-    const headers = new HttpHeaders().set(' Content-type ','application/json ');
-
-    return this.http.get<Warehouse>(this.warehousesWarehouseManagementURL + "/" + warehouseId, {headers : headers, params : params}).pipe(catchError(err => {
+    return this.http.get<Warehouse>(this.warehousesWarehouseManagementURL + "Warehouses/" + warehouseId).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Armazém obtido com sucesso!',false);
       }
       if (err.status == 400) {
         this.mostrarNotificacao('Erro ao obter armazém!',true);
+      }
+      return throwError(err);
+    }));
+  }
+
+  updateWarehouse(warehouse:Warehouse): Observable<any> {
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify(warehouse);
+    return this.http.put(this.warehousesWarehouseManagementURL + 'warehouses', body,{'headers':headers}).pipe(catchError(err => {
+      if (err.status == 200) {
+        this.mostrarNotificacao('Armazém alterado com sucesso!',false);
+      }
+      if (err.status == 500) {
+        
+        this.mostrarNotificacao(err,true);
       }
       return throwError(err);
     }));

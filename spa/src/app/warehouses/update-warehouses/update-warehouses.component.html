@@ -6,8 +6,8 @@
             padding: 0;
             width: 10%;
             background-color: #0090a3a5;
-            position: fixed;
-            height: 100%;
+            position: absolute;
+            height: 90%;
             overflow: auto;
         }
         
@@ -46,55 +46,50 @@
     </ul>
 </section>
 
-<section style="margin-left:10%;padding:1px 16px;height:auto;">
-    <form [formGroup] = "truckForm">
-        <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Delivery Information:</h1>
+<section style="margin-left:10%;padding:1px 16px;height:100%;">
+    <form [formGroup] = "warehouseForm">
+        <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Warehouse Information:</h1>
         <div>
-            <input type="text" class="form-control" id="truckId" placeholder="Id" formControlName="id">
+            <input type="text" class="form-control" id="warehouseId" placeholder="Id" formControlName="id">
         </div>
-        
         <br> 
         <div>
-            <input type="text" class="form-control mb-3" placeholder="Plate" id="plate" formControlName="plate">
+            <input type="text" class="form-control mb-3" placeholder="Designation" id="warehouseDesignation" formControlName="warehouseDesignation">
         </div>
-        
         <br>
         <div>
-            <input type="text" class="form-control" id="name" placeholder="name" formControlName="name">
+            <input type="text" class="form-control" id="Street" placeholder="warehouseStreet" formControlName="warehouseStreet">
         </div>
-        
         <br> 
         <div>
-            <input type="number" class="form-control mb-3" placeholder="autonomy" id="autonomy" formControlName="autonomy">
+            <input type="text" class="form-control mb-3" placeholder="Door Number" id="warehouseDoorNumber" formControlName="warehouseDoorNumber">
         </div>
-        
         <br> 
         <div>
-            <input type="number" class="form-control mb-3" placeholder="maxBattery" id="maxBattery" formControlName="maxBattery">
+            <input type="text" class="form-control mb-3" placeholder="Post Code" id="warehousePostCode" formControlName="warehousePostCode">
         </div>
-        
         <br>
         <div>
-            <input type="number" class="form-control mb-3" placeholder="payLoad" id="payLoad" formControlName="payLoad">
+            <input type="text" class="form-control mb-3" placeholder="City" id="warehouseCity" formControlName="warehouseCity">
         </div>
-        
-        <br> 
-        <div>
-            <input type="number" class="form-control mb-3" placeholder="tare" id="tare" formControlName="tare">
-        </div>
-        
-        <br> 
-        <div>
-            <input type="number" class="form-control mb-3" placeholder="baterryChargingTime" id="Baterry ChargingTime" formControlName="baterryChargingTime">
-        </div>
-        
         <br>
-        <button type="submit" class="btn btn-primary w-100" (click)="createDelivery()">Save</button>
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Latitude" id="warehouseLatitude" formControlName="warehouseLatitude">
+        </div>
+        <br>
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Longitude" id="warehouseLongitude" formControlName="warehouseLongitude">
+        </div>
+        <br>
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Altitude" id="warehouseAltitude" formControlName="warehouseAltitude">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary w-100" (click)="updateWarehouse()">Save</button>
     </form>
 
-    <br> 
-    <br> 
-    <div style="position: fixed;z-index: 999;">
+    <div style="margin-top: 20px;">
         <button routerLink="/home">Exit</button>
     </div>
 </section>
+
