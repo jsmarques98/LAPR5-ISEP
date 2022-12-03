@@ -5,14 +5,13 @@ import { Warehouse } from '../warehouses';
 import { WarehouseService } from '../warehouse.service';
 
 @Component({
-  selector: 'app-get-warehouses',
-  templateUrl: './get-warehouses.component.html',
-  styleUrls: ['./get-warehouses.component.css']
+  selector: 'app-get-warehouses-by-id',
+  templateUrl: './get-warehouses-by-id.component.html',
+  styleUrls: ['./get-warehouses-by-id.component.css']
 })
 export class GetWarehousesComponent implements OnInit {
 
   warehouse;
-  warehouses = null;
   selectedWarehouse?: Warehouse;
 
   constructor(private router: Router, private service : WarehouseService,private notification:MatSnackBar) { }
@@ -20,18 +19,19 @@ export class GetWarehousesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getWarehouses(){ 
+  getWarehouseById(warehouseId: String){ 
 
-    this.service.getWarehouses().subscribe(res => {
+    this.service.getWarehouseById(warehouseId).subscribe(res => {
       if (res != null) {
-        this.mostrarNotificacao('Armazéns obtidos com sucesso!',false)
-        this.warehouses = res;
+        this.mostrarNotificacao('Armazém obtido com sucesso!',false)
+        this.warehouse = res;
       }else{
-        this.mostrarNotificacao('Erro ao obter os armazéns!',true)
+        this.mostrarNotificacao('Erro ao obter o armazém!',true)
       };
     });
   }
 
+  
   onSelect(warehouse: Warehouse): void {
     this.selectedWarehouse = warehouse;
   }

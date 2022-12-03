@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Warehouse } from './warehouses';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({providedIn:'root'})
@@ -40,6 +40,40 @@ export class WarehouseService {
       }
       if (err.status == 400) {
         this.mostrarNotificacao('Erro ao obter armazéns!',true);
+      }
+      return throwError(err);
+    }));
+  }
+
+  getWarehouseById(warehouseId: String): Observable<Warehouse>{
+
+    const params = new HttpParams().set('warehouse.warehouseId', JSON.stringify(warehouseId));
+
+    const headers = new HttpHeaders().set(' Content-type ','application/json ');
+
+    return this.http.get<Warehouse>(this.warehousesWarehouseManagementURL + "/" + warehouseId, {headers : headers, params : params}).pipe(catchError(err => {
+      if (err.status == 200) {
+        this.mostrarNotificacao('Armazém obtido com sucesso!',false);
+      }
+      if (err.status == 400) {
+        this.mostrarNotificacao('Erro ao obter armazém!',true);
+      }
+      return throwError(err);
+    }));
+  }
+
+  deleteWarehouse(warehouseId: string): Observable<Warehouse> {
+    
+    const params = new HttpParams().set('warehouse.warehouseId', JSON.stringify(warehouseId));
+
+    const headers = new HttpHeaders().set(' Content-type ','application/json ');
+
+    return this.http.delete<Warehouse>(this.warehousesWarehouseManagementURL + "/" + warehouseId, {headers : headers, params : params}).pipe(catchError(err => {
+      if (err.status == 200) {
+        this.mostrarNotificacao('Armazém removido com sucesso! Id armazém=${warehouseId}',false);
+      }
+      if (err.status == 400) {
+        this.mostrarNotificacao('Erro ao remover armazém!',true);
       }
       return throwError(err);
     }));

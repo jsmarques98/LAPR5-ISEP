@@ -46,7 +46,8 @@ import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-
     GetSectionsComponent,
     GetTrucksComponent,
     GetWarehousesComponent,
-    CheckBestPossibleRouteComponent
+    CheckBestPossibleRouteComponent,
+    GetWarehousesComponent
   ],
   imports: [
     BrowserModule,
