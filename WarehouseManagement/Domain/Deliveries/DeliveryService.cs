@@ -74,6 +74,37 @@ namespace DDDSample1.Domain.Deliveries
             return  DeliveryMapper.toDTO(delivery);
         }
 
+        public async Task<DeliveryDTO> InactivateAsync(DeliveryId id)
+        {
+            var delivery = await this._repo.GetByIdAsync(id); 
+
+            if (delivery == null)
+                return null;   
+
+            delivery.MarkAsInative();
+            
+            await this._unitOfWork.CommitAsync();
+
+            return DeliveryMapper.toDTO(delivery);
+        }
+
+        public async Task<DeliveryDTO> DeleteAsync(DeliveryId id)
+        {
+            var delivery = await this._repo.GetByIdAsync(id);
+
+            if (delivery == null)
+                return null;
+
+            if (delivery.Active)
+                throw new BusinessRuleValidationException("It is not possible to delete an active warehouse.");
+
+            this._repo.Remove(delivery);
+
+            await this._unitOfWork.CommitAsync();
+
+            return DeliveryMapper.toDTO(delivery);
+        }
+
         private async Task checkDeliveryWarehouseIdAsync(WarehouseId deliveryWarehouseId)
         {
            var deliveryWarehouse = await _repoWarehouses.GetByIdAsync(deliveryWarehouseId);

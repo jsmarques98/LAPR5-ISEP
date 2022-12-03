@@ -80,5 +80,50 @@ namespace DDDSample1.Controllers
                 return BadRequest(new {Message = ex.Message});
             }
         }
+
+
+        // Inactivate: api/Deliveries/5
+        [HttpDelete("{id}/soft")]
+        public async Task<ActionResult<DeliveryDTO>> SoftDelete(String id)
+        {
+            var delivery = await _service.InactivateAsync(new DeliveryId(id));
+
+            if (delivery == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(delivery);
+        }
+
+
+        // DELETE: api/Deliveries/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<DeliveryDTO>> Delete(String id)
+        {
+            try
+            {
+
+                var delivery = await _service.InactivateAsync(new DeliveryId(id));
+
+                if (delivery == null)
+                {
+                    return NotFound();
+                }
+
+                var delivery1 = await _service.DeleteAsync(new DeliveryId(id));
+
+                if (delivery1 == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(delivery1);
+            }
+            catch(BusinessRuleValidationException ex)
+            {
+               return BadRequest(new {Message = ex.Message});
+            }
+        }
     }
 }

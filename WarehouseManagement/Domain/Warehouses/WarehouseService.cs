@@ -61,6 +61,38 @@ namespace DDDSample1.Domain.Warehouses
 
             return WarehouseMapper.toDTO(warehouse);
         }
+
+
+        public async Task<WarehouseDto> InactivateAsync(WarehouseId id)
+        {
+            var warehouse = await this._repo.GetByIdAsync(id); 
+
+            if (warehouse == null)
+                return null;   
+
+            warehouse.MarkAsInative();
+            
+            await this._unitOfWork.CommitAsync();
+
+            return WarehouseMapper.toDTO(warehouse);
+        }
+
+        public async Task<WarehouseDto> DeleteAsync(WarehouseId id)
+        {
+            var warehouse = await this._repo.GetByIdAsync(id);
+
+            if (warehouse == null)
+                return null;
+
+            if (warehouse.Active)
+                throw new BusinessRuleValidationException("It is not possible to delete an active warehouse.");
+
+            this._repo.Remove(warehouse);
+
+            await this._unitOfWork.CommitAsync();
+
+            return WarehouseMapper.toDTO(warehouse);
+        }
         
     }
 }
