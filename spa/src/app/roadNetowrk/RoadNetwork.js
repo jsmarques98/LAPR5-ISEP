@@ -46,6 +46,18 @@ export default class RoadNetwork {
         // spotLight.shadow.camera.up=1000;
         
         this.scene.add(spotLight);
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+        this.camera.position.set(0, 80, 0);
+
+        this.scene.add(this.camera);
+        this.camera.add( spotLight );
+
+        this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement);
+        this.orbitControls.enableDamping = true;
+        this.orbitControls.dampingFactor = 0.2;
+        this.orbitControls.maxPolarAngle = Math.PI / 2;
+        this.orbitControls.target.set(0, 5, 0);
+        this.orbitControls.update();
 
 
 
@@ -141,5 +153,5 @@ export default class RoadNetwork {
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-    }s
+    }
 }
