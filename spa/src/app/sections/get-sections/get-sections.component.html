@@ -1,26 +1,74 @@
 <section>
-    <h2>Sections</h2>
-    <ul class="sections">
+  <style> 
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 10%;
+        background-color: #0090a3a5;
+        position: absolute;
+        height: 90%;
+        overflow: auto;
+    }
+    
+    li a {
+        text-align: center;
+        border-bottom: 1px solid #555;
+        display: block;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    li a:hover {
+        background-color: #00d643;
+        color: white;
+    }
+    
+</style>
+    
+    
+  <ul style="border: 1px solid #555;">
+    <li><a href="/createDeliveries">Create Deliveries</a></li>
+    <li><a href="/createPackagings">Create Packagings</a></li>
+    <li><a href="/updatePackagings">Update Packagings</a></li>
+    <li><a href="/createTrucks">Create Trucks</a></li>
+    <li><a href="/createSections">Create Sections</a></li>
+    <li><a href="/createWarehouses">Create Warehouses</a></li>
+    <li><a href="/checkBestRoute">Check Route Planning</a></li>
+    <li><a href="/getDeliveries">Get Deliveries</a></li>
+    <li><a href="/getSections">Get Sections</a></li>
+    <li><a href="/getTrucks">Get Trucks</a></li>
+    <li><a href="/getWarehouses">Get Warehouses</a></li>
+  </ul>
+</section>
+
+<section style="margin-left:10%;padding:1px 16px;height:auto;">
+  <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Sections</h2>
+  <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" (click)="getSections()">Find</button>
+</section>
+
+<section style="margin-left:10%;padding:1px 16px;height:auto;">
+  <ul class="sections" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
     <li *ngFor="let section of sections">
       <button [class.selected]="section === selectedSection" type="button" (click)="onSelect(section)">
         <span class="name">{{section.warehouseOrigin}} to {{section.warehouseDestiny}}</span>
       </button>
     </li>
-    </ul>
-    
-    <button type="submit" class="btn btn-primary w-100" (click)="getSections()">Find</button>
-  
-    <div *ngIf="selectedSection">
-    <h2>Section {{selectedSection.warehouseOrigin | uppercase}} to {{selectedSection.warehouseDestiny | uppercase}} Details</h2>
-    <div>duration: {{selectedSection.duration}}</div>
-    <div>distance: {{selectedSection.distance}}</div>
-    <div>energySpent: {{selectedSection.energySpent}}</div>
-    <div>extraTime: {{selectedSection.extraTime}}</div>
+    <div style="margin-top: 20px;">
+      <button routerLink="/home">Exit</button>
     </div>
-    
-    <br> 
-    <br> 
-    <button routerLink="/home">Exit</button>
-    
-    <section>
+  </ul>
+  
+  
+  <div *ngIf="selectedSection" style="margin-left: 15%;">
+    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Section {{selectedSection.warehouseOrigin | uppercase}} to {{selectedSection.warehouseDestiny | uppercase}} Details</h2>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">duration: {{selectedSection.duration}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">distance: {{selectedSection.distance}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">energySpent: {{selectedSection.energySpent}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">extraTime: {{selectedSection.extraTime}}</div>
+    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" (click)="getSections()">Delete Section</button>
+  </div>
+</section>
   

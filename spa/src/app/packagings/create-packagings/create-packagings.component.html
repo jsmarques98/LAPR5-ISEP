@@ -1,31 +1,92 @@
 <section>
+  <style> 
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 10%;
+        background-color: #0090a3a5;
+        position: fixed;
+        height: 100%;
+        overflow: auto;
+    }
+    
+    li a {
+        text-align: center;
+        border-bottom: 1px solid #555;
+        display: block;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    li a:hover {
+        background-color: #00d643;
+        color: white;
+    }
+    
+</style>
+    
+    
+  <ul style="border: 1px solid #555;">
+    <li><a href="/createDeliveries">Create Deliveries</a></li>
+    <li><a href="/createPackagings">Create Packagings</a></li>
+    <li><a href="/updatePackagings">Update Packagings</a></li>
+    <li><a href="/createTrucks">Create Trucks</a></li>
+    <li><a href="/createSections">Create Sections</a></li>
+    <li><a href="/createWarehouses">Create Warehouses</a></li>
+    <li><a href="/checkBestRoute">Check Route Planning</a></li>
+    <li><a href="/getDeliveries">Get Deliveries</a></li>
+    <li><a href="/getSections">Get Sections</a></li>
+    <li><a href="/getTrucks">Get Trucks</a></li>
+    <li><a href="/getWarehouses">Get Warehouses</a></li>
+  </ul>
+</section>
+
+<section style="margin-left:10%;padding:1px 16px;height:auto;">
+
     <form [formGroup] = "packagingForm">
-        <h1>Packaging Information:</h1>
-        <div  >
-            <input type="text" class="form-control" id="packagingId" placeholder="Id" formControlName="id">
-        </div>
-        <br> 
-        <div>
-            <input type="text" class="form-control mb-3" placeholder="Delivery Id" id="packagingDeliveryId" formControlName="packagingDeliveryId">
-        </div>
-        <br>
-        <div  >
-            <input type="text" class="form-control" id="packagingTruckId" placeholder="Packaging Truck Id" formControlName="packagingTruckId">
-        </div>
-        <br> 
-        <div>
-            <input type="text" class="form-control mb-3" placeholder="Position X" id="packagingPositionX" formControlName="packagingPositionX">
-        </div>
-        <br> 
-        <div>
-            <input type="text" class="form-control mb-3" placeholder="Position Y" id="packagingPositionY" formControlName="packagingPositionY">
-        </div>
-        <br>
-        <div>
-            <input type="text" class="form-control mb-3" placeholder="Position Z" id="packagingPositionZ" formControlName="packagingPositionZ">
-        </div>
-        <br>
-                  <button type="submit" class="btn btn-primary w-100" (click)="createPackaging()">Save</button>
-          </form>
+
+      <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Packaging Information:</h1>
+      
+      <div>
+        <input type="text" class="form-control" id="packagingId" placeholder="Id" formControlName="id">
+      </div>
+      
+      <br> 
+      <div>
+        <input type="text" class="form-control mb-3" placeholder="Delivery Id" id="packagingDeliveryId" formControlName="packagingDeliveryId">
+      </div>
+      
+      <br>
+      <div>
+        <input type="text" class="form-control" id="packagingTruckId" placeholder="Packaging Truck Id" formControlName="packagingTruckId">
+      </div>
+      
+      <br> 
+      <div>
+        <input type="text" class="form-control mb-3" placeholder="Position X" id="packagingPositionX" formControlName="packagingPositionX">
+      </div>
+      
+      <br> 
+      <div>
+        <input type="text" class="form-control mb-3" placeholder="Position Y" id="packagingPositionY" formControlName="packagingPositionY">
+      </div>
+      
+      <br>
+      <div>
+        <input type="text" class="form-control mb-3" placeholder="Position Z" id="packagingPositionZ" formControlName="packagingPositionZ">
+      </div>
+      
+      <br>
+      <button type="submit" class="btn btn-primary w-100" (click)="createPackaging()">Save</button>
+    </form>
+
+    <br> 
+    <br> 
+    <div style="position: fixed;z-index: 999;">
+        <button routerLink="/home">Exit</button>
+    </div>
 </section>
 

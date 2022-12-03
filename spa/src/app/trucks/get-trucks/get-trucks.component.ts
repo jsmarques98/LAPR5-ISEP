@@ -23,10 +23,10 @@ export class GetTrucksComponent implements OnInit {
 
     this.service.getTrucks().subscribe(res => {
       if (res != null) {
-        this.mostrarNotificacao('Entregas obtidas com sucesso!',false)
+        this.mostrarNotificacao('Trucks obtidos com sucesso!',false)
         this.trucks = res;
       }else{
-        this.mostrarNotificacao('Erro ao obter as entregas!',true)
+        this.mostrarNotificacao('Erro ao obter os Trucks!',true)
       };
     });
   }

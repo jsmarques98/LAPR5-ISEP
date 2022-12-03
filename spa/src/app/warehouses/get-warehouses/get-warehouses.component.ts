@@ -36,6 +36,11 @@ export class GetWarehousesComponent implements OnInit {
     this.selectedWarehouse = warehouse;
   }
 
+
+  deleteWarehouse(warehouseId : string){
+    this.service.deleteWarehouse(warehouseId)
+  }
+
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
     this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});

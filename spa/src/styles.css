@@ -1,6 +1,9 @@
 #index {  
-    height: 50 px;  
     color: #fff;background-image: url("/assets/background.png");  
     background-size: cover;  
-
 }  
+
+div.cdk-overlay-container {
+    margin-left: 25%;
+    color: #369;
+}

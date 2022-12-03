@@ -1,51 +1,96 @@
 <section>
+  <style> 
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 10%;
+        background-color: #0090a3a5;
+        position: absolute;
+        height: 90%;
+        overflow: auto;
+    }
+    
+    li a {
+        text-align: center;
+        border-bottom: 1px solid #555;
+        display: block;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    li a:hover {
+        background-color: #00d643;
+        color: white;
+    }
+    
+</style>
+    
+    
+  <ul style="border: 1px solid #555;">
+    <li><a href="/createDeliveries">Create Deliveries</a></li>
+    <li><a href="/createPackagings">Create Packagings</a></li>
+    <li><a href="/updatePackagings">Update Packagings</a></li>
+    <li><a href="/createTrucks">Create Trucks</a></li>
+    <li><a href="/createSections">Create Sections</a></li>
+    <li><a href="/createWarehouses">Create Warehouses</a></li>
+    <li><a href="/checkBestRoute">Check Route Planning</a></li>
+    <li><a href="/getDeliveries">Get Deliveries</a></li>
+    <li><a href="/getSections">Get Sections</a></li>
+    <li><a href="/getTrucks">Get Trucks</a></li>
+    <li><a href="/getWarehouses">Get Warehouses</a></li>
+  </ul>
+</section>
+
+
+
+<section style="margin-left:10%;padding:1px 16px;height:100%;">
   <form [formGroup] = "planningForm">
-      <h1>Insert Truck and Date to see planning route:</h1>
-          <div  >
-              <input type="text" class="form-control" id="truckName" placeholder="Truck Name " formControlName="truckName">
-          </div>
-          <br> 
-          <div>
-              <input type="date" class="form-control mb-3" placeholder="Delivery Date" id="deliveryDate" formControlName="deliveryDate">
-          </div>
-          <br>
-          <button type="submit" class="btn btn-primary w-100" (click)="checkBestPossibleRoute()">Best Route</button>
-          <br>
-          <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicMass()">Heuristic Mass</button>
-          <br>
-          <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicTime()">Heuristic Time</button>
-          <br>
-          <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicTimeAndMass()">Heuristic Time and Mass</button>
+      <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Insert Truck and Date to see planning route:</h1>
+      <div  >
+        <input type="text" class="form-control" id="truckName" placeholder="Truck Name " formControlName="truckName">
+      </div>
+      <br> 
+      <div>
+        <input type="date" class="form-control mb-3" placeholder="Delivery Date" id="deliveryDate" formControlName="deliveryDate">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary w-100" (click)="checkBestPossibleRoute()">Best Route</button>
+      <br>
+      <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicMass()">Heuristic Mass</button>
+      <br>
+      <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicTime()">Heuristic Time</button>
+      <br>
+      <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicTimeAndMass()">Heuristic Time and Mass</button>
   </form>
 </section>
 
-<section>
-<h2>Route:</h2>
-<div> Tempo total: {{custo}}</div>
-<ul class="deliveries">
-<li *ngFor="let delivery of deliveries">
-  <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
-    <span class="name">{{delivery.id}}</span>
-  </button>
-  <div></div>
-</li>
-</ul>
+<section style="margin-left:10%;padding:1px 16px;height:auto;">
+  <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Route:</h2>
+  <div style="color:#369;font-family: Arial, Helvetica, sans-serif;"> Tempo total: {{custo}}</div>
+  <ul class="deliveries" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
+    <li *ngFor="let delivery of deliveries">
+      <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
+        <span class="name">{{delivery.id}}</span>
+      </button>
+    </li>
+    <div style="margin-top: 20px;">
+      <button routerLink="/home">Exit</button>
+    </div>
+  </ul>
 
 
-<div *ngIf="selectedDelivery">
-<h2>{{selectedDelivery.id | uppercase}} Details</h2>
-<div>deliveryDate: {{selectedDelivery.deliveryDate}}</div>
-<div>loadTime: {{selectedDelivery.loadTime}}</div>
-<div>unloadTime: {{selectedDelivery.unloadTime}}</div>
-<div>totalWeight: {{selectedDelivery.totalWeight}}</div>
-<div>deliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>
+  <div *ngIf="selectedDelivery" style="margin-left: 15%;">
+    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">{{selectedDelivery.id | uppercase}} Details</h2>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">deliveryDate: {{selectedDelivery.deliveryDate}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">loadTime: {{selectedDelivery.loadTime}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">unloadTime: {{selectedDelivery.unloadTime}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">totalWeight: {{selectedDelivery.totalWeight}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">deliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>
+  </div>
+</section>
 
 
-</div>
-
-<br> 
-<br> 
-<button routerLink="/home">Exit</button>
-
-<section>
 

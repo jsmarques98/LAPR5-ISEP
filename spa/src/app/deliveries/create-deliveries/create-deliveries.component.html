@@ -1,31 +1,86 @@
 <section>
+    <style> 
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 10%;
+            background-color: #0090a3a5;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+        
+        li a {
+            text-align: center;
+            border-bottom: 1px solid #555;
+            display: block;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        li a:hover {
+            background-color: #00d643;
+            color: white;
+        }
+        
+    </style>
+        
+        
+    <ul style="border: 1px solid #555;">
+        <li><a href="/createDeliveries">Create Deliveries</a></li>
+        <li><a href="/createPackagings">Create Packagings</a></li>
+        <li><a href="/updatePackagings">Update Packagings</a></li>
+        <li><a href="/createTrucks">Create Trucks</a></li>
+        <li><a href="/createSections">Create Sections</a></li>
+        <li><a href="/createWarehouses">Create Warehouses</a></li>
+        <li><a href="/checkBestRoute">Check Route Planning</a></li>
+        <li><a href="/getDeliveries">Get Deliveries</a></li>
+        <li><a href="/getSections">Get Sections</a></li>
+        <li><a href="/getTrucks">Get Trucks</a></li>
+        <li><a href="/getWarehouses">Get Warehouses</a></li>
+    </ul>
+</section>
+
+<section style="margin-left:10%;padding:1px 16px;height:auto;">
     <form [formGroup] = "deliveryForm">
-        <h1>Delivery Information:</h1>
-        <div  >
+        <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Delivery Information:</h1>
+        <div>
             <input type="text" class="form-control" id="deliveryId" placeholder="Id" formControlName="id">
         </div>
+        
         <br> 
         <div>
             <input type="text" class="form-control mb-3" placeholder="Warehouse Id" id="deliveryWarehouseId" formControlName="deliveryWarehouseId">
         </div>
+        
         <br>
-        <div  >
+        <div>
             <input type="date" class="form-control" id="deliveryDate" placeholder="Delivery Date" formControlName="deliveryDate">
         </div>
+        
         <br> 
         <div>
             <input type="number" class="form-control mb-3" placeholder="Load Time" id="deliveryLoadTime" formControlName="deliveryLoadTime">
         </div>
+        
         <br> 
         <div>
             <input type="number" class="form-control mb-3" placeholder="Unload Time" id="deliveryUnloadTime" formControlName="deliveryUnoadTime">
         </div>
+        
         <br>
         <div>
             <input type="number" class="form-control mb-3" placeholder="Total Weight" id="deliveryTotalWeight" formControlName="deliveryTotalWeight">
         </div>
+        
         <br>
-                  <button type="submit" class="btn btn-primary w-100" (click)="createDelivery()">Save</button>
-          </form>
+        <button type="submit" class="btn btn-primary w-100" (click)="createDelivery()">Save</button>
+    </form>
+    <div style="margin-top: 20px;">
+        <button routerLink="/home">Exit</button>
+    </div>
 </section>
 

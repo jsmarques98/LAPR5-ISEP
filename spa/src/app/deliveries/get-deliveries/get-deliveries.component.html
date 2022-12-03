@@ -1,26 +1,74 @@
-    <section>
-  <h2>Deliveries</h2>
-  <ul class="deliveries">
-  <li *ngFor="let delivery of deliveries">
-    <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
-      <span class="name">{{delivery.id}}</span>
-    </button>
-  </li>
+<section>
+  <style> 
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 10%;
+        background-color: #0090a3a5;
+        position: absolute;
+        height: 90%;
+        overflow: auto;
+    }
+    
+    li a {
+        text-align: center;
+        border-bottom: 1px solid #555;
+        display: block;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    li a:hover {
+        background-color: #00d643;
+        color: white;
+    }
+    
+  </style>
+    
+    
+  <ul style="border: 1px solid #555;">
+    <li><a href="/createDeliveries">Create Deliveries</a></li>
+    <li><a href="/createPackagings">Create Packagings</a></li>
+    <li><a href="/updatePackagings">Update Packagings</a></li>
+    <li><a href="/createTrucks">Create Trucks</a></li>
+    <li><a href="/createSections">Create Sections</a></li>
+    <li><a href="/createWarehouses">Create Warehouses</a></li>
+    <li><a href="/checkBestRoute">Check Route Planning</a></li>
+    <li><a href="/getDeliveries">Get Deliveries</a></li>
+    <li><a href="/getSections">Get Sections</a></li>
+    <li><a href="/getTrucks">Get Trucks</a></li>
+    <li><a href="/getWarehouses">Get Warehouses</a></li>
+  </ul>
+</section>
+
+<section style="margin-left:10%;padding:1px 16px;height:100%;">
+  <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Deliveries</h2>
+  <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" (click)="getDeliveries()">Find</button>
+</section>
+
+<section style="margin-left:10%;padding:1px 16px;height:100%;">
+  <ul class="deliveries" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
+    <li *ngFor="let delivery of deliveries">
+      <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
+        <span class="name">{{delivery.id}}</span>
+      </button>
+    </li>
+    <div style="margin-top: 20px;">
+      <button routerLink="/home">Exit</button>
+    </div> 
   </ul>
   
-  <button type="submit" class="btn btn-primary w-100" (click)="getDeliveries()">Find</button>
 
-  <div *ngIf="selectedDelivery">
-  <h2>Delivery {{selectedDelivery.id | uppercase}} Details</h2>
-  <div>DeliveryDate: {{selectedDelivery.deliveryDate}}</div>
-  <div>LoadTime: {{selectedDelivery.loadTime}}</div>
-  <div>UnloadTime: {{selectedDelivery.unloadTime}}</div>
-  <div>TotalWeight: {{selectedDelivery.totalWeight}}</div>
-  <div>DeliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>  
+  <div *ngIf="selectedDelivery" style="margin-left: 15%;">
+    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Delivery {{selectedDelivery.id | uppercase}} Details</h2>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">DeliveryDate: {{selectedDelivery.deliveryDate}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">LoadTime: {{selectedDelivery.loadTime}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">UnloadTime: {{selectedDelivery.unloadTime}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">TotalWeight: {{selectedDelivery.totalWeight}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">DeliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>  
+    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" (click)="getDeliveries()">Delete Delivery</button>
   </div>
-  
-  <br> 
-  <br> 
-  <button routerLink="/home">Exit</button>
-  
-  <section>
+</section>

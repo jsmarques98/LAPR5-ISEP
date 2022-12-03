@@ -1,30 +1,79 @@
 <section>
-    <h2>Warehouses</h2>
-    <ul class="warehouses">
+  <style> 
+      ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          width: 10%;
+          background-color: #0090a3a5;
+          height: 90%;
+          position: absolute;
+          overflow: auto;
+      }
+      
+      li a {
+          text-align: center;
+          border-bottom: 1px solid #555;
+          display: block;
+          color: white;
+          padding: 8px 16px;
+          text-decoration: none;
+          font-family: Arial, Helvetica, sans-serif;
+      }
+
+      li a:hover {
+          background-color: #00d643;
+          color: white;
+      }
+      
+  </style>
+    
+    
+  <ul style="border: 1px solid #555;">
+    <li><a href="/createDeliveries">Create Deliveries</a></li>
+    <li><a href="/createPackagings">Create Packagings</a></li>
+    <li><a href="/updatePackagings">Update Packagings</a></li>
+    <li><a href="/createTrucks">Create Trucks</a></li>
+    <li><a href="/createSections">Create Sections</a></li>
+    <li><a href="/createWarehouses">Create Warehouses</a></li>
+    <li><a href="/checkBestRoute">Check Route Planning</a></li>
+    <li><a href="/getDeliveries">Get Deliveries</a></li>
+    <li><a href="/getSections">Get Sections</a></li>
+    <li><a href="/getTrucks">Get Trucks</a></li>
+    <li><a href="/getWarehouses">Get Warehouses</a></li>
+  </ul>
+</section>
+
+<section style="margin-left:10%;padding:1px 16px;height:100%;">
+  <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Warehouses</h2>
+  <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" (click)="getWarehouses()">Find</button>
+</section>
+
+<section style="margin-left:10%;padding:1px 16px;height:auto;">
+  <ul class="warehouses" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
     <li *ngFor="let warehouse of warehouses">
       <button [class.selected]="warehouse === selectedWarehouse" type="button" (click)="onSelect(warehouse)">
         <span class="name">{{warehouse.id}}</span>
       </button>
     </li>
-    </ul>
-    
-    <button type="submit" class="btn btn-primary w-100" (click)="getWarehouses()">Find</button>
-  
-    <div *ngIf="selectedWarehouse">
-    <h2>Warehouse {{selectedWarehouse.id | uppercase}} Details</h2>
-    <div>Designation: {{selectedWarehouse.designation}}</div>
-    <div>Street: {{selectedWarehouse.street}}</div>
-    <div>Door Number: {{selectedWarehouse.doorNumber}}</div>
-    <div>Post Code: {{selectedWarehouse.postCode}}</div>  
-    <div>City: {{selectedWarehouse.city}}</div> 
-    <div>Latitude: {{selectedWarehouse.latitude}}</div> 
-    <div>Longitude: {{selectedWarehouse.longitude}}</div> 
-    <div>Altitude: {{selectedWarehouse.altitude}}</div>  
+    <div style="margin-top: 20px;">
+      <button routerLink="/home">Exit</button>
     </div>
-    
-    <br> 
-    <br> 
-    <button routerLink="/home">Exit</button>
-    
-    <section>
+  </ul>
+  
+
+  <div *ngIf="selectedWarehouse" style="margin-left: 15%;">
+    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Warehouse {{selectedWarehouse.id | uppercase}} Details</h2>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Designation: {{selectedWarehouse.designation}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Street: {{selectedWarehouse.street}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Door Number: {{selectedWarehouse.doorNumber}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Post Code: {{selectedWarehouse.postCode}}</div>  
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">City: {{selectedWarehouse.city}}</div> 
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Latitude: {{selectedWarehouse.latitude}}</div> 
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Longitude: {{selectedWarehouse.longitude}}</div> 
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Altitude: {{selectedWarehouse.altitude}}</div>
+    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" (click)="deleteWarehouse(selectedWarehouse.id)">Delete Warehouse</button>  
+  </div>  
+</section>
+
   
