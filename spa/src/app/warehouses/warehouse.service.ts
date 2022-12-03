@@ -61,7 +61,7 @@ export class WarehouseService {
   updateWarehouse(warehouse:Warehouse): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(warehouse);
-    return this.http.put(this.warehousesWarehouseManagementURL + 'warehouses', body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.put(this.warehousesWarehouseManagementURL + 'Warehouses', body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Armazém alterado com sucesso!',false);
       }
@@ -74,12 +74,8 @@ export class WarehouseService {
   }
 
   deleteWarehouse(warehouseId: string): Observable<Warehouse> {
-    
-    const params = new HttpParams().set('warehouse.warehouseId', JSON.stringify(warehouseId));
 
-    const headers = new HttpHeaders().set(' Content-type ','application/json ');
-
-    return this.http.delete<Warehouse>(this.warehousesWarehouseManagementURL + "/" + warehouseId, {headers : headers, params : params}).pipe(catchError(err => {
+    return this.http.delete<Warehouse>(this.warehousesWarehouseManagementURL + "Warehouses/"+ warehouseId,).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Armazém removido com sucesso! Id armazém=${warehouseId}',false);
       }
