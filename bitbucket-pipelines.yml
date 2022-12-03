@@ -35,8 +35,8 @@ pipelines:
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
              USER: 'root'
-             SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+             SERVER: 'vs698.dei.isep.ipp.pt'
              REMOTE_PATH: '/logisticsMD'
              LOCAL_PATH: './Logistics'
              SSH_KEY: $MYKEY
-             EXTRA_ARGS: ["-P","10698"]
+             EXTRA_ARGS: ["-P","22"]
