@@ -46,6 +46,16 @@ export class SectionService {
     }));
   }
 
+  deleteSection(sectionId : string): Observable<any> {
+   
+    let deleteOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+           body : {'id' : sectionId}     }
+  
+    return this.http.delete<any>(this.logistcsURL + 'sections',deleteOptions).pipe(catchError(err => {
+      return throwError(err);
+    }));
+  }
+
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
     this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});

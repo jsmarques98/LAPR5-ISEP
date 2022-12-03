@@ -17,7 +17,7 @@ export class TruckService {
   addTruck(truck:Truck): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(truck);
-    console.log(body)
+  
     return this.http.post(this.logisticURL + 'trucks', body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
@@ -33,7 +33,6 @@ export class TruckService {
   }
 
   getTrucks(): Observable<any> {
-      
     return this.http.get<Truck[]>(this.logisticURL + 'trucks/').pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Camiões obtidos com sucesso!',false);
@@ -45,9 +44,20 @@ export class TruckService {
     }));
   }
 
+  deleteTruck(plate : string): Observable<any> {
+    console.log(plate);
+    let deleteOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+           body : {'Plate' : plate}     }
+  
+    return this.http.delete<any>(this.logisticURL + 'trucks',deleteOptions).pipe(catchError(err => {
+      return throwError(err);
+    }));
+  }
+ 
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
     this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
   }
+
  
 }

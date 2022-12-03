@@ -31,7 +31,21 @@ export class GetTrucksComponent implements OnInit {
     });
   }
 
-  
+  deleteTruck(plate:string){
+
+    this.service.deleteTruck(plate).subscribe(res => {
+      if (res != null) {
+        this.mostrarNotificacao('Trucks eliminado com sucesso!',false)
+        this.selectedTruck=undefined;
+        this.getTrucks();
+       
+      }else{
+        this.mostrarNotificacao('Erro ao obter os Trucks!',true)
+      };
+    });
+  }
+
+
   onSelect(truck: Truck): void {
     this.selectedTruck = truck;
   }

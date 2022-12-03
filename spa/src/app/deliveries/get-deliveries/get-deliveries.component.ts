@@ -34,6 +34,21 @@ export class GetDeliveriesComponent implements OnInit {
   onSelect(delivery: Delivery): void {
     this.selectedDelivery = delivery;
   }
+  
+  deleteDeliverie(deliveryId : string){
+    
+    this.service.deleteDeliverie(deliveryId).subscribe(res => {
+      if (res != null) {
+        this.mostrarNotificacao('delivery eliminado com sucesso!',false)
+        this.selectedDelivery=undefined;
+        this.getDeliveries();
+       
+      }else{
+        this.mostrarNotificacao('Erro ao eliminar delivery!',true)
+      };
+    });
+  }
+
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';

@@ -38,7 +38,17 @@ export class GetWarehousesComponent implements OnInit {
 
 
   deleteWarehouse(warehouseId : string){
-    this.service.deleteWarehouse(warehouseId)
+    console.log(warehouseId);
+    this.service.deleteWarehouse(warehouseId).subscribe(res => {
+      if (res != null) {
+        this.mostrarNotificacao('Trucks eliminado com sucesso!',false)
+        this.selectedWarehouse=undefined;
+        this.getWarehouses();
+       
+      }else{
+        this.mostrarNotificacao('Erro ao obter os Trucks!',true)
+      };
+    });
   }
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {

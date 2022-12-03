@@ -29,6 +29,7 @@ export default (app: Router) => {
     (req, res, next) => ctrl.createTruck(req, res, next) );
 
   route.patch('',
+  
     celebrate({
       body: Joi.object({
         plate:Joi.string().required(),
@@ -62,9 +63,10 @@ export default (app: Router) => {
     route.delete('',
     celebrate({
       body: Joi.object({
-        plate:Joi.string().required()
+        Plate:Joi.string().required()
       })
     }),
+
     (req, res, next) => ctrl.deleteByPlatepublic(req, res, next));
 };
 
