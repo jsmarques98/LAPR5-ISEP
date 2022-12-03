@@ -8,4 +8,5 @@ export default interface ITruckRepo extends Repo<Truck> {
   findByDomainId (truckId: TruckId | string): Promise<Truck>;
   findByPlate (truckPlate: Plate): Promise<Truck>;
   findAll (): Promise<Truck[]>;
+  deleteByPlate(truckPlate: Plate): Promise<Boolean>;
 }

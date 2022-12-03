@@ -55,6 +55,24 @@ export default class SectionService implements ISectionService {
       throw e;
     }
   }
+  
+  public async deleteById(id: string): Promise<Result<String>> {
+    try {
+
+
+      let boolean = await this.sectionRepo.deleteById(new UniqueEntityID(id));
+
+      if (boolean===true) {
+        return Result.ok<String>("Section apagada com suecesso");
+      }
+      else {
+      
+        return Result.ok<String>("Não existe uma Section com o id  inserido");
+        }
+    } catch (e) {
+      throw e;
+    }
+  }
 
 
   public async createSection(sectionDTO: ISectionDTO): Promise<Result<ISectionDTO>> {
@@ -114,7 +132,8 @@ export default class SectionService implements ISectionService {
 
    await axios.get(config.warehousesAPIWarehouseManagementURL+sectionDTO.warehouseOrigin)
   .then((response) => {warehouseoOriginId = response.data.id;})
-  .catch(() => {
+  .catch((e) => {
+    console.log(e);
     throw new Error("Origin Warehouse does not exist!");
 });
 

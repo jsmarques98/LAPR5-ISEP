@@ -76,5 +76,17 @@ export default class TruckController implements ITruckController /* TODO: extend
       return next(e);
     }
   };
+  public async deleteByPlatepublic(req: Request, res: Response, next: NextFunction) {
+  try {
+    const truckOrError = await this.truckServiceInstance.deleteByPlate(req.body.plate);
+
+ 
+    const mensagem = truckOrError.getValue();
+    return res.json( mensagem ).status(200);
+  }
+  catch (e) {
+    return next(e);
+  }
+};
 
 }

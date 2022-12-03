@@ -5,4 +5,5 @@ export default interface ITruckController  {
   updateTruck(req: Request, res: Response, next: NextFunction);
   getTruck(req: Request, res: Response, next: NextFunction);
   getAllTrucks(req: Request, res: Response, next: NextFunction);
+  deleteByPlatepublic(req: Request, res: Response, next: NextFunction);
 }

@@ -5,4 +5,5 @@ export default interface ISectionController  {
   updateSection(req: Request, res: Response, next: NextFunction);
   getAllSections(req: Request, res: Response, next: NextFunction);
   getSection(req: Request, res: Response, next: NextFunction);
+  deleteById(req: Request, res: Response, next: NextFunction);
 }

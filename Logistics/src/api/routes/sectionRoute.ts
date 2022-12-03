@@ -49,9 +49,17 @@ export default (app: Router) => {
     route.get('/:id',
     celebrate({
       body: Joi.object({
-        plate:Joi.string().required()
+        id:Joi.string().required()
       })
     }),
     (req, res, next) => ctrl.getSection(req, res, next));
+
+    route.delete('',
+    celebrate({
+      body: Joi.object({
+        id:Joi.string().required()
+      })
+    }),
+    (req, res, next) => ctrl.deleteById(req, res, next));
 };
 

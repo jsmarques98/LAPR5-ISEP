@@ -118,5 +118,21 @@ export default class TruckService implements ITruckService {
       throw e;
     }
   }
+  
+  public async deleteByPlate( plate: string): Promise<Result<String>> {
+    try {
+      let boolean = await this.truckRepo.deleteByPlate(Plate.create(plate).getValue());
+
+      if (boolean===true) {
+        return Result.ok<String>("camião apagado com suecesso");
+      }
+      else {
+      
+        return Result.ok<String>("Não existe um camião com a matricula inserida");
+        }
+    } catch (e) {
+      throw e;
+    }
+  }
 
 }

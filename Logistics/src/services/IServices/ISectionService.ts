@@ -6,4 +6,5 @@ export default interface ISectionServiice  {
   updateSection(sectionDTO: ISectionDTO): Promise<Result<ISectionDTO>>;
   getAllSections(): Promise<Result<ISectionDTO[]>>
   getSection(id: string): Promise<Result<ISectionDTO>>
+  deleteById(id: string): Promise<Result<String>>
 }

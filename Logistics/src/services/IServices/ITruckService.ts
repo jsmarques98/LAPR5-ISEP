@@ -6,4 +6,5 @@ export default interface ITruckServiice  {
   updateTruck(truckDTO: ITruckDTO): Promise<Result<ITruckDTO>>;
   getTruck (truckId: string): Promise<Result<ITruckDTO>>;
   getAllTrucks(): Promise<Result<ITruckDTO[]>>
+  deleteByPlate(plate: string): Promise<Result<String>>;
 }

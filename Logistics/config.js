@@ -31,7 +31,7 @@ export default {
   planningAPIHeuristicTimeURL: "http://localhost:8000/heuristicTime",
   planningAPIHeuristicMassURL: "http://localhost:8000/heuristicMass",
   planningAPIHeuristicTimeAndMassURL: "http://localhost:8000/heuristicTimeAndMass",
-
+  warehousesAPIWarehouseManagementURL:"https://localhost:5001/api/Warehouses/",
   
   /**
    * Used by winston logger

@@ -29,6 +29,7 @@ export default class TruckRepo implements ITruckRepo {
 
     const query = { domainId: idX}; 
     const truckDocument = await this.truckSchema.findOne( query as FilterQuery<ITruckPersistence & Document>);
+    
 
     return !!truckDocument === true;
   }
@@ -65,11 +66,27 @@ export default class TruckRepo implements ITruckRepo {
     const truckRecord = await this.truckSchema.findOne( query as FilterQuery<ITruckPersistence & Document> );
 
     if( truckRecord != null) {
+
+     
       return TruckMap.toDomain(truckRecord);
     }
     else
       return null;
   }
+
+  public async deleteByPlate(truckPlate:  Plate):Promise<Boolean> {
+    const query = { plate: truckPlate};
+    const truckRecord = await this.truckSchema.findOne( query as FilterQuery<ITruckPersistence & Document> );
+    
+    if( truckRecord != null) {
+     await  truckRecord.delete();
+      return true;
+    }
+    else
+      return false;
+  }
+
+  
 
   public async findByPlate (truckPlate:  Plate): Promise<Truck> {
      const query = { plate: truckPlate};

@@ -8,6 +8,7 @@ import { SectionMap } from "../mappers/SectionMap";
 import { Document, FilterQuery, Model } from 'mongoose';
 import { ISectionPersistence } from '../dataschema/ISectionPersistence';
 import { Console } from 'console';
+import { UniqueEntityID } from '../core/domain/UniqueEntityID';
 
 @Service()
 export default class SectionRepo implements ISectionRepo {
@@ -59,7 +60,7 @@ export default class SectionRepo implements ISectionRepo {
 
   public async findByDomainId (sectionId: SectionId
    | string): Promise<Section> {
-    const query = { domainId: sectionId};
+    const query = { SectionId: sectionId};
     const sectionRecord = await this.sectionSchema.findOne( query as FilterQuery<ISectionPersistence & Document> );
 
     if( sectionRecord != null) {
@@ -73,4 +74,20 @@ export default class SectionRepo implements ISectionRepo {
     const sectionRecord = await this.sectionSchema.find();
     return sectionRecord !== null ? sectionRecord.map((postRecord) => SectionMap.toDomain(postRecord)): null  
   }
+
+  public async deleteById(sectionId:  SectionId):Promise<Boolean> {
+   
+    const query = { domainId: sectionId};
+    const sectionRecord = await this.sectionSchema.findOne( query as FilterQuery<ISectionPersistence & Document> );
+
+    if( sectionRecord != null) {
+      await  sectionRecord.delete()
+      return true;
+    }
+    else
+      return false;
+  }
+    
+ 
+
 }

@@ -58,5 +58,13 @@ export default (app: Router) => {
       })
     }),
     (req, res, next) => ctrl.getTruck(req, res, next));
+
+    route.delete('',
+    celebrate({
+      body: Joi.object({
+        plate:Joi.string().required()
+      })
+    }),
+    (req, res, next) => ctrl.deleteByPlatepublic(req, res, next));
 };
 

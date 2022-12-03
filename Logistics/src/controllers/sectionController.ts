@@ -77,4 +77,17 @@ export default class SectionController implements ISectionController /* TODO: ex
     }
   };
 
+  public async deleteById(req: Request, res: Response, next: NextFunction) {
+    try {
+      
+      const sectionOrError = await this.sectionServiceInstance.deleteById(req.body.id) 
+
+      const mensagem = sectionOrError.getValue();
+      return  res.json(mensagem).status(200);
+    }
+    catch (e) {
+      return next(e);
+    }
+  };
+
 }
