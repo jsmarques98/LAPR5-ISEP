@@ -33,7 +33,7 @@ export class CreateTrucksComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createDelivery(){
+  createTruck(){
     
     this.truck.domainId=this.truckForm.value.id!;
     this.truck.plate=this.truckForm.value.plate!;
