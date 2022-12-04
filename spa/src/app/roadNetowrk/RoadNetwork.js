@@ -74,7 +74,7 @@ export default class RoadNetwork {
         this.initializeFloor();
         this.initializeRoundabouts(warehouseInformationList);
         this.initializeRoads();
-       
+        this.addWarehouse3DObjects(warehouseInformationList);
         window.addEventListener('resize', event => this.windowResize(event));
         document.body.appendChild(this.renderer.domElement);
 
@@ -141,6 +141,18 @@ export default class RoadNetwork {
         }
     }
 
+    addWarehouse3DObjects(warehouseInformationList){
+        const gltfLoader = new GLTFLoader();
+        warehouseInformationList.forEach(obj => {
+            const warehouse = new Roundabout(obj);
+            gltfLoader.load('./warehouse3DGLB/scene.glb', (gltf) => {
+                gltf.scene.scale.multiplyScalar(1 / 7500);
+                let root = gltf.scene;
+                root.position.set(warehouse.coordenadas.x, warehouse.coordenadas.y, warehouse.coordenadas.z);
+                this.scene.add(root);
+            });
+        });
+    }
 
 
     update() {
