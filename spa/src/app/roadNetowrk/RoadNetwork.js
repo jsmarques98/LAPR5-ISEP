@@ -33,10 +33,10 @@ export default class RoadNetwork {
 
 
         //LIGHT
-        const spotLight = new THREE.AmbientLight(0xffffff,1);
-        // spotLight.castShadow = true;
-        // spotLight.position.set(100, 250, 100);
-        // spotLight.angle = THREE.MathUtils.degToRad(30);
+        const spotLight = new THREE.SpotLight(0xffffff,1);
+         spotLight.castShadow = true;
+         spotLight.position.set(100, 250, 100);
+         spotLight.angle = THREE.MathUtils.degToRad(30);
         // spotLight.shadow.camera.near = 30;
         // spotLight.shadow.camera.far = 100;
         // spotLight.shadow.camera.top = 50;
@@ -74,7 +74,6 @@ export default class RoadNetwork {
         this.initializeFloor();
         this.initializeRoundabouts(warehouseInformationList);
         this.initializeRoads();
-
        
         window.addEventListener('resize', event => this.windowResize(event));
         document.body.appendChild(this.renderer.domElement);
@@ -89,7 +88,7 @@ export default class RoadNetwork {
         let floorMaterial = new THREE.MeshPhongMaterial({color: 0xa6a6a6,side: THREE.DoubleSide});
 
         var loader = new THREE.TextureLoader();
-        loader.load( 'grass.jpg', 
+        loader.load( 'textures/grass.jpg', 
         function ( texture ) {   
             texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;

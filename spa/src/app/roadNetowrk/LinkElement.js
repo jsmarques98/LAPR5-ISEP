@@ -9,7 +9,7 @@ export default class LinkElement {
         let linkElemGeometry = new THREE.PlaneGeometry(roadWidth, ri * K_LIGACAO);
         let linkElemMaterial = new THREE.MeshPhongMaterial({ color: 0xFFFFFF, side: THREE.DoubleSide });
         var loader = new THREE.TextureLoader();
-        loader.load( 'road.jpg', 
+        loader.load( 'textures/road.jpg', 
         function ( texture ) {   
             texture.wrapS = THREE.RepeatWrapping;
             texture.rotation = Math.PI/2;

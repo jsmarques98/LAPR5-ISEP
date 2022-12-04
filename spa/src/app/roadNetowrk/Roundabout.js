@@ -18,7 +18,7 @@ export default class Roundabout {
         let roundaboutGeometry = new THREE.CircleGeometry(Ri, 40);
         let roundaboutMaterial = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
         var loader = new THREE.TextureLoader();
-        loader.load( 'roundabout.png', 
+        loader.load( 'textures/roundabout.png', 
         function ( texture ) {   
             texture.wrapS = THREE.RepeatWrapping;
             texture.rotation = Math.PI/2;

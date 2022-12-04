@@ -21,7 +21,7 @@ export default class Road {
         let roadGeometry = new THREE.PlaneGeometry(roadLength, roadWidth);
         let roadMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff, side: THREE.DoubleSide });
         var loader = new THREE.TextureLoader();
-        loader.load( 'road.jpg', 
+        loader.load( 'textures/road.jpg', 
         function ( texture ) { 
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
