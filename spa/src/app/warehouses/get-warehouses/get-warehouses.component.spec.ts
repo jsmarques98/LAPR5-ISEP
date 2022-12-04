@@ -21,3 +21,4 @@ describe('GetWarehousesComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
