@@ -52,8 +52,11 @@
         <div>
             <input type="text" class="form-control" id="warehouseId" placeholder="Id" formControlName="id">
         </div>
-        <button type="submit" class="btn btn-primary w-100" (click)="getWarehouseById()">Find</button>
+        <button style="margin-top: 10px;" type="submit" class="btn btn-primary w-100" (click)="getWarehouseById()">Find</button>
     </form>
+    <div style="margin-top: 20px;">
+      <button routerLink="/home">Exit</button>
+    </div>
   </section>
   
   <section style="margin-left:10%;padding:1px 16px;height:auto;">

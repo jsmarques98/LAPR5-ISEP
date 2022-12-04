@@ -6,8 +6,8 @@
         padding: 0;
         width: 10%;
         background-color: #0090a3a5;
-        position: fixed;
-        height: 100%;
+        position: absolute;
+        height: 90%;
         overflow: auto;
     }
     
@@ -46,11 +46,11 @@
   </ul>
 </section>
 
-<section style="margin-left:10%;padding:1px 16px;height:auto;">
+<section style="margin-left:10%;padding:1px 16px;height:100%;">
 
     <form [formGroup] = "packagingForm">
 
-      <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Packaging Information:</h1>
+      <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Packaging Information:</h1>
       
       <div>
         <input type="text" class="form-control" id="packagingId" placeholder="Id" formControlName="id">
@@ -87,7 +87,7 @@
 
     <br> 
     <br> 
-    <div style="position: fixed;z-index: 999;">
+    <div style="margin-top: 20px;">
         <button routerLink="/home">Exit</button>
     </div>
 </section>
