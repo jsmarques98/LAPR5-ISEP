@@ -7,8 +7,8 @@ beforeEach(() =>{
 describe('Created truck', () => {
     it('Visits the initial project page', () => {
       cy.visit('/createTrucks')
-      cy.get("#plate").type("24-MT-77")
       cy.get("#truckId").type("23")
+      cy.get("#plate").type("24-MT-77")
       cy.get("#name").type("POPO DO ZE")
       cy.get("#autonomy").type("100")
       cy.get("#maxBattery").type("100")
@@ -16,12 +16,14 @@ describe('Created truck', () => {
       cy.get("#tare").type("2000")
       cy.get("#BaterryChargingTime").type("60")
       cy.get("#createTruck").click()
+      cy.wait(1000)
       cy.visit('/getTrucks')
       cy.get("#find").click()
-      cy.get("#truckPlate").click()
+      cy.wait(1000)
+
+      cy.contains("24-MT-77").click()
+      cy.wait(1000)
       cy.get("#Delete").click()
-
-
       
     })
   })

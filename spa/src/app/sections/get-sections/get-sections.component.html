@@ -48,7 +48,7 @@
 
 <section style="margin-left:10%;padding:1px 16px;height:auto;">
   <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Sections</h2>
-  <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" (click)="getSections()">Find</button>
+  <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100"id="getSections" (click)="getSections()">Find</button>
 </section>
 
 <section style="margin-left:10%;padding:1px 16px;height:auto;">
@@ -70,7 +70,7 @@
     <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">distance: {{selectedSection.distance}}</div>
     <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">energySpent: {{selectedSection.energySpent}}</div>
     <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">extraTime: {{selectedSection.extraTime}}</div>
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" (click)="deleteSection(selectedSection.id)">Delete Section</button>
+    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="delete" (click)="deleteSection(selectedSection.id)">Delete Section</button>
   </div>
 </section>
   

@@ -54,7 +54,7 @@
 <section style="margin-left:10%;padding:1px 16px;height:auto;">
   <ul class="trucks" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
       <div *ngFor="let truck of trucks">
-        <button [class.selected]="truck === selectedTruck" type="button" id="truckPlate" (click)="onSelect(truck)">
+        <button [class.selected]="truck === selectedTruck" type="button" id="selectedTruck" (click)="onSelect(truck)">
           <span class="name">{{truck.plate}}</span>
         </button>
       </div>
