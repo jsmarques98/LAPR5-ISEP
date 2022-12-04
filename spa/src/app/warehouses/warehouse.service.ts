@@ -61,7 +61,8 @@ export class WarehouseService {
   updateWarehouse(warehouse:Warehouse): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(warehouse);
-    return this.http.put(this.warehousesWarehouseManagementURL + 'Warehouses', body,{'headers':headers}).pipe(catchError(err => {
+    const warehouseId = warehouse.id;
+    return this.http.put(this.warehousesWarehouseManagementURL + "Warehouses/" + warehouseId, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Armazém alterado com sucesso!',false);
       }
