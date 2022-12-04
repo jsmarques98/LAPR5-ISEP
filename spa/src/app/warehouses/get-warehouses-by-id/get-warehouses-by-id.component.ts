@@ -37,6 +37,20 @@ export class GetWarehousesByIdComponent implements OnInit {
     });
   }
 
+  deleteWarehouse(warehouseId : string){
+    console.log(warehouseId);
+    this.service.deleteWarehouse(warehouseId).subscribe(res => {
+      if (res != null) {
+        this.mostrarNotificacao('Armazém eliminado com sucesso!',false)
+        this.visible=undefined;
+        this.getWarehouseById();
+       
+      }else{
+        this.mostrarNotificacao('Erro ao obter os Armazém!',true)
+      };
+    });
+  }
+
   
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {
