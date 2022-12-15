@@ -10,10 +10,10 @@ import Road from './Road.js';
 
 export default class RoadNetwork {
     warehouses = [];
-    K_LIGACAO = 1.1 ;
-    K_CIRCULO = 2.1;
-    Wi = 0.5;
-    Ri = 2;
+    K_LIGACAO = 2 ;
+    K_CIRCULO = 3;
+    Wi = 1;
+    Ri = this.Wi * this.K_CIRCULO /2;
     INFINITESIMO=0.01;
 
 
@@ -27,25 +27,42 @@ export default class RoadNetwork {
         //RENDERER
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.shadowMap.enable = false;
+        this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 
 
         //LIGHT
-        const spotLight = new THREE.SpotLight(0xffffff,1);
-         spotLight.castShadow = true;
-         spotLight.position.set(100, 250, 100);
-         spotLight.angle = THREE.MathUtils.degToRad(30);
-        // spotLight.shadow.camera.near = 30;
-        // spotLight.shadow.camera.far = 100;
-        // spotLight.shadow.camera.top = 50;
-        // spotLight.shadow.camera.bottom = 1;
-        
-        // spotLight.shadow.camera.rotateY(-Math.PI*0.5)
-        // spotLight.shadow.camera.up=1000;
-        
-        this.scene.add(spotLight);
+        // Create a group of objects
+        this.object = new THREE.Group();
+
+        // Create the ambient light
+        let ambientLight = new THREE.AmbientLight(0xFFFFFF, 1);
+
+        this.object.add(ambientLight);
+
+        // Create the first point light and turn on shadows for this light
+        let spotLight = new THREE.SpotLight(0xFFFFFF, 1);
+        spotLight.position.set(0, 100, -0)
+        spotLight.angle = 0.9
+        spotLight.distance = 600
+        spotLight.penumbra = 1
+        spotLight.castShadow = true;
+        spotLight.shadow.mapSize.width = 1024;
+        spotLight.shadow.mapSize.height = 1024;
+        spotLight.shadow.focus = 1;
+        spotLight.shadow.camera.near = 50;
+        spotLight.shadow.camera.far = 300;
+        spotLight.shadow.camera.fov = 30;
+
+
+        console.log(spotLight.shadow.camera.position)
+        this.object.add(spotLight);
+
+
+        this.scene.add(this.object)
+
+
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
         this.camera.position.set(0, 80, 0);
 
@@ -59,15 +76,6 @@ export default class RoadNetwork {
         this.orbitControls.target.set(0, 5, 0);
         this.orbitControls.update();
 
-
-
-         //spotLight.target.position.set( 0, 0, 0 );
-         //spotLight.position.copy( this.camera.position );
-
-
-
-        
-        
 
 
 
@@ -91,7 +99,7 @@ export default class RoadNetwork {
         loader.load( 'textures/grass.jpg', 
         function ( texture ) {   
             texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
+            texture.wrapT = THREE.RepeatWrapping;
             texture.repeat.set(20,20); 
             floorMaterial.map = texture;
             floorMaterial.needsUpdate = true;
@@ -100,6 +108,7 @@ export default class RoadNetwork {
         let floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
 
         floorMesh.receiveShadow = true;
+        floorMesh.castShadow = false;
         floorMesh.position.y = -3.5;
         this.scene.add(floorMesh);
     }

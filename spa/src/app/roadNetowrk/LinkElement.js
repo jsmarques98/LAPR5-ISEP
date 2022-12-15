@@ -19,6 +19,8 @@ export default class LinkElement {
             linkElemMaterial.needsUpdate = true;
         });
         let linkElemMesh = new THREE.Mesh(linkElemGeometry, linkElemMaterial);
+        linkElemMesh.castShadow = true;
+        linkElemMesh.receiveShadow = true;
         this.linkElement.add(linkElemMesh); 
         this.linkElement.position.set(ri * Math.cos(angle) + coordinates.x, coordinates.y, ri * Math.sin(angle) + coordinates.z);
         this.linkElement.rotation.set(Math.PI/2, 0, angle + Math.PI/2);

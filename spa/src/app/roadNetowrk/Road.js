@@ -4,7 +4,6 @@ export default class Road {
     
     constructor(originWarehouseCoordinates, destinWarehouseCoordinates, connectAngle, ri, roadWidth, K_LIGACAO) {
 
-        ri = 2.818;
         let distanceWarehouses = Math.sqrt(Math.pow(destinWarehouseCoordinates.x - originWarehouseCoordinates.x, 2) + Math.pow(destinWarehouseCoordinates.z - originWarehouseCoordinates.z, 2));
         if (distanceWarehouses > 0){
             distanceWarehouses -= (ri * K_LIGACAO) * 2;
@@ -25,11 +24,14 @@ export default class Road {
         function ( texture ) { 
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
-            texture.repeat.set(20,1)
+            texture.repeat.set(5,1)
             roadMaterial.map = texture;
             roadMaterial.needsUpdate = true;
         });
         let roadMesh = new THREE.Mesh(roadGeometry, roadMaterial);
+
+        roadMesh.castShadow=true;
+        roadMesh.receiveShadow=true;
         
         this.object.add(roadMesh);
 

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { DoubleSide } from 'three';
 
 
 export default class Roundabout {
@@ -6,7 +7,6 @@ export default class Roundabout {
         
         this.conections = roundabout.conections;
 
-        //this.radius = 0.2;
         
         this.object = new THREE.Group();
 
@@ -16,7 +16,7 @@ export default class Roundabout {
 
         
         let roundaboutGeometry = new THREE.CircleGeometry(Ri, 40);
-        let roundaboutMaterial = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
+        let roundaboutMaterial = new THREE.MeshPhongMaterial({ color: 0xFFFFFF, side:DoubleSide });
         var loader = new THREE.TextureLoader();
         loader.load( 'textures/roundabout.png', 
         function ( texture ) {   
