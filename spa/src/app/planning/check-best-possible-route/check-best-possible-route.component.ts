@@ -39,8 +39,8 @@ export class CheckBestPossibleRouteComponent implements OnInit {
     this.planning.truckName=this.planningForm.value.truckName!;
     this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
 
-    const strNum = this.planning.deliveryDate.replace(/[^0-9]/g, '')
-    this.planning.deliveryDate= strNum;
+   
+    this.planning.deliveryDate= this.planning.deliveryDate.substring(8,10)+"/"+this.planning.deliveryDate.substring(5,7)+"/"+this.planning.deliveryDate.substring(0,4)
 
 
     this.servicePlanning.checkBestPossibleRoute(this.planning).subscribe(res => {
@@ -75,9 +75,8 @@ export class CheckBestPossibleRouteComponent implements OnInit {
   checkRouteHeuristicMass(){ 
     this.planning.truckName=this.planningForm.value.truckName!;
     this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
+    this.planning.deliveryDate= this.planning.deliveryDate.substring(8,10)+"/"+this.planning.deliveryDate.substring(5,7)+"/"+this.planning.deliveryDate.substring(0,4)
 
-    const strNum = this.planning.deliveryDate.replace(/[^0-9]/g, '')
-    this.planning.deliveryDate= strNum;
 
     this.servicePlanning.checkRouteHeuristicMass(this.planning).subscribe(res => {
       if (res != null && res.routeList!=undefined) {
@@ -110,9 +109,8 @@ export class CheckBestPossibleRouteComponent implements OnInit {
   checkRouteHeuristicTime(){ 
     this.planning.truckName=this.planningForm.value.truckName!;
     this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
+    this.planning.deliveryDate= this.planning.deliveryDate.substring(8,10)+"/"+this.planning.deliveryDate.substring(5,7)+"/"+this.planning.deliveryDate.substring(0,4)
 
-    const strNum = this.planning.deliveryDate.replace(/[^0-9]/g, '')
-    this.planning.deliveryDate= strNum;
 
     this.servicePlanning.checkRouteHeuristicTime(this.planning).subscribe(res => {
       if (res != null && res.routeList!=undefined) {
@@ -145,9 +143,8 @@ export class CheckBestPossibleRouteComponent implements OnInit {
   checkRouteHeuristicTimeAndMass(){ 
     this.planning.truckName=this.planningForm.value.truckName!;
     this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
+    this.planning.deliveryDate= this.planning.deliveryDate.substring(8,10)+"/"+this.planning.deliveryDate.substring(5,7)+"/"+this.planning.deliveryDate.substring(0,4)
 
-    const strNum = this.planning.deliveryDate.replace(/[^0-9]/g, '')
-    this.planning.deliveryDate= strNum;
 
     this.servicePlanning.checkRouteHeuristicTimeAndMass(this.planning).subscribe(res => {
       if (res != null && res.routeList!=undefined) {

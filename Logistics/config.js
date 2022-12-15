@@ -30,8 +30,14 @@ export default {
   planningAPIBestRoutesURL: "http://localhost:8000/bestRoute",
   planningAPIHeuristicTimeURL: "http://localhost:8000/heuristicTime",
   planningAPIHeuristicMassURL: "http://localhost:8000/heuristicMass",
+  loadTruckURL: "http://localhost:8000/loadTruck",
+  loadDeliveryURL: "http://localhost:8000/loadDelivery",
+  loadSectionURL: "http://localhost:8000/loadSection",
+  loadWarehouseURL: "http://localhost:8000/loadWarehouse",
+  eliminarDadosURL: "http://localhost:8000/deleteDados",
   planningAPIHeuristicTimeAndMassURL: "http://localhost:8000/heuristicTimeAndMass",
   warehousesAPIWarehouseManagementURL:"https://localhost:5001/api/Warehouses/",
+  deliveriesAPIWarehouseManagementURL:"https://localhost:5001/api/Deliveries/",
   
   /**
    * Used by winston logger

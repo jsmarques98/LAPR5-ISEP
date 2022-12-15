@@ -14,11 +14,11 @@ import { IUserDTO } from '../dto/IUserDTO';
 import IUserRepo from './IRepos/IUserRepo';
 import IRoleRepo from './IRepos/IRoleRepo';
 
-import { User } from '../domain/user';
-import { UserPassword } from '../domain/userPassword';
-import { UserEmail } from '../domain/userEmail';
+import { User } from '../domain/user/user';
+import { UserPassword } from '../domain/user/userPassword';
+import { UserEmail } from '../domain/user/userEmail';
 
-import { Role } from '../domain/role';
+import { Role } from '../domain/role/role';
 
 import { Result } from "../core/logic/Result";
 
@@ -167,15 +167,15 @@ export default class UserService implements IUserService{
   }
 
 
-  private async getRole (roleId: string): Promise<Result<Role>> {
+  private async getRole (roleName: string): Promise<Result<Role>> {
 
-    const role = await this.roleRepo.findByDomainId( roleId );
+    const role = await this.roleRepo.findByName( roleName );
     const found = !!role;
 
     if (found) {
       return Result.ok<Role>(role);
     } else {
-      return Result.fail<Role>("Couldn't find role by id=" + roleId);
+      return Result.fail<Role>("Couldn't find role by name=" + roleName);
     }
   }
 
