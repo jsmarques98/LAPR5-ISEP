@@ -25,7 +25,8 @@ import { GetWarehousesComponent } from './warehouses/get-warehouses/get-warehous
 import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-route/check-best-possible-route.component';
 import { UpdateWarehousesComponent } from './warehouses/update-warehouses/update-warehouses.component';
 import { GetWarehousesByIdComponent } from './warehouses/get-warehouses-by-id/get-warehouses-by-id.component';
-
+import { GoogleLoginProvider, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 
 
 @NgModule({
@@ -59,9 +60,28 @@ import { GetWarehousesByIdComponent } from './warehouses/get-warehouses-by-id/ge
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '253750858737-m8igorsjrkpvtj16a7bh3jbk1pln9s03.apps.googleusercontent.com'
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

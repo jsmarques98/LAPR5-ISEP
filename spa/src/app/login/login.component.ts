@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators,FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+
 
 
 @Component({
@@ -11,29 +13,17 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm = this.fb.group({
-    email: [''],
-    password: ['']
-  });
+  user: SocialUser;
+  loggedIn: boolean;
 
-  constructor(private fb: FormBuilder,private loginService: LoginService,private router: Router,) { 
-  }
+  constructor(private authService: SocialAuthService) { }
 
-  ngOnInit(): void {
-  }
-
-  login(): void {
-  
-    let email = this.loginForm.value.email!;
-
-    let password = this.loginForm.value.password!;
-
-
-    if(this.loginService.login(email,password)){
-      this.router.navigate(['/home']);
-    }
-    
-
+  ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log(this.user)
+    });
   }
 
 }
