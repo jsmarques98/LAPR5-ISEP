@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
+import middlewares from '../middlewares';
 
 import { Container } from 'typedi';
 import ISectionController from '../../controllers/IControllers/ISectionController'; 
@@ -12,7 +13,7 @@ export default (app: Router) => {
   app.use('/Sections', route);
   const ctrl = Container.get(config.controllers.section.name) as ISectionController;
 
-  route.post('',
+  route.post('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         id: Joi.string(),
@@ -27,7 +28,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createSection(req, res, next) );
 
-  route.put('',
+  route.put('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         id: Joi.string().required(),
@@ -39,14 +40,14 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateSection(req, res, next) );
 
-    route.get('',
+    route.get('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
       }),
     }),
     (req, res, next) => ctrl.getAllSections(req, res, next));
 
-    route.get('/:id',
+    route.get('/:id',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         id:Joi.string().required()
@@ -54,7 +55,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.getSection(req, res, next));
 
-    route.delete('',
+    route.delete('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         id:Joi.string().required()

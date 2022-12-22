@@ -59,7 +59,6 @@ export default class RoleRepo implements IRoleRepo {
 
     const query = { domainId: roleId};
     const roleRecord = await this.roleSchema.findOne( query as FilterQuery<IRolePersistence & Document> );
-    console.log(roleRecord);
     if( roleRecord != null) {
       return RoleMap.toDomain(roleRecord);
     }

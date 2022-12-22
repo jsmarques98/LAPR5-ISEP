@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
+import middlewares from '../middlewares';
 
 import { Container } from 'typedi';
 import ITruckController from '../../controllers/IControllers/ITruckController'; 
@@ -13,7 +14,7 @@ export default (app: Router) => {
 
   const ctrl = Container.get(config.controllers.truck.name) as ITruckController;
 
-  route.post('',
+  route.post('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         domainId:Joi.string(),
@@ -28,7 +29,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createTruck(req, res, next) );
 
-  route.patch('',
+  route.patch('',middlewares.isAuth,
   
     celebrate({
       body: Joi.object({
@@ -45,14 +46,14 @@ export default (app: Router) => {
 
    
 
-    route.get('',
+    route.get('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
       })
     }),
     (req, res, next) => ctrl.getAllTrucks(req, res, next));
 
-    route.get('/:plate',
+    route.get('/:plate',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         plate:Joi.string().required()
@@ -60,7 +61,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.getTruck(req, res, next));
 
-    route.delete('',
+    route.delete('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         Plate:Joi.string().required()

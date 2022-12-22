@@ -107,11 +107,10 @@ export default class UserService implements IUserService{
   }
 
   public async SignIn(email: string, password: string): Promise<Result<{ userDTO: IUserDTO, token: string }>> {
-
     const user = await this.userRepo.findByEmail( email );
 
     if (!user) {
-      throw new Error('User not registered');
+      return Result.ok<{userDTO: IUserDTO, token: string}>( {userDTO: null, token: null} );
     }
 
     /**
@@ -129,6 +128,18 @@ export default class UserService implements IUserService{
     } else {
       throw new Error('Invalid Password');
     }
+  }
+
+
+  public async SSOSignIn(email: string): Promise<Result<{ userDTO: IUserDTO, token: string }>> {
+    const user = await this.userRepo.findByEmail( email );
+    if (!user) {
+      return Result.ok<{userDTO: IUserDTO, token: string}>( {userDTO: null, token: null} );
+    }else{
+      const token = this.generateToken(user) as string;
+      const userDTO = UserMap.toDTO( user ) as IUserDTO;
+      return Result.ok<{userDTO: IUserDTO, token: string}>( {userDTO: userDTO, token: token} );
+    } 
   }
 
   private generateToken(user) {

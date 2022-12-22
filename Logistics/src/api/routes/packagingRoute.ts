@@ -3,17 +3,16 @@ import { celebrate, Joi } from 'celebrate';
 
 import { Container } from 'typedi';
 import IPackagingController from '../../controllers/IControllers/IPackagingController'; 
-
+import middlewares from '../middlewares';
 import config from "../../../config";
 
 const route = Router();
 
 export default (app: Router) => {
-  console.log("sdfdsd------------")
   app.use('/packagings', route);
   const ctrl = Container.get(config.controllers.packaging.name) as IPackagingController;
 
-  route.post('',
+  route.post('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         id: Joi.string(),
@@ -27,7 +26,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createPackaging(req, res, next) );
 
-  route.put('',
+  route.put('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         id: Joi.string(),
@@ -40,7 +39,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updatePackaging(req, res, next) );
 
-    route.get('',
+    route.get('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
       }),

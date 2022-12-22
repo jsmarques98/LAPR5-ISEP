@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
+import middlewares from '../middlewares';
 
 import { Container } from 'typedi';
 import IRoleController from '../../controllers/IControllers/IRoleController'; 
@@ -13,7 +14,7 @@ export default (app: Router) => {
 
   const ctrl = Container.get(config.controllers.role.name) as IRoleController;
 
-  route.post('',
+  route.post('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         name: Joi.string().required()
@@ -21,7 +22,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createRole(req, res, next) );
 
-  route.put('',
+  route.put('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         id: Joi.string().required(),
@@ -29,7 +30,7 @@ export default (app: Router) => {
       }),
     }),
     (req, res, next) => ctrl.updateRole(req, res, next) );
-    route.get('',
+    route.get('',middlewares.isAuth,
     celebrate({
       params: Joi.object({
       })
