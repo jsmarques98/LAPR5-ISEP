@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -8,19 +9,20 @@ import { Router } from '@angular/router';
 })
 
 export class AppComponent implements OnInit{
-  toDisplay = true;
+
+  toDisplay = Boolean(localStorage.getItem("flag"));
+
   constructor(private router: Router) {
   }
 
+
   ngOnInit(): void {
+    
   }
 
   tittle = 'EletricGO';
 
-  toggleData() {
-    this.toDisplay = !this.toDisplay;
-    this.router.navigate(['/login']);
-  }
+
 
 }
 

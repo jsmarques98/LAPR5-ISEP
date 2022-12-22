@@ -13,8 +13,5 @@ export class DeliveriesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createDeliveries(){
-    this.router.navigate(['/create-deliveries']);
-  }
 
 }

@@ -29,6 +29,7 @@ import { GoogleLoginProvider, SocialLoginModule } from '@abacritt/angularx-socia
 import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +53,9 @@ import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
     CheckBestPossibleRouteComponent,
     GetWarehousesComponent,
     UpdateWarehousesComponent,
-    GetWarehousesByIdComponent
+    GetWarehousesByIdComponent,
+    PosLoginPageComponent
+
   ],
   imports: [
     BrowserModule,
