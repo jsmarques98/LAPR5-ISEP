@@ -11,17 +11,24 @@ namespace DDDSample1.Domain.Warehouses{
         public string City {get; private set;}
 
         public Address (string street, int doorNumber, string postCode, string city){
-            this.Street = street;
-            if(Validate(doorNumber))
+            if(Validate(street))
+                this.Street = street;
+            if(ValidateDoorNumber(doorNumber))
                 this.DoorNumber = doorNumber;
-            this.PostCode = postCode;
-            this.City = city;
+            if(Validate(postCode))    
+                this.PostCode = postCode;
+            if(Validate(city))    
+                this.City = city;
         }
 
+        private Boolean Validate(string Address){
+            if(Address != null)
+                return true;
+
+            throw new Exception("It cannot be null");
+        }
         
-
-
-        private Boolean Validate(int DoorNumber){
+        private Boolean ValidateDoorNumber(int DoorNumber){
             if(DoorNumber >= 0)
                 return true;
 
