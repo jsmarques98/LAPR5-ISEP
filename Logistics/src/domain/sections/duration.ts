@@ -17,11 +17,11 @@ export class Duration extends ValueObject<DurationProps> {
 
   public static create (duration: number): Result<Duration> {
     if(duration<0){
-      return Result.fail<Duration>("duration needs to be greater than to 0");
+      throw new Error("duration needs to be greater than to 0");
      }
     const guardResult = Guard.againstNullOrUndefined(duration, 'duration');
     if (!guardResult.succeeded) {
-      return Result.fail<Duration>(guardResult.message);
+      throw new Error("duration needs to be instantiated");
     } else {
       return Result.ok<Duration>(new Duration({ value: duration }))
     }

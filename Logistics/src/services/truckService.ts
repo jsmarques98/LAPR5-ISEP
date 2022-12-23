@@ -20,6 +20,7 @@ export default class TruckService implements ITruckService {
       @Inject(config.repos.truck.name) private truckRepo : ITruckRepo
   ) {}
 
+
   public async getTruck( plate: string): Promise<Result<ITruckDTO>> {
     try {
       const truck = await this.truckRepo.findByPlate(Plate.create(plate).getValue());
@@ -62,7 +63,7 @@ export default class TruckService implements ITruckService {
        truckOrError = await Truck.create( truckDTO ,new UniqueEntityID( truckDTO.domainId));
       }
       if (truckOrError.isFailure) {
-        return Result.fail<ITruckDTO>(truckOrError.errorValue());
+        return Result.fail<ITruckDTO>(truckOrError.error);
       }
       const truckResult = truckOrError.getValue();
       let aux =await this.truckRepo.exists(truckResult);
@@ -134,5 +135,29 @@ export default class TruckService implements ITruckService {
       throw e;
     }
   }
+  async inativeTruck(plate: string): Promise<Result<String>> {
+    try {
+       const truck =  await this.truckRepo.findByPlate(Plate.create(plate).getValue());
+      if (truck === null) {
+        return Result.fail<String>("Truck not Found");
+      }
+      else {
+        if(truck.active===false){
+          return Result.ok<String>( "camiao inibido sem sucesso  ");
+        }else{
+        truck.MarkAsInative()
+        await this.truckRepo.save(truck)
+        return Result.ok<String>( "camião inibido com sucesso");
+        }
+      }
+    } catch (e) {
+      throw e;
+    }
+
+  }
+
+  
+
+
 
 }

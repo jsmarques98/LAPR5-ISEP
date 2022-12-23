@@ -17,11 +17,11 @@ export class Distance extends ValueObject<DistanceProps> {
 
   public static create (distance: number): Result<Distance> {
     if(distance<0){
-      return Result.fail<Distance>("distance needs to be greater than to 0");
+      throw new Error("distance needs to be greater than to 0");
      }
     const guardResult = Guard.againstNullOrUndefined(distance, 'distance');
     if (!guardResult.succeeded) {
-      return Result.fail<Distance>(guardResult.message);
+      throw new Error("distance needs to be instantiated");
     } else {
       return Result.ok<Distance>(new Distance({ value: distance }))
     }

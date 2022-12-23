@@ -11,6 +11,7 @@ const TruckSchema = new mongoose.Schema(
     tare:{type: Number},
     baterryChargingTime:{type: Number},
     plate:{type: String, unique:true},
+    active:{type: String},
   },
   { timestamps: true},
 );

@@ -21,6 +21,7 @@ interface TruckProps {
   tare: Tare;
   baterryChargingTime: BaterryChargingTime;
   plate: Plate;
+  active: boolean;
 }
 
 export class Truck extends AggregateRoot<TruckProps> {
@@ -43,6 +44,10 @@ export class Truck extends AggregateRoot<TruckProps> {
 
   get maxBattery(): MaxBattery {
     return this.props.maxBattery;
+  }
+
+  get active(): Boolean {
+    return this.props.active;
   }
 
   
@@ -82,23 +87,34 @@ export class Truck extends AggregateRoot<TruckProps> {
     this.props.baterryChargingTime=value;
   }
 
+
+
   private constructor (props: TruckProps, id?: UniqueEntityID) {
     super(props, id);
   }
 
 
   public static create (truckDTO: ITruckDTO, id?: UniqueEntityID): Result<Truck> {
-
+    
     const name = truckDTO.name;
-
     if (!!name === false || name.length === 0) {
       return Result.fail<Truck>('Must provide a truck name')
     } else {
-
-      const truck = new Truck({ name: name,maxBattery: MaxBattery.create(truckDTO.maxBattery).getValue(),
+      let aux= truckDTO.active.toLocaleLowerCase()
+      let isPresent: boolean = aux === "true";
+    try{
+      const  truck = new Truck({ name: name,maxBattery: MaxBattery.create(truckDTO.maxBattery).getValue(),
         autonomy: Autonomy.create(truckDTO.autonomy).getValue(), payLoad: PayLoad.create(truckDTO.payLoad).getValue(), tare: Tare.create(truckDTO.tare).getValue(),
-        baterryChargingTime:  BaterryChargingTime.create(truckDTO.baterryChargingTime).getValue(),plate:  Plate.create(truckDTO.plate).getValue()}, id);
-      return Result.ok<Truck>( truck )
+        baterryChargingTime:  BaterryChargingTime.create(truckDTO.baterryChargingTime).getValue(),plate:  Plate.create(truckDTO.plate).getValue(), active :isPresent}, id);
+        return Result.ok<Truck>( truck )
+    }catch(err){
+      return  Result.fail<Truck>(err.message)
     }
+       
+
+    }
+  }
+  public  MarkAsInative(){
+     this.props.active = false;
   }
 }

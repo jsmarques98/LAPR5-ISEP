@@ -18,11 +18,11 @@ export class MaxBattery extends ValueObject<MaxBatteryProps> {
 
   public static create (maxBattery: number): Result<MaxBattery> {
     if(maxBattery<=0){
-      return Result.fail<MaxBattery>("maxBattery needs to be greater than to 0");
+      throw new Error("maxBattery needs to be greater than to 0");
      }
     const guardResult = Guard.againstNullOrUndefined(maxBattery, 'MaxBattery');
     if (!guardResult.succeeded) {
-      return Result.fail<MaxBattery>(guardResult.message);
+      throw new Error(guardResult.message);
     } else {
       return Result.ok<MaxBattery>(new MaxBattery({ value: maxBattery }))
     }

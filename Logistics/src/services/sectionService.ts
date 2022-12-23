@@ -45,7 +45,7 @@ export default class SectionService implements ISectionService {
       const section = await this.sectionRepo.findByDomainId(new UniqueEntityID(id));
 
       if (section === null) {
-        return Result.fail<ISectionDTO>("truck not found");
+        return Result.fail<ISectionDTO>("section not found");
       }
       else {
         const truckDTOResult = SectionMap.toDTO( section ) as ISectionDTO;
@@ -59,12 +59,12 @@ export default class SectionService implements ISectionService {
   public async deleteById(id: string): Promise<Result<String>> {
     try {
 
-
       let boolean = await this.sectionRepo.deleteById(new UniqueEntityID(id));
 
       if (boolean===true) {
         return Result.ok<String>("Section apagada com suecesso");
       }
+
       else {
       
         return Result.ok<String>("Não existe uma Section com o id  inserido");
@@ -77,18 +77,15 @@ export default class SectionService implements ISectionService {
 
   public async createSection(sectionDTO: ISectionDTO): Promise<Result<ISectionDTO>> {
     try {
-      await this.checkIfWarehousesExist(sectionDTO); 
+
+     // await this.checkIfWarehousesExist(sectionDTO); 
       let sectionOrError;
 
-      if(sectionDTO.id===undefined){
-        sectionOrError = await Section.create( sectionDTO);
+      sectionOrError = await Section.create( sectionDTO);
         
-       }else{
-        sectionOrError= await Section.create( sectionDTO,new UniqueEntityID( sectionDTO.id));
-
-       }
       if (sectionOrError.isFailure) {
-        return Result.fail<ISectionDTO>(sectionOrError.errorValue());
+    
+        return Result.fail<ISectionDTO>(sectionOrError.error);
       }
 
       const sectionResult = sectionOrError.getValue();
@@ -97,12 +94,11 @@ export default class SectionService implements ISectionService {
       const sectionDTOResult = SectionMap.toDTO( sectionResult ) as ISectionDTO;
       return Result.ok<ISectionDTO>( sectionDTOResult )
     } catch (e) {
-      throw e;
+      return Result.fail<ISectionDTO>(e.message);
     }
   }
 
   public async updateSection(sectionDTO: ISectionDTO): Promise<Result<ISectionDTO>> {
-    console.log("service")
     try {
       const section = await this.sectionRepo.findByDomainId(sectionDTO.id);
 
@@ -114,7 +110,6 @@ export default class SectionService implements ISectionService {
         section.props.duration=Duration.create(sectionDTO.duration).getValue();
         section.props.energySpent=EnergySpent.create(sectionDTO.energySpent).getValue();
         section.props.extraTime=ExtraTime.create(sectionDTO.extraTime).getValue();
-        console.log(section.props);
      
         await this.sectionRepo.save(section);
 
@@ -130,18 +125,17 @@ export default class SectionService implements ISectionService {
     var warehouseDestinyId;
     var warehouseoOriginId;
 
-   await axios.get(config.warehousesAPIWarehouseManagementURL+sectionDTO.warehouseOrigin)
+   await axios.get(config.WarehouseManagementApiURL+config.warehousesAPIWarehouseManagementURL+sectionDTO.warehouseOrigin)
   .then((response) => {warehouseoOriginId = response.data.id;})
   .catch((e) => {
-    console.log(e);
     throw new Error("Origin Warehouse does not exist!");
-});
+  });
 
-  await axios.get(config.warehousesAPIWarehouseManagementURL+sectionDTO.warehouseDestiny)
+  await axios.get(config.WarehouseManagementApiURL+config.warehousesAPIWarehouseManagementURL+sectionDTO.warehouseDestiny)
   .then((response) => {warehouseDestinyId = response.data.id;})
   .catch(() => {
     throw new Error("Destiny Warehouse does not exist!");
-}); 
+  }); 
   }
 
 }

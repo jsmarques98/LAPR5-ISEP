@@ -15,10 +15,13 @@ export default class SectionController implements ISectionController /* TODO: ex
   ) {}
 
   public async createSection(req: Request, res: Response, next: NextFunction) {
+ 
     try {
       const sectionOrError = await this.sectionServiceInstance.createSection(req.body as ISectionDTO) as Result<ISectionDTO>;
       if (sectionOrError.isFailure) {
-        return res.status(402).send();
+        
+ 
+        return res.status(402).send(sectionOrError.error);
       }
       const sectionDTO = sectionOrError.getValue();
       return res.json( sectionDTO ).status(201);

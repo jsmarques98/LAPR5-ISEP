@@ -17,11 +17,11 @@ export class Tare extends ValueObject<TareProps> {
 
   public static create (tare: number): Result<Tare> {
     if(tare<=0){
-      return Result.fail<Tare>("tare needs to be greater than to 0");
+      throw new Error("tare needs to be greater than to 0");
      }
     const guardResult = Guard.againstNullOrUndefined(tare, 'tare');
     if (!guardResult.succeeded) {
-      return Result.fail<Tare>(guardResult.message);
+      throw new Error(guardResult.message);
     } else {
       return Result.ok<Tare>(new Tare({ value: tare }))
     }

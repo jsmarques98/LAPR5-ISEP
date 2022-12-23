@@ -13,7 +13,7 @@ export class PackagingMap extends Mapper<Packaging> {
   public static toDTO( packaging: Packaging): IPackagingDTO {
     return {
       id: packaging.id.toString(),
-      truckId: packaging.truckId.toString(),
+      truckPlate: packaging.truckPlate.toString(),
       positionX:packaging.props.position.x,
       positionY:packaging.props.position.y,
       positionZ:packaging.props.position.z,
@@ -37,7 +37,7 @@ export class PackagingMap extends Mapper<Packaging> {
   public static toPersistence (packaging: Packaging): any {
     return {
       domainId: packaging.id.toString(),
-      truckId: packaging.truckId.toString(),
+      truckPlate: packaging.truckPlate.toString(),
       deliveryId: packaging.deliveryId, 
       positionX: packaging.position.x,
       positionY:  packaging.position.y,

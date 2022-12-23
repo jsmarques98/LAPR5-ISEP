@@ -7,9 +7,10 @@ import { PackagingId } from "./packagingId";
 import IPackagingDTO from "../../dto/IPackagingDTO";
 import { WareHouses } from "../../domain/sections/warehouses";
 import { Position } from "./position";
+import { Plate } from "../trucks/plate";
 
 interface PackagingProps {
-  truckId: TruckId;
+  truckPlate: Plate;
   deliveryId: string;
   position: Position;
 }
@@ -24,8 +25,8 @@ export class Packaging extends AggregateRoot<PackagingProps> {
     return new PackagingId(this.packagingId.toValue());
   }
 
-  get truckId (): TruckId {
-    return this.props.truckId;
+  get truckPlate (): Plate {
+    return this.props.truckPlate;
   }
   
   get deliveryId (): string {
@@ -55,7 +56,7 @@ export class Packaging extends AggregateRoot<PackagingProps> {
 
   
   public static create (packagingDTO: IPackagingDTO, id?: UniqueEntityID): Result<Packaging> {
-      const packaging = new Packaging({ truckId: new TruckId(packagingDTO.truckId),deliveryId: packagingDTO.deliveryId,
+      const packaging = new Packaging({ truckPlate:Plate.create(packagingDTO.truckPlate).getValue(),deliveryId: packagingDTO.deliveryId,
         position: Position.create(packagingDTO.positionX,packagingDTO.positionY,packagingDTO.positionZ).getValue()}, id);
 
       return Result.ok<Packaging>( packaging );

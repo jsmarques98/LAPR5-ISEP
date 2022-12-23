@@ -19,11 +19,11 @@ export class BaterryChargingTime extends ValueObject<BaterryChargingTimeProps> {
   public static create (baterryChargingTime: number): Result<BaterryChargingTime> {
 
     if(baterryChargingTime<=0){
-      return Result.fail<BaterryChargingTime>("baterryChargingTime needs to be greater than to 0");
+      throw new Error("baterryChargingTime needs to be greater than to 0");
      }
     const guardResult = Guard.againstNullOrUndefined(baterryChargingTime, 'baterryChargingTime');
     if (!guardResult.succeeded) {
-      return Result.fail<BaterryChargingTime>(guardResult.message);
+      throw new Error(guardResult.message);
     } else {
       return Result.ok<BaterryChargingTime>(new BaterryChargingTime({ value: baterryChargingTime }))
     }

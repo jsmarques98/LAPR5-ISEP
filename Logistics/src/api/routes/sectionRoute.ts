@@ -13,10 +13,9 @@ export default (app: Router) => {
   app.use('/Sections', route);
   const ctrl = Container.get(config.controllers.section.name) as ISectionController;
 
-  route.post('',middlewares.isAuth,
+  route.post('',
     celebrate({
       body: Joi.object({
-        id: Joi.string(),
         warehouseOrigin: Joi.string().required(),
         warehouseDestiny: Joi.string().required(),
         duration: Joi.number().required(),
@@ -40,7 +39,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateSection(req, res, next) );
 
-    route.get('',middlewares.isAuth,
+    route.get('',
     celebrate({
       body: Joi.object({
       }),
@@ -55,7 +54,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.getSection(req, res, next));
 
-    route.delete('',middlewares.isAuth,
+    route.delete('',
     celebrate({
       body: Joi.object({
         id:Joi.string().required()

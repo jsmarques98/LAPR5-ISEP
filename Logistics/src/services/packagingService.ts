@@ -12,9 +12,11 @@ import { response } from 'express';
 import { threadId } from 'worker_threads';
 import { UniqueEntityID } from '../core/domain/UniqueEntityID';
 import { TruckId } from '../domain/trucks/truckId';
+import { Plate } from '../domain/trucks/plate';
 
 const axios = require('axios');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 
 @Service()
 export default class PackagingService implements IPackagingService {
@@ -78,7 +80,7 @@ export default class PackagingService implements IPackagingService {
         return Result.fail<IPackagingDTO>("packaging not found");
       }
       else {
-        packaging.props.truckId=new UniqueEntityID(packagingDto.truckId);
+        packaging.props.truckPlate=Plate.create(packagingDto.truckPlate).getValue();
         packaging.props.position=Position.create(packagingDto.positionX,packagingDto.positionY,packagingDto.positionZ).getValue();
         packaging.props.deliveryId=packagingDto.deliveryId;
         
@@ -93,7 +95,7 @@ export default class PackagingService implements IPackagingService {
   }
 
   private async checkIfTruckExist(packagingDTO : IPackagingDTO){
-    if(this.truckRepo.findByDomainId(packagingDTO.truckId)==null){
+    if(this.truckRepo.findByPlate(Plate.create(packagingDTO.truckPlate).getValue())==null){
       throw new Error("Truck does not exist!");
     }
   }
@@ -101,7 +103,7 @@ export default class PackagingService implements IPackagingService {
   private async checkIfDeliveryExist(packagingDTO : IPackagingDTO){
     var deliveryId;
 
-   await axios.get(config.deliveriesAPIWarehouseManagementURL+packagingDTO.deliveryId)
+   await axios.get(config.WarehouseManagementApiURL+config.deliveriesAPIWarehouseManagementURL+packagingDTO.deliveryId)
   .then((response) => {deliveryId = response.data.id;})
   .catch(() => {
     throw new Error("Delivery does not exist!");

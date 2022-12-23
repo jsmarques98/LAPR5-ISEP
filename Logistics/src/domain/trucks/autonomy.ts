@@ -17,11 +17,11 @@ export class Autonomy extends ValueObject<AutonomyProps> {
 
   public static create (autonomy: number): Result<Autonomy> {
    if(autonomy<0){
-    return Result.fail<Autonomy>("autonomy needs to be greater than or equal to 0");
+    throw new Error("autonomy needs to be greater than or equal to 0");
    }
     const guardResult = Guard.againstNullOrUndefined(autonomy, 'autonomy');
     if (!guardResult.succeeded) {
-      return Result.fail<Autonomy>(guardResult.message);
+      throw new Error(guardResult.message);
     } else {
       return Result.ok<Autonomy>(new Autonomy({ value: autonomy }))
     }

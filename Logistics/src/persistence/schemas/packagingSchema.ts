@@ -7,7 +7,7 @@ const TruckSchema = new mongoose.Schema(
     positionX: { type: Number },
     positionY:{type: Number},
     positionZ:{type: Number,},
-    truckId:{type: String},
+    truckPlate:{type: String},
     deliveryId:{type: String},
   },
   { timestamps: true},

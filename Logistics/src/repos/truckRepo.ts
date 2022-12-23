@@ -52,6 +52,8 @@ export default class TruckRepo implements ITruckRepo {
         truckDocument.payLoad= truck.payLoad.value;
         truckDocument.tare= truck.tare.value;
         truckDocument.baterryChargingTime= truck.baterryChargingTime.value;
+        truckDocument.active=truck.active.toString();
+       
         await truckDocument.save();
         return truck;
       }

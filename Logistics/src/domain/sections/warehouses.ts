@@ -23,11 +23,13 @@ export class WareHouses extends ValueObject<WareHousesProps> {
   public static create (value: string,value1: string): Result<WareHouses> {
     const guardResult = Guard.againstNullOrUndefined(value, 'warehouseOrigin');
     if (!guardResult.succeeded) {
-      return Result.fail<WareHouses>(guardResult.message);
+       throw new Error("warehouseOrigin needs to be instantiated");
+
     } 
     const guardResult1 = Guard.againstNullOrUndefined(value1, 'warehouseDestiny');
     if (!guardResult.succeeded) {
-      return Result.fail<WareHouses>(guardResult1.message);
+      throw new Error("warehouseDestiny needs to be instantiated");
+
     } 
       return Result.ok<WareHouses>(new WareHouses({ warehouseOrigin: value, warehouseDestiny:value1}))
     }

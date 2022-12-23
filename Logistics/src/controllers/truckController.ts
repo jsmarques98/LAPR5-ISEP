@@ -17,8 +17,10 @@ export default class TruckController implements ITruckController /* TODO: extend
   public async createTruck(req: Request, res: Response, next: NextFunction) {
     try {
       const truckOrError = await this.truckServiceInstance.createTruck(req.body as ITruckDTO) as Result<ITruckDTO>;
+      
       if (truckOrError.isFailure) {
-        return res.status(402).send();
+
+        return res.status(402).send(truckOrError.error);
       }
       const truckDTO = truckOrError.getValue();
       return res.json( truckDTO ).status(201);
@@ -60,7 +62,7 @@ export default class TruckController implements ITruckController /* TODO: extend
   };
 
   public async getAllTrucks(req: Request, res: Response, next: NextFunction) {
-    console.log("aaaaaaaaa")
+
     try {
       
       const roleOrError = await this.truckServiceInstance.getAllTrucks() as Result<ITruckDTO[]>
@@ -78,11 +80,21 @@ export default class TruckController implements ITruckController /* TODO: extend
     }
   };
   public async deleteByPlatepublic(req: Request, res: Response, next: NextFunction) {
-  console.log("11111111111111")
   try {
     const truckOrError = await this.truckServiceInstance.deleteByPlate(req.body.Plate);
 
  
+    const mensagem = truckOrError.getValue();
+    return res.json( mensagem ).status(200);
+  }
+  catch (e) {
+    return next(e);
+  }
+};
+
+public async inativeTruck(req: Request, res: Response, next: NextFunction) {
+  try {
+    const truckOrError = await this.truckServiceInstance.inativeTruck(req.body.Plate);
     const mensagem = truckOrError.getValue();
     return res.json( mensagem ).status(200);
   }

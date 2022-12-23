@@ -20,11 +20,12 @@ export class TruckMap extends Mapper<Truck> {
       tare: truck.tare.value,
       baterryChargingTime: truck.baterryChargingTime.value,
       plate: truck.plate.toString(),
+      active: truck.active.toString()
     } as ITruckDTO;
   }
 
   public static toDomain (truck: any | Model<ITruckPersistence & Document> ): Truck {
-   
+ 
     const truckOrError = Truck.create(
         truck,
       new UniqueEntityID(truck.domainId)
@@ -36,7 +37,6 @@ export class TruckMap extends Mapper<Truck> {
   }
 
   public static toPersistence (truck: Truck): any {
-
     return {
       domainId: truck.id.toString(),
       name: truck.name,
@@ -46,6 +46,7 @@ export class TruckMap extends Mapper<Truck> {
       tare: truck.tare.value,
       baterryChargingTime: truck.baterryChargingTime.value,
       plate: truck.plate.value,
+      active: truck.active.toString(),
     }
   }
 }

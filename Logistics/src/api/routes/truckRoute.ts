@@ -14,7 +14,7 @@ export default (app: Router) => {
 
   const ctrl = Container.get(config.controllers.truck.name) as ITruckController;
 
-  route.post('',middlewares.isAuth,
+  route.post('',
     celebrate({
       body: Joi.object({
         domainId:Joi.string(),
@@ -25,6 +25,7 @@ export default (app: Router) => {
         payLoad: Joi.number().required(),
         tare: Joi.number().required(),
         baterryChargingTime: Joi.number().required(),
+        active: Joi.string().required(),
       })
     }),
     (req, res, next) => ctrl.createTruck(req, res, next) );
@@ -40,13 +41,14 @@ export default (app: Router) => {
         payLoad: Joi.number(),
         tare: Joi.number(),
         baterryChargingTime: Joi.number(),
+        
       }),
     }),
     (req, res, next) => ctrl.updateTruck(req, res, next) );
 
    
 
-    route.get('',middlewares.isAuth,
+    route.get('',
     celebrate({
       body: Joi.object({
       })
@@ -61,13 +63,27 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.getTruck(req, res, next));
 
-    route.delete('',middlewares.isAuth,
+    route.delete('',
     celebrate({
       body: Joi.object({
         Plate:Joi.string().required()
       })
     }),
 
+    
+
     (req, res, next) => ctrl.deleteByPlatepublic(req, res, next));
+
+
+
+
+    route.delete('/:soft',
+    celebrate({
+      body: Joi.object({
+        Plate:Joi.string().required()
+      })
+    }),
+
+    (req, res, next) => ctrl.inativeTruck(req, res, next));
 };
 

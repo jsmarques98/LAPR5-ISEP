@@ -17,11 +17,11 @@ export class ExtraTime extends ValueObject<ExtraTimeProps> {
 
   public static create (extraTime: number): Result<ExtraTime> {
     if(extraTime<0){
-      return Result.fail<ExtraTime>("extraTime needs to be greater than to 0");
+      throw new Error("extraTime needs to be greater than to 0");
      }
     const guardResult = Guard.againstNullOrUndefined(extraTime, 'extraTime');
     if (!guardResult.succeeded) {
-      return Result.fail<ExtraTime>(guardResult.message);
+      throw new Error("extraTime needs to be instantiated");
     } else {
       return Result.ok<ExtraTime>(new ExtraTime({ value: extraTime }))
     }

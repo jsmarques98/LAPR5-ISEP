@@ -3,6 +3,6 @@ export default interface IPackagingDTO {
     positionX:number;
     positionY:number;
     positionZ:number;
-    truckId: string;
+    truckPlate: string;
     deliveryId: string;  
     }

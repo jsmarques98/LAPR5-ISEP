@@ -7,4 +7,5 @@ export interface ITruckPersistence {
     tare: number;
     baterryChargingTime: number;
     plate :string;
+    active:string;
   }

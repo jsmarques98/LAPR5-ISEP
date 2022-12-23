@@ -12,14 +12,14 @@ export default (app: Router) => {
   app.use('/packagings', route);
   const ctrl = Container.get(config.controllers.packaging.name) as IPackagingController;
 
-  route.post('',middlewares.isAuth,
+  route.post('',
     celebrate({
       body: Joi.object({
         id: Joi.string(),
         positionX: Joi.number().required(),
         positionY: Joi.number().required(),
         positionZ: Joi.number().required(),
-        truckId: Joi.string().required(),
+        truckPlate: Joi.string().required(),
         deliveryId: Joi.string().required(),
 
       })
@@ -39,7 +39,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updatePackaging(req, res, next) );
 
-    route.get('',middlewares.isAuth,
+    route.get('',
     celebrate({
       body: Joi.object({
       }),
