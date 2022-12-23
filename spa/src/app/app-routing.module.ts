@@ -17,6 +17,8 @@ import { GetWarehousesComponent } from './warehouses/get-warehouses/get-warehous
 import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-route/check-best-possible-route.component';
 import { UpdateWarehousesComponent } from './warehouses/update-warehouses/update-warehouses.component';
 import { GetWarehousesByIdComponent } from './warehouses/get-warehouses-by-id/get-warehouses-by-id.component';
+import { GetPackagingsComponent } from './packagings/get-packagings/get-packagings.component';
+
 
 
 const routes: Routes = [
@@ -35,6 +37,7 @@ const routes: Routes = [
   { path: 'checkBestRoute', component: CheckBestPossibleRouteComponent },
   { path: 'updateWarehouses', component: UpdateWarehousesComponent },
   { path: 'getWarehousesById', component: GetWarehousesByIdComponent },
+  { path: 'getPackagings', component: GetPackagingsComponent },
   
 
 

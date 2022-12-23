@@ -23,7 +23,7 @@ export class GetTrucksComponent implements OnInit {
 
     this.service.getTrucks().subscribe(res => {
       if (res != null) {
-        this.mostrarNotificacao('Trucks obtidos com sucesso!',false)
+     
         this.trucks = res;
       }else{
         this.mostrarNotificacao('Erro ao obter os Trucks!',true)
@@ -43,6 +43,17 @@ export class GetTrucksComponent implements OnInit {
         this.mostrarNotificacao('Erro ao obter os Trucks!',true)
       };
     });
+  }
+
+  inactiveTruck(plate:string){
+    this.service.inactiveTruck(plate).subscribe(async res =>{
+      this.mostrarNotificacao(res,true)
+      this.getTrucks();
+      
+
+
+
+    })
   }
 
 

@@ -19,14 +19,16 @@ export class TruckService {
     const body=JSON.stringify(truck);
   
     return this.http.post(environment.logisticsAPI+environment.logisticsAPIPTrucks, body,{'headers':headers}).pipe(catchError(err => {
-      if (err.status == 200) {
+      if (err.status == 201) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }
-      if (err.status == 400) {
+      if (err.status == 402) {
         this.mostrarNotificacao('POST EFETUADO SEM SUCESSO!',true);
+        this.mostrarNotificacao(err.error,true);
       }
       if (err.status == 500) {
-        this.mostrarNotificacao('POST INVÁLIDO:\n DEVE TER PELO MENOS 1 TAG EM COMUM COM ESSE UTILIZADOR!\n OU JÁ FEZ UM PEDIDO DE LIGAÇÃO!',true);
+        this.mostrarNotificacao('POST INVÁLIDO:',true);
+        this.mostrarNotificacao(err.error,true);
       }
       return throwError(err);
     }));
@@ -53,6 +55,21 @@ export class TruckService {
       return throwError(err);
     }));
   }
+
+  inactiveTruck(plate : string): Observable<any> {
+    
+    let  inactiveOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+           body : {'Plate' : plate}     }
+  
+    return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIPTrucks+"/:soft", inactiveOptions).pipe(catchError(err => {
+      if (err.status == 500) {
+        this.mostrarNotificacao('NÃO EXISTE UM CAMIÃO ASSOCIADO A ESSE CAMIÃO!',true);
+      }
+      return throwError(err);
+    }));
+  }
+
+
  
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';

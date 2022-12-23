@@ -7,4 +7,7 @@ export class Truck{
     payLoad: number;
     tare: number;
     baterryChargingTime: number; 
+    active:string;
 }
+
+ 

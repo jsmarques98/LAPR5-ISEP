@@ -14,7 +14,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class CreateTrucksComponent implements OnInit {
 
   truckForm = this.fb.group({
-    id: [''],
+
     plate: [''],
     name: [''],
     autonomy: [],
@@ -35,7 +35,7 @@ export class CreateTrucksComponent implements OnInit {
 
   createTruck(){
     
-    this.truck.domainId=this.truckForm.value.id!;
+
     this.truck.plate=this.truckForm.value.plate!;
     this.truck.name=this.truckForm.value.name!;
     this.truck.autonomy=this.truckForm.value.autonomy!;
@@ -43,6 +43,7 @@ export class CreateTrucksComponent implements OnInit {
     this.truck.payLoad=this.truckForm.value.payLoad!;
     this.truck.tare=this.truckForm.value.tare!;
     this.truck.baterryChargingTime=this.truckForm.value.baterryChargingTime!;
+    this.truck.active="true";
 
 
     this.service.addTruck(this.truck).subscribe(res => {

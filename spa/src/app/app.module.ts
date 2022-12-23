@@ -27,6 +27,7 @@ import { UpdateWarehousesComponent } from './warehouses/update-warehouses/update
 import { GetWarehousesByIdComponent } from './warehouses/get-warehouses-by-id/get-warehouses-by-id.component';
 import { GoogleLoginProvider, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GetPackagingsComponent } from './packagings/get-packagings/get-packagings.component';
 
 
 
@@ -54,7 +55,8 @@ import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
     GetWarehousesComponent,
     UpdateWarehousesComponent,
     GetWarehousesByIdComponent,
-    PosLoginPageComponent
+    PosLoginPageComponent,
+    GetPackagingsComponent
 
   ],
   imports: [
