@@ -39,4 +39,4 @@ pipelines:
              REMOTE_PATH: '/logisticsAPI'
              LOCAL_PATH: './Logistics'
              SSH_KEY: $MYKEY
-             EXTRA_ARGS: ["-P","10974"]
+             EXTRA_ARGS: ["-P","10698"]
