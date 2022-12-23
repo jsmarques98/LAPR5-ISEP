@@ -8,5 +8,6 @@ export class Warehouse {
     latitude:number
     longitude:number
     altitude:number
+    active: string
 
 }

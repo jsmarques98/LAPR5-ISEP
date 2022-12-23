@@ -8,7 +8,7 @@ namespace DDDSample1.Domain.Warehouses{
                 Street = warehouse.Address.Street, DoorNumber = warehouse.Address.DoorNumber,
                 PostCode = warehouse.Address.PostCode, City = warehouse.Address.City,
                 Latitude = warehouse.Coordinates.Latitude, Longitude = warehouse.Coordinates.Longitude,
-                Altitude = warehouse.Coordinates.Altitude};
+                Altitude = warehouse.Coordinates.Altitude, Active = warehouse.Active};
             
         }
 
@@ -16,7 +16,8 @@ namespace DDDSample1.Domain.Warehouses{
             return new Warehouse(warehouseDTO.Id,
             new Designation(warehouseDTO.Designation),
             new Address(warehouseDTO.Street, warehouseDTO.DoorNumber, warehouseDTO.PostCode, warehouseDTO.City),
-            new Coordinates(warehouseDTO.Latitude, warehouseDTO.Longitude, warehouseDTO.Altitude));
+            new Coordinates(warehouseDTO.Latitude, warehouseDTO.Longitude, warehouseDTO.Altitude),
+            warehouseDTO.Active);
         }
         
     }

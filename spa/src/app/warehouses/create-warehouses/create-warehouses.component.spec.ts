@@ -56,7 +56,8 @@ describe('WarehouseService', () => {
           city:"Porto",
           latitude: 60.0,
           longitude:60.0,
-          altitude: 60.0
+          altitude: 60.0,
+          active: 'true'
         };
     
         service.addWarehouse(Warehouse1).subscribe((data) => {

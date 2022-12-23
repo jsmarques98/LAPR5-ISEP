@@ -28,7 +28,10 @@
     <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Latitude: {{selectedWarehouse.latitude}}</div> 
     <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Longitude: {{selectedWarehouse.longitude}}</div> 
     <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Altitude: {{selectedWarehouse.altitude}}</div>
+    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Active: {{selectedWarehouse.active}}</div>
     <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteWarehouse(selectedWarehouse.id)">Delete Warehouse</button>  
+    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Inactivate" (click)="inactivateWarehouse(selectedWarehouse.id)">Inactivate Warehouse</button>  
+
   </div>  
 </section>
 

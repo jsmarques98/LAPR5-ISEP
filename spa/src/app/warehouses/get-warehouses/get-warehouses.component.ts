@@ -51,6 +51,20 @@ export class GetWarehousesComponent implements OnInit {
     });
   }
 
+  inactivateWarehouse(warehouseId : string){
+    console.log(warehouseId);
+    this.service.inactivateWarehouse(warehouseId).subscribe(res => {
+      if (res != null) {
+        this.mostrarNotificacao('Armazém inibido com sucesso!',false)
+        this.selectedWarehouse=undefined;
+        this.getWarehouses();
+       
+      }else{
+        this.mostrarNotificacao('Erro ao inibir o Armazém!',true)
+      };
+    });
+  }
+
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
     this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});

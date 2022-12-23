@@ -16,7 +16,7 @@ namespace DDDSample1.Domain.Warehouses
             this.Active = true;
         }
 
-        public Warehouse(String warehouseId, Designation designation, Address address, Coordinates coordinates)
+        public Warehouse(String warehouseId, Designation designation, Address address, Coordinates coordinates, bool Active)
         {
             this.Id = new WarehouseId(warehouseId);
             this.Designation = designation;

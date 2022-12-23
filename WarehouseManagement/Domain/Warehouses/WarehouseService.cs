@@ -27,7 +27,7 @@ namespace DDDSample1.Domain.Warehouses
         public async Task<WarehouseDto> GetByIdAsync(WarehouseId id)
         {
             var warehouse = await this._repo.GetByIdAsync(id);
-            
+
             if(warehouse == null)
                 return null;
 

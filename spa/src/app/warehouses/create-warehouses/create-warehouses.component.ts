@@ -21,7 +21,8 @@ export class CreateWarehousesComponent implements OnInit {
     warehouseCity: [],
     warehouseLatitude: [],
     warehouseLongitude: [],
-    warehouseAltitude: []
+    warehouseAltitude: [],
+    warehouseActive: [],    
   });
 
   warehouse = new Warehouse();
@@ -42,6 +43,8 @@ export class CreateWarehousesComponent implements OnInit {
     this.warehouse.latitude=this.warehouseForm.value.warehouseLatitude!;
     this.warehouse.longitude=this.warehouseForm.value.warehouseLongitude!;
     this.warehouse.altitude=this.warehouseForm.value.warehouseAltitude!;
+    this.warehouse.active=this.warehouseForm.value.warehouseActive!;
+
 
     
     this.service.addWarehouse(this.warehouse).subscribe(res => {
