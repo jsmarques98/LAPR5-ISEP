@@ -3,11 +3,11 @@ import { Section } from './section';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn:'root'})
 export class SectionService {
  
-  logistcsURL: string = "http://localhost:3000/api/";
  
   constructor(private http: HttpClient,private notification:MatSnackBar) {
   }
@@ -15,10 +15,12 @@ export class SectionService {
 
  
   addSection(section:Section): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'authorization' : 'Token ' + token}  
+
     const body=JSON.stringify(section);
     console.log(body)
-    return this.http.post(this.logistcsURL + 'sections', body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.post(environment.logisticsAPI+ environment.logisticsAPIPSections, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }
@@ -35,7 +37,7 @@ export class SectionService {
 
   getSections(): Observable<any> {
       
-    return this.http.get<Section[]>(this.logistcsURL + 'sections/').pipe(catchError(err => {
+    return this.http.get<Section[]>(environment.logisticsAPI+ environment.logisticsAPIPSections).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Secções obtidas com sucesso!',false);
       }
@@ -51,7 +53,7 @@ export class SectionService {
     let deleteOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
            body : {'id' : sectionId}     }
   
-    return this.http.delete<any>(this.logistcsURL + 'sections',deleteOptions).pipe(catchError(err => {
+    return this.http.delete<any>(environment.logisticsAPI+ environment.logisticsAPIPSections,deleteOptions).pipe(catchError(err => {
       return throwError(err);
     }));
   }

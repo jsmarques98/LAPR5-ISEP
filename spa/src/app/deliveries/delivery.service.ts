@@ -3,11 +3,12 @@ import { Delivery } from './delivery';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn:'root'})
 export class DeliveryService {
  
-  deliveriesWarehouseManagementURL: string = "https://localhost:5001/api/";
+  
  
   constructor(private http: HttpClient,private notification:MatSnackBar) {
   }
@@ -18,7 +19,7 @@ export class DeliveryService {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(delivery);
     console.log(body)
-    return this.http.post(this.deliveriesWarehouseManagementURL + 'deliveries', body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.post(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }
@@ -34,7 +35,7 @@ export class DeliveryService {
 
   getDeliveries(): Observable<any> {
       
-    return this.http.get<Delivery[]>(this.deliveriesWarehouseManagementURL + 'deliveries/').pipe(catchError(err => {
+    return this.http.get<Delivery[]>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
       }
@@ -47,7 +48,7 @@ export class DeliveryService {
 
   getDelivery(id : string): Observable<any> {
     
-    return this.http.get<Delivery>(this.deliveriesWarehouseManagementURL + 'deliveries/'+id).pipe(catchError(err => {
+    return this.http.get<Delivery>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries+id).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
       }
@@ -60,8 +61,7 @@ export class DeliveryService {
 
   deleteDeliverie(deliveryId: string): Observable<any> {
   
-    return this.http.delete<any>(this.deliveriesWarehouseManagementURL+
-       'deliveries/' + deliveryId).pipe(catchError(err => {
+    return this.http.delete<any>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries+ deliveryId).pipe(catchError(err => {
      
       if (err.status == 200) {
         this.mostrarNotificacao('Delivey removido com sucesso! Id Delivey=${deliveryId}',false);

@@ -3,11 +3,11 @@ import { Warehouse } from './warehouses';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn:'root'})
 export class WarehouseService {
  
-  warehousesWarehouseManagementURL: string = "https://localhost:5001/api/";
  
   constructor(private http: HttpClient,private notification:MatSnackBar) {
   }
@@ -18,7 +18,7 @@ export class WarehouseService {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(warehouse);
     console.log(body)
-    return this.http.post(this.warehousesWarehouseManagementURL + 'Warehouses', body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.post(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }
@@ -34,7 +34,7 @@ export class WarehouseService {
 
   getWarehouses(): Observable<any> {
       
-    return this.http.get<Warehouse[]>(this.warehousesWarehouseManagementURL + 'Warehouses/').pipe(catchError(err => {
+    return this.http.get<Warehouse[]>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Armazéns obtidos com sucesso!',false);
       }
@@ -47,7 +47,7 @@ export class WarehouseService {
 
   getWarehouseById(warehouseId: String): Observable<Warehouse>{
 
-    return this.http.get<Warehouse>(this.warehousesWarehouseManagementURL + "Warehouses/" + warehouseId).pipe(catchError(err => {
+    return this.http.get<Warehouse>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses + warehouseId).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Armazém obtido com sucesso!',false);
       }
@@ -62,7 +62,7 @@ export class WarehouseService {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(warehouse);
     const warehouseId = warehouse.id;
-    return this.http.put(this.warehousesWarehouseManagementURL + "Warehouses/" + warehouseId, body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.put(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses + warehouseId, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Armazém alterado com sucesso!',false);
       }
@@ -76,7 +76,7 @@ export class WarehouseService {
 
   deleteWarehouse(warehouseId: string): Observable<Warehouse> {
 
-    return this.http.delete<Warehouse>(this.warehousesWarehouseManagementURL + "Warehouses/"+ warehouseId,).pipe(catchError(err => {
+    return this.http.delete<Warehouse>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses+ warehouseId,).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Armazém removido com sucesso! Id armazém=${warehouseId}',false);
       }

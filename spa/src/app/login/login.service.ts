@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({providedIn:'root'})
@@ -16,12 +17,12 @@ export class LoginService {
 
 
    login(email:string){
-    return this.http.post('http://localhost:3000/api/auth/ssosignin',{email:email});
+    return this.http.post(environment.logisticsAPI+environment.logisticsAPILogin,{email:email});
   }
 
   logout() {
     localStorage.removeItem("id_token");
-    return this.http.post("http://localhost:3000/api/auth/logout",{});
+    return this.http.post(environment.logisticsAPI+environment.logisticsAPILogout,{});
   }
 
 

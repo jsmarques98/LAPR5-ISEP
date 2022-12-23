@@ -3,7 +3,31 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  logisticsAPI:"http://localhost:3000/api/",
+
+  logisticsAPILogin:"auth/ssosignin",
+  logisticsAPILogout:"auth/logout",
+
+  logisticsAPIPackagings:"packagings/",
+
+  logisticsAPIPlanningBestRoute:"plannings/bestRoute",
+  logisticsAPIPlanningHeuristicMass:"plannings/routeHeuristicMass",
+  logisticsAPIPlanningHeuristicTime:"plannings/routeHeuristicTime",
+  logisticsAPIPlanningHeuristicTimeAndMass:"plannings/routeHeuristicTimeAndMass",
+
+  logisticsAPIPSections:"sections/",
+
+  logisticsAPIPTrucks:"trucks/",
+
+
+  warehouseManagementAPI: "https://localhost:5001/api/",
+
+  warehouseManagementAPIDeliveries: "deliveries/",
+  
+  warehouseManagementAPIWarehouses: "warehouses/",
+
 };
 
 /*

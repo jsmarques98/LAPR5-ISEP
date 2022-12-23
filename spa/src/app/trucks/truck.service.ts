@@ -3,11 +3,11 @@ import { Truck } from './truck';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn:'root'})
 export class TruckService {
  
-  logisticURL: string = "http://localhost:3000/api/";
  
   constructor(private http: HttpClient,private notification:MatSnackBar) {
   }
@@ -18,7 +18,7 @@ export class TruckService {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(truck);
   
-    return this.http.post(this.logisticURL + 'trucks', body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.post(environment.logisticsAPI+environment.logisticsAPIPTrucks, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }
@@ -33,7 +33,7 @@ export class TruckService {
   }
 
   getTrucks(): Observable<any> {
-    return this.http.get<Truck[]>(this.logisticURL + 'trucks/').pipe(catchError(err => {
+    return this.http.get<Truck[]>(environment.logisticsAPI+environment.logisticsAPIPTrucks).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Camiões obtidos com sucesso!',false);
       }
@@ -49,7 +49,7 @@ export class TruckService {
     let deleteOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
            body : {'Plate' : plate}     }
   
-    return this.http.delete<any>(this.logisticURL + 'trucks',deleteOptions).pipe(catchError(err => {
+    return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIPTrucks,deleteOptions).pipe(catchError(err => {
       return throwError(err);
     }));
   }

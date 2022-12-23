@@ -3,11 +3,11 @@ import { Packaging } from './packaging';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn:'root'})
 export class PackagingService {
  
-  logisticsURL: string = "http://localhost:3000/api/";
  
   constructor(private http: HttpClient,private notification:MatSnackBar) {
   }
@@ -17,7 +17,7 @@ export class PackagingService {
   addPackaging(packaging:Packaging): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(packaging);
-    return this.http.post(this.logisticsURL + 'packagings', body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.post(environment.logisticsAPI + environment.logisticsAPIPackagings, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
       }
@@ -31,7 +31,7 @@ export class PackagingService {
   updatePackaging(packaging:Packaging): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(packaging);
-    return this.http.put(this.logisticsURL + 'packagings', body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.put(environment.logisticsAPI + environment.logisticsAPIPackagings, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Empacotamento alterado com sucesso!',false);
       }

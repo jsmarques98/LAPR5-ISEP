@@ -5,11 +5,11 @@ import { catchError, Observable, throwError } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import { Warehouse } from '../warehouses/warehouses';
 import { Truck } from '../trucks/truck';
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn:'root'})
 export class PlanningService {
  
-  logisticsURL: string = "http://localhost:3000/api/";
  
   constructor(private http: HttpClient,private notification:MatSnackBar) {
   }
@@ -20,7 +20,7 @@ export class PlanningService {
       
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/bestRoute',{ params: params }).pipe(catchError(err => {
+    return this.http.get<Warehouse[]>(environment.logisticsAPI + environment.logisticsAPIPlanningBestRoute ,{ params: params }).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Melhor caminho encontrado com sucesso!',false);
       }
@@ -35,7 +35,7 @@ export class PlanningService {
   checkRouteHeuristicMass(planning:Planning): Observable<any> {
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/routeHeuristicMass',{ params: params }).pipe(catchError(err => {
+    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicMass,{ params: params }).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística da massa!',false);
       }
@@ -50,7 +50,7 @@ export class PlanningService {
       
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/routeHeuristicTime',{ params: params }).pipe(catchError(err => {
+    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTime,{ params: params }).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística do tempo!',false);
       }
@@ -65,7 +65,7 @@ export class PlanningService {
       
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(this.logisticsURL + 'plannings/routeHeuristicTimeAndMass',{ params: params }).pipe(catchError(err => {
+    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTimeAndMass,{ params: params }).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística da massa e tempo em conjunto!',false);
       }
