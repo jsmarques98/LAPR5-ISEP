@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { WarehouseService } from 'src/app/warehouses/warehouse.service';
 import { Section } from '../section';
+import { Warehouse } from 'src/app/warehouses/warehouses';
 import { SectionService } from '../section.service';
 
 @Component({
@@ -13,25 +15,53 @@ import { SectionService } from '../section.service';
 export class CreateSectionsComponent implements OnInit {
 
   sectionForm = this.fb.group({
-    id:[''],
+
     warehouseOrigin:[''],
     warehouseDestiny:[''],
     duration:[],
     distance:[],
     energySpent:[],
-    extraTime:[]
+    extraTime:[],
   });
 
+  
+  warehouses;
   section = new Section();
 
-  constructor(private fb: FormBuilder,private router: Router, private service : SectionService,private notification:MatSnackBar) { }
+  constructor(private fb: FormBuilder,private router: Router, private service : SectionService,private servieWarehouse: WarehouseService,private notification:MatSnackBar) {
+    this.getAllWarehouses()
+   }
 
   ngOnInit(): void {
   }
 
-  createSection(){
+  
+  public allCustomers: string[] = new Array();
+
+  updateWarehouseOrigin(e) {
+    this.sectionForm.value.warehouseOrigin=e.target.value
+  }
+ 
+  updateWarehouseDestiny(e) {
+    this.sectionForm.value.warehouseDestiny=e.target.value
+  }
+
+  getAllWarehouses(){
     
-    this.section.id=this.sectionForm.value.id!;
+    this.servieWarehouse.getWarehouses().subscribe(res => {
+      if (res != null) {
+        this.mostrarNotificacao('Armazéns obtidos com sucesso!',false)
+        this.warehouses = res;
+      }else{
+        this.mostrarNotificacao('Erro ao obter os armazéns!',true)
+      };
+
+  });
+  
+}
+
+
+  createSection(){
     this.section.warehouseOrigin=this.sectionForm.value.warehouseOrigin!;
     this.section.warehouseDestiny=this.sectionForm.value.warehouseDestiny!;
     this.section.duration=this.sectionForm.value.duration!;
@@ -39,8 +69,6 @@ export class CreateSectionsComponent implements OnInit {
     this.section.energySpent=this.sectionForm.value.energySpent!;
     this.section.extraTime=this.sectionForm.value.extraTime!;
    
-
-
     this.service.addSection(this.section).subscribe(res => {
       if (res != null) {
         this.mostrarNotificacao('Post Efetuado com sucesso!',false)

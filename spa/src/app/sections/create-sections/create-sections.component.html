@@ -4,18 +4,23 @@
     <form [formGroup] = "sectionForm">
         <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Section Information:</h1>
         
-        <div>
-            <input type="text" class="form-control" id="sectionId" placeholder="Id" formControlName="id">
-        </div>
-        <br> 
-        <div>
-            <input type="text" class="form-control mb-3" placeholder="WarehouseOrigin Id" id="warehouseOrigin" formControlName="warehouseOrigin">
-        </div>
-        
+        <select #cricket (change)="updateWarehouseOrigin($event)">
+            <option value="default">warehouseOrigin</option>
+            <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+                {{warehouse.designation}}
+            </option>
+        </select>
+         
         <br>
-        <div>
-            <input type="text" class="form-control" id="warehouseDestiny" placeholder="warehouseDestiny Id" formControlName="warehouseDestiny">
-        </div>
+        <br>
+        <select #cricket (change)="updateWarehouseDestiny($event)">
+            <option value="default">warehouseDestiny</option>
+            <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+                {{warehouse.designation}}
+            </option>
+        </select>
+        <br>
+   
         
         <br> 
         <div>

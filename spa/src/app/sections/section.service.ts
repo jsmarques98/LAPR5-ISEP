@@ -38,11 +38,16 @@ export class SectionService {
   getSections(): Observable<any> {
       
     return this.http.get<Section[]>(environment.logisticsAPI+ environment.logisticsAPIPSections).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('Secções obtidas com sucesso!',false);
+      if (err.status == 201) {
+        this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao obter Secções!',true);
+      if (err.status == 402) {
+        this.mostrarNotificacao('POST EFETUADO SEM SUCESSO!',true);
+        this.mostrarNotificacao(err.error,true);
+      }
+      if (err.status == 500) {
+        this.mostrarNotificacao('POST INVÁLIDO:',true);
+        this.mostrarNotificacao(err.error,true);
       }
       return throwError(err);
     }));

@@ -16,7 +16,7 @@ export class CreatePackagingsComponent implements OnInit {
   packagingForm = this.fb.group({
     id: [''],
     packagingDeliveryId: [''],
-    packagingTruckId: [''],
+    packagingTruckPlate: [''],
     packagingPositionX: [''],
     packagingPositionY: [''],
     packagingPositionZ:['']
@@ -35,7 +35,7 @@ export class CreatePackagingsComponent implements OnInit {
     this.packaging.positionX=this.packagingForm.value.packagingPositionX!;
     this.packaging.positionY=this.packagingForm.value.packagingPositionY!;
     this.packaging.positionZ=this.packagingForm.value.packagingPositionZ!;
-    this.packaging.truckId=this.packagingForm.value.packagingTruckId!;
+    this.packaging.truckPlate=this.packagingForm.value.packagingTruckPlate!;
     this.packaging.deliveryId=this.packagingForm.value.packagingDeliveryId!;
 
 
