@@ -66,7 +66,7 @@ pipelines:
               EXTRA_ARGS: ["-P","10698"]
     - step:
         name: SPA Deployment to execute on Virtual Machine
-        deployment: Production
+        deployment: Staging
         script: 
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
