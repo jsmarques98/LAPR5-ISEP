@@ -81,6 +81,14 @@ export class PackagingService {
     return of(packaging)
   }
 
+  async filterByDate(packaging: any): Promise<Observable<any>> {
+
+    const filteredItems = packaging.filter(item => item.deliveryDate === '05/12/2022');
+  
+    return of(filteredItems)
+  }
+
+
   
  async  getinfoDeliveriesForPackagings(packagings: Observable<Packaging> ): Promise<Observable<any>>  {
 

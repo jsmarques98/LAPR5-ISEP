@@ -53,6 +53,26 @@ export class GetPackagingsComponent implements OnInit {
    
   }
 
+  async filterByDate(){ 
+    if( this.packagings==undefined){
+     await this.getPackagings()
+    }
+   
+    (await this.service.filterByDate(this.packagings)).subscribe(res => {
+       if (res != null) {
+         
+         this.mostrarNotificacao('Entregas filtradas com sucesso!',false)
+         this.packagings = res;
+         console.log("final")
+         console.log(res)
+       }else{
+         this.mostrarNotificacao('Entregas filtradas sem sucesso!',true)
+       };
+     });
+    
+   }
+  
+
   onSelect(packaging: Packaging): void {
     this.selectedPackaging = packaging;
   }
