@@ -11,29 +11,46 @@ import { PackagingService } from '../packaging.service';
 })
 export class GetPackagingsComponent implements OnInit {
 
-  packagings = null;
+  packagings ;
   selectedPackaging?: Packaging;
+  flag:boolean;
 
   constructor(private router: Router, private service : PackagingService,private notification:MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
-  async getPackagings(){ 
-
+  async getPackagings() { 
+    
    (await this.service.getPackagings()).subscribe(res => {
       if (res != null) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false)
-
-        
-        
         this.packagings = res;
-
-
+        
       }else{
         this.mostrarNotificacao('Erro ao obter as entregas!',true)
       };
     });
+    this.flag=true
+  }
+
+  async orderByDate(){ 
+   if( this.packagings==undefined){
+    await this.getPackagings()
+   }
+  
+   (await this.service.orderByDate(this.packagings)).subscribe(res => {
+      if (res != null) {
+        
+        this.mostrarNotificacao('Entregas ordenadas com sucesso!',false)
+        this.packagings = res;
+        console.log("final")
+        console.log(res)
+      }else{
+        this.mostrarNotificacao('Entregas ordenadas sem sucesso!',true)
+      };
+    });
+   
   }
 
   onSelect(packaging: Packaging): void {

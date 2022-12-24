@@ -57,17 +57,31 @@ export class TruckService {
   }
 
   inactiveTruck(plate : string): Observable<any> {
-    
-    let  inactiveOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-           body : {'Plate' : plate}     }
-  
-    return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIPTrucks+"/:soft", inactiveOptions).pipe(catchError(err => {
-      if (err.status == 500) {
-        this.mostrarNotificacao('NÃO EXISTE UM CAMIÃO ASSOCIADO A ESSE CAMIÃO!',true);
+    try{
+        let  inactiveOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+              body : {'Plate' : plate}     }
+          
+        return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIPTrucks+"/:soft", inactiveOptions).pipe(catchError(err => {
+       
+          if (err.status == 200) {
+            this.mostrarNotificacao(err.error,false);
+          }
+          if (err.status == 400) {
+          
+            this.mostrarNotificacao(err.error,true);
+          }
+          if (err.status == 500) {
+        
+            this.mostrarNotificacao(err.error,true);
+          }
+          return throwError(err);
+        }));
+      }catch(err){
+        return throwError(err);
       }
-      return throwError(err);
-    }));
+
   }
+  
 
 
  

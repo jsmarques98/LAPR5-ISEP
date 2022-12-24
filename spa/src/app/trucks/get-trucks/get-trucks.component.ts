@@ -46,14 +46,14 @@ export class GetTrucksComponent implements OnInit {
   }
 
   inactiveTruck(plate:string){
+    try{
     this.service.inactiveTruck(plate).subscribe(async res =>{
       this.mostrarNotificacao(res,true)
       this.getTrucks();
-      
-
-
-
     })
+    } catch{
+      
+    }
   }
 
 

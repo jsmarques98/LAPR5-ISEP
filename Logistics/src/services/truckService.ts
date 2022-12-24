@@ -143,7 +143,7 @@ export default class TruckService implements ITruckService {
       }
       else {
         if(truck.active===false){
-          return Result.ok<String>( "camiao inibido sem sucesso  ");
+          return Result.fail<String>( "camiao inibido sem sucesso  ");
         }else{
         truck.MarkAsInative()
         await this.truckRepo.save(truck)

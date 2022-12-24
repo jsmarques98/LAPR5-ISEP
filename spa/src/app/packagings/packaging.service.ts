@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Packaging } from './packaging';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { catchError, Observable, of, throwError, toArray } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import { environment } from 'src/environments/environment';
 import { DeliveryService } from '../deliveries/delivery.service';
 import { from } from 'rxjs';
+import { ary } from 'cypress/types/lodash';
 
 @Injectable({providedIn:'root'})
 export class PackagingService {
@@ -46,7 +47,7 @@ export class PackagingService {
     }));
   }
 
-  async getPackagings(): Promise<Observable<any>> {
+  async getPackagings():Promise<Observable<Packaging>> {
    
     let packagings
      packagings= await this.http.get<Packaging[]>(environment.logisticsAPI +environment.logisticsAPIPackagings).pipe(catchError(err => {
@@ -59,12 +60,29 @@ export class PackagingService {
       return throwError(err);
     }));
    
-    let packagingsAndDeliveries=await this.getinfoDeliveriesForPackagings(packagings)    
-
-    return packagingsAndDeliveries
+    return await this.getinfoDeliveriesForPackagings(packagings)  
   }
 
- async  getinfoDeliveriesForPackagings(packagings: Observable<Packaging> ):  Promise<Observable<any>>  {
+  async orderByDate(packaging: any): Promise<Observable<any>> {
+
+    packaging.sort((a, b) => {
+     
+      if (a.deliveryDate < b.deliveryDate) {
+        return -1;
+      }
+
+      if (a.deliveryDate > b.deliveryDate) {
+        return 1;
+      }
+    
+      return 0;
+    });
+  
+    return of(packaging)
+  }
+
+  
+ async  getinfoDeliveriesForPackagings(packagings: Observable<Packaging> ): Promise<Observable<any>>  {
 
     let deleviriesId =new Array
     let json
@@ -82,7 +100,7 @@ export class PackagingService {
           json[index].deliveryWarehouseId=res.deliveryWarehouseId
         }
       });
-    }
+     }
     return of(json)
   }
 

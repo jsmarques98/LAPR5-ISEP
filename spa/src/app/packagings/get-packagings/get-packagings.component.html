@@ -3,6 +3,8 @@
 <section style="margin-left:10%;padding:1px 16px;height:100%;">
     <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">packagings</h2>
     <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id ="find"(click)="getPackagings()">Find</button>
+    <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="orderByDate" (click)="orderByDate()">Order by Date</button>
+    <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="filterByDate" (click)="filterByDate()">Filter by Date</button>
   </section>
   
   <section style="margin-left:10%;padding:1px 16px;height:100%;">
@@ -17,7 +19,7 @@
       </div> 
     </ul>
     
-  
+
     <div *ngIf="selectedPackaging" style="margin-left: 15%;">
       <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Packaging {{selectedPackaging.id | uppercase}} Details</h2>
       <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">positionX: {{selectedPackaging.positionX}}</div>
@@ -27,6 +29,7 @@
       <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">deliveryId: {{selectedPackaging.deliveryId}}</div>  
       <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">DeliveryDate: {{selectedPackaging.deliveryDate}}</div> 
       <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">DeliveryWarehouseId: {{selectedPackaging.deliveryWarehouseId}}</div> 
+     
     </div>
   </section>
   

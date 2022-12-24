@@ -95,8 +95,11 @@ export default class TruckController implements ITruckController /* TODO: extend
 public async inativeTruck(req: Request, res: Response, next: NextFunction) {
   try {
     const truckOrError = await this.truckServiceInstance.inativeTruck(req.body.Plate);
-    const mensagem = truckOrError.getValue();
-    return res.json( mensagem ).status(200);
+
+    if (truckOrError.isFailure) {
+      return res.status(400).send(truckOrError.error);
+  }
+    return res.json( truckOrError.getValue() ).status(200);
   }
   catch (e) {
     return next(e);

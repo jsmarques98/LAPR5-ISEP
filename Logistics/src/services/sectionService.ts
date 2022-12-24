@@ -78,7 +78,7 @@ export default class SectionService implements ISectionService {
   public async createSection(sectionDTO: ISectionDTO): Promise<Result<ISectionDTO>> {
     try {
 
-     // await this.checkIfWarehousesExist(sectionDTO); 
+     await this.checkIfWarehousesExist(sectionDTO); 
       let sectionOrError;
 
       sectionOrError = await Section.create( sectionDTO);
