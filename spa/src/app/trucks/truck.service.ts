@@ -15,10 +15,11 @@ export class TruckService {
 
  
   addTruck(truck:Truck): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     const body=JSON.stringify(truck);
   
-    return this.http.post(environment.logisticsAPI+environment.logisticsAPIPTrucks, body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.post(environment.logisticsAPI+environment.logisticsAPIPTrucks, body,{headers}).pipe(catchError(err => {
       if (err.status == 201) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }
@@ -35,7 +36,9 @@ export class TruckService {
   }
 
   getTrucks(): Observable<any> {
-    return this.http.get<Truck[]>(environment.logisticsAPI+environment.logisticsAPIPTrucks).pipe(catchError(err => {
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
+    return this.http.get<Truck[]>(environment.logisticsAPI+environment.logisticsAPIPTrucks,{headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Camiões obtidos com sucesso!',false);
       }
@@ -47,8 +50,8 @@ export class TruckService {
   }
 
   deleteTruck(plate : string): Observable<any> {
-    console.log(plate);
-    let deleteOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    const token = localStorage.getItem('id_token')!;
+    let deleteOptions =  {headers: new HttpHeaders({'Authorization' : 'Token ' + token, 'Content-Type': 'application/json' }),
            body : {'Plate' : plate}     }
   
     return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIPTrucks,deleteOptions).pipe(catchError(err => {
@@ -58,7 +61,8 @@ export class TruckService {
 
   inactiveTruck(plate : string): Observable<any> {
     try{
-        let  inactiveOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      const token = localStorage.getItem('id_token')!;
+        let  inactiveOptions =  {headers: new HttpHeaders({ 'Authorization' : 'Token ' + token,'Content-Type': 'application/json' }),
               body : {'Plate' : plate}     }
           
         return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIPTrucks+"/:soft", inactiveOptions).pipe(catchError(err => {

@@ -11,13 +11,21 @@
       </div>
       
       <br> 
-      <div>
-        <input type="text" class="form-control mb-3" placeholder="DeliveryId" id="packagingDeliveryId" formControlName="packagingDeliveryId">
-      </div>
-      
+      <select #cricket (change)="updateDelivery($event)">
+        <option value="default">choose a delivery</option>
+        <option *ngFor="let delivery of deliveries" [value]="delivery.id">
+            {{delivery.id}}
+        </option>
+    </select>
+    <br>
       <br>
       <div>
-        <input type="text" class="form-control" id="packagingTruckPlate" placeholder="Packaging Truck truckPlate" formControlName="packagingTruckPlate">
+        <select #cricket (change)="updateTruck($event)">
+          <option value="default">choose a truck</option>
+          <option *ngFor="let truck of trucks" [value]="truck.plate">
+              {{truck.plate}}
+          </option>
+      </select>
       </div>
       
       <br> 

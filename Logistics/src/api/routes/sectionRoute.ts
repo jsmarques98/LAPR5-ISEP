@@ -13,16 +13,15 @@ export default (app: Router) => {
   app.use('/Sections', route);
   const ctrl = Container.get(config.controllers.section.name) as ISectionController;
 
-  route.post('',
+  route.post('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
-        warehouseOrigin: Joi.string().required(),
-        warehouseDestiny: Joi.string().required(),
-        duration: Joi.number().required(),
-        distance: Joi.number().required(),
-        energySpent: Joi.number().required(),
-        extraTime: Joi.number().required(),
-
+        warehouseOrigin: Joi.string(),
+        warehouseDestiny: Joi.string(),
+        duration: Joi.number(),
+        distance: Joi.number(),
+        energySpent: Joi.number(),
+        extraTime: Joi.number(),
       })
     }),
     (req, res, next) => ctrl.createSection(req, res, next) );
@@ -39,7 +38,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateSection(req, res, next) );
 
-    route.get('',
+    route.get('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
       }),
@@ -54,7 +53,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.getSection(req, res, next));
 
-    route.delete('',
+    route.delete('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         id:Joi.string().required()

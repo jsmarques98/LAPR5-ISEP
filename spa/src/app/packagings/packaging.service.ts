@@ -19,9 +19,11 @@ export class PackagingService {
 
  
   addPackaging(packaging:Packaging): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
     const body=JSON.stringify(packaging);
-    return this.http.post(environment.logisticsAPI + environment.logisticsAPIPackagings, body,{'headers':headers}).pipe(catchError(err => {
+    console.log(body)
+    return this.http.post(environment.logisticsAPI + environment.logisticsAPIPackagings, body,{headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
       }
@@ -33,9 +35,10 @@ export class PackagingService {
   }
 
   updatePackaging(packaging:Packaging): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
     const body=JSON.stringify(packaging);
-    return this.http.put(environment.logisticsAPI + environment.logisticsAPIPackagings, body,{'headers':headers}).pipe(catchError(err => {
+    return this.http.put(environment.logisticsAPI + environment.logisticsAPIPackagings, body,{headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Empacotamento alterado com sucesso!',false);
       }
@@ -48,9 +51,10 @@ export class PackagingService {
   }
 
   async getPackagings():Promise<Observable<Packaging>> {
-   
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
     let packagings
-     packagings= await this.http.get<Packaging[]>(environment.logisticsAPI +environment.logisticsAPIPackagings).pipe(catchError(err => {
+     packagings= await this.http.get<Packaging[]>(environment.logisticsAPI +environment.logisticsAPIPackagings,{headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
       }

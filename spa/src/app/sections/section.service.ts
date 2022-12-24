@@ -16,28 +16,34 @@ export class SectionService {
  
   addSection(section:Section): Observable<any> {
     const token = localStorage.getItem('id_token')!;
-    const headers = {'authorization' : 'Token ' + token}  
-
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
+  
     const body=JSON.stringify(section);
-    console.log(body)
-    return this.http.post(environment.logisticsAPI+ environment.logisticsAPIPSections, body,{'headers':headers}).pipe(catchError(err => {
-      if (err.status == 200) {
+
+   return this.http.post(environment.logisticsAPI+ environment.logisticsAPIPSections, body,{headers}).pipe(catchError(err => {
+      if (err.status == 201) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }
-      if (err.status == 400) {
+      if (err.status == 402) {
         this.mostrarNotificacao('POST EFETUADO SEM SUCESSO!',true);
+        this.mostrarNotificacao(err.error,true);
       }
       if (err.status == 500) {
-        this.mostrarNotificacao('POST INVÁLIDO:\n DEVE TER PELO MENOS 1 TAG EM COMUM COM ESSE UTILIZADOR!\n OU JÁ FEZ UM PEDIDO DE LIGAÇÃO!',true);
+        console.log(err.error)
+        this.mostrarNotificacao('POST INVÁLIDO:',true);
+        this.mostrarNotificacao(err.error,true);
       }
       return throwError(err);
     }));
+
+   
   }
 
 
   getSections(): Observable<any> {
-      
-    return this.http.get<Section[]>(environment.logisticsAPI+ environment.logisticsAPIPSections).pipe(catchError(err => {
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
+    return this.http.get<Section[]>(environment.logisticsAPI+ environment.logisticsAPIPSections,{headers}).pipe(catchError(err => {
       if (err.status == 201) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }
@@ -54,11 +60,12 @@ export class SectionService {
   }
 
   deleteSection(sectionId : string): Observable<any> {
+    const token = localStorage.getItem('id_token')!;
    
-    let deleteOptions =  {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    let deleteOptions =  {headers: new HttpHeaders({ 'Authorization' : 'Token ' + token,'Content-Type': 'application/json' }),
            body : {'id' : sectionId}     }
   
-    return this.http.delete<any>(environment.logisticsAPI+ environment.logisticsAPIPSections,deleteOptions).pipe(catchError(err => {
+    return this.http.delete<any>(environment.logisticsAPI+ environment.logisticsAPIPSections,deleteOptions,).pipe(catchError(err => {
       return throwError(err);
     }));
   }

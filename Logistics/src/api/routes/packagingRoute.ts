@@ -12,7 +12,7 @@ export default (app: Router) => {
   app.use('/packagings', route);
   const ctrl = Container.get(config.controllers.packaging.name) as IPackagingController;
 
-  route.post('',
+  route.post('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         id: Joi.string(),
@@ -39,7 +39,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updatePackaging(req, res, next) );
 
-    route.get('',
+    route.get('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
       }),

@@ -8,10 +8,15 @@
         </div>
         
         <br> 
-        <div>
-            <input type="text" class="form-control mb-3" placeholder="Warehouse Id" id="deliveryWarehouseId" formControlName="deliveryWarehouseId">
-        </div>
+       
+        <select #cricket (change)="updateWarehouse($event)">
+            <option value="default">choose a warehouse</option>
+            <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+                {{warehouse.designation}}
+            </option>
+        </select>
         
+        <br>
         <br>
         <div>
             <input type="date" class="form-control" id="deliveryDate" placeholder="Delivery Date" formControlName="deliveryDate">

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Inject, Service } from 'typedi';
 import config from "../../config";
 
+
 import ISectionController from "./IControllers/ISectionController";
 import ISectionService from '../services/IServices/ISectionService';
 import ISectionDTO from '../dto/ISectionDTO';
@@ -15,7 +16,6 @@ export default class SectionController implements ISectionController /* TODO: ex
   ) {}
 
   public async createSection(req: Request, res: Response, next: NextFunction) {
- 
     try {
       const sectionOrError = await this.sectionServiceInstance.createSection(req.body as ISectionDTO) as Result<ISectionDTO>;
       if (sectionOrError.isFailure) {

@@ -16,8 +16,7 @@ export class CreateSectionsComponent implements OnInit {
 
   sectionForm = this.fb.group({
 
-    warehouseOrigin:[''],
-    warehouseDestiny:[''],
+
     duration:[],
     distance:[],
     energySpent:[],
@@ -39,11 +38,11 @@ export class CreateSectionsComponent implements OnInit {
   public allCustomers: string[] = new Array();
 
   updateWarehouseOrigin(e) {
-    this.sectionForm.value.warehouseOrigin=e.target.value
+    this.section.warehouseOrigin=e.target.value
   }
  
   updateWarehouseDestiny(e) {
-    this.sectionForm.value.warehouseDestiny=e.target.value
+    this.section.warehouseDestiny=e.target.value
   }
 
   getAllWarehouses(){
@@ -62,8 +61,7 @@ export class CreateSectionsComponent implements OnInit {
 
 
   createSection(){
-    this.section.warehouseOrigin=this.sectionForm.value.warehouseOrigin!;
-    this.section.warehouseDestiny=this.sectionForm.value.warehouseDestiny!;
+  
     this.section.duration=this.sectionForm.value.duration!;
     this.section.distance=this.sectionForm.value.distance!;
     this.section.energySpent=this.sectionForm.value.energySpent!;

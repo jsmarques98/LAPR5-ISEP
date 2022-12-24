@@ -17,10 +17,11 @@ export class PlanningService {
 
  
   checkBestPossibleRoute(planning:Planning): Observable<any> {
-      
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(environment.logisticsAPI + environment.logisticsAPIPlanningBestRoute ,{ params: params }).pipe(catchError(err => {
+    return this.http.get<Warehouse[]>(environment.logisticsAPI + environment.logisticsAPIPlanningBestRoute ,{headers ,params: params }).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Melhor caminho encontrado com sucesso!',false);
       }
@@ -34,8 +35,9 @@ export class PlanningService {
 
   checkRouteHeuristicMass(planning:Planning): Observable<any> {
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
-    
-    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicMass,{ params: params }).pipe(catchError(err => {
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
+    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicMass,{headers , params: params }).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística da massa!',false);
       }
@@ -47,10 +49,11 @@ export class PlanningService {
   }
 
   checkRouteHeuristicTime(planning:Planning): Observable<any> {
-      
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTime,{ params: params }).pipe(catchError(err => {
+    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTime,{ headers ,params: params }).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística do tempo!',false);
       }
@@ -62,10 +65,11 @@ export class PlanningService {
   }
 
   checkRouteHeuristicTimeAndMass(planning:Planning): Observable<any> {
-      
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTimeAndMass,{ params: params }).pipe(catchError(err => {
+    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTimeAndMass,{headers , params: params }).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística da massa e tempo em conjunto!',false);
       }
