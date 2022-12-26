@@ -1,29 +1,17 @@
-# Deploy to Azure Kubernetes Service
-# Build and push image to Azure Container Registry; Deploy to Azure Kubernetes Service
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
 - master
 
-
-
 variables:
-
-  # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '0862fc01-3a17-4873-9732-f2108f14b9ee'
   imageRepository: 'warehousemanagement'
   containerRegistry: 'warehousemanagement.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildNumber)'
-
-
-  # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
-
 stages:
-- stage: Build
-  displayName: Build stage
+- stage: Build and Deploy
+  displayName: Build and Deploy stage
   jobs:
   - job: Build
     displayName: Build
@@ -42,16 +30,11 @@ stages:
 
     - upload: manifests
       artifact: manifests
-
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-
-  jobs:
-  - deployment: Deploy
+  - job: Deploy
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
+    dependsOn: Build
     environment: 'Joserocha229lei2223s53di50-2045.default'
     strategy:
       runOnce:
@@ -66,4 +49,3 @@ stages:
                 $(Pipeline.Workspace)/manifests/service.yml
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
-
