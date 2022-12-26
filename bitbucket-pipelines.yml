@@ -30,14 +30,14 @@ pipelines:
               - npm test
 
     - step:
-        name: SPA Deployment to execute on Virtual Machine
+        name: Logistics Deployment to execute on Virtual Machine
         deployment: Production
         script: 
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
               USER: 'root'
               SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
-              REMOTE_PATH: '/spa'
-              LOCAL_PATH: './spa'
+              REMOTE_PATH: '/logisticsAPI'
+              LOCAL_PATH: './Logistics'
               SSH_KEY: $MYKEY
-              EXTRA_ARGS: ["-P","10698"]
+              EXTRA_ARGS: ["-P","10982 "]
