@@ -44,7 +44,6 @@ pipelines:
 
     - step:
         name: WarehouseManagement Deployment to execute on Virtual Machine
-        deployment: Production
         script: 
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
