@@ -57,7 +57,7 @@ describe('WarehouseService', () => {
           //3
       const req = httpController.expectOne({
         method: 'GET',
-        url: `${url}api/Warehouses/`,
+        url: `${url}api/warehouses/`,
       });
 
           //4

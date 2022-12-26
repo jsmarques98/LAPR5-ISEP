@@ -62,7 +62,7 @@ describe('DeliveryService', () => {
     
         const req = httpController.expectOne({
           method: 'POST',
-          url: `${url}api/deliveries`,
+          url: `${url}api/deliveries/`,
         });
     
         req.flush(createdDelivery);

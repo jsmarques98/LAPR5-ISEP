@@ -63,7 +63,7 @@ describe('SectionService', () => {
     
         const req = httpController.expectOne({
           method: 'POST',
-          url: `${url}api/sections`,
+          url: `${url}api/sections/`,
         });
     
         req.flush(createdSection);

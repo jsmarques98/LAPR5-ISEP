@@ -50,11 +50,11 @@ export class PackagingService {
     }));
   }
 
-  async getPackagings():Promise<Observable<Packaging>> {
+  getPackagings():Observable<any> {
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
     let packagings
-     packagings= await this.http.get<Packaging[]>(environment.logisticsAPI +environment.logisticsAPIPackagings,{headers}).pipe(catchError(err => {
+     packagings=  this.http.get<Packaging[]>(environment.logisticsAPI +environment.logisticsAPIPackagings,{headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
       }
@@ -64,7 +64,7 @@ export class PackagingService {
       return throwError(err);
     }));
    
-    return await this.getinfoDeliveriesForPackagings(packagings)  
+    return packagings  
   }
 
   async orderByDate(packaging: any): Promise<Observable<any>> {
@@ -94,11 +94,11 @@ export class PackagingService {
 
 
   
- async  getinfoDeliveriesForPackagings(packagings: Observable<Packaging> ): Promise<Observable<any>>  {
+  getinfoDeliveriesForPackagings(packagings: Observable<Packaging> ): Observable<any>  {
 
     let deleviriesId =new Array
     let json
-    await  packagings.forEach(function(nome) {
+    packagings.forEach(function(nome) {
       json= JSON.parse(JSON.stringify(nome))
       for (let index = 0; index < json.length; index++) {
         deleviriesId[index] = json[index].deliveryId;
@@ -106,14 +106,14 @@ export class PackagingService {
     })
 
     for (let index = 0; index < deleviriesId.length; index++) {
-      (await this.deliveryService.getDelivery(deleviriesId[index])).subscribe(res => {
+      (this.deliveryService.getDelivery(deleviriesId[index])).subscribe(res => {
         if (res != null) {
           json[index].deliveryDate=res.deliveryDate
           json[index].deliveryWarehouseId=res.deliveryWarehouseId
         }
       });
      }
-    return of(json)
+    return json
   }
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {

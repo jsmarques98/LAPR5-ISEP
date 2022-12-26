@@ -55,7 +55,8 @@ describe('TruckService', () => {
             maxBattery: 100,
             payLoad: 1000,
             tare: 2000,
-            baterryChargingTime:60
+            baterryChargingTime:60,
+            active: 'true'
         };
     
         service.addTruck(Truck1).subscribe((data) => {
@@ -64,7 +65,7 @@ describe('TruckService', () => {
     
         const req = httpController.expectOne({
           method: 'POST',
-          url: `${url}api/trucks`,
+          url: `${url}api/trucks/`,
         });
     
         req.flush(createdTruck);

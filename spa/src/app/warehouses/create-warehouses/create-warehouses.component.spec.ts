@@ -66,7 +66,7 @@ describe('WarehouseService', () => {
     
         const req = httpController.expectOne({
           method: 'POST',
-          url: `${url}api/Warehouses`,
+          url: `${url}api/warehouses/`,
         });
     
         req.flush(createdWarehouse);

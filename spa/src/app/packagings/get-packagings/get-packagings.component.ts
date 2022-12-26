@@ -20,9 +20,9 @@ export class GetPackagingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async getPackagings() { 
+  getPackagings() { 
     
-   (await this.service.getPackagings()).subscribe(res => {
+   this.service.getPackagings().subscribe(res => {
       if (res != null) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false)
         this.packagings = res;

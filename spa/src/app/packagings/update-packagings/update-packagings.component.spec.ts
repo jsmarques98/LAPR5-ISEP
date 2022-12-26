@@ -48,12 +48,14 @@ describe('PackagingService', () => {
 
     it('should call updatePackaging and return the updated packaging from the API', () => {
         const updatedPackaging: Packaging = {
-          id: '50',
-          positionX:"12345", 
-          positionY: "123245", 
-          positionZ: "1234567", 
-          truckId: "1", 
-          deliveryId: "1"
+          deliveryDate: '05/12/2022',
+            deliveryWarehouseId: '1',
+            deliveryId: "1",
+            id: '50',
+            positionX:"12345", 
+            positionY: "123245", 
+            positionZ: "1234567", 
+            truckPlate: "1"
         };
     
         service.updatePackaging(Packaging1).subscribe((data) => {
@@ -62,7 +64,7 @@ describe('PackagingService', () => {
     
         const req = httpController.expectOne({
           method: 'PUT',
-          url: `${url}api/packagings`,
+          url: `${url}api/packagings/`,
         });
     
         req.flush(updatedPackaging);

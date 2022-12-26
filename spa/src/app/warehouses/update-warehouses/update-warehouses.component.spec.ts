@@ -66,7 +66,7 @@ describe('WarehouseService', () => {
     
         const req = httpController.expectOne({
           method: 'PUT',
-          url: `${url}api/Warehouses/${updatedWarehouse.id}`,
+          url: `${url}api/warehouses/${updatedWarehouse.id}`,
         });
     
         req.flush(updatedWarehouse);
