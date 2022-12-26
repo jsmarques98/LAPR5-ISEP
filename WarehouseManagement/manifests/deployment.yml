@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warehouse-management-deployment
+spec:
+  selector:
+    matchLabels:
+      app: warehouse-management-pod
+  template:
+    metadata:
+      labels:
+        app: warehouse-management-pod
+    spec:
+      containers:
+      - name: warehouse-management-containter
+        image: warehousemanagement.azurecr.io/warehousemanagement:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
