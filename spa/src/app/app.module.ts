@@ -28,6 +28,8 @@ import { GetWarehousesByIdComponent } from './warehouses/get-warehouses-by-id/ge
 import { GoogleLoginProvider, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GetPackagingsComponent } from './packagings/get-packagings/get-packagings.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -66,7 +68,9 @@ import { GetPackagingsComponent } from './packagings/get-packagings/get-packagin
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    SocialLoginModule
+    SocialLoginModule,
+    NgxPaginationModule,
+    MatPaginatorModule
   ],
   providers: [
     {

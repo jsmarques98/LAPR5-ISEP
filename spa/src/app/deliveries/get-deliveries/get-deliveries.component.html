@@ -7,11 +7,16 @@
 
 <section style="margin-left:10%;padding:1px 16px;height:100%;">
   <ul class="deliveries" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
-    <li *ngFor="let delivery of deliveries">
+    <li *ngFor="let delivery of deliveries| paginate: {currentPage: p,itemsPerPage: count}">
       <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
         <span class="name">{{delivery.id}}</span>
       </button>
     </li>
+    <!--Including the pagination control.-->
+    <div class="text-right" style="width: 500px;color:black;">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <!--<mat-paginator #paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>-->      
+    </div>
     <div style="margin-top: 20px;">
       <button routerLink="/home">Exit</button>
     </div> 

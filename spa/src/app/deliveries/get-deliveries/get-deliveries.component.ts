@@ -11,6 +11,9 @@ import { DeliveryService } from '../delivery.service';
 })
 export class GetDeliveriesComponent implements OnInit {
 
+  p: number = 1;
+  count: number = 10;
+
   deliveries = null;
   selectedDelivery?: Delivery;
 
