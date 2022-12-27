@@ -11,6 +11,9 @@ import { SectionService } from '../section.service';
 })
 export class GetSectionsComponent implements OnInit {
 
+  p: number = 1;
+  count: number = 12;
+
   sections = null;
 
   selectedSection?: Section;
