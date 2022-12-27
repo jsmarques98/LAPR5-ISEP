@@ -50,11 +50,11 @@ export class PackagingService {
     }));
   }
 
-  getPackagings():Observable<any> {
+  async getPackagings():Promise<Observable<any>> {
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
     let packagings
-     packagings=  this.http.get<Packaging[]>(environment.logisticsAPI +environment.logisticsAPIPackagings,{headers}).pipe(catchError(err => {
+     packagings=  await this.http.get<Packaging[]>(environment.logisticsAPI +environment.logisticsAPIPackagings,{headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
       }
@@ -63,19 +63,19 @@ export class PackagingService {
       }
       return throwError(err);
     }));
-   
-    return packagings  
+
+    return await this.getinfoDeliveriesForPackagings(packagings) 
   }
 
   async orderByDate(packaging: any): Promise<Observable<any>> {
 
     packaging.sort((a, b) => {
      
-      if (a.deliveryDate < b.deliveryDate) {
+      if (new Date(a.deliveryDate) < new Date(b.deliveryDate)) {
         return -1;
       }
 
-      if (a.deliveryDate > b.deliveryDate) {
+      if (new Date(a.deliveryDate) > new Date(b.deliveryDate)) {
         return 1;
       }
     
@@ -85,35 +85,55 @@ export class PackagingService {
     return of(packaging)
   }
 
-  async filterByDate(packaging: any): Promise<Observable<any>> {
+  async orderByWarehouseId(packaging: any): Promise<Observable<any>> {
 
-    const filteredItems = packaging.filter(item => item.deliveryDate === '05/12/2022');
+    packaging.sort((a, b) => {      
+      if (new Number(a.deliveryWarehouseId) < new Number(b.deliveryWarehouseId)) { 
+        return -1;
+      }
+
+      if (new Number(a.deliveryWarehouseId) > new Number(b.deliveryWarehouseId)) {
+        return 1;
+      }
+      return 0;
+    });
+    return of(packaging)
+  }
+
+  async filterByDate(packaging: any, deliveryDate: string): Promise<Observable<any>> {
+
+    const filteredItems = packaging.filter(item => item.deliveryDate === deliveryDate);
+  
+    return of(filteredItems)
+  }
+
+  async filterByWarehouseId(packaging: any, deliveryWarehouseId: string): Promise<Observable<any>> {
+
+    const filteredItems = packaging.filter(item => item.deliveryWarehouseId === deliveryWarehouseId);
   
     return of(filteredItems)
   }
 
 
   
-  getinfoDeliveriesForPackagings(packagings: Observable<Packaging> ): Observable<any>  {
-
+  async getinfoDeliveriesForPackagings(packagings: Observable<Packaging> ): Promise<Observable<any>>  {    
     let deleviriesId =new Array
     let json
-    packagings.forEach(function(nome) {
+    await packagings.forEach(function(nome) {
       json= JSON.parse(JSON.stringify(nome))
       for (let index = 0; index < json.length; index++) {
         deleviriesId[index] = json[index].deliveryId;
       }
-    })
-
+    })    
     for (let index = 0; index < deleviriesId.length; index++) {
-      (this.deliveryService.getDelivery(deleviriesId[index])).subscribe(res => {
+      (await this.deliveryService.getDelivery(deleviriesId[index])).subscribe(res => {
         if (res != null) {
           json[index].deliveryDate=res.deliveryDate
           json[index].deliveryWarehouseId=res.deliveryWarehouseId
         }
       });
      }
-    return json
+    return of(json)
   }
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {

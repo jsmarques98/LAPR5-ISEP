@@ -2,10 +2,21 @@
 
 <section style="margin-left:10%;padding:1px 16px;height:100%;">
     <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">packagings</h2>
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id ="find"(click)="getPackagings()">Find</button>
+    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id ="find"(click)="getPackagings();getUniqueArrayDate();getUniqueArrayWarehouse()">Find</button>
     <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="orderByDate" (click)="orderByDate()">Order by Date</button>
-    <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="filterByDate" (click)="filterByDate()">Filter by Date</button>
-  </section>
+    <select *ngIf="flag" #cricket (change)="filterByDate($event)">
+      <option value="default">Filter by Date</option>
+      <option *ngFor="let packaging of newArrayDate" [value]="packaging.deliveryDate">
+          {{packaging.deliveryDate}}
+      </option>
+  </select>
+    <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="orderByDate" (click)="orderByWarehouseId()">Order by WarehouseId</button>
+    <select *ngIf="flag" #cricket (change)="filterByWarehouseId($event)">
+      <option value="default">Filter by WarehouseId</option>
+      <option *ngFor="let packaging of newArrayWarehouse" [value]="packaging.deliveryWarehouseId">
+          {{packaging.deliveryWarehouseId}}
+      </option>
+  </select>  </section>
   
   <section style="margin-left:10%;padding:1px 16px;height:100%;">
     <ul class="packagings" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
