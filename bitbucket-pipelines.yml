@@ -52,4 +52,17 @@ pipelines:
               REMOTE_PATH: '/warehouseManagement'
               LOCAL_PATH: './WarehouseManagement'
               SSH_KEY: $MYKEY
-              EXTRA_ARGS: ["-P","10790"]          
+              EXTRA_ARGS: ["-P","10790"]     
+
+    - step:
+        name: SPA Deployment to execute on Virtual Machine
+        script: 
+          - pipe: atlassian/scp-deploy:1.2.1
+            variables:
+              USER: 'root'
+              SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+              REMOTE_PATH: '/spa'
+              LOCAL_PATH: './spa'
+              SSH_KEY: $MYKEY
+              EXTRA_ARGS: ["-P","10794"]          
+
