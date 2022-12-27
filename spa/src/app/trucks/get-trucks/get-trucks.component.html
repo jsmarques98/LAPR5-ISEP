@@ -10,6 +10,7 @@
       <div *ngFor="let truck of trucks">
         <button [class.selected]="truck === selectedTruck" type="button" id="selectedTruck" (click)="onSelect(truck)">
           <span class="name">{{truck.plate}}</span>
+
         </button>
       </div>
     <div style="margin-top: 20px;">

@@ -65,7 +65,7 @@ export class TruckService {
         let  inactiveOptions =  {headers: new HttpHeaders({ 'Authorization' : 'Token ' + token,'Content-Type': 'application/json' }),
               body : {'Plate' : plate}     }
           
-        return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIPTrucks+"/:soft", inactiveOptions).pipe(catchError(err => {
+        return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIInactiveTrucks, inactiveOptions).pipe(catchError(err => {
        
           if (err.status == 200) {
             this.mostrarNotificacao(err.error,false);

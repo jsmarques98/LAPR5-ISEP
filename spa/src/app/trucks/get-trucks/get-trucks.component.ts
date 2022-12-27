@@ -48,7 +48,8 @@ export class GetTrucksComponent implements OnInit {
   inactiveTruck(plate:string){
     try{
     this.service.inactiveTruck(plate).subscribe(async res =>{
-      this.mostrarNotificacao(res,true)
+      this.mostrarNotificacao(res,false)
+      this.selectedTruck=undefined;
       this.getTrucks();
     })
     } catch{
@@ -58,6 +59,7 @@ export class GetTrucksComponent implements OnInit {
 
 
   onSelect(truck: Truck): void {
+    
     this.selectedTruck = truck;
   }
 
