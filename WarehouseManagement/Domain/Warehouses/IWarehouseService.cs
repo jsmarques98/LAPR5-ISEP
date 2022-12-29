@@ -15,6 +15,8 @@ namespace DDDSample1.Domain.Warehouses
         Task<WarehouseDto> UpdateAsync(WarehouseDto dto);
 
         Task<WarehouseDto> InactivateAsync(WarehouseId id);
+
+        Task<WarehouseDto> ActivateAsync(WarehouseId id);
         
         Task<WarehouseDto> DeleteAsync(WarehouseId id);
 

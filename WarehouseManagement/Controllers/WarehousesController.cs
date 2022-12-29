@@ -89,6 +89,20 @@ namespace DDDSample1.Controllers
             return Ok(war);
         }
 
+        // Activate: api/Warehouses/5
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<WarehouseDto>> Activate(String id)
+        {
+            var war = await _service.ActivateAsync(new WarehouseId(id));
+
+            if (war == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(war);
+        }
+
         // DELETE: api/Warehouses/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<WarehouseDto>> Delete(String id)

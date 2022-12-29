@@ -77,6 +77,20 @@ namespace DDDSample1.Domain.Warehouses
             return WarehouseMapper.toDTO(warehouse);
         }
 
+        public async Task<WarehouseDto> ActivateAsync(WarehouseId id)
+        {
+            var warehouse = await this._repo.GetByIdAsync(id); 
+
+            if (warehouse == null)
+                return null;   
+
+            warehouse.MarkAsActive();
+            
+            await this._unitOfWork.CommitAsync();
+
+            return WarehouseMapper.toDTO(warehouse);
+        }
+
         public async Task<WarehouseDto> DeleteAsync(WarehouseId id)
         {
             var warehouse = await this._repo.GetByIdAsync(id);
