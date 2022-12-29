@@ -85,5 +85,15 @@ export default (app: Router) => {
     }),
 
     (req, res, next) => ctrl.inativeTruck(req, res, next));
+
+    route.patch('/:plate',middlewares.isAuth,
+    celebrate({
+      body: Joi.object({
+        active: Joi.string().required(),
+      })
+    }),
+
+    (req, res, next) => ctrl.activateTruck(req, res, next));
 };
+
 

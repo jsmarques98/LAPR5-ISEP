@@ -156,8 +156,20 @@ export default class TruckService implements ITruckService {
 
   }
 
-  
-
-
-
+  async activateTruck(plate: string): Promise<Result<String>> {
+    try {
+       const truck =  await this.truckRepo.findByPlate(Plate.create(plate).getValue());
+      if (truck === null) {
+        return Result.fail<String>("Truck not Found");
+      }
+      else {
+        truck.MarkAsActive()
+        await this.truckRepo.save(truck)
+        return Result.ok<String>( "camião ativado com sucesso");
+        }
+      }
+     catch (e) {
+      throw e;
+    }
+  }
 }

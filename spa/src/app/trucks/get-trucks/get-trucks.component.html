@@ -28,7 +28,8 @@
     <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Baterry Charging Time: {{selectedTruck.baterryChargingTime}}</div>
     <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Active: {{selectedTruck.active}}</div>
     <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteTruck(selectedTruck.plate)">Delete Truck</button>  
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Inactive" (click)="inactiveTruck(selectedTruck.plate)">Inactive Truck</button>  
+    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Inactive" (click)="inactiveTruck(selectedTruck.plate)">Inactive Truck</button>
+    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Activate" (click)="activateTruck(selectedTruck.plate)">Activate Truck</button>    
   </div>
 </section>
   
