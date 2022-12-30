@@ -77,7 +77,7 @@ export default (app: Router) => {
 
 
 
-    route.delete('/:soft',
+    route.delete('/:soft',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         Plate:Joi.string().required()
@@ -86,10 +86,10 @@ export default (app: Router) => {
 
     (req, res, next) => ctrl.inativeTruck(req, res, next));
 
-    route.patch('/:plate',middlewares.isAuth,
+    route.patch('/:active',middlewares.isAuth,
     celebrate({
       body: Joi.object({
-        active: Joi.string().required(),
+        Plate: Joi.string(),
       })
     }),
 

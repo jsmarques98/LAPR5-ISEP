@@ -143,7 +143,7 @@ export default class TruckService implements ITruckService {
       }
       else {
         if(truck.active===false){
-          return Result.fail<String>( "camiao inibido sem sucesso  ");
+          return Result.fail<String>( "camiao ja esta inibido");
         }else{
         truck.MarkAsInative()
         await this.truckRepo.save(truck)
@@ -163,9 +163,13 @@ export default class TruckService implements ITruckService {
         return Result.fail<String>("Truck not Found");
       }
       else {
+        if(truck.active===true){
+          return Result.fail<String>( "camiao ja esta ativo");
+        }else{
         truck.MarkAsActive()
         await this.truckRepo.save(truck)
         return Result.ok<String>( "camião ativado com sucesso");
+        }
         }
       }
      catch (e) {
