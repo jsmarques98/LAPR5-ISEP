@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Observable, switchMap } from 'rxjs';
 import { Packaging } from '../packaging';
 import { PackagingService } from '../packaging.service';
 
@@ -12,50 +13,53 @@ import { PackagingService } from '../packaging.service';
 export class GetPackagingsComponent implements OnInit {
 
   packagings ;
+  packagings1 ;
   selectedPackaging?: Packaging;
   flag:boolean;
+  dateFlag:boolean;
+  idFlag:boolean;
   newArrayDate;
   newArrayWarehouse;
+  filterDate;
+  warehouse;
+  date;
+  filterWarehouse;
 
   constructor(private router: Router, private service : PackagingService,private notification:MatSnackBar) { }
 
   ngOnInit(): void {
+    this.getPackagins1()
   }
 
-  async getPackagings() { 
-   (await this.service.getPackagings()).subscribe(res => {
-      if (res != null) {
-        this.mostrarNotificacao('Entregas obtidas com sucesso!',false)
-        this.packagings = res;
-        
-      }else{
-        this.mostrarNotificacao('Erro ao obter as entregas!',true)
-      };
-    });    
-     
+   getPackagings() { 
+    this.packagings = this.packagings1
     this.flag=true
+    this.filterDate='default'
+    this.filterWarehouse='default'
+  }
+  
+  getPackagins1(){
+    ( this.service.getPackagings()).pipe(switchMap (res =>this.service.getinfoDeliveriesForPackagings(res))).subscribe(res1=>{this.packagings1=res1});
+  }
+  
+  async getUniqueArrayDate() {
+    await this.getPackagins1()
+    let a    
+    a = new Set(this.packagings1.map(packaging=>packaging.deliveryDate))
+    this.newArrayDate = Array.from(a);
+    return this.newArrayDate
+  }
 
+  async getUniqueArrayWarehouse() {
+    await this.getPackagins1()
+    let a    
+    a = new Set(this.packagings1.map(packaging=>packaging.deliveryWarehouseId))
+    this.newArrayWarehouse = Array.from(a);
+    return this.newArrayWarehouse
   }
-  
-  
-  
-  getUniqueArrayDate() {
-    const key = 'deliveryDate';  //use the key that contains the duplicate values.
-    this.newArrayDate = [...new Map(this.packagings.map(item =>
-      [item[key], item])).values()];
-      return this.newArrayDate ;   //This newArray will have unique values.
-  }
-
-  getUniqueArrayWarehouse() {
-    const key = 'deliveryWarehouseId';  //use the key that contains the duplicate values.
-    this.newArrayWarehouse = [...new Map(this.packagings.map(item =>
-      [item[key], item])).values()];
-      return this.newArrayWarehouse ;   //This newArray will have unique values.
-  }
-  
 
   async orderByDate(){ 
-   if( this.packagings==undefined){
+   if( this.packagings1==undefined){
     await this.getPackagings()
    }
   
@@ -64,8 +68,6 @@ export class GetPackagingsComponent implements OnInit {
         
         this.mostrarNotificacao('Entregas ordenadas com sucesso!',false)
         this.packagings = res;
-        console.log("final")
-        console.log(res)
       }else{
         this.mostrarNotificacao('Entregas ordenadas sem sucesso!',true)
       };
@@ -74,10 +76,9 @@ export class GetPackagingsComponent implements OnInit {
   }
 
   async orderByWarehouseId(){ 
-    if( this.packagings==undefined){
+    if( this.packagings1==undefined){
      await this.getPackagings()
-    }
-   
+    }  
     (await this.service.orderByWarehouseId(this.packagings)).subscribe(res => {
        if (res != null) {
          
@@ -89,41 +90,78 @@ export class GetPackagingsComponent implements OnInit {
     
    }
 
-  async filterByDate(e){ 
-    
-    this.selectedPackaging = undefined;
-    if( this.packagings==undefined){
-     await this.getPackagings()
-    }
-   
-    (await this.service.filterByDate(this.packagings,e.target.value)).subscribe(res => {
-       if (res != null) {
+  async filterByDate(date: string, list:Array<any>):Promise<Observable<any>>{  
+    let a
+        
+    (await this.service.filterByDate(list,date)).subscribe(res => {
+
+       if (res.length != 0) {
          
          this.mostrarNotificacao('Entregas filtradas com sucesso!',false)
-         this.packagings = res;
+         a = res;
        }else{
-         this.mostrarNotificacao('Entregas filtradas sem sucesso!',true)
+         this.mostrarNotificacao('Não existem entregas para estes filtros!',true)
        };
-     });
-    
+     }); 
+     return a
    }
 
-  async filterByWarehouseId(e){ 
-    this.selectedPackaging = undefined;
-  if( this.packagings==undefined){
-    await this.getPackagings()
-  }
+  async filterByWarehouseId(id: string, list:Array<any>):Promise<Observable<any>>{ 
+    let a
   
-  (await this.service.filterByWarehouseId(this.packagings,e.target.value)).subscribe(res => {
-      if (res != null) {
-        
+  (await this.service.filterByWarehouseId(list,id)).subscribe(res => {
+      if (res.length != 0) {
         this.mostrarNotificacao('Entregas filtradas com sucesso!',false)
-        this.packagings = res;
+        a=res
       }else{
-        this.mostrarNotificacao('Entregas filtradas sem sucesso!',true)
+        this.mostrarNotificacao('Não existem entregas para estes filtros!',true)
       };
     });
-  
+    
+    return a
+  }
+
+
+  async filterDateAndWarehouse(e){
+    this.selectedPackaging = undefined
+
+    const a = e.target.innerText
+    const b = a.split('\n')
+    let c
+    
+    if(b[0] === "Filter by WarehouseId"){
+      if(this.dateFlag){
+        c = await this.filterByDate(this.date,this.packagings1) 
+      }else{
+        c = this.packagings1
+      }
+      if (e.target.value === "default") {
+        this.idFlag = false
+        this.packagings = c
+      }else{
+        this.idFlag =true
+        this.warehouse = e.target.value
+            
+        this.packagings = await this.filterByWarehouseId(e.target.value,c) 
+      }   
+    }
+
+    if(b[0] === "Filter by Date"){
+      if(this.idFlag){
+        c = await this.filterByWarehouseId(this.warehouse,this.packagings1)
+      }else{
+        c = this.packagings1
+      }  
+        if (e.target.value === "default") {
+          this.dateFlag = false
+          this.packagings = c
+        }else{
+          this.dateFlag =true
+          this.date = e.target.value
+          this.packagings = await this.filterByDate(e.target.value,c)
+        }
+      }   
+
   }
   
 
