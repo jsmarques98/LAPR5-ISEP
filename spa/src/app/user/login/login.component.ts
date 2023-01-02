@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
         aux = res;
         if(aux.token != null && aux.userDTO != null){
           this.loginService.setSession(res);
+          localStorage.setItem("profileimage",user.photoUrl)
+
           switch ( aux.userDTO.role ) {
             case "Administrator":
               localStorage.setItem("admin","true");

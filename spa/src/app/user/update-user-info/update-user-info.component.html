@@ -1,0 +1,47 @@
+<section style="height:100%;">
+    <form [formGroup] = "userForm">
+        <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">User Information:</h1>
+        <div>
+            <input type="text" class="form-control" id="firstName" placeholder="First Name" formControlName="firstName">
+        </div>
+        
+
+        
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Last Name" id="lastName" formControlName="lastName">
+        </div>
+
+        
+        
+        <br> 
+ 
+
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="Phone Number" id="phoneNumber" formControlName="phoneNumber">
+        </div>
+        <br>
+
+
+        <div>
+            <input type="password" class="form-control mb-3" placeholder="Password" id="password" formControlName="password">
+        </div>
+
+        <br>
+        <div>
+            <input type="password" class="form-control mb-3" placeholder="Confirm Password" id="passwordValidation" formControlName="passwordValidation">
+        </div>
+        <br>
+          
+    </form>
+
+    
+    <br>
+    <button type="submit" class="btn btn-primary w-100" id="updateInfo"(click)="updateUserInfo()">Save</button>
+
+    <br>
+
+    <div style="margin-top: 20px;">
+        <button routerLink="/profile">Exit</button>
+    </div>
+</section>

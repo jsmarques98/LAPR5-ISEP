@@ -1,0 +1,17 @@
+<img [src]="image">
+<p class="text">First Name: {{ user.firstName }}</p>
+<p class="text">Last Name: {{ user.lastName }}</p>
+<p class="text">Email: {{ user.email }}</p>
+<p class="text">PhoneNumber: {{ user.phoneNumber }}</p>
+<p class="text">Role: {{ user.role }}</p>
+
+
+<button (click)="updateInfo()">Update Personal Info</button>
+<br>
+<br>
+<button (click)="logout()">Logout</button>
+<div style="margin-top: 20px;">
+    <button routerLink="/home">Exit</button>
+</div>
+
+
