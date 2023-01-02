@@ -6,6 +6,7 @@ import { UserEmail } from "./userEmail";
 import { Role } from "../../domain/role/role";
 import { UserPassword } from "./userPassword";
 import { Guard } from "../../core/logic/Guard";
+import { UserPhoneNumber } from "./userPhoneNumber";
 
 
 interface UserProps {
@@ -14,6 +15,7 @@ interface UserProps {
   email: UserEmail;
   password: UserPassword;
   role: Role;
+  phoneNumber:UserPhoneNumber;
 }
 
 export class User extends AggregateRoot<UserProps> {
@@ -41,6 +43,10 @@ export class User extends AggregateRoot<UserProps> {
     return this.props.password;
   }
 
+  get phoneNumber (): UserPhoneNumber {
+    return this.props.phoneNumber;
+  }
+
   get role (): Role {
     return this.props.role;
   }
@@ -48,6 +54,31 @@ export class User extends AggregateRoot<UserProps> {
   set role (value: Role) {
       this.props.role = value;
   }
+
+  
+  public set phoneNumber(v : UserPhoneNumber) {
+    this.props.phoneNumber = v;
+  }
+
+  public set password(v : UserPassword) {
+    this.props.password = v;
+  }
+
+  public set lastName(v : string) {
+    this.props.lastName = v;
+  }
+
+  public set firstName(v : string) {
+    console.log(2);
+    
+    this.props.firstName = v;
+  }
+
+  public set email(v : UserEmail) {
+    this.props.email = v;
+  }
+  
+
 
   private constructor (props: UserProps, id?: UniqueEntityID) {
     super(props, id);
@@ -59,7 +90,8 @@ export class User extends AggregateRoot<UserProps> {
       { argument: props.firstName, argumentName: 'firstName' },
       { argument: props.lastName, argumentName: 'lastName' },
       { argument: props.email, argumentName: 'email' },
-      { argument: props.role, argumentName: 'role' }
+      { argument: props.role, argumentName: 'role' },
+      { argument: props.phoneNumber, argumentName: 'phoneNumber' },
     ];
 
     const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);

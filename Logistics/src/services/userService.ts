@@ -21,6 +21,7 @@ import { UserEmail } from '../domain/user/userEmail';
 import { Role } from '../domain/role/role';
 
 import { Result } from "../core/logic/Result";
+import { UserPhoneNumber } from '../domain/user/userPhoneNumber';
 
 @Service()
 export default class UserService implements IUserService{
@@ -65,6 +66,7 @@ export default class UserService implements IUserService{
 
       const password = await UserPassword.create({ value: hashedPassword, hashed: true}).getValue();
       const email = await UserEmail.create( userDTO.email ).getValue();
+      const phoneNumber = await UserPhoneNumber.create( userDTO.phoneNumber ).getValue();
       let role: Role;
 
       const roleOrError = await this.getRole(userDTO.role);
@@ -80,6 +82,7 @@ export default class UserService implements IUserService{
         email: email,
         role: role,
         password: password,
+        phoneNumber:phoneNumber 
       });
 
       if (userOrError.isFailure) {
@@ -187,6 +190,100 @@ export default class UserService implements IUserService{
       return Result.ok<Role>(role);
     } else {
       return Result.fail<Role>("Couldn't find role by name=" + roleName);
+    }
+  }
+
+  public async deleteUser( email: string): Promise<Result<String>> {
+    try {
+      let boolean = await this.userRepo.deleteUser(UserEmail.create(email).getValue());
+
+      if (boolean===true) {
+        return Result.ok<String>("user apagado com suecesso");
+      }
+      else {
+      
+        return Result.ok<String>("Não existe um user com o email inserido");
+        }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  public async getUserByEmail (email: string): Promise<Result<{ userDTO: IUserDTO}>> {
+    
+
+    const user = await this.userRepo.findByEmail( email );
+    const found = !!user;
+
+    if (found) {
+      const userDTO = UserMap.toDTO( user ) as IUserDTO;
+      return Result.ok<{ userDTO: IUserDTO}>({userDTO: userDTO});
+    } else {
+      return Result.fail<{ userDTO: IUserDTO}>("Couldn't find user by email=" + email);
+    }
+  }
+
+
+  public async updateUser(userDTO: IUserDTO): Promise<Result<IUserDTO>> {
+    
+    try {
+  
+
+      const user = await this.userRepo.findByEmail(userDTO.email);
+
+
+      if (user === null) {
+        return Result.fail<IUserDTO>("user not found");
+      }
+      else {
+
+
+        if(userDTO.firstName!=null){
+          console.log(1);
+          
+        user.firstName = userDTO.firstName;
+        }
+
+        if(userDTO.lastName!=null){
+        user.lastName=userDTO.lastName
+        }
+        
+        if(userDTO.password!=null){
+          
+          const salt = randomBytes(32);
+          this.logger.silly('Hashing password');
+          const hashedPassword = await argon2.hash(userDTO.password, { salt });
+          this.logger.silly('Creating user db record');
+
+          const password = await UserPassword.create({ value: hashedPassword, hashed: true}).getValue();
+          user.password=password;
+        }
+
+        if(userDTO.phoneNumber!=null){
+        user.phoneNumber=UserPhoneNumber.create(userDTO.phoneNumber).getValue();
+        }
+
+        if(userDTO.role!=null){
+          let role: Role;
+
+          const roleOrError = await this.getRole(userDTO.role);
+          if (roleOrError.isFailure) {
+            return Result.fail<IUserDTO>("role not found");
+          } else {
+            role = roleOrError.getValue();
+          }
+          user.role=role;
+        }
+
+        
+
+        await this.userRepo.save(user);
+
+        const userDTOResult = UserMap.toDTO( user ) as IUserDTO;
+      return Result.ok<IUserDTO>( userDTOResult )
+        }
+    } catch (e) {
+      throw e;
     }
   }
 

@@ -7,6 +7,7 @@ import { IUserDTO } from '../../dto/IUserDTO';
 import middlewares from '../middlewares';
 import { celebrate, Joi } from 'celebrate';
 import winston = require('winston');
+import { Result } from '../../core/logic/Result';
 
 var user_controller = require('../../controllers/userController');
 
@@ -23,7 +24,8 @@ export default (app: Router) => {
         lastName: Joi.string().required(),
         email: Joi.string().required(),
         password: Joi.string().required(),
-        role: Joi.string().required()
+        role: Joi.string().required(),
+        phoneNumber: Joi.number().required()
       }),
     }),
     async (req: Request, res: Response, next: NextFunction) => {
@@ -136,4 +138,86 @@ export default (app: Router) => {
   app.use('/users', route);
 
   route.get('/me', middlewares.isAuth, middlewares.attachCurrentUser, user_controller.getMe);
+
+  route.delete('',middlewares.isAuth,
+    async (req, res, next) =>{
+      const logger = Container.get('logger') as winston.Logger;
+      logger.debug('Calling Delete-User endpoint with body: %o', req.body)
+      try {
+        const  email  = req.query.email.toString();;
+        const authServiceInstance = Container.get(AuthService);
+        const result = await authServiceInstance.deleteUser(email);
+        
+        if( result.isFailure ){
+        
+          return res.json().status(403);
+
+        }
+
+        
+        return res.json(1).status(200);
+
+      } catch (e) {
+        logger.error('🔥 error: %o',  e );
+        return next(e);
+      }
+    } );
+
+
+    route.get('/getByEmail',middlewares.isAuth,
+    async (req, res, next) =>{
+      const logger = Container.get('logger') as winston.Logger;
+      logger.debug('Calling Get-User-By-Email endpoint with body: %o', req.body)
+      try {
+        const  email  = req.query.email.toString();
+        
+        const authServiceInstance = Container.get(AuthService);
+        const result = await authServiceInstance.getUserByEmail(email);
+        
+        if( result.isFailure )
+          return res.json().status(403);
+
+        const { userDTO } = result.getValue();
+        return res.json({ userDTO }).status(200);
+
+      } catch (e) {
+        logger.error('🔥 error: %o',  e );
+        return next(e);
+      }
+    } );
+
+    route.patch('',middlewares.isAuth,
+  
+    celebrate({
+      body: Joi.object({
+        firstName: Joi.string(),
+        lastName: Joi.string(),
+        password: Joi.string(),
+        phoneNumber: Joi.number(),
+        email: Joi.string().required(),
+        role: Joi.string()
+      }),
+    }),
+    async (req, res, next) => {
+      
+      
+      const logger = Container.get('logger') as winston.Logger;
+      logger.debug('Calling Get-User-By-Email endpoint with body: %o', req.body)
+      try {
+        const authServiceInstance = Container.get(AuthService);
+        console.log("1");
+        
+        const userOrError = await  authServiceInstance.updateUser(req.body as IUserDTO) as Result<IUserDTO>;
+        if (userOrError.isFailure) {
+          return res.status(404).send();
+        }
+  
+        const truckDTO = userOrError.getValue();
+        return res.json( truckDTO ).status(201);
+      }
+      catch (e) {
+        return next(e);
+      }
+    } );
+
 };

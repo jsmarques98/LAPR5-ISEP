@@ -11,6 +11,7 @@ import { UserEmail } from "../domain/user/userEmail";
 import { UserPassword } from "../domain/user/userPassword";
 
 import RoleRepo from "../repos/roleRepo";
+import { UserPhoneNumber } from '../domain/user/userPhoneNumber';
 
 export class UserMap extends Mapper<User> {
 
@@ -21,13 +22,15 @@ export class UserMap extends Mapper<User> {
       lastName: user.lastName,
       email: user.email.value,
       password: "",
-      role: user.role.name.toString()
+      role: user.role.name.toString(),
+      phoneNumber : user.phoneNumber.value
     } as IUserDTO;
   }
 
   public static async toDomain (raw: any): Promise<User> {
     const userEmailOrError = UserEmail.create(raw.email);
     const userPasswordOrError = UserPassword.create({value: raw.password, hashed: true});
+    const userPhoneNumberOrError = UserPhoneNumber.create(raw.phoneNumber)
     const repo = Container.get(RoleRepo);
     const role = await repo.findByDomainId(raw.role);
 
@@ -37,6 +40,7 @@ export class UserMap extends Mapper<User> {
       email: userEmailOrError.getValue(),
       password: userPasswordOrError.getValue(),
       role: role,
+      phoneNumber: userPhoneNumberOrError.getValue()
     }, new UniqueEntityID(raw.domainId))
 
     userOrError.isFailure ? console.log(userOrError.error) : '';
@@ -52,6 +56,7 @@ export class UserMap extends Mapper<User> {
       firstName: user.firstName,
       lastName: user.lastName,
       role: user.role.id.toValue(),
+      phoneNumber: user.phoneNumber.value
     }
     return a;
   }

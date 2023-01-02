@@ -1,6 +1,6 @@
 import { Service, Inject } from 'typedi';
 
-import { Document, Model } from 'mongoose';
+import { Document, FilterQuery, Model } from 'mongoose';
 import { IUserPersistence } from '../dataschema/IUserPersistence';
 
 import IUserRepo from "../services/IRepos/IUserRepo";
@@ -49,6 +49,10 @@ export default class UserRepo implements IUserRepo {
       } else {
         userDocument.firstName = user.firstName;
         userDocument.lastName = user.lastName;
+        userDocument.email = user.email.value;
+        userDocument.password = user.password.value;
+        userDocument.phoneNumber = user.phoneNumber.value;
+        userDocument.role = user.role.id.toString();
         await userDocument.save();
 
         return user;
@@ -59,6 +63,7 @@ export default class UserRepo implements IUserRepo {
   }
 
   public async findByEmail (email: UserEmail | string): Promise<User> {
+    
     const query = { email: email.toString() };
     const userRecord = await this.userSchema.findOne( query );
 
@@ -81,5 +86,19 @@ export default class UserRepo implements IUserRepo {
     }
     else
       return null;
+  }
+
+
+  public async deleteUser(useremail:  UserEmail):Promise<Boolean> {
+    
+    const query = { email: useremail.value};
+    const userRecord = await this.userSchema.findOne( query as FilterQuery<IUserPersistence & Document> );
+    
+    if( userRecord != null) {
+     await  userRecord.delete();
+      return true;
+    }
+    else
+      return false;
   }
 }
