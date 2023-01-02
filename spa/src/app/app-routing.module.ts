@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PosLoginPageComponent } from './pos-login-page/pos-login-page.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './user/login/login.component';
 import { CreateDeliveriesComponent } from './deliveries/create-deliveries/create-deliveries.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CreatePackagingsComponent } from './packagings/create-packagings/create-packagings.component';
@@ -18,6 +18,11 @@ import { CheckBestPossibleRouteComponent } from './planning/check-best-possible-
 import { UpdateWarehousesComponent } from './warehouses/update-warehouses/update-warehouses.component';
 import { GetWarehousesByIdComponent } from './warehouses/get-warehouses-by-id/get-warehouses-by-id.component';
 import { GetPackagingsComponent } from './packagings/get-packagings/get-packagings.component';
+import { RegisterUserComponent } from './user/register-user/register-user.component';
+import { RgpdTermsComponent } from './user/rgpd-terms/rgpd-terms.component';
+import { DeleteUserComponent } from './user/delete-user/delete-user.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { UpdateUserInfoComponent } from './user/update-user-info/update-user-info.component';
 
 
 
@@ -38,6 +43,11 @@ const routes: Routes = [
   { path: 'updateWarehouses', component: UpdateWarehousesComponent },
   { path: 'getWarehousesById', component: GetWarehousesByIdComponent },
   { path: 'getPackagings', component: GetPackagingsComponent },
+  { path: 'registerUser', component: RegisterUserComponent },
+  { path: 'rgpdTerms', component: RgpdTermsComponent },
+  { path: 'deleteUser', component: DeleteUserComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'updateUserInfo', component: UpdateUserInfoComponent },
   
 
 

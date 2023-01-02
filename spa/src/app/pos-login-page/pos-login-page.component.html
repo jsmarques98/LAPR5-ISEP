@@ -1,6 +1,11 @@
-<div>
-  <button (click)="logout()">Logout </button>
-</div>
+<button class="user-button" (click)="toggleMenu()">
+    <img [src]="userimage" alt="User Icon" class="user-icon" width="50" height="50">
+    <ul class="dropdown-menu">
+      <li><a href="/profile">Profile</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+  </button>
+
 <br>
 <section>
     <ul>
@@ -18,5 +23,7 @@
       <li><a *ngIf="admin || warehouseManager" href="/updateWarehouses">Update Warehouses</a></li>
       <li><a *ngIf="admin || warehouseManager" href="/getWarehousesById">Get Warehouses by Id</a></li>
       <li><a *ngIf="admin || warehouseManager" href="/getPackagings">Get Packagings </a></li>
+      <li><a *ngIf="admin " href="/registerUser">Register user </a></li>
+      <li><a *ngIf="admin " href="/deleteUser">Delete user </a></li>
     </ul>
   </section>

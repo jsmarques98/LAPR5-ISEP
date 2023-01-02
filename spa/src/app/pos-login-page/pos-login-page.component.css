@@ -48,3 +48,30 @@
         cursor: auto;
       }
 
+      
+      .dropdown-menu {
+        display: none;
+        margin-left: -10px;
+        margin-top: 20px;
+        width: auto;
+        height: auto;
+
+      }
+      .show {
+        display: block;
+      }
+      
+      .user-button {
+        float:right;
+        float:top;
+        border-radius: 50%;
+      }
+
+      .user-button img {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        border: none;
+      }
+      
+

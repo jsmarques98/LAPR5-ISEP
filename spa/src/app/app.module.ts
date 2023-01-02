@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './user/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PosLoginPageComponent } from './pos-login-page/pos-login-page.component';
 import { DeliveriesComponent } from './deliveries/deliveries.component';
@@ -30,6 +30,12 @@ import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GetPackagingsComponent } from './packagings/get-packagings/get-packagings.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { UserComponent } from './user/user.component';
+import { RegisterUserComponent } from './user/register-user/register-user.component';
+import { RgpdTermsComponent } from './user/rgpd-terms/rgpd-terms.component';
+import { DeleteUserComponent } from './user/delete-user/delete-user.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { UpdateUserInfoComponent } from './user/update-user-info/update-user-info.component';
 
 
 
@@ -58,7 +64,13 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     UpdateWarehousesComponent,
     GetWarehousesByIdComponent,
     PosLoginPageComponent,
-    GetPackagingsComponent
+    GetPackagingsComponent,
+    UserComponent,
+    RegisterUserComponent,
+    RgpdTermsComponent,
+    DeleteUserComponent,
+    ProfileComponent,
+    UpdateUserInfoComponent
 
   ],
   imports: [

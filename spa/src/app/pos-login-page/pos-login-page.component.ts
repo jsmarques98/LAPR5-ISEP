@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../user/login/login.service';
 
 @Component({
   selector: 'app-pos-login-page',
@@ -8,8 +8,8 @@ import { LoginService } from '../login/login.service';
   styleUrls: ['./pos-login-page.component.css']
 })
 export class PosLoginPageComponent implements OnInit {
-  constructor(private router: Router, private loginService : LoginService) { }
-
+  constructor(private router: Router, private loginService : LoginService,private elementRef: ElementRef) { }
+  userimage = localStorage.getItem("profileimage")
   ngOnInit(): void {
   }
   
@@ -23,4 +23,11 @@ export class PosLoginPageComponent implements OnInit {
     this.router.navigate(["/login"])
   }
 
+
+  toggleMenu() {
+    const menu = this.elementRef.nativeElement.querySelector('.dropdown-menu');
+    if (menu) {
+      menu.classList.toggle('show');
+    }
+  }
 }

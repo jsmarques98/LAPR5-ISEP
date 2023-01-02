@@ -1,0 +1,68 @@
+<section style="margin-left:10%;padding:1px 16px;height:100%;">
+    <form [formGroup] = "userForm">
+        <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">User Information:</h1>
+        <div>
+            <input type="text" class="form-control" id="firstName" placeholder="First Name" formControlName="firstName">
+        </div>
+        
+
+        
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Last Name" id="lastName" formControlName="lastName">
+        </div>
+
+        <br> 
+       
+        <div>
+            <input type="date" class="form-control" id="birthdate" placeholder="Birthdate" formControlName="birthdate">
+        </div>
+        
+        <br> 
+        <div>
+            <input type="text" class="form-control mb-3" placeholder="Email" id="email" formControlName="email">
+        </div>
+        <br>
+
+        <div>
+            <input type="number" class="form-control mb-3" placeholder="Phone Number" id="phoneNumber" formControlName="phoneNumber">
+        </div>
+        <br>
+
+
+        
+        <select #cricket (change)="selectRole($event)">
+            <option value="default">Select the role</option>
+            <option *ngFor="let role of roles" [value]="role.name">{{role.name}}</option>
+        </select>
+
+        <br>
+
+        <br>
+        <div>
+            <input type="password" class="form-control mb-3" placeholder="Password" id="password" formControlName="password">
+        </div>
+
+        <br>
+        <div>
+            <input type="password" class="form-control mb-3" placeholder="Confirm Password" id="passwordValidation" formControlName="passwordValidation">
+        </div>
+        <br>
+          
+    </form>
+
+    <label>
+        <input type="checkbox" [(ngModel)]="isChecked" name="acceptTerms" value="accept">
+        I accept the <a href="/rgpdTerms" >terms and conditions</a> of the RGPD.
+      </label>
+      <br>
+    
+    <br>
+    <button type="submit" class="btn btn-primary w-100" id="registerUser"(click)="registerUser()">Save</button>
+
+    <br>
+
+    <div style="margin-top: 20px;">
+        <button routerLink="/home">Exit</button>
+    </div>
+</section>

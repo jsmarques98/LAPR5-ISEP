@@ -9,6 +9,12 @@ export const environment = {
 
   logisticsAPILogin:"auth/ssosignin",
   logisticsAPILogout:"auth/logout",
+  logisticsAPIRegistUsers:"auth/signup",
+  logisticsAPIDeleteUsers:"users/",
+  logisticsAPIUpdateUsers:"users/",
+  logisticsAPIGetUserByEmail:"users/getByEmail",
+  logisticsAPIUserInfo:"users/me",
+
 
   logisticsAPIPackagings:"packagings/",
 
@@ -17,13 +23,14 @@ export const environment = {
   logisticsAPIPlanningHeuristicTime:"plannings/routeHeuristicTime",
   logisticsAPIPlanningHeuristicTimeAndMass:"plannings/routeHeuristicTimeAndMass",
   logisticsAPIInactiveTrucks:"trucks/soft",
+  logisticsAPIRoles:"roles/",
 
   logisticsAPIPSections:"sections/",
 
   logisticsAPIPTrucks:"trucks/",
 
 
-  warehouseManagementAPI: "http://10.9.23.22:5000/api/",
+  warehouseManagementAPI: "http://localhost:5000/api/",
 
   warehouseManagementAPIDeliveries: "deliveries/",
   
