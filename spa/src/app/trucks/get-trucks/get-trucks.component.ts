@@ -57,6 +57,18 @@ export class GetTrucksComponent implements OnInit {
     }
   }
 
+  activateTruck(plate:string){
+    try{
+    this.service.activateTruck(plate).subscribe(async res =>{
+      this.mostrarNotificacao(res,false)
+      this.selectedTruck=undefined;
+      this.getTrucks();
+    })
+    } catch{
+      
+    }
+  }
+
 
   onSelect(truck: Truck): void {
     

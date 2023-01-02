@@ -7,5 +7,4 @@ export class Packaging {
     positionY:string
     positionZ:string
     truckPlate:string
-  
 }

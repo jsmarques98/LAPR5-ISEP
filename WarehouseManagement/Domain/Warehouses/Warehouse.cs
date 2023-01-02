@@ -50,5 +50,10 @@ namespace DDDSample1.Domain.Warehouses
         {
             this.Active = false;
         }
+
+        public void MarkAsActive()
+        {
+            this.Active = true;
+        }
     }
 }

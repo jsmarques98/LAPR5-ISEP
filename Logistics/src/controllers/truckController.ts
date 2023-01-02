@@ -106,4 +106,18 @@ public async inativeTruck(req: Request, res: Response, next: NextFunction) {
   }
 };
 
+public async activateTruck(req: Request, res: Response, next: NextFunction) {
+  try {
+    const truckOrError = await this.truckServiceInstance.activateTruck(req.body.Plate);
+
+    if (truckOrError.isFailure) {
+      return res.status(400).send(truckOrError.error);
+  }
+    return res.json( truckOrError.getValue() ).status(200);
+  }
+  catch (e) {
+    return next(e);
+  }
+};
+
 }

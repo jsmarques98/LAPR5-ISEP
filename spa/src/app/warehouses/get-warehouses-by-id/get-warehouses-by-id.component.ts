@@ -63,6 +63,18 @@ export class GetWarehousesByIdComponent implements OnInit {
     });
   }
 
+  activateWarehouse(warehouseId : string){
+    console.log(warehouseId);
+    this.service.activateWarehouse(warehouseId).subscribe(res => {
+      if (res != null) {
+        this.mostrarNotificacao('Armazém ativado com sucesso!',false)
+        
+      }else{
+        this.mostrarNotificacao('Erro ao ativar o Armazém!',true)
+      };
+    });
+  }
+
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';

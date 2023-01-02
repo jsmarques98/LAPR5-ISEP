@@ -62,8 +62,9 @@ export class TruckService {
   inactiveTruck(plate : string): Observable<any> {
     try{
       const token = localStorage.getItem('id_token')!;
-        let  inactiveOptions =  {headers: new HttpHeaders({ 'Authorization' : 'Token ' + token,'Content-Type': 'application/json' }),
-              body : {'Plate' : plate}     }
+      let inactiveOptions =  {headers: new HttpHeaders({'Authorization' : 'Token ' + token, 'Content-Type': 'application/json' }),
+             body : {'Plate' : plate}     }
+    
           
         return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIInactiveTrucks, inactiveOptions).pipe(catchError(err => {
        
@@ -85,10 +86,35 @@ export class TruckService {
       }
 
   }
+
+  activateTruck(plate : string): Observable<any> {
+    try{
+      const token = localStorage.getItem('id_token')!;
+      const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
+      const body = {'Plate' : plate} 
+    
+        return this.http.patch(environment.logisticsAPI + environment.logisticsAPIActiveTrucks, body,{headers} ).pipe(catchError(err => {
+          if (err.status == 200) {
+            this.mostrarNotificacao(err.error,false);
+          }
+          if (err.status == 400) {
+      
+            this.mostrarNotificacao(err.error,true);
+          }
+          if (err.status == 500) {
+        
+            this.mostrarNotificacao(err.error,true);
+          }
+          return throwError(err);
+        }));
+      }catch(err){
+        return throwError(err);
+      }
+
+  }
   
 
 
- 
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
     this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});

@@ -5,7 +5,6 @@ import { catchError, Observable, of, throwError, toArray } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import { environment } from 'src/environments/environment';
 import { DeliveryService } from '../deliveries/delivery.service';
-import { from } from 'rxjs';
 import { ary } from 'cypress/types/lodash';
 
 @Injectable({providedIn:'root'})
@@ -50,11 +49,10 @@ export class PackagingService {
     }));
   }
 
-  async getPackagings():Promise<Observable<any>> {
+   getPackagings():Observable<any> {
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
-    let packagings
-     packagings=  await this.http.get<Packaging[]>(environment.logisticsAPI +environment.logisticsAPIPackagings,{headers}).pipe(catchError(err => {
+    return  this.http.get<Packaging[]>(environment.logisticsAPI +environment.logisticsAPIPackagings,{headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
       }
@@ -64,7 +62,7 @@ export class PackagingService {
       return throwError(err);
     }));
 
-    return await this.getinfoDeliveriesForPackagings(packagings) 
+    
   }
 
   async orderByDate(packaging: any): Promise<Observable<any>> {
@@ -116,24 +114,17 @@ export class PackagingService {
 
 
   
-  async getinfoDeliveriesForPackagings(packagings: Observable<Packaging> ): Promise<Observable<any>>  {    
-    let deleviriesId =new Array
-    let json
-    await packagings.forEach(function(nome) {
-      json= JSON.parse(JSON.stringify(nome))
-      for (let index = 0; index < json.length; index++) {
-        deleviriesId[index] = json[index].deliveryId;
-      }
-    })    
-    for (let index = 0; index < deleviriesId.length; index++) {
-      (await this.deliveryService.getDelivery(deleviriesId[index])).subscribe(res => {
+   getinfoDeliveriesForPackagings(packagings: any ):Observable<any> {
+    for (let index = 0; index < packagings.length; index++) {
+      ( this.deliveryService.getDelivery(packagings[index].deliveryId)).subscribe(res => {
         if (res != null) {
-          json[index].deliveryDate=res.deliveryDate
-          json[index].deliveryWarehouseId=res.deliveryWarehouseId
+          packagings[index].deliveryDate=res.deliveryDate
+          packagings[index].deliveryWarehouseId=res.deliveryWarehouseId
+          packagings[index].filter=false
         }
       });
      }
-    return of(json)
+    return of(packagings)
   }
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {

@@ -41,7 +41,7 @@ pipelines:
               REMOTE_PATH: '/spa'
               LOCAL_PATH: './spa'
               SSH_KEY: $MYKEY
-              EXTRA_ARGS: ["-P","10974"]
+              EXTRA_ARGS: ["-P","10113"]
 
     - step:
         name: Logistics Deployment to execute on Virtual Machine

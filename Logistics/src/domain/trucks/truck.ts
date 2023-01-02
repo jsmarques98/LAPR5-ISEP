@@ -117,4 +117,8 @@ export class Truck extends AggregateRoot<TruckProps> {
   public  MarkAsInative(){
      this.props.active = false;
   }
+
+  public  MarkAsActive(){
+    this.props.active = true;
+ }
 }
