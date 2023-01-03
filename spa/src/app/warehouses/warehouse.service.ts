@@ -88,8 +88,9 @@ export class WarehouseService {
   }
 
   inactivateWarehouse(warehouseId: string): Observable<any> {
-    
-    return this.http.delete<any>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses + warehouseId + '/soft').pipe(catchError(err => {
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify(warehouseId);
+    return this.http.patch<any>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses + warehouseId + '/soft', body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
         this.mostrarNotificacao('Armazém inibido com sucesso!',false);
       }

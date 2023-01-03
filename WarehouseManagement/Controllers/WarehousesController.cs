@@ -76,7 +76,7 @@ namespace DDDSample1.Controllers
 
 
         // Inactivate: api/Warehouses/5
-        [HttpDelete("{id}/soft")]
+        [HttpPatch("{id}/soft")]
         public async Task<ActionResult<WarehouseDto>> SoftDelete(String id)
         {
             var war = await _service.InactivateAsync(new WarehouseId(id));
