@@ -31,7 +31,7 @@ export const environment = {
   logisticsAPIPTrucks:"trucks/",
 
 
-  warehouseManagementAPI: "http://localhost:5000/api/",
+  warehouseManagementAPI: "http://localhost:5001/api/",
 
   warehouseManagementAPIDeliveries: "deliveries/",
   
