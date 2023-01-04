@@ -42,6 +42,18 @@ pipelines:
               LOCAL_PATH: './spa'
               SSH_KEY: $MYKEY
               EXTRA_ARGS: ["-P","10113"]
+              
+    - step:
+        name: Stop Node
+        script:
+          - pipe: atlassian/ssh-run:0.4.1
+            variables:
+              SSH_USER: 'root'
+              SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+              COMMAND: 'pm2 delete node'
+              MODE: 'command' 
+              PORT: '10982' 
+              SSH_KEY: '$MYKEY' 
 
     - step:
         name: Logistics Deployment to execute on Virtual Machine
@@ -54,6 +66,18 @@ pipelines:
               LOCAL_PATH: './Logistics'
               SSH_KEY: $MYKEY
               EXTRA_ARGS: ["-P","10982"]
+              
+    - step:
+        name: Start Node
+        script:
+          - pipe: atlassian/ssh-run:0.4.1
+            variables:
+              SSH_USER: 'root'
+              SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+              COMMAND: '/sem_5_pi/deploy.sh'
+              MODE: 'command'
+              PORT: '10681'
+              SSH_KEY: '$MYKEY'
 
     - step:
         name: WarehouseManagement Deployment to execute on Virtual Machine
