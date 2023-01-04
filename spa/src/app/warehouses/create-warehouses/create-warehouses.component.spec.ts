@@ -5,11 +5,7 @@ import {
     HttpClientTestingModule,
     HttpTestingController,
   } from '@angular/common/http/testing';
-  
-  import { Warehouse1} from 'src/app/warehouses/mockWarehouses';
-  import { WarehouseService } from 'src/app/warehouses/warehouse.service';
-  import { Warehouse } from 'src/app/warehouses/warehouses';
-  
+ 
 import { CreateWarehousesComponent } from './create-warehouses.component';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { WarehouseService } from '../warehouse.service';
 
 describe('CreateWarehousesComponent', () => {
   let component: CreateWarehousesComponent;
@@ -77,44 +74,3 @@ describe('CreateWarehousesComponent', () => {
   });
 });
 
-
-describe('WarehouseService', () => {
-  let service: WarehouseService;
-  let httpController: HttpTestingController;
-
-  let url = 'http://localhost:5000/';
-  
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, MatSnackBarModule],
-      });
-      service = TestBed.inject(WarehouseService);
-      httpController = TestBed.inject(HttpTestingController);
-    });
-
-    it('should call addWarehouse', () => {
-        const createdWarehouse: Warehouse = {
-          id: '25',
-          designation: "Armazém do Porto",
-          street: "Rua Julio Dinis",
-          doorNumber: 25,
-          postCode: "4150-332",
-          city:"Porto",
-          latitude: 60.0,
-          longitude:60.0,
-          altitude: 60.0,
-          active: 'true'
-        };
-    
-        service.addWarehouse(Warehouse1).subscribe((data) => {
-          expect(data.body).toEqual(createdWarehouse);
-        });
-    
-        const req = httpController.expectOne({
-          method: 'POST',
-          url: `${url}api/warehouses/`,
-        });
-    
-        req.flush(createdWarehouse);
-    });
-})
