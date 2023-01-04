@@ -74,9 +74,9 @@ pipelines:
             variables:
               SSH_USER: 'root'
               SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
-              COMMAND: '/sem_5_pi/deploy.sh'
+              COMMAND: '/deploy.sh'
               MODE: 'command'
-              PORT: '10681'
+              PORT: '10982'
               SSH_KEY: '$MYKEY'
 
     - step:
