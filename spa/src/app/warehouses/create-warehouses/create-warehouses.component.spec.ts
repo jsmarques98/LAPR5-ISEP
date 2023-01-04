@@ -52,7 +52,7 @@ describe('CreateWarehousesComponent', () => {
     component.warehouseForm.controls['id'].setValue('75');
     component.warehouseForm.controls['warehouseDesignation'].setValue('Foz');
     component.warehouseForm.controls['warehouseStreet'].setValue('Rua julio dantas');
-    component.warehouseForm.controls['warehouseDoorNumber'].setValue(317);
+    component.warehouseForm.controls['warehouseDoorNumber'].setValue('317');
     component.warehouseForm.controls['warehousePostCode'].setValue('4150');
     component.warehouseForm.controls['warehouseCity'].setValue('Porto');
     component.warehouseForm.controls['warehouseLatitude'].setValue(null);
@@ -66,12 +66,12 @@ describe('CreateWarehousesComponent', () => {
     component.warehouseForm.controls['id'].setValue('75');
     component.warehouseForm.controls['warehouseDesignation'].setValue('Foz');
     component.warehouseForm.controls['warehouseStreet'].setValue('Rua julio dantas');
-    component.warehouseForm.controls['warehouseDoorNumber'].setValue(317);
+    component.warehouseForm.controls['warehouseDoorNumber'].setValue('317');
     component.warehouseForm.controls['warehousePostCode'].setValue('4150');
     component.warehouseForm.controls['warehouseCity'].setValue('Porto');
-    component.warehouseForm.controls['warehouseLatitude'].setValue(60);
-    component.warehouseForm.controls['warehouseLongitude'].setValue(60);
-    component.warehouseForm.controls['warehouseAltitude'].setValue(1);
+    component.warehouseForm.controls['warehouseLatitude'].setValue('60');
+    component.warehouseForm.controls['warehouseLongitude'].setValue('60');
+    component.warehouseForm.controls['warehouseAltitude'].setValue('1');
     await component.createWarehouse();
     expect(component.warehouseForm.valid).toBeTruthy();
   });
@@ -107,7 +107,7 @@ describe('WarehouseService', () => {
         };
     
         service.addWarehouse(Warehouse1).subscribe((data) => {
-          expect(data).toEqual(createdWarehouse);
+          expect(data.body).toEqual(createdWarehouse);
         });
     
         const req = httpController.expectOne({

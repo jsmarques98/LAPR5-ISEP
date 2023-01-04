@@ -62,7 +62,12 @@ export default class PackagingService implements IPackagingService {
         return Result.fail<IPackagingDTO>(packagingOrError.errorValue());
       }
       const packagingResult = packagingOrError.getValue();
+     let aux= await this.packagingRepo.exists(packagingResult);
+     if((aux).valueOf()){
+      return Result.fail<IPackagingDTO>(  ("Ja existe um packaging com este domainId"));
+     }else{
       await this.packagingRepo.save(packagingResult);
+    }
       const packagingDtoResult = PackagingMap.toDTO( packagingResult ) as IPackagingDTO;
       return Result.ok<IPackagingDTO>( packagingDtoResult )
     } catch (e) {

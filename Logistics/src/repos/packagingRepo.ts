@@ -35,7 +35,9 @@ export default class packagingRepo implements IPackagingRepo{
 
   public async save (packaging: Packaging): Promise<Packaging> {
     const query = { domainId: packaging.id.toString()}; 
-    const packagingDocument = await this.packagingSchema.findOne( query as FilterQuery<IPackagingRepo & Document>);
+    const packagingDocument = await this.packagingSchema.findOne(query);
+    console.log(packagingDocument)
+    console.log("merda")
     try {
       if (packagingDocument === null ) {
        

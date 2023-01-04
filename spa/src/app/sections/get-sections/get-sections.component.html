@@ -5,7 +5,7 @@
 </section>
 
 <section style="margin-left:10%;padding:1px 16px;height:auto;">
-  <ul class="sections" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
+  <ul class="sections" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;height: 60px">
     <li *ngFor="let section of sections | paginate: {currentPage: p,itemsPerPage: count}">
       <button [class.selected]="section === selectedSection" type="button" (click)="onSelect(section)">
         <span class="name">{{section.warehouseOrigin}} to {{section.warehouseDestiny}}</span>

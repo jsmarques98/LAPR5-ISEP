@@ -16,12 +16,12 @@ export class CreateWarehousesComponent implements OnInit {
     id: ['',Validators.required],
     warehouseDesignation: ['',Validators.required],
     warehouseStreet: ['',Validators.required],
-    warehouseDoorNumber: [0,Validators.required],
+    warehouseDoorNumber: ['',Validators.required],
     warehousePostCode:['',Validators.required],
     warehouseCity: ['',Validators.required],
-    warehouseLatitude: [0,Validators.required],
-    warehouseLongitude: [0,Validators.required],
-    warehouseAltitude: [0,Validators.required],    
+    warehouseLatitude: ['',Validators.required],
+    warehouseLongitude: ['',Validators.required],
+    warehouseAltitude: ['',Validators.required],    
   });
 
   warehouse = new Warehouse();
@@ -36,27 +36,24 @@ export class CreateWarehousesComponent implements OnInit {
     this.warehouse.id=this.warehouseForm.value.id!;
     this.warehouse.designation=this.warehouseForm.value.warehouseDesignation!;
     this.warehouse.street=this.warehouseForm.value.warehouseStreet!;
-    this.warehouse.doorNumber=this.warehouseForm.value.warehouseDoorNumber!;
+    this.warehouse.doorNumber=parseInt(this.warehouseForm.value.warehouseDoorNumber!);
     this.warehouse.postCode=this.warehouseForm.value.warehousePostCode!;
     this.warehouse.city=this.warehouseForm.value.warehouseCity!;
-    this.warehouse.latitude=this.warehouseForm.value.warehouseLatitude!;
-    this.warehouse.longitude=this.warehouseForm.value.warehouseLongitude!;
-    this.warehouse.altitude=this.warehouseForm.value.warehouseAltitude!;
+    this.warehouse.latitude=parseInt(this.warehouseForm.value.warehouseLatitude!);
+    this.warehouse.longitude=parseInt(this.warehouseForm.value.warehouseLongitude!);
+    this.warehouse.altitude=parseInt(this.warehouseForm.value.warehouseAltitude!);
     this.warehouse.active="true";
 
 
     
     this.service.addWarehouse(this.warehouse).subscribe(
       (res) => {
-        console.log(res);
         this.showNotification('Post Efetuado com sucesso!',false);
         this.router.navigate(['/home']);
       },
       (error) => {
-        console.error(error.error.errors.message);
-        this.showNotification('Post não efetuado!',true);
-      }
-    );
+        this.showNotification("Post Efetuado sem sucesso!",true);
+      });
 }
 
 private showNotification(mensagem: string, falha: boolean) {

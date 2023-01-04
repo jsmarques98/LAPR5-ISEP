@@ -67,14 +67,17 @@ export class CreateSectionsComponent implements OnInit {
     this.section.energySpent=this.sectionForm.value.energySpent!;
     this.section.extraTime=this.sectionForm.value.extraTime!;
    
-    this.service.addSection(this.section).subscribe(res => {
-      if (res != null) {
-        this.mostrarNotificacao('Post Efetuado com sucesso!',false)
-      }else{
-        this.mostrarNotificacao('Post não efetuado!',true)
-      };
-
-    this.router.navigate(['/home']);
+    this.service.addSection(this.section).subscribe( (res) => {
+      this.mostrarNotificacao('Post Efetuado com sucesso!',false);
+      this.router.navigate(['/home']);
+    },
+    (error) => {
+      if(error.status==402){
+        this.mostrarNotificacao(error.error,true);
+      }
+    else{
+      this.mostrarNotificacao(error.error.errors.message,true);
+    }
   });
   
 }

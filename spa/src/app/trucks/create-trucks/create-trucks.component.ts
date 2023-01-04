@@ -17,11 +17,12 @@ export class CreateTrucksComponent implements OnInit {
 
     plate: ['',Validators.required],
     name: ['',Validators.required],
-    autonomy: [0,Validators.required],
-    maxBattery: [0,Validators.required],
-    payLoad:[0,Validators.required],
-    tare:[0,Validators.required],
-    baterryChargingTime:[0,Validators.required],
+    autonomy: ['',Validators.required],
+    maxBattery: ['',Validators.required],
+    payLoad:['',Validators.required ],
+    tare:['',Validators.required],
+
+    baterryChargingTime:['',Validators.required],
 
 
   });
@@ -34,33 +35,43 @@ export class CreateTrucksComponent implements OnInit {
   }
 
   async createTruck(){
+
     if(this.truckForm.valid){
     this.truck.plate=this.truckForm.value.plate!;
-    this.truck.name=this.truckForm.value.name!;
-    this.truck.autonomy=this.truckForm.value.autonomy!;
-    this.truck.maxBattery=this.truckForm.value.maxBattery!;
-    this.truck.payLoad=this.truckForm.value.payLoad!;
-    this.truck.tare=this.truckForm.value.tare!;
-    this.truck.baterryChargingTime=this.truckForm.value.baterryChargingTime!;
+    this.truck.name=this.truckForm.value.name!;parseInt(this.truckForm.value.autonomy!)
+    this.truck.autonomy=parseInt(this.truckForm.value.autonomy!)
+    this.truck.maxBattery=parseInt(this.truckForm.value.maxBattery!)
+    this.truck.payLoad=parseInt(this.truckForm.value.payLoad!)
+    this.truck.tare=parseInt(this.truckForm.value.tare!)
+    this.truck.baterryChargingTime=parseInt(this.truckForm.value.baterryChargingTime!)
     this.truck.active="true";
 
 
-    this.service.addTruck(this.truck).subscribe(
-      (res) => {
-        console.log(res);
-        this.showNotification('Post Efetuado com sucesso!',false);
-        this.router.navigate(['/home']);
-      },
-      (error) => {
-        console.error(error);
-        this.showNotification('Post não efetuado!',true);
+    (await this.service.addTruck(this.truck)).subscribe((res) => {
+        if(res.status==201){
+          this.mostrarNotificacao('Post Efetuado com sucesso!',false);
+          this.router.navigate(['/home']);
+        }
+      
+    },
+    (error) => {
+      if(error.status==402){
+        this.mostrarNotificacao(error.error,true);
       }
-    );
+    else{
+      this.mostrarNotificacao(error.error.errors.message,true);
+    }
+    }
+  );
   }
-  
 }
+      
 
-private showNotification(mensagem: string, falha: boolean) {
+
+
+
+
+private mostrarNotificacao(mensagem: string, falha: boolean) {
   var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
   this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
 }

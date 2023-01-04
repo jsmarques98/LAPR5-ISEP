@@ -63,6 +63,7 @@ export default class TruckService implements ITruckService {
        truckOrError = await Truck.create( truckDTO ,new UniqueEntityID( truckDTO.domainId));
       }
       if (truckOrError.isFailure) {
+        console.log(truckOrError.error)
         return Result.fail<ITruckDTO>(truckOrError.error);
       }
       const truckResult = truckOrError.getValue();

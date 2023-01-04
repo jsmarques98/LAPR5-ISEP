@@ -31,15 +31,7 @@ export class RegisterUserService {
     const body=JSON.stringify(user);
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
-    return this.http.post<any>(environment.logisticsAPI+environment.logisticsAPIRegistUsers,body,{headers}).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('User registado com sucesso!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao registar user!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.post<any>(environment.logisticsAPI+environment.logisticsAPIRegistUsers,body,{headers,observe:'response'});
   }
 
 

@@ -43,16 +43,19 @@ export class CreatePackagingsComponent implements OnInit {
     this.packaging.positionY=this.packagingForm.value.packagingPositionY!;
     this.packaging.positionZ=this.packagingForm.value.packagingPositionZ!;
 
-    this.service.addPackaging(this.packaging).subscribe(res => {
-      console.log("componente")
-      if (res != null) {
-        this.mostrarNotificacao('Empacotamento criado com sucesso!',false)
-      }else{
-        this.mostrarNotificacao('Erro ao criar empacotamento!',true)
-      };
-
-    this.router.navigate(['/home']);
-  });
+    this.service.addPackaging(this.packaging).subscribe(
+      (res) => {
+        this.mostrarNotificacao('Post Efetuado com sucesso!',false);
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        if(error.status==402){
+          this.mostrarNotificacao(error.error,true);
+        }
+      else{
+        this.mostrarNotificacao(error.error.errors.message,true);
+      }
+    });
   
 }
 

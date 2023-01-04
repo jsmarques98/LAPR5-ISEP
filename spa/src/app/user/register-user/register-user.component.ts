@@ -47,17 +47,20 @@ export class RegisterUserComponent implements OnInit {
     this.user.role=this.selectedRole;
     this.user.phoneNumber=this.userForm.value.phoneNumber!;
     
-    this.service.registerUser(this.user).subscribe(res => {
-      if (res != null) {
-
-        this.mostrarNotificacao('Post Efetuado com sucesso!',false)
-      }else{
-        this.mostrarNotificacao('Post não efetuado!',true)
-      }})
-    }else {
+    this.service.registerUser(this.user).subscribe((res) => {
+      this.mostrarNotificacao('Post Efetuado com sucesso!',false);
+      this.router.navigate(['/home']);
+    },
+    (error) => {
+      if(error.status==402){
+        this.mostrarNotificacao(error.error,true);
+      }
+    else{
+      this.mostrarNotificacao(error.error.errors.message,true);
     }
-    
+  });
   }
+}
 
   selectRole(e) {
     this.selectedRole=e.target.value

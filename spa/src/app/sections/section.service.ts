@@ -20,21 +20,7 @@ export class SectionService {
   
     const body=JSON.stringify(section);
 
-   return this.http.post(environment.logisticsAPI+ environment.logisticsAPIPSections, body,{headers}).pipe(catchError(err => {
-      if (err.status == 201) {
-        this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
-      }
-      if (err.status == 402) {
-        this.mostrarNotificacao('POST EFETUADO SEM SUCESSO!',true);
-        this.mostrarNotificacao(err.error,true);
-      }
-      if (err.status == 500) {
-        console.log(err.error)
-        this.mostrarNotificacao('POST INVÁLIDO:',true);
-        this.mostrarNotificacao(err.error,true);
-      }
-      return throwError(err);
-    }));
+   return this.http.post(environment.logisticsAPI+ environment.logisticsAPIPSections, body,{headers,observe:'response'});
 
    
   }

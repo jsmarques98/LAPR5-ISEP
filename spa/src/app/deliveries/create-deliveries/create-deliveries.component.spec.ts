@@ -57,7 +57,7 @@ describe('DeliveryService', () => {
         };
     
         service.addDelivery(Delivery1).subscribe((data) => {
-          expect(data).toEqual(createdDelivery);
+          expect(data.body).toEqual(createdDelivery);
         });
     
         const req = httpController.expectOne({

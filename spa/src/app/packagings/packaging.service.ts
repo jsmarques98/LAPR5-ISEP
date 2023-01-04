@@ -22,15 +22,7 @@ export class PackagingService {
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
     const body=JSON.stringify(packaging);
     console.log(body)
-    return this.http.post(environment.logisticsAPI + environment.logisticsAPIPackagings, body,{headers}).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('Empacotamento criado com sucesso!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao criar empacotamento!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.post(environment.logisticsAPI + environment.logisticsAPIPackagings, body,{headers,observe:'response'});
   }
 
   updatePackaging(packaging:Packaging): Observable<any> {

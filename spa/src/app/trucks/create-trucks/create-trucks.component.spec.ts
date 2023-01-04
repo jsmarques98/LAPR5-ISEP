@@ -48,10 +48,10 @@ describe('CreateTruckComponent', () => {
   it('onSubmit with invalid form', async () => {
     component.truckForm.controls['plate'].setValue('22-22-FA');
     component.truckForm.controls['name'].setValue('Popo');
-    component.truckForm.controls['autonomy'].setValue(1);
-    component.truckForm.controls['maxBattery'].setValue(1);
-    component.truckForm.controls['payLoad'].setValue(1);
-    component.truckForm.controls['tare'].setValue(1);
+    component.truckForm.controls['autonomy'].setValue('1');
+    component.truckForm.controls['maxBattery'].setValue('1');
+    component.truckForm.controls['payLoad'].setValue('1');
+    component.truckForm.controls['tare'].setValue('1');
     component.truckForm.controls['baterryChargingTime'].setValue(null);
     await component.createTruck();
     expect(component.truckForm.valid).toBeFalsy();
@@ -60,11 +60,11 @@ describe('CreateTruckComponent', () => {
   it('onSubmit with valid form', async () => {
     component.truckForm.controls['plate'].setValue('22-22-FA');
     component.truckForm.controls['name'].setValue('Popo');
-    component.truckForm.controls['autonomy'].setValue(1);
-    component.truckForm.controls['maxBattery'].setValue(1);
-    component.truckForm.controls['payLoad'].setValue(1);
-    component.truckForm.controls['tare'].setValue(1);
-    component.truckForm.controls['baterryChargingTime'].setValue(1);
+    component.truckForm.controls['autonomy'].setValue('1');
+    component.truckForm.controls['maxBattery'].setValue('1');
+    component.truckForm.controls['payLoad'].setValue('1');
+    component.truckForm.controls['tare'].setValue('1');
+    component.truckForm.controls['baterryChargingTime'].setValue('1');
     await component.createTruck();
     expect(component.truckForm.valid).toBeTruthy();
   });
@@ -102,14 +102,14 @@ describe('TruckService', () => {
           };
       
           service.addTruck(createdTruck).subscribe((data) => {
-            expect(data).toEqual(response.status);
+            expect(data.body).toEqual(201);
           });
       
           const req = httpController.expectOne({
             method: 'POST',
             url: `${url}api/trucks/`,
           });
-          req.flush(201);
+          req.flush(response.status);
       });
 
       it('create truck fail', () => {
@@ -124,20 +124,30 @@ describe('TruckService', () => {
             baterryChargingTime:60,
             active: 'true'
         };
+      
         const response = {
-          "status": 400,
+          "status": 402,
         };
-    
-        service.addTruck(createdTruck).subscribe((data) => {
-          expect(data).toEqual(response.status);
+
+        const trucks= service.addTruck(createdTruck).subscribe((data) => {
+  console.log(data)
+          expect(data.body).toEqual(402);
         });
-    
+        console.log(trucks)
         const req = httpController.expectOne({
           method: 'POST',
           url: `${url}api/trucks/`,
         });
-        req.flush(400);
+        req.flush(response.status);
+
+       
+      
+
+        
+    
+      
     });
     
   });
+
 });

@@ -39,38 +39,37 @@ export class CreateDeliveriesComponent implements OnInit {
     this.delivery.totalWeight=this.deliveryForm.value.deliveryTotalWeight!;
     const strNum = this.delivery.deliveryDate.replace(/[^0-9]/g, '')
     this.delivery.deliveryDate= strNum;
-    this.service.addDelivery(this.delivery).subscribe(res => {
+    this.service.addDelivery(this.delivery).subscribe(
+      (res) => {
+        this.mostrarNotificacao('Post Efetuado com sucesso!',false);
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        this.mostrarNotificacao("Post Efetuado sem sucesso!",true);
+      });
+  
+  }
+
+  updateWarehouse(e) {
+    this.delivery.deliveryWarehouseId=e.target.value
+  }
+
+  getAllWarehouses(){
+      
+    this.servieWarehouse.getWarehouses().subscribe(res => {
       if (res != null) {
-        this.mostrarNotificacao('Post Efetuado com sucesso!',false)
+        this.mostrarNotificacao('Armazéns obtidos com sucesso!',false)
+        this.warehouses = res;
       }else{
-        this.mostrarNotificacao('Post não efetuado!',true)
+        this.mostrarNotificacao('Erro ao obter os armazéns!',true)
       };
 
-    this.router.navigate(['/home']);
-  });
-  
-}
+    });
+  }
 
-updateWarehouse(e) {
-  this.delivery.deliveryWarehouseId=e.target.value
-}
-
-getAllWarehouses(){
-    
-  this.servieWarehouse.getWarehouses().subscribe(res => {
-    if (res != null) {
-      this.mostrarNotificacao('Armazéns obtidos com sucesso!',false)
-      this.warehouses = res;
-    }else{
-      this.mostrarNotificacao('Erro ao obter os armazéns!',true)
-    };
-
-  });
-}
-
-private mostrarNotificacao(mensagem: string, falha: boolean) {
-  var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
-  this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
-}
+  private mostrarNotificacao(mensagem: string, falha: boolean) {
+    var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
+    this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
+  }
 }
 

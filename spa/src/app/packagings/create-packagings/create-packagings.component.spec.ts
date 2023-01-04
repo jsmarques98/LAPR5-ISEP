@@ -59,7 +59,7 @@ describe('PackagingService', () => {
         };
     
         service.addPackaging(Packaging1).subscribe((data) => {
-          expect(data).toEqual(createdPackaging);
+          expect(data.body).toEqual(createdPackaging);
         });
     
         const req = httpController.expectOne({

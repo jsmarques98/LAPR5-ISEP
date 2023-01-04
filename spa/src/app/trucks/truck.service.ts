@@ -13,25 +13,13 @@ export class TruckService {
   }
  
 
-   addTruck(truck:Truck){
+   addTruck(truck: Truck) {
+    
     const token = localStorage.getItem('id_token')!;
-    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
-    const body=JSON.stringify(truck);
+    const headers = {'Authorization': 'Token ' + token, 'content-type': 'application/json'};
+    const body = JSON.stringify(truck);
   
-    return this.http.post(environment.logisticsAPI+environment.logisticsAPIPTrucks, body,{headers}).pipe(catchError(err => {
-      if (err.status == 201) {
-        this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
-      }
-      if (err.status == 402) {
-        this.mostrarNotificacao('POST EFETUADO SEM SUCESSO!',true);
-        this.mostrarNotificacao(err.error,true);
-      }
-      if (err.status == 500) {
-        this.mostrarNotificacao('POST INVÁLIDO:',true);
-        this.mostrarNotificacao(err.error,true);
-      }
-      return throwError(err);
-    }));
+    return this.http.post(environment.logisticsAPI + environment.logisticsAPIPTrucks, body, {headers,observe:'response'});
   }
 
   getTrucks(): Observable<any> {

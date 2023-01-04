@@ -15,12 +15,14 @@ export default class PackagingController implements IPackagingController /* TODO
   ) {}
 
   public async createPackaging(req: Request, res: Response, next: NextFunction) {
-    console.log("ESTOU AQUI!----------------------------------------------------------------------------------------------")
     try {
       const packagingOrError = await this.packagingServiceInstance.createPackaging(req.body as IPackagingDTO) as Result<IPackagingDTO>;
         
       if (packagingOrError.isFailure) {
-        return res.status(402).send();
+  
+    
+        return res.status(402).send(packagingOrError.error);
+       
       }
 
       const packagingDTO = packagingOrError.getValue();

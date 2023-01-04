@@ -19,18 +19,8 @@ export class DeliveryService {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(delivery);
     console.log(body)
-    return this.http.post(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries, body,{'headers':headers}).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('POST EFETUADO SEM SUCESSO!',true);
-      }
-      if (err.status == 500) {
-        this.mostrarNotificacao('POST INVÁLIDO:\n DEVE TER PELO MENOS 1 TAG EM COMUM COM ESSE UTILIZADOR!\n OU JÁ FEZ UM PEDIDO DE LIGAÇÃO!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.post(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries, body,{'headers':headers,observe:'response'});
+      
   }
 
   getDeliveries(): Observable<any> {

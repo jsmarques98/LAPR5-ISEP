@@ -17,19 +17,7 @@ export class WarehouseService {
   addWarehouse(warehouse:Warehouse): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(warehouse);
-    console.log(body)
-    return this.http.post(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses, body,{'headers':headers}).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.showNotification('POST EFETUADO COM SUCESSO!',false);
-      }
-      if (err.status == 400) {
-        this.showNotification('POST EFETUADO SEM SUCESSO!',true);
-      }
-      if (err.status == 500) {
-        this.showNotification('POST INVÁLIDO:\n DEVE TER PELO MENOS 1 TAG EM COMUM COM ESSE UTILIZADOR!\n OU JÁ FEZ UM PEDIDO DE LIGAÇÃO!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.post(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses, body,{'headers':headers,observe:'response'});
   }
 
   getWarehouses(): Observable<any> {

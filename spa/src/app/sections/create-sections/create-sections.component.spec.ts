@@ -58,7 +58,7 @@ describe('SectionService', () => {
         };
     
         service.addSection(Section1).subscribe((data) => {
-          expect(data).toEqual(createdSection);
+          expect(data.body).toEqual(createdSection);
         });
     
         const req = httpController.expectOne({
