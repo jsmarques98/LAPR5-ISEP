@@ -12,11 +12,11 @@
       </button>
     </li>
     <!--Including the pagination control.-->
-    <div class="text-right" style="width: 500px;color:black;">
+    <div class="text-right" style="width: 500px;color:black;position: absolute;margin-top: 100px;">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
       <!--<mat-paginator #paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>-->      
     </div>
-    <div style="margin-top: 20px;">
+    <div style="position: absolute;margin-top: 100px;">
       <button routerLink="/home">Exit</button>
     </div>
   </ul>

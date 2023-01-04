@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { WarehouseService } from 'src/app/warehouses/warehouse.service';
@@ -17,10 +17,10 @@ export class CreateSectionsComponent implements OnInit {
   sectionForm = this.fb.group({
 
 
-    duration:[],
-    distance:[],
-    energySpent:[],
-    extraTime:[],
+    duration:['',Validators.required],
+    distance:['',Validators.required],
+    energySpent:['',Validators.required],
+    extraTime:['',Validators.required],
   });
 
   
@@ -61,24 +61,25 @@ export class CreateSectionsComponent implements OnInit {
 
 
   createSection(){
-  
-    this.section.duration=this.sectionForm.value.duration!;
-    this.section.distance=this.sectionForm.value.distance!;
-    this.section.energySpent=this.sectionForm.value.energySpent!;
-    this.section.extraTime=this.sectionForm.value.extraTime!;
-   
-    this.service.addSection(this.section).subscribe( (res) => {
-      this.mostrarNotificacao('Post Efetuado com sucesso!',false);
-      this.router.navigate(['/home']);
-    },
-    (error) => {
-      if(error.status==402){
-        this.mostrarNotificacao(error.error,true);
+    if(this.sectionForm.valid){
+      this.section.duration=parseInt(this.sectionForm.value.duration!);
+      this.section.distance=parseInt(this.sectionForm.value.distance!);
+      this.section.energySpent=parseInt(this.sectionForm.value.energySpent!);
+      this.section.extraTime=parseInt(this.sectionForm.value.extraTime!);
+    
+      this.service.addSection(this.section).subscribe( (res) => {
+        this.mostrarNotificacao('Post Efetuado com sucesso!',false);
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        if(error.status==402){
+          this.mostrarNotificacao(error.error,true);
+        }
+      else{
+        this.mostrarNotificacao(error.error.errors.message,true);
       }
-    else{
-      this.mostrarNotificacao(error.error.errors.message,true);
-    }
-  });
+    });
+  }
   
 }
 
