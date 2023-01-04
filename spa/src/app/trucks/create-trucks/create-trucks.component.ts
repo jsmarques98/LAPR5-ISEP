@@ -45,21 +45,22 @@ export class CreateTrucksComponent implements OnInit {
     this.truck.active="true";
 
 
-    (await this.service.addTruck(this.truck)).subscribe(res => {
-      if (res != null) {
-
-        this.mostrarNotificacao('Post Efetuado com sucesso!',false)
-      }else{
-        this.mostrarNotificacao('Post não efetuado!',true)
-      };
-
-    this.router.navigate(['/home']);
-    });
+    this.service.addTruck(this.truck).subscribe(
+      (res) => {
+        console.log(res);
+        this.showNotification('Post Efetuado com sucesso!',false);
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        console.error(error);
+        this.showNotification('Post não efetuado!',true);
+      }
+    );
   }
   
 }
 
-private mostrarNotificacao(mensagem: string, falha: boolean) {
+private showNotification(mensagem: string, falha: boolean) {
   var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
   this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
 }

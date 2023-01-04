@@ -47,9 +47,9 @@ export class UpdateWarehousesComponent implements OnInit {
 
     this.service.updateWarehouse(this.warehouse).subscribe(res => {
       if (res != null) {
-        this.mostrarNotificacao('Armazém alterado com sucesso!',false)
+        this.showNotification('Armazém alterado com sucesso!',false)
       }else{
-        this.mostrarNotificacao('Erro ao alterar o armazém!',true)
+        this.showNotification('Erro ao alterar o armazém!',true)
       };
 
     this.router.navigate(['/home']);
@@ -57,7 +57,7 @@ export class UpdateWarehousesComponent implements OnInit {
   
 }
 
-private mostrarNotificacao(mensagem: string, falha: boolean) {
+private showNotification(mensagem: string, falha: boolean) {
   var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
   this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
 }

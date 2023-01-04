@@ -1,45 +1,42 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA  } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TruckService } from '../truck.service';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import { CreateTrucksComponent } from './create-trucks.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TruckService } from '../truck.service';
+import { CreateTrucksComponent } from './create-trucks.component';
+
   import { Truck1} from 'src/app/trucks/mockTrucks';
   import { Truck } from 'src/app/trucks/truck';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
+import { MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
-describe('CreateTruckComponentt', () => {
+
+describe('CreateTruckComponent', () => {
   let component: CreateTrucksComponent;
   let fixture: ComponentFixture<CreateTrucksComponent>;
-  let fakeTruckService: any;
+  let httpMock: any;
 
+  const mockSnackBar = {
+    open: (message: string, action: string, config) => {}
+  };
 
-    const mockSnackBar = {
-
-    };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CreateTrucksComponent ],
-      imports: [MatDialogModule,FormsModule,ReactiveFormsModule, BrowserAnimationsModule,MatCardModule,MatFormFieldModule,MatInputModule],
+      imports: [HttpClientTestingModule, MatDialogModule,FormsModule,ReactiveFormsModule, BrowserAnimationsModule,MatCardModule,MatFormFieldModule,MatInputModule],
       providers: [TruckService,{ provide: MatSnackBar, useValue: mockSnackBar } ,{ provide: MAT_DIALOG_DATA, useValue: {} },]
     }).compileComponents();
 
-    fakeTruckService = jasmine.createSpyObj('TruckService', ['addTruck']);
-    fakeTruckService.addTruck.and.returnValue(Promise.resolve({status: 201}));
-
-    TestBed.overrideProvider(TruckService, {useValue: fakeTruckService});
+    
+    httpMock = TestBed.get(HttpTestingController);
     fixture = TestBed.createComponent(CreateTrucksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     component.ngOnInit();
-    
-    
-    
   });
 
   it('should create', () => {

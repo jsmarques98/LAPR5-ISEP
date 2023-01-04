@@ -20,13 +20,13 @@ export class WarehouseService {
     console.log(body)
     return this.http.post(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
+        this.showNotification('POST EFETUADO COM SUCESSO!',false);
       }
       if (err.status == 400) {
-        this.mostrarNotificacao('POST EFETUADO SEM SUCESSO!',true);
+        this.showNotification('POST EFETUADO SEM SUCESSO!',true);
       }
       if (err.status == 500) {
-        this.mostrarNotificacao('POST INVÁLIDO:\n DEVE TER PELO MENOS 1 TAG EM COMUM COM ESSE UTILIZADOR!\n OU JÁ FEZ UM PEDIDO DE LIGAÇÃO!',true);
+        this.showNotification('POST INVÁLIDO:\n DEVE TER PELO MENOS 1 TAG EM COMUM COM ESSE UTILIZADOR!\n OU JÁ FEZ UM PEDIDO DE LIGAÇÃO!',true);
       }
       return throwError(err);
     }));
@@ -36,10 +36,10 @@ export class WarehouseService {
       
     return this.http.get<Warehouse[]>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Armazéns obtidos com sucesso!',false);
+        this.showNotification('Armazéns obtidos com sucesso!',false);
       }
       if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao obter armazéns!',true);
+        this.showNotification('Erro ao obter armazéns!',true);
       }
       return throwError(err);
     }));
@@ -49,10 +49,10 @@ export class WarehouseService {
 
     return this.http.get<Warehouse>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses + warehouseId).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Armazém obtido com sucesso!',false);
+        this.showNotification('Armazém obtido com sucesso!',false);
       }
       if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao obter armazém!',true);
+        this.showNotification('Erro ao obter armazém!',true);
       }
       return throwError(err);
     }));
@@ -64,11 +64,11 @@ export class WarehouseService {
     const warehouseId = warehouse.id;
     return this.http.put(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses + warehouseId, body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Armazém alterado com sucesso!',false);
+        this.showNotification('Armazém alterado com sucesso!',false);
       }
       if (err.status == 500) {
         
-        this.mostrarNotificacao(err,true);
+        this.showNotification(err,true);
       }
       return throwError(err);
     }));
@@ -78,10 +78,10 @@ export class WarehouseService {
 
     return this.http.delete<Warehouse>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses+ warehouseId,).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Armazém removido com sucesso! Id armazém=${warehouseId}',false);
+        this.showNotification('Armazém removido com sucesso! Id armazém=${warehouseId}',false);
       }
       if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao remover armazém!',true);
+        this.showNotification('Erro ao remover armazém!',true);
       }
       return throwError(err);
     }));
@@ -92,10 +92,10 @@ export class WarehouseService {
     const body=JSON.stringify(warehouseId);
     return this.http.patch<any>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses + warehouseId + '/soft', body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Armazém inibido com sucesso!',false);
+        this.showNotification('Armazém inibido com sucesso!',false);
       }
       if(err.status == 500){
-        this.mostrarNotificacao('Não existe esse armazém', true);
+        this.showNotification('Não existe esse armazém', true);
       }
       return throwError(err);
     }))
@@ -106,16 +106,16 @@ export class WarehouseService {
     const body=JSON.stringify(warehouseId);
     return this.http.patch<any>(environment.warehouseManagementAPI+environment.warehouseManagementAPIWarehouses + warehouseId,  body,{'headers':headers}).pipe(catchError(err => {
       if (err.status == 200) {
-        this.mostrarNotificacao('Armazém ativado com sucesso!',false);
+        this.showNotification('Armazém ativado com sucesso!',false);
       }
       if(err.status == 500){
-        this.mostrarNotificacao('Não existe esse armazém', true);
+        this.showNotification('Não existe esse armazém', true);
       }
       return throwError(err);
     }))
   }
 
-  private mostrarNotificacao(mensagem: string, falha: boolean) {
+  private showNotification(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
     this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
   }

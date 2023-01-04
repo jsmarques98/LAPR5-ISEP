@@ -13,16 +13,16 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class CreateWarehousesComponent implements OnInit {
 
   warehouseForm = this.fb.group({
-    id: [''],
-    warehouseDesignation: [''],
-    warehouseStreet: [],
-    warehouseDoorNumber: [],
-    warehousePostCode:[],
-    warehouseCity: [],
-    warehouseLatitude: [],
-    warehouseLongitude: [],
-    warehouseAltitude: [],
-    warehouseActive: [],    
+    id: ['',Validators.required],
+    warehouseDesignation: ['',Validators.required],
+    warehouseStreet: ['',Validators.required],
+    warehouseDoorNumber: [0,Validators.required],
+    warehousePostCode:['',Validators.required],
+    warehouseCity: ['',Validators.required],
+    warehouseLatitude: [0,Validators.required],
+    warehouseLongitude: [0,Validators.required],
+    warehouseAltitude: [0,Validators.required],
+    warehouseActive: ['',Validators.required],    
   });
 
   warehouse = new Warehouse();
@@ -47,19 +47,20 @@ export class CreateWarehousesComponent implements OnInit {
 
 
     
-    this.service.addWarehouse(this.warehouse).subscribe(res => {
-      if (res != null) {
-        this.mostrarNotificacao('Post Efetuado com sucesso!',false)
-      }else{
-        this.mostrarNotificacao('Post não efetuado!',true)
-      };
-
-    this.router.navigate(['/home']);
-  });
-  
+    this.service.addWarehouse(this.warehouse).subscribe(
+      (res) => {
+        console.log(res);
+        this.showNotification('Post Efetuado com sucesso!',false);
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        console.error(error);
+        this.showNotification('Post não efetuado!',true);
+      }
+    );
 }
 
-private mostrarNotificacao(mensagem: string, falha: boolean) {
+private showNotification(mensagem: string, falha: boolean) {
   var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
   this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
 }
