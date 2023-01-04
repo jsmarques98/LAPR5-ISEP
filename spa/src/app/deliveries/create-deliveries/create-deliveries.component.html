@@ -9,7 +9,7 @@
         
         <br> 
        
-        <select #cricket (change)="updateWarehouse($event)">
+        <select id="selectWarehouse" #cricket (change)="updateWarehouse($event)">
             <option value="default">choose a warehouse</option>
             <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
                 {{warehouse.designation}}

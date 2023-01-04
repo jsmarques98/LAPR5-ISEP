@@ -23,7 +23,7 @@ export const environment = {
   logisticsAPIPlanningHeuristicMass:"plannings/routeHeuristicMass",
   logisticsAPIPlanningHeuristicTime:"plannings/routeHeuristicTime",
   logisticsAPIPlanningHeuristicTimeAndMass:"plannings/routeHeuristicTimeAndMass",
-  logisticsAPIInactiveTrucks:"trucks/soft",
+  logisticsAPIInactiveTrucks:"trucks/inactive",
   logisticsAPIActiveTrucks:"trucks/active",
   logisticsAPIRoles:"roles/",
 

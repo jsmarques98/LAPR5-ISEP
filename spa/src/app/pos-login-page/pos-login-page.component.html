@@ -10,22 +10,22 @@
 <br>
 <section>
     <ul>
-      <li><a *ngIf="admin || warehouseManager" href="/createDeliveries">Create Deliveries</a></li>
-      <li><a *ngIf="admin || logisticsManager" href="/createPackagings">Create Packagings</a></li>
-      <li><a *ngIf="admin || logisticsManager" href="/updatePackagings">Update Packagings</a></li>
-      <li><a *ngIf="admin || fleetManager" href="/createTrucks">Create Trucks</a></li>
-      <li><a *ngIf="admin || logisticsManager" href="/createSections">Create Sections</a></li>
-      <li><a *ngIf="admin || warehouseManager" href="/createWarehouses">Create Warehouses</a></li>
-      <li><a *ngIf="admin || logisticsManager" href="/checkBestRoute">Check Route Planning</a></li>
-      <li><a *ngIf="admin || warehouseManager" href="/getDeliveries">Get Deliveries</a></li>
-      <li><a *ngIf="admin || logisticsManager" href="/getSections">Get Sections</a></li>
-      <li><a *ngIf="admin || logisticsManager" href="/getTrucks">Get Trucks</a></li>
-      <li><a *ngIf="admin || warehouseManager" href="/getWarehouses">Get Warehouses</a></li>
-      <li><a *ngIf="admin || warehouseManager" href="/updateWarehouses">Update Warehouses</a></li>
-      <li><a *ngIf="admin || warehouseManager" href="/getWarehousesById">Get Warehouses by Id</a></li>
-      <li><a *ngIf="admin || warehouseManager" href="/getPackagings">Get Packagings </a></li>
-      <li><a *ngIf="admin " href="/registerUser">Register user </a></li>
-      <li><a *ngIf="admin " href="/deleteUser">Delete user </a></li>
-      <li><a *ngIf="admin " href="http://127.0.0.1:5555/roadNetowrk/RoadNetwork.html">Road Network </a></li>
+      <li><a id="createDeliveries" *ngIf="admin || warehouseManager" href="/createDeliveries">Create Deliveries</a></li>
+      <li><a id="createPackagings" *ngIf="admin || logisticsManager" href="/createPackagings">Create Packagings</a></li>
+      <li><a id="updatePackagings" *ngIf="admin || logisticsManager" href="/updatePackagings">Update Packagings</a></li>
+      <li><a id="createTrucks" *ngIf="admin || fleetManager" href="/createTrucks">Create Trucks</a></li>
+      <li><a id="createSections" *ngIf="admin || logisticsManager" href="/createSections">Create Sections</a></li>
+      <li><a id="createWarehouses" *ngIf="admin || warehouseManager" href="/createWarehouses">Create Warehouses</a></li>
+      <li><a id="checkBestRoute" *ngIf="admin || logisticsManager" href="/checkBestRoute">Check Route Planning</a></li>
+      <li><a id="getDeliveries" *ngIf="admin || warehouseManager" href="/getDeliveries">Get Deliveries</a></li>
+      <li><a id="getSections" *ngIf="admin || logisticsManager" href="/getSections">Get Sections</a></li>
+      <li><a id="getTrucks" *ngIf="admin || logisticsManager" href="/getTrucks">Get Trucks</a></li>
+      <li><a id="getWarehouses" *ngIf="admin || warehouseManager" href="/getWarehouses">Get Warehouses</a></li>
+      <li><a id="updateWarehouses" *ngIf="admin || warehouseManager" href="/updateWarehouses">Update Warehouses</a></li>
+      <li><a id="getWarehousesById" *ngIf="admin || warehouseManager" href="/getWarehousesById">Get Warehouses by Id</a></li>
+      <li><a id="getPackagings" *ngIf="admin || warehouseManager" href="/getPackagings">Get Packagings </a></li>
+      <li><a id="registerUser" *ngIf="admin " href="/registerUser">Register user </a></li>
+      <li><a id="deleteUser" *ngIf="admin " href="/deleteUser">Delete user </a></li>
+      <li><a id="roadNetowrk" *ngIf="admin " href="http://127.0.0.1:5555/roadNetowrk/RoadNetwork.html">Road Network </a></li>
     </ul>
   </section>
