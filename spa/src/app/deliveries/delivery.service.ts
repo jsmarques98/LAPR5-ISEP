@@ -25,42 +25,17 @@ export class DeliveryService {
 
   getDeliveries(): Observable<any> {
       
-    return this.http.get<Delivery[]>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao obter entregas!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.get<Delivery[]>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries)
   }
 
   getDelivery(id : string): Observable<any> {
     
-    return this.http.get<Delivery>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries+id).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao obter entregas!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.get<Delivery>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries+id)
   }
 
   deleteDeliverie(deliveryId: string): Observable<any> {
   
-    return this.http.delete<any>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries+ deliveryId).pipe(catchError(err => {
-     
-      if (err.status == 200) {
-        this.mostrarNotificacao('Delivey removido com sucesso! Id Delivey=${deliveryId}',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao remover Delivey!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.delete<any>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries+ deliveryId)
   }
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {

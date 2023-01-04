@@ -41,11 +41,11 @@ export class CreateDeliveriesComponent implements OnInit {
     this.delivery.deliveryDate= strNum;
     this.service.addDelivery(this.delivery).subscribe(
       (res) => {
-        this.mostrarNotificacao('Post Efetuado com sucesso!',false);
+        this.mostrarNotificacao('Delivery criada com sucesso!',false);
         this.router.navigate(['/home']);
       },
       (error) => {
-        this.mostrarNotificacao("Post Efetuado sem sucesso!",true);
+        this.mostrarNotificacao("Erro ao criar Delivery !",true);
       });
   
   }
