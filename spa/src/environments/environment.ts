@@ -8,6 +8,7 @@ export const environment = {
   logisticsAPI:"http://localhost:3000/api/",
 
   logisticsAPILogin:"auth/ssosignin",
+  logisticsAPISignIn:"auth/signin",
   logisticsAPILogout:"auth/logout",
   logisticsAPIRegistUsers:"auth/signup",
   logisticsAPIDeleteUsers:"users/",

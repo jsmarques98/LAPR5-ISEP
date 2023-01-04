@@ -11,12 +11,18 @@ import { User } from '../user';
 export class ProfileComponent implements OnInit {
   user:User;
   image;
+  loginType;
   constructor(private loginService: LoginService,private router: Router) { }
 
   ngOnInit(): void {
     this.loginService.getUserDetails().subscribe(res => {
       this.user= res;
-      this.image=localStorage.getItem("profileimage");
+      if(localStorage.getItem("loginType") === "0"){
+        this.loginType=true;
+        this.image = localStorage.getItem("profileimage");
+      }else{
+        this.loginType=false;
+      }
       
     })    
   }

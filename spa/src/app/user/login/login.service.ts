@@ -20,7 +20,7 @@ export class LoginService {
     } 
 
 
-   login(email:string){
+  login(email:string){
     return this.http.post(environment.logisticsAPI+environment.logisticsAPILogin,{email:email});
   }
 
@@ -34,6 +34,10 @@ export class LoginService {
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     return this.http.get<User>(environment.logisticsAPI+environment.logisticsAPIUserInfo,{headers});
+  }
+
+  sigIn(email:string,password:string){
+    return this.http.post(environment.logisticsAPI+environment.logisticsAPISignIn,{email:email,password:password});
   }
 
 

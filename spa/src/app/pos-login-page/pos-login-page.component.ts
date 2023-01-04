@@ -9,8 +9,16 @@ import { LoginService } from '../user/login/login.service';
 })
 export class PosLoginPageComponent implements OnInit {
   constructor(private router: Router, private loginService : LoginService,private elementRef: ElementRef) { }
-  userimage = localStorage.getItem("profileimage")
+  userimage;
+  imageType;
+  
   ngOnInit(): void {
+    if(localStorage.getItem("loginType") === "0"){
+      this.imageType=true;
+      this.userimage = localStorage.getItem("profileimage");
+    }else{
+      this.imageType=false;
+    }
   }
   
   admin=Boolean(localStorage.getItem("admin"));

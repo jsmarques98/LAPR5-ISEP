@@ -1,2 +1,17 @@
-<h2>Login</h2>
+<h2>Login with google</h2>
 <asl-google-signin-button></asl-google-signin-button>
+
+<section>
+    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Login with email and password</h2>
+    <form [formGroup] = "userForm">
+        <div>
+            <input type="text" class="form-control" id="userEmail" placeholder="Email" formControlName="email">
+        </div>
+        <br>
+
+        <div>
+            <input type="password" class="form-control" id="userPassword" placeholder="Password" formControlName="password">
+        </div>
+        <button style="margin-top: 10px;" type="submit" class="btn btn-primary w-100" (click)="login()">Login</button>
+    </form>
+  </section>

@@ -1,4 +1,5 @@
-<img [src]="image">
+<img *ngIf="loginType" [src]="image">
+<img *ngIf="!loginType" src="../../../assets/usericon.png">
 <p class="text">First Name: {{ user.firstName }}</p>
 <p class="text">Last Name: {{ user.lastName }}</p>
 <p class="text">Email: {{ user.email }}</p>

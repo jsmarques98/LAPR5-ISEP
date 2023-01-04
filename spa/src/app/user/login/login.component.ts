@@ -15,7 +15,12 @@ export class LoginComponent implements OnInit {
   user: SocialUser;
   loggedIn: boolean;
 
-  constructor(private authService: SocialAuthService, private router: Router, private loginService : LoginService) {
+  userForm = this.fb.group({
+    email: ['',Validators.required],
+    password: ['',Validators.required] 
+  });
+
+  constructor(private fb: FormBuilder,private authService: SocialAuthService, private router: Router, private loginService : LoginService) {
     localStorage.setItem("admin","");
     localStorage.setItem("warehouseManager","");
     localStorage.setItem("fleetManager","");
@@ -32,6 +37,7 @@ export class LoginComponent implements OnInit {
         if(aux.token != null && aux.userDTO != null){
           this.loginService.setSession(res);
           localStorage.setItem("profileimage",user.photoUrl)
+          localStorage.setItem("loginType","0");
 
           switch ( aux.userDTO.role ) {
             case "Administrator":
@@ -57,6 +63,37 @@ export class LoginComponent implements OnInit {
     });
 
 
+  }
+
+  login(){
+    let aux ;
+    this.loginService.sigIn(this.userForm.value.email!,this.userForm.value.password!).subscribe(res => {
+      aux = res;
+      if(aux.token != null && aux.userDTO != null){
+        this.loginService.setSession(res);
+        
+        localStorage.setItem("loginType","1");
+        switch ( aux.userDTO.role ) {
+          case "Administrator":
+            localStorage.setItem("admin","true");
+              break;
+          case "Logistics Manager":
+            localStorage.setItem("logisticsManager","true");
+              break;
+          case "Fleet Manager":
+            localStorage.setItem("fleetManager","true");
+              break;
+          case "Warehouse Manager":
+            localStorage.setItem("warehouseManager","true");
+              break;
+       }
+       this.router.navigate(["/home"])
+
+
+      }else{
+        this.router.navigate(["/login"])
+      }
+    })
   }
 
 
