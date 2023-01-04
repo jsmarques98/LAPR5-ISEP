@@ -58,7 +58,6 @@ describe('CreateWarehousesComponent', () => {
     component.warehouseForm.controls['warehouseLatitude'].setValue(null);
     component.warehouseForm.controls['warehouseLongitude'].setValue(null);
     component.warehouseForm.controls['warehouseAltitude'].setValue(null);
-    component.warehouseForm.controls['warehouseActive'].setValue('true');
     await component.createWarehouse();
     expect(component.warehouseForm.valid).toBeFalsy();
   });
@@ -73,7 +72,6 @@ describe('CreateWarehousesComponent', () => {
     component.warehouseForm.controls['warehouseLatitude'].setValue(60);
     component.warehouseForm.controls['warehouseLongitude'].setValue(60);
     component.warehouseForm.controls['warehouseAltitude'].setValue(1);
-    component.warehouseForm.controls['warehouseActive'].setValue('true');
     await component.createWarehouse();
     expect(component.warehouseForm.valid).toBeTruthy();
   });

@@ -23,7 +23,7 @@ namespace DDDSample1.Domain.Warehouses
         }
 
         private Boolean Validate(long Id){
-            if(Id>0)
+            if(Id>0 != null)
                 return true;
 
             throw new Exception("ID cannot be negative");

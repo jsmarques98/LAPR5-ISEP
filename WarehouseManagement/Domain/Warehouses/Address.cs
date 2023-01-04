@@ -29,7 +29,7 @@ namespace DDDSample1.Domain.Warehouses{
         }
         
         private Boolean ValidateDoorNumber(int DoorNumber){
-            if(DoorNumber >= 0)
+            if(DoorNumber >= 0 && DoorNumber != null)
                 return true;
 
             throw new Exception("Door number cannot be negative");

@@ -21,8 +21,7 @@ export class CreateWarehousesComponent implements OnInit {
     warehouseCity: ['',Validators.required],
     warehouseLatitude: [0,Validators.required],
     warehouseLongitude: [0,Validators.required],
-    warehouseAltitude: [0,Validators.required],
-    warehouseActive: ['',Validators.required],    
+    warehouseAltitude: [0,Validators.required],    
   });
 
   warehouse = new Warehouse();
@@ -43,7 +42,7 @@ export class CreateWarehousesComponent implements OnInit {
     this.warehouse.latitude=this.warehouseForm.value.warehouseLatitude!;
     this.warehouse.longitude=this.warehouseForm.value.warehouseLongitude!;
     this.warehouse.altitude=this.warehouseForm.value.warehouseAltitude!;
-    this.warehouse.active=this.warehouseForm.value.warehouseActive!;
+    this.warehouse.active="true";
 
 
     
@@ -54,7 +53,7 @@ export class CreateWarehousesComponent implements OnInit {
         this.router.navigate(['/home']);
       },
       (error) => {
-        console.error(error);
+        console.error(error.error.errors.message);
         this.showNotification('Post não efetuado!',true);
       }
     );

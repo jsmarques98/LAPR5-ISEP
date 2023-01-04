@@ -19,20 +19,20 @@ namespace DDDSample1.Domain.Warehouses{
         }
         
         private Boolean ValidateLatitude(double latitude){
-            if(latitude>=0 && latitude <=90)
+            if(latitude>=0 && latitude <=90 && latitude != null)
                 return true;
 
             throw new Exception("Latitude cannot be negative or bigger than 90 degrees");
         }
         private Boolean ValidateLongitude(double longitude){
-            if(longitude>=0 && longitude <=180)
+            if(longitude>=0 && longitude <=180 && longitude != null)
                 return true;
 
             throw new Exception("Longitude cannot be negative or bigger than 180 degrees");
         }
 
         private Boolean ValidateAltitude(double altitude){
-            if(altitude>=0)
+            if(altitude>=0 && altitude != null)
                 return true;
 
             throw new Exception("Altitude cannot be negative");
