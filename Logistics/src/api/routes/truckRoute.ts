@@ -77,7 +77,7 @@ export default (app: Router) => {
 
 
 
-    route.delete('/:soft',middlewares.isAuth,
+    route.patch('/:soft',middlewares.isAuth,
     celebrate({
       body: Joi.object({
         Plate:Joi.string().required()

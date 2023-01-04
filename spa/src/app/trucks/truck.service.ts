@@ -13,8 +13,7 @@ export class TruckService {
   }
  
 
- 
-  addTruck(truck:Truck): Observable<any> {
+   addTruck(truck:Truck){
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     const body=JSON.stringify(truck);
@@ -66,7 +65,7 @@ export class TruckService {
              body : {'Plate' : plate}     }
     
           
-        return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIInactiveTrucks, inactiveOptions).pipe(catchError(err => {
+        return this.http.patch<any>(environment.logisticsAPI+environment.logisticsAPIInactiveTrucks, inactiveOptions).pipe(catchError(err => {
        
           if (err.status == 200) {
             this.mostrarNotificacao(err.error,false);

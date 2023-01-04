@@ -1,52 +1,121 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA  } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TruckService } from '../truck.service';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { CreateTrucksComponent } from './create-trucks.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
-import {
-    HttpClientTestingModule,
-    HttpTestingController,
-  } from '@angular/common/http/testing';
-  
   import { Truck1} from 'src/app/trucks/mockTrucks';
-  import { TruckService } from 'src/app/trucks/truck.service';
   import { Truck } from 'src/app/trucks/truck';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-/*import { CreateTrucksComponent } from './create-trucks.component';
 
-describe('CreateTrucksComponent', () => {
+describe('CreateTruckComponentt', () => {
   let component: CreateTrucksComponent;
   let fixture: ComponentFixture<CreateTrucksComponent>;
+  let fakeTruckService: any;
 
+
+    const mockSnackBar = {
+
+    };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateTrucksComponent ]
-    })
-    .compileComponents();
+      declarations: [ CreateTrucksComponent ],
+      imports: [MatDialogModule,FormsModule,ReactiveFormsModule, BrowserAnimationsModule,MatCardModule,MatFormFieldModule,MatInputModule],
+      providers: [TruckService,{ provide: MatSnackBar, useValue: mockSnackBar } ,{ provide: MAT_DIALOG_DATA, useValue: {} },]
+    }).compileComponents();
 
+    fakeTruckService = jasmine.createSpyObj('TruckService', ['addTruck']);
+    fakeTruckService.addTruck.and.returnValue(Promise.resolve({status: 201}));
+
+    TestBed.overrideProvider(TruckService, {useValue: fakeTruckService});
     fixture = TestBed.createComponent(CreateTrucksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.ngOnInit();
+    
+    
+    
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});*/
+
+
+
+  it('onSubmit with invalid form', async () => {
+    component.truckForm.controls['plate'].setValue('22-22-FA');
+    component.truckForm.controls['name'].setValue('Popo');
+    component.truckForm.controls['autonomy'].setValue(1);
+    component.truckForm.controls['maxBattery'].setValue(1);
+    component.truckForm.controls['payLoad'].setValue(1);
+    component.truckForm.controls['tare'].setValue(1);
+    component.truckForm.controls['baterryChargingTime'].setValue(null);
+    await component.createTruck();
+    expect(component.truckForm.valid).toBeFalsy();
+  });
+
+  it('onSubmit with valid form', async () => {
+    component.truckForm.controls['plate'].setValue('22-22-FA');
+    component.truckForm.controls['name'].setValue('Popo');
+    component.truckForm.controls['autonomy'].setValue(1);
+    component.truckForm.controls['maxBattery'].setValue(1);
+    component.truckForm.controls['payLoad'].setValue(1);
+    component.truckForm.controls['tare'].setValue(1);
+    component.truckForm.controls['baterryChargingTime'].setValue(1);
+    await component.createTruck();
+    expect(component.truckForm.valid).toBeTruthy();
+  });
+});
 
 describe('TruckService', () => {
-  let service: TruckService;
-  let httpController: HttpTestingController;
-
-  let url = 'http://localhost:3000/';
+  describe('TruckService', () => {
+    let service: TruckService;
+    let httpController: HttpTestingController;
   
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, MatSnackBarModule],
+    let url = 'http://localhost:3000/';
+    
+      beforeEach(() => {
+        TestBed.configureTestingModule({
+          imports: [HttpClientTestingModule, MatSnackBarModule],
+        });
+        service = TestBed.inject(TruckService);
+        httpController = TestBed.inject(HttpTestingController);
       });
-      service = TestBed.inject(TruckService);
-      httpController = TestBed.inject(HttpTestingController);
-    });
+  
+      it('create truck sucess', () => {
+          const createdTruck: Truck = {
+              domainId: "25",
+              plate: "24-MT-77",
+              name: "POPO do JOSE",
+              autonomy: 25,
+              maxBattery: 100,
+              payLoad: 1000,
+              tare: 2000,
+              baterryChargingTime:60,
+              active: 'true'
+          };
+          const response = {
+            "status": 201,
+          };
+      
+          service.addTruck(createdTruck).subscribe((data) => {
+            expect(data).toEqual(response.status);
+          });
+      
+          const req = httpController.expectOne({
+            method: 'POST',
+            url: `${url}api/trucks/`,
+          });
+          req.flush(201);
+      });
 
-    it('should call addTruck', () => {
+      it('create truck fail', () => {
         const createdTruck: Truck = {
             domainId: "25",
             plate: "24-MT-77",
@@ -54,20 +123,24 @@ describe('TruckService', () => {
             autonomy: 25,
             maxBattery: 100,
             payLoad: 1000,
-            tare: 2000,
+            tare: -2000,
             baterryChargingTime:60,
             active: 'true'
         };
+        const response = {
+          "status": 400,
+        };
     
-        service.addTruck(Truck1).subscribe((data) => {
-          expect(data).toEqual(createdTruck);
+        service.addTruck(createdTruck).subscribe((data) => {
+          expect(data).toEqual(response.status);
         });
     
         const req = httpController.expectOne({
           method: 'POST',
           url: `${url}api/trucks/`,
         });
-    
-        req.flush(createdTruck);
+        req.flush(400);
     });
-})
+    
+  });
+});

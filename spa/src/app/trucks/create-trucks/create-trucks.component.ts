@@ -15,13 +15,13 @@ export class CreateTrucksComponent implements OnInit {
 
   truckForm = this.fb.group({
 
-    plate: [''],
-    name: [''],
-    autonomy: [],
-    maxBattery: [],
-    payLoad:[],
-    tare:[],
-    baterryChargingTime:[],
+    plate: ['',Validators.required],
+    name: ['',Validators.required],
+    autonomy: [0,Validators.required],
+    maxBattery: [0,Validators.required],
+    payLoad:[0,Validators.required],
+    tare:[0,Validators.required],
+    baterryChargingTime:[0,Validators.required],
 
 
   });
@@ -33,9 +33,8 @@ export class CreateTrucksComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createTruck(){
-    
-
+  async createTruck(){
+    if(this.truckForm.valid){
     this.truck.plate=this.truckForm.value.plate!;
     this.truck.name=this.truckForm.value.name!;
     this.truck.autonomy=this.truckForm.value.autonomy!;
@@ -46,7 +45,7 @@ export class CreateTrucksComponent implements OnInit {
     this.truck.active="true";
 
 
-    this.service.addTruck(this.truck).subscribe(res => {
+    (await this.service.addTruck(this.truck)).subscribe(res => {
       if (res != null) {
 
         this.mostrarNotificacao('Post Efetuado com sucesso!',false)
@@ -55,7 +54,8 @@ export class CreateTrucksComponent implements OnInit {
       };
 
     this.router.navigate(['/home']);
-  });
+    });
+  }
   
 }
 
