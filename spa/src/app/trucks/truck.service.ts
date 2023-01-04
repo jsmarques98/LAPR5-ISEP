@@ -18,8 +18,7 @@ export class TruckService {
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization': 'Token ' + token, 'content-type': 'application/json'};
     const body = JSON.stringify(truck);
-  
-    return this.http.post(environment.logisticsAPI + environment.logisticsAPIPTrucks, body, {headers,observe:'response'});
+   return this.http.post(environment.logisticsAPI + environment.logisticsAPIPTrucks, body, {headers,observe:'response'});
   }
 
   getTrucks(): Observable<any> {
@@ -49,11 +48,9 @@ export class TruckService {
   inactiveTruck(plate : string): Observable<any> {
     try{
       const token = localStorage.getItem('id_token')!;
-      let inactiveOptions =  {headers: new HttpHeaders({'Authorization' : 'Token ' + token, 'Content-Type': 'application/json' }),
-             body : {'Plate' : plate}     }
-    
+      let inactiveOptions =  {headers: new HttpHeaders({'Authorization' : 'Token ' + token, 'Content-Type': 'application/json' }), }
           
-        return this.http.patch<any>(environment.logisticsAPI+environment.logisticsAPIInactiveTrucks, inactiveOptions).pipe(catchError(err => {
+        return this.http.patch<any>(environment.logisticsAPI+environment.logisticsAPIInactiveTrucks, {'Plate' : plate}, inactiveOptions).pipe(catchError(err => {
        
           if (err.status == 200) {
             this.mostrarNotificacao(err.error,false);
