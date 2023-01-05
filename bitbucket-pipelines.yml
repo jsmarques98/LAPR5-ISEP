@@ -36,7 +36,7 @@ pipelines:
             variables:
               SSH_USER: 'root'
               SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
-              COMMAND: 'pm2 delete spa'
+              COMMAND: 'pkill -f "npm start"'
               MODE: 'command' 
               PORT: '10113' 
               SSH_KEY: '$MYKEY'
