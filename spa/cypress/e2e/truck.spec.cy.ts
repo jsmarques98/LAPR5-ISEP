@@ -36,8 +36,6 @@ describe('Create trucks', () => {
       cy.get("#BaterryChargingTime").type("60")
       cy.get("#createTruck").click()
       cy.wait(1000)
-
-      
     })
 
     it('Create truck invalid tare (negative)', () => {
@@ -107,8 +105,6 @@ describe('Create trucks', () => {
       cy.wait(1000)
       cy.get("#Delete").click()
       cy.wait(1000)
-
     })
-
   })
 

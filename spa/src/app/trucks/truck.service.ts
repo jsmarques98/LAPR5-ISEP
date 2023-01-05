@@ -24,7 +24,7 @@ export class TruckService {
   getTrucks(): Observable<any> {
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
-    return this.http.get<Truck[]>(environment.logisticsAPI+environment.logisticsAPIPTrucks,{headers});
+    return this.http.get<Truck[]>(environment.logisticsAPI+environment.logisticsAPIPTrucks,{headers,observe:'response'});
   }
 
   deleteTruck(plate : string): Observable<any> {
