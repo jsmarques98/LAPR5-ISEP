@@ -43,6 +43,18 @@ pipelines:
               SSH_KEY: $MYKEY
               EXTRA_ARGS: ["-P","10113"]
               
+    - step:
+        name: Start spa
+        script:
+          - pipe: atlassian/ssh-run:0.4.1
+            variables:
+              SSH_USER: 'root'
+              SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+              COMMAND: '/deploy.sh'
+              MODE: 'command'
+              PORT: '10113'
+              SSH_KEY: '$MYKEY'
+              
               
     - step:
         name: Stop Node
