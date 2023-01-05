@@ -28,6 +28,8 @@ export default class PlanningController implements IPlanningController /* TODO: 
 
       const rolePosts = PlanningOrError.getValue();
       res.status(200);
+     
+      
       return  res.json(rolePosts);
     }
     catch (e) {
@@ -94,6 +96,25 @@ export default class PlanningController implements IPlanningController /* TODO: 
       return next(e);
     }
   };
+  public async getGenetic(req: Request, res: Response, next: NextFunction) {
+    try {
+      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, routeList: []} as IPlanningDTO;
+      const PlanningOrError = await this.planningServiceInstance.getGenetic(planningDTO) as Result<IPlanningDTO>
+
+      if (PlanningOrError.isFailure) {
+          return res.status(400).send();
+      }
+
+      const rolePosts = PlanningOrError.getValue();
+      res.status(200);
+      return  res.json(rolePosts);
+    }
+    catch (e) {
+      console.log(e);
+      return next(e);
+    }
+  };
+
 
 
 }

@@ -27,7 +27,7 @@ export default class PlanningService implements IPlanningService {
 
        for(i=0;i<trucks.length ;i++){
        let  truck=trucks[i];
-        await axios.get(config.planningAPIURL+config.loadTruckURL,{ params: { truckName: truck.name,tara:truck.tare,
+        await axios.get(config.planningAPIURL+config.loadTruckURL,{ params: { truckName: truck.plate,tara:truck.tare,
           capacidade_carga:truck.payLoad,carga_total_baterias:truck.maxBattery, 
           autonomia:truck.autonomy,t_recarr_bat_20a80:truck.baterryChargingTime} }).
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
@@ -40,7 +40,7 @@ export default class PlanningService implements IPlanningService {
   public async loadDeliveriesKnowledgeDataBase(){
     let route;
     let route2;
-      let deliveries= await axios.get(WarehouseManagementApiURL+config.deliveriesAPIWarehouseManagementURL).then((response) => {route = response.data}).catch(() => {
+      let deliveries= await axios.get(config.WarehouseManagementApiURL+config.deliveriesAPIWarehouseManagementURL).then((response) => {route = response.data}).catch(() => {
         });
 
        let i;
@@ -59,7 +59,7 @@ export default class PlanningService implements IPlanningService {
     let route;
     let route2;
 
-      let warehouses= await axios.get(WarehouseManagementApiURL+config.warehousesAPIWarehouseManagementURL).then((response) => {route = response.data}).catch(() => {
+      let warehouses= await axios.get(config.WarehouseManagementApiURL+config.warehousesAPIWarehouseManagementURL).then((response) => {route = response.data}).catch(() => {
         throw new Error("Delivery does not exist!");
         });
 
@@ -106,9 +106,9 @@ public async deleteKnowledgeDataBase(){
 
   public async getBestRoute(planningDTO : IPlanningDTO): Promise<Result<IPlanningDTO>> {
 
-     this.deleteKnowledgeDataBase()
-     this.loadWarehousesKnowledgeDataBase()
-     this.loadTrucksKnowledgeDataBase()
+    this.deleteKnowledgeDataBase()
+    this.loadWarehousesKnowledgeDataBase()
+    this.loadTrucksKnowledgeDataBase()
     this.loadDeliveriesKnowledgeDataBase()
   
     await this.loadSectionsKnowledgeDataBase()
@@ -130,15 +130,18 @@ public async deleteKnowledgeDataBase(){
   }
 
   public async getRouteHeuristicTime(planningDTO : IPlanningDTO): Promise<Result<IPlanningDTO>> {
+    this.deleteKnowledgeDataBase()
+    this.loadWarehousesKnowledgeDataBase()
+    this.loadTrucksKnowledgeDataBase()
+   this.loadDeliveriesKnowledgeDataBase()
+   await this.loadSectionsKnowledgeDataBase()
     try {
       let route;
 
       await axios.get(config.planningAPIURL+config.planningAPIHeuristicTimeURL,{ params: { truckName: planningDTO.truckName, deliveryDate:planningDTO.deliveryDate } }).
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
-    
-      
-      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, routeList: route} as IPlanningDTO;
 
+      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, routeList: route} as IPlanningDTO;
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
       throw e;
@@ -147,6 +150,11 @@ public async deleteKnowledgeDataBase(){
   }
 
   public async getRouteHeuristicMass(planningDTO : IPlanningDTO): Promise<Result<IPlanningDTO>> {
+    this.deleteKnowledgeDataBase()
+    this.loadWarehousesKnowledgeDataBase()
+    this.loadTrucksKnowledgeDataBase()
+   this.loadDeliveriesKnowledgeDataBase()
+   await this.loadSectionsKnowledgeDataBase()
     try {
       let route;
       await axios.get(config.planningAPIURL+config.planningAPIHeuristicMassURL,{ params: { truckName: planningDTO.truckName, deliveryDate:planningDTO.deliveryDate } }).
@@ -163,13 +171,21 @@ public async deleteKnowledgeDataBase(){
   }
 
   public async getRouteHeuristicTimeAndMass(planningDTO : IPlanningDTO): Promise<Result<IPlanningDTO>> {
+    this.deleteKnowledgeDataBase()
+    this.loadWarehousesKnowledgeDataBase()
+    this.loadTrucksKnowledgeDataBase()
+   this.loadDeliveriesKnowledgeDataBase()
+   await this.loadSectionsKnowledgeDataBase()
     try {
       let route;
 
+
+
       await axios.get(config.planningAPIURL+config.planningAPIHeuristicTimeAndMassURL,{ params: { truckName: planningDTO.truckName, deliveryDate:planningDTO.deliveryDate } }).
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
-    
-      
+
+  
+
       const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, routeList: route} as IPlanningDTO;
 
       return Result.ok<IPlanningDTO>(result);
@@ -179,8 +195,26 @@ public async deleteKnowledgeDataBase(){
 
   }
 
-}
+  public async getGenetic(planningDTO : IPlanningDTO): Promise<Result<IPlanningDTO>> {
+    this.deleteKnowledgeDataBase()
+    this.loadWarehousesKnowledgeDataBase()
+    this.loadTrucksKnowledgeDataBase()
+  this.loadDeliveriesKnowledgeDataBase()
+   await this.loadSectionsKnowledgeDataBase()
+    try {
+      let route;
 
-function displayOutput(response: any) {
-  throw new Error('Function not implemented.');
+      await axios.get(config.planningAPIURL+config.planningAPIGeneticURL,{ params: {
+         date: '05/12/2022' , numberG: 6, 
+      dimensaoP: 7, percentagemC: 50, 
+      percentagemM: 30, valorReferencia: 340} }).
+      then((response) => {route = response.data;}).catch((e) => {console.log(e)});
+      const result = { routeList: route} as IPlanningDTO;
+      console.log(route)
+      return Result.ok<IPlanningDTO>(result);
+  } catch(e) {
+      throw e;
+  }
+
+  }
 }
