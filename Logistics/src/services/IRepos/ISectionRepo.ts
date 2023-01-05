@@ -7,5 +7,6 @@ export default interface ISectionRepo extends Repo<Section> {
   save(section: Section): Promise<Section>;
   findByDomainId (sectionId: SectionId | string): Promise<Section>;
   findAll (): Promise<Section[]>;
+  find (skip:number,limit:number): Promise<Section[]>;
   deleteById (id:UniqueEntityID): Promise<Boolean>;
 }

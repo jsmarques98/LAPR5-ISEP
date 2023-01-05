@@ -26,12 +26,9 @@ export default class PlanningService implements IPlanningService {
     let route;
       let trucks=(await this.truckServiceInstance.getAllTrucks()).getValue();
       let i;
-
-
-
        for(i=0;i<trucks.length ;i++){
        let  truck=trucks[i];
-        await axios.get(config.planningAPIURL+config.loadTruckURL,{ params: { truckName: truck.plate,tara:truck.tare,
+        await axios.get(config.planningAPIURL+config.loadTruckURL,{ params: { truckName: truck.name,tara:truck.tare,
           capacidade_carga:truck.payLoad,carga_total_baterias:truck.maxBattery, 
           autonomia:truck.autonomy,t_recarr_bat_20a80:truck.baterryChargingTime} }).
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
@@ -119,12 +116,15 @@ public async deleteKnowledgeDataBase(){
 
     try {
       let route;
+      console.log(planningDTO);
+      
 
       await axios.get(config.planningAPIURL+config.planningAPIBestRoutesURL,{ params: { truckName: planningDTO.truckName, deliveryDate:planningDTO.deliveryDate } }).
-      then((response) => {route = response.data;}).catch((e) => {console.log(e)});
+      then((response) => {console.log(response.data)
+      ,route = response.data;}).catch((e) => {console.log(e)});
     
       
-      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route} as IPlanningDTO;
+      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
 
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {

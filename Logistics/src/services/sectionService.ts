@@ -27,12 +27,31 @@ export default class SectionService implements ISectionService {
   public async getAllSections(): Promise<Result<ISectionDTO[]>> {
     try {
       const allSections = await this.sectionRepo.findAll();
-
+  
+   
       if (allSections === null) {
           return Result.fail<ISectionDTO[]>("Não existem secções registados.");
       }
 
       const result = allSections.map((allSections) => SectionMap.toDTO(allSections) as ISectionDTO);
+      return Result.ok<ISectionDTO[]>(result);
+  } catch(e) {
+      throw e;
+  }
+
+  }
+
+  public async getSections(skip:number,limit:number): Promise<Result<ISectionDTO[]>> {
+    try {
+      
+      const section = await this.sectionRepo.find(skip,limit);
+   
+ 
+      if (section === null) {
+          return Result.fail<ISectionDTO[]>("Não existem secções registados.");
+      }
+
+      const result = section.map((allSections) => SectionMap.toDTO(allSections) as ISectionDTO);
       return Result.ok<ISectionDTO[]>(result);
   } catch(e) {
       throw e;

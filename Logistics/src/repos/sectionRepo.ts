@@ -9,6 +9,7 @@ import { Document, FilterQuery, Model } from 'mongoose';
 import { ISectionPersistence } from '../dataschema/ISectionPersistence';
 import { Console } from 'console';
 import { UniqueEntityID } from '../core/domain/UniqueEntityID';
+import internal from 'stream';
 
 @Service()
 export default class SectionRepo implements ISectionRepo {
@@ -72,6 +73,11 @@ export default class SectionRepo implements ISectionRepo {
 
   public async findAll(): Promise<Section[]> {
     const sectionRecord = await this.sectionSchema.find();
+    return sectionRecord !== null ? sectionRecord.map((postRecord) => SectionMap.toDomain(postRecord)): null  
+  }
+
+  public async find(skip:number,limit:number): Promise<Section[]> {
+    const sectionRecord = await this.sectionSchema.find().skip(skip).limit(limit);
     return sectionRecord !== null ? sectionRecord.map((postRecord) => SectionMap.toDomain(postRecord)): null  
   }
 
