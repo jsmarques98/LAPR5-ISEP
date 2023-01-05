@@ -5,6 +5,9 @@ import IPlanningService from './IServices/IPlanningService';
 import { Result } from "../core/logic/Result";
 import ITruckService from './IServices/ITruckService';
 import ISectionServiice from './IServices/ISectionService';
+import { Planning } from '../domain/planning/planning';
+import { UniqueEntityID } from '../core/domain/UniqueEntityID';
+import { PlanningMap } from '../mappers/PlanningMap';
 
 
 const axios = require('axios');
@@ -12,6 +15,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 @Service()
 export default class PlanningService implements IPlanningService {
+  planningRepo: any;
   constructor(
     @Inject(config.services.truck.name) private truckServiceInstance : ITruckService,
     @Inject(config.services.section.name) private sectionServiceInstance : ISectionServiice
@@ -120,7 +124,7 @@ public async deleteKnowledgeDataBase(){
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
     
       
-      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, routeList: route} as IPlanningDTO;
+      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route} as IPlanningDTO;
 
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
@@ -141,7 +145,7 @@ public async deleteKnowledgeDataBase(){
       await axios.get(config.planningAPIURL+config.planningAPIHeuristicTimeURL,{ params: { truckName: planningDTO.truckName, deliveryDate:planningDTO.deliveryDate } }).
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
 
-      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, routeList: route} as IPlanningDTO;
+      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route} as IPlanningDTO;
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
       throw e;
@@ -161,7 +165,7 @@ public async deleteKnowledgeDataBase(){
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
     
       
-      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, routeList: route} as IPlanningDTO;
+      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route} as IPlanningDTO;
 
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
@@ -184,9 +188,7 @@ public async deleteKnowledgeDataBase(){
       await axios.get(config.planningAPIURL+config.planningAPIHeuristicTimeAndMassURL,{ params: { truckName: planningDTO.truckName, deliveryDate:planningDTO.deliveryDate } }).
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
 
-  
-
-      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, routeList: route} as IPlanningDTO;
+      const result = { truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route } as unknown as IPlanningDTO;
 
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
@@ -195,12 +197,37 @@ public async deleteKnowledgeDataBase(){
 
   }
 
+  public async createPlanning(planningDTO : IPlanningDTO): Promise<Result<IPlanningDTO>> {
+
+    let planningOrError;
+
+    planningOrError= await Planning.create(planningDTO,new UniqueEntityID());
+
+    if (planningOrError.isFailure) {
+      return Result.fail<IPlanningDTO>(planningOrError.errorValue());
+    }
+
+    const planningResult = planningOrError.getValue();
+
+    let aux= await this.planningRepo.exists(planningResult);
+    
+    if((aux).valueOf()){
+      return Result.fail<IPlanningDTO>(  ("Ja existe um planning com este domainId"));
+     }else{
+      await this.planningRepo.save(planningResult);
+    }
+      const planningDtoResult = PlanningMap.toDTO( planningResult ) as IPlanningDTO;
+      return Result.ok<IPlanningDTO>( planningDtoResult )
+
+}
+
+
   public async getGenetic(planningDTO : IPlanningDTO): Promise<Result<IPlanningDTO>> {
     this.deleteKnowledgeDataBase()
     this.loadWarehousesKnowledgeDataBase()
     this.loadTrucksKnowledgeDataBase()
-  this.loadDeliveriesKnowledgeDataBase()
-   await this.loadSectionsKnowledgeDataBase()
+    this.loadDeliveriesKnowledgeDataBase()
+    await this.loadSectionsKnowledgeDataBase()
     try {
       let route;
 
@@ -209,7 +236,7 @@ public async deleteKnowledgeDataBase(){
       dimensaoP: 7, percentagemC: 50, 
       percentagemM: 30, valorReferencia: 340} }).
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
-      const result = { routeList: route} as IPlanningDTO;
+      const result = { deliveryId: route} as IPlanningDTO;
       console.log(route)
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {

@@ -5,6 +5,8 @@ const PlanningSchema = new mongoose.Schema(
   {
     truckPlate:{type: String},
     deliveryDate:{type: String},
+    deliveryID: {type: Array<String>},
+    time: {type: Number}
   },
   { timestamps: true},
 );

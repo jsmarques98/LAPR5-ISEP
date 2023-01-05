@@ -1,4 +1,6 @@
 export interface IPlanningPersistence {
     truckPlate: string;
-    deliveryDate: string; 
+    deliveryDate: String; 
+    deliveryId: Array<String>;
+    time: number;
   }
