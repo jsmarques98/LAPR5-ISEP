@@ -29,6 +29,18 @@ pipelines:
               - npm install
               - npm test
 
+    - step:
+        name: Stop spa
+        script:
+          - pipe: atlassian/ssh-run:0.4.1
+            variables:
+              SSH_USER: 'root'
+              SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+              COMMAND: 'pm2 delete spa'
+              MODE: 'command' 
+              PORT: '10113' 
+              SSH_KEY: '$MYKEY'
+
 
     - step:
         name: SPA Deployment to execute on Virtual Machine
