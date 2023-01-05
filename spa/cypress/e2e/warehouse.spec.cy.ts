@@ -61,32 +61,35 @@ describe('Create Warehouse', () => {
 
   })
 
+  
   describe('Get Warehouses', () => {
-    it('Get all warehouses', () => {
-  
-    cy.visit('/getWarehouses')
-      cy.get('#getWarehouses').click()
-      cy.wait(1000)
-  
-    })
-  
-    // it('Get all Warehouses and shows information of one Warehouse', () => {
-  
-    //   cy.get('#getWarehouses').click()
-    //   cy.contains("35").click()
-    //   cy.wait(1000)
-  
-    // })
-  
-    
-    // it('Get all Warehouses and delete one', () => {
-  
-    //   cy.get('#getWarehouses').click()
-    //   cy.contains("35").click()
-    //   cy.wait(1000)
-    //   cy.get("#Delete").click()
-    //   cy.wait(1000)
-  
-    // })
+      it('Get all warehouses', () => {
+      
+        cy.get('#getWarehouses').click()
+        cy.get("#find").click()
+        cy.wait(1000)
+      
+      })
+      
+      it('Get all Warehouses and shows information of one warehouse', () => {
+      
+        cy.get('#getWarehouses').click()
+        cy.get("#find").click()
+        cy.contains("13").click()
+        cy.wait(1000)
+      
+      })
+      
+        
+      it('Get all Warehouses and delete one', () => {
+      
+        cy.get('#getWarehouses').click()
+        cy.get("#find").click()
+        cy.contains("13").click()
+        cy.wait(1000)
+        cy.get("#Delete").click()
+        cy.wait(1000)
+      
+        })
   
   })
