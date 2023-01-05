@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"start http://localhost:4200/login && ng serve\"",
+    "start": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve --host vs113.dei.isep.ipp.pt --ssl true",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
