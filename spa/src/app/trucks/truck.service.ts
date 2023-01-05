@@ -24,15 +24,7 @@ export class TruckService {
   getTrucks(): Observable<any> {
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
-    return this.http.get<Truck[]>(environment.logisticsAPI+environment.logisticsAPIPTrucks,{headers}).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('Camiões obtidos com sucesso!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao obter camiões!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.get<Truck[]>(environment.logisticsAPI+environment.logisticsAPIPTrucks,{headers});
   }
 
   deleteTruck(plate : string): Observable<any> {
@@ -40,65 +32,26 @@ export class TruckService {
     let deleteOptions =  {headers: new HttpHeaders({'Authorization' : 'Token ' + token, 'Content-Type': 'application/json' }),
            body : {'Plate' : plate}     }
   
-    return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIPTrucks,deleteOptions).pipe(catchError(err => {
-      return throwError(err);
-    }));
+    return this.http.delete<any>(environment.logisticsAPI+environment.logisticsAPIPTrucks,deleteOptions);
   }
 
   inactiveTruck(plate : string): Observable<any> {
-    try{
       const token = localStorage.getItem('id_token')!;
       let inactiveOptions =  {headers: new HttpHeaders({'Authorization' : 'Token ' + token, 'Content-Type': 'application/json' }), }
           
-        return this.http.patch<any>(environment.logisticsAPI+environment.logisticsAPIInactiveTrucks, {'Plate' : plate}, inactiveOptions).pipe(catchError(err => {
-       
-          if (err.status == 200) {
-            this.mostrarNotificacao(err.error,false);
-          }
-          if (err.status == 400) {
-          
-            this.mostrarNotificacao(err.error,true);
-          }
-          if (err.status == 500) {
-        
-            this.mostrarNotificacao(err.error,true);
-          }
-          return throwError(err);
-        }));
-      }catch(err){
-        return throwError(err);
-      }
+        return this.http.patch<any>(environment.logisticsAPI+environment.logisticsAPIInactiveTrucks, {'Plate' : plate}, inactiveOptions);
 
   }
 
   activateTruck(plate : string): Observable<any> {
-    try{
+
       const token = localStorage.getItem('id_token')!;
       const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
       const body = {'Plate' : plate} 
     
-        return this.http.patch(environment.logisticsAPI + environment.logisticsAPIActiveTrucks, body,{headers} ).pipe(catchError(err => {
-          if (err.status == 200) {
-            this.mostrarNotificacao(err.error,false);
-          }
-          if (err.status == 400) {
-      
-            this.mostrarNotificacao(err.error,true);
-          }
-          if (err.status == 500) {
-        
-            this.mostrarNotificacao(err.error,true);
-          }
-          return throwError(err);
-        }));
-      }catch(err){
-        return throwError(err);
-      }
-
+        return this.http.patch(environment.logisticsAPI + environment.logisticsAPIActiveTrucks, body,{headers} );
   }
   
-
-
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
     this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});

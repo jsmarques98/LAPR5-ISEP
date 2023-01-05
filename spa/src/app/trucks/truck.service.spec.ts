@@ -155,15 +155,7 @@ describe('TruckService', () => {
           method: 'PATCH',
           url: `${url}api/trucks/active`,
         });
-        req.flush(response.status);  
-            
+        req.flush(response.status);       
     });
-
-
   });
-
-  
-  
-
-  
 });

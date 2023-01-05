@@ -20,58 +20,54 @@ export class GetTrucksComponent implements OnInit {
   }
 
   getTrucks(){ 
-
-    this.service.getTrucks().subscribe(res => {
-      if (res != null) {
-     
+    this.service.getTrucks().subscribe(
+      (res) => {
         this.trucks = res;
-      }else{
-        this.mostrarNotificacao('Erro ao obter os Trucks!',true)
-      };
-    });
+      },
+      (error) => {
+        this.mostrarNotificacao("Erro ao obter os Trucks!'",true);
+      });
   }
 
   deleteTruck(plate:string){
-
-    this.service.deleteTruck(plate).subscribe(res => {
-      if (res != null) {
+    this.service.deleteTruck(plate).subscribe(
+      res => {
         this.mostrarNotificacao('Trucks eliminado com sucesso!',false)
         this.selectedTruck=undefined;
         this.getTrucks();
-       
-      }else{
-        this.mostrarNotificacao('Erro ao obter os Trucks!',true)
-      };
-    });
+      },
+      (error) => {
+        this.mostrarNotificacao('Erro ao obter os Trucks!',true) 
+      });
   }
 
   inactiveTruck(plate:string){
-    try{
-    this.service.inactiveTruck(plate).subscribe(async res =>{
-      this.mostrarNotificacao(res,false)
-      this.selectedTruck=undefined;
-      this.getTrucks();
-    })
-    } catch{
-      
-    }
+    this.service.inactiveTruck(plate).subscribe(
+      res => {
+        this.mostrarNotificacao(res,false)
+        this.selectedTruck=undefined;
+        this.getTrucks();
+      },
+      (error) => {
+
+        this.mostrarNotificacao(error.error,false)
+      });
   }
 
   activateTruck(plate:string){
-    try{
-    this.service.activateTruck(plate).subscribe(async res =>{
-      this.mostrarNotificacao(res,false)
-      this.selectedTruck=undefined;
-      this.getTrucks();
-    })
-    } catch{
-      
-    }
+      this.service.activateTruck(plate).subscribe(
+        res => {
+          this.mostrarNotificacao(res,false)
+          this.selectedTruck=undefined;
+          this.getTrucks();
+        },
+        (error) => {
+          this.mostrarNotificacao(error.error,false)
+        });
   }
 
 
   onSelect(truck: Truck): void {
-    
     this.selectedTruck = truck;
   }
 

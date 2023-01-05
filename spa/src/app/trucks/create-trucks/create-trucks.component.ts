@@ -51,6 +51,7 @@ export class CreateTrucksComponent implements OnInit {
         if(res.status==201){
           this.mostrarNotificacao('Post Efetuado com sucesso!',false);
           this.router.navigate(['/home']);
+        
         }
       
     },
