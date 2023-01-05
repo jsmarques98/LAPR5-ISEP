@@ -26,7 +26,9 @@ describe('WarehouseService', () => {
         httpController = TestBed.inject(HttpTestingController);
       });
   
-      it('should call addWarehouse', () => {
+// Test addWarehouse
+
+      it('create warehouse success', () => {
           const createdWarehouse: Warehouse = {
             id: '25',
             designation: "Armazém do Porto",
@@ -51,24 +53,41 @@ describe('WarehouseService', () => {
       
           req.flush(createdWarehouse);
       });
-  })
 
-  describe('WarehouseService', () => {
-    let service: WarehouseService;
-    let httpController: HttpTestingController;
-  
-    let url = 'http://localhost:5000/';
+      it('create warehouse fail', () => {
+        const createdWarehouse: Warehouse = {
+          id: '25',
+          designation: "Armazém do Porto",
+          street: "Rua Julio Dinis",
+          doorNumber: 25,
+          postCode: "4150-332",
+          city:"Porto",
+          latitude: -60.0,
+          longitude:60.0,
+          altitude: 60.0,
+          active: 'true'
+        };
+        
+        const response = {
+            "status": 402,
+          };
     
-      beforeEach(() => {
-        TestBed.configureTestingModule({
-          imports: [HttpClientTestingModule, MatSnackBarModule],
+          const warehouses= service.addWarehouse(createdWarehouse).subscribe((data) => {
+            console.log(data)
+                    expect(data.body).toEqual(402);
+                  });
+                  console.log(warehouses)
+    
+        const req = httpController.expectOne({
+          method: 'POST',
+          url: `${url}api/warehouses/`,
         });
-        service = TestBed.inject(WarehouseService);
-        httpController = TestBed.inject(HttpTestingController);
-      });
-  
-  
-  
+    
+        req.flush(response.status);
+    });
+
+    // Test getWarehouses
+
     it('should call getWarehouses and return an array of Warehouses', () => {
             // 1
           service.getWarehouses().subscribe((res) => {
@@ -85,24 +104,10 @@ describe('WarehouseService', () => {
             //4
         req.flush(WAREHOUSE);
       });
-  })
+  
+  
+    // Test getWarehouseById
 
-  describe('WarehouseService', () => {
-    let service: WarehouseService;
-    let httpController: HttpTestingController;
-  
-    let url = 'http://localhost:5000/';
-    
-      beforeEach(() => {
-        TestBed.configureTestingModule({
-          imports: [HttpClientTestingModule, MatSnackBarModule],
-        });
-        service = TestBed.inject(WarehouseService);
-        httpController = TestBed.inject(HttpTestingController);
-      });
-  
-  
-  
     it('should call getWarehouseById and return a Warehouse', () => {
            // Arrange
            const id = '25';
@@ -123,22 +128,9 @@ describe('WarehouseService', () => {
             //4
         req.flush(Warehouse1);
       });
-  })
-
-  describe('WarehouseService', () => {
-    let service: WarehouseService;
-    let httpController: HttpTestingController;
   
-    let url = 'http://localhost:5000/';
-    
-      beforeEach(() => {
-        TestBed.configureTestingModule({
-          imports: [HttpClientTestingModule, MatSnackBarModule],
-        });
-        service = TestBed.inject(WarehouseService);
-        httpController = TestBed.inject(HttpTestingController);
-      });
-  
+    // Test updateWarehouse
+      
       it('should call updateWarehouse and return the updated warehouse from the API', () => {
           const updatedWarehouse: Warehouse = {
             id: '25',
@@ -164,4 +156,50 @@ describe('WarehouseService', () => {
       
           req.flush(updatedWarehouse);
       });
-  })
+
+    // Test inactivateWarehouse
+
+      it('inactive Warehouse ', () => {
+        
+        const id = '1';
+
+        const response = {
+            "status": 200,
+          };
+      
+        service.inactivateWarehouse(id).subscribe((data) => {  
+          expect(data).toEqual(200);
+        });
+        
+        const req = httpController.expectOne({
+          method: 'PATCH',
+          url: `${url}api/warehouses/${id}/soft`,
+        });
+        req.flush(response.status);  
+            
+    });
+
+
+    // Test activateWarehouse
+
+    it('active Warehouse ', () => {
+            
+        const response = {
+            "status": 200,
+          };
+
+          const id = '1';  
+      
+        service.activateWarehouse(id).subscribe((data) => {  
+          expect(data).toEqual(200);
+        });
+        
+        const req = httpController.expectOne({
+          method: 'PATCH',
+          url: `${url}api/warehouses/${id}`,
+        });
+        req.flush(response.status);  
+            
+    });
+
+   })
