@@ -48,4 +48,12 @@ export default (app: Router) => {
       })
     }),
     (req, res, next) => ctrl.getRouteHeuristicTimeAndMass(req, res, next));
+    
+    route.get('/gera',middlewares.isAuth,
+    celebrate({
+      query: Joi.object().keys({
+        
+      })
+    }),
+    (req, res, next) => ctrl.getGenetic(req, res, next));
 };

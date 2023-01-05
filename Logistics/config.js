@@ -32,6 +32,7 @@ export default {
   planningAPIBestRoutesURL:   "bestRoute",
   planningAPIHeuristicTimeURL: "heuristicTime",
   planningAPIHeuristicMassURL: "heuristicMass",
+  planningAPIGeneticURL: "gera",
   loadTruckURL: "loadTruck",
   loadDeliveryURL: "loadDelivery",
   loadSectionURL: "loadSection",

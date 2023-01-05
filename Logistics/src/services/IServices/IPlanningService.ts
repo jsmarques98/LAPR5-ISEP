@@ -6,4 +6,5 @@ export default interface IPlanningService  {
   getRouteHeuristicTime(planningDTO: IPlanningDTO): Promise<Result<IPlanningDTO>>
   getRouteHeuristicMass(planningDTO: IPlanningDTO): Promise<Result<IPlanningDTO>>
   getRouteHeuristicTimeAndMass(planningDTO: IPlanningDTO): Promise<Result<IPlanningDTO>> 
+  getGenetic(planningDTO: IPlanningDTO): Promise<Result<IPlanningDTO>> 
 }
