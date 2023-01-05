@@ -20,13 +20,19 @@ export class GetTrucksComponent implements OnInit {
   }
 
   getTrucks(){ 
-    this.service.getTrucks().subscribe(
+  
+    
+   return this.service.getTrucks().subscribe(
       (res) => {
-        this.trucks = res;
+        console.log(res)
+        this.trucks = res.body;
       },
       (error) => {
         this.mostrarNotificacao("Erro ao obter os Trucks!'",true);
       });
+ 
+   
+     
   }
 
   deleteTruck(plate:string){

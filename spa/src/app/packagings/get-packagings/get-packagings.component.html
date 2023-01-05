@@ -4,13 +4,13 @@
     <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">packagings</h2>
     <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id ="find"(click)="getPackagings();getUniqueArrayDate();getUniqueArrayWarehouse();">Find</button>
     <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="orderByDate" (click)="orderByDate()">Order by Date</button>
-    <select [(ngModel)]="filterDate" *ngIf="flag" #cricket (change)="filterDateAndWarehouse($event)">
+    <select [(ngModel)]="filterDate" *ngIf="flag" #cricket id="filterDate" (change)="filterDateAndWarehouse($event)">
       <option value="default" (click)="getUniqueArrayDate()">Filter by Date</option>
       <option *ngFor="let packaging of newArrayDate" [value]="packaging">
           {{packaging}}
       </option>
   </select>
-    <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="orderByDate" (click)="orderByWarehouseId()">Order by WarehouseId</button>
+    <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="orderByWarehouse" (click)="orderByWarehouseId()">Order by WarehouseId</button>
     <select [(ngModel)]="filterWarehouse" *ngIf="flag" #cricket (change)="filterDateAndWarehouse($event)">
       <option value="default">Filter by WarehouseId</option>
       <option *ngFor="let packaging of newArrayWarehouse" [value]="packaging">

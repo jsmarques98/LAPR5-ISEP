@@ -45,16 +45,15 @@ describe('PackagingService', () => {
       httpController = TestBed.inject(HttpTestingController);
     });
 
-
-
   it('should call getPackagings and return an array of Packagings', () => {
           // 1
         service.getPackagings().subscribe((res) => {
               //2
         expect(res).toEqual(PACKAGING);
-      });    
+      });
           const request = httpController.expectOne(`${environment.logisticsAPI}${environment.logisticsAPIPackagings}`);
           expect(request.request.method).toEqual('GET');
           request.flush(PACKAGING);
-        });
+    });
 })
+}

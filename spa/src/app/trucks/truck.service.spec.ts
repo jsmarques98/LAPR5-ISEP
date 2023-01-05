@@ -91,13 +91,10 @@ describe('TruckService', () => {
             baterryChargingTime:60,
             active: 'true'
         };
-        const response = {
-          "status": 402,
-        };
-        service.getTrucks().subscribe((data) => {
-            console.log(data);
-            
-          expect(data).toEqual(createdTruck);
+       
+
+        service.getTrucks().subscribe((data) => {  
+          expect(data.body).toEqual(createdTruck);
         });
         const req = httpController.expectOne({
           method: 'GET',
