@@ -9,6 +9,7 @@ import { Result } from "../core/logic/Result";
 import IPlanningController from './IControllers/IPlanningController';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
+import IPlanningGeneticDTO from '../dto/IPlanningGeneticDTO';
 
 @Service()
 export default class PlanningController implements IPlanningController /* TODO: extends ../core/infra/BaseController */ {
@@ -19,7 +20,7 @@ export default class PlanningController implements IPlanningController /* TODO: 
   public async getBestRoute(req: Request, res: Response, next: NextFunction) {
 
     try {
-      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, routeList: []} as IPlanningDTO;
+      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, deliveryId: []} as IPlanningDTO;
       const PlanningOrError = await this.planningServiceInstance.getBestRoute(planningDTO) as Result<IPlanningDTO>
 
       if (PlanningOrError.isFailure) {
@@ -41,7 +42,7 @@ export default class PlanningController implements IPlanningController /* TODO: 
 
   public async getRouteHeuristicTime(req: Request, res: Response, next: NextFunction) {
     try {
-      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, routeList: []} as IPlanningDTO;
+      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, deliveryId: []} as IPlanningDTO;
       const PlanningOrError = await this.planningServiceInstance.getRouteHeuristicTime(planningDTO) as Result<IPlanningDTO>
 
       if (PlanningOrError.isFailure) {
@@ -61,7 +62,7 @@ export default class PlanningController implements IPlanningController /* TODO: 
   public async getRouteHeuristicMass(req: Request, res: Response, next: NextFunction) {
     try {
 
-      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, routeList: []} as IPlanningDTO;
+      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, deliveryId: []} as IPlanningDTO;
       const PlanningOrError = await this.planningServiceInstance.getRouteHeuristicMass(planningDTO) as Result<IPlanningDTO>
 
       if (PlanningOrError.isFailure) {
@@ -80,7 +81,7 @@ export default class PlanningController implements IPlanningController /* TODO: 
 
   public async getRouteHeuristicTimeAndMass(req: Request, res: Response, next: NextFunction) {
     try {
-      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, routeList: []} as IPlanningDTO;
+      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, deliveryId: []} as IPlanningDTO;
       const PlanningOrError = await this.planningServiceInstance.getRouteHeuristicTimeAndMass(planningDTO) as Result<IPlanningDTO>
 
       if (PlanningOrError.isFailure) {
@@ -98,8 +99,10 @@ export default class PlanningController implements IPlanningController /* TODO: 
   };
   public async getGenetic(req: Request, res: Response, next: NextFunction) {
     try {
-      const planningDTO = {truckName: req.query.truckName, deliveryDate:req.query.deliveryDate, routeList: []} as IPlanningDTO;
-      const PlanningOrError = await this.planningServiceInstance.getGenetic(planningDTO) as Result<IPlanningDTO>
+      const planningDTO = {deliveryDate: req.query.deliveryDate, numGer:req.query.numGer,dimPop:req.query.dimPop,perC:req.query.perC,perM:req.query.perM,refVal:req.query.refVal, routeList:[] } as IPlanningGeneticDTO;
+      
+
+      const PlanningOrError = await this.planningServiceInstance.getGenetic(planningDTO) as Result<IPlanningGeneticDTO>
 
       if (PlanningOrError.isFailure) {
           return res.status(400).send();

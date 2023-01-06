@@ -6,6 +6,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import { Warehouse } from '../warehouses/warehouses';
 import { Truck } from '../trucks/truck';
 import { environment } from 'src/environments/environment';
+import { PlanningGenetic } from './route-genetic-algorithm/planningGenetic';
 
 @Injectable({providedIn:'root'})
 export class PlanningService {
@@ -21,15 +22,7 @@ export class PlanningService {
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(environment.logisticsAPI + environment.logisticsAPIPlanningBestRoute ,{headers ,params: params }).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('Melhor caminho encontrado com sucesso!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao encontrar o melhor caminho!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.get<Warehouse[]>(environment.logisticsAPI + environment.logisticsAPIPlanningBestRoute ,{headers ,params: params });
   }
 
 
@@ -37,15 +30,7 @@ export class PlanningService {
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
-    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicMass,{headers , params: params }).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística da massa!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao encontrar caminho!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicMass,{headers , params: params })
   }
 
   checkRouteHeuristicTime(planning:Planning): Observable<any> {
@@ -53,15 +38,7 @@ export class PlanningService {
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTime,{ headers ,params: params }).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística do tempo!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao encontrar caminho!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTime,{ headers ,params: params })
   }
 
   checkRouteHeuristicTimeAndMass(planning:Planning): Observable<any> {
@@ -69,15 +46,15 @@ export class PlanningService {
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     let params = new HttpParams().set('truckName', planning.truckName).set('deliveryDate', planning.deliveryDate);
     
-    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTimeAndMass,{headers , params: params }).pipe(catchError(err => {
-      if (err.status == 200) {
-        this.mostrarNotificacao('Caminho encontrado com sucesso com utilizaçáo da heurística da massa e tempo em conjunto!',false);
-      }
-      if (err.status == 400) {
-        this.mostrarNotificacao('Erro ao encontrar caminho!',true);
-      }
-      return throwError(err);
-    }));
+    return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTimeAndMass,{headers , params: params })
+  }
+
+  checkGeneticAlgRoute(planning:PlanningGenetic): Observable<any> {
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
+    let params = new HttpParams().set('deliveryDate', planning.deliveryDate).set('numGer', planning.numGer).set('dimPop', planning.dimPop).set('perC', planning.perC).set('perM', planning.perM).set('refVal', planning.refVal);
+    
+    return this.http.get<Warehouse[]>(environment.logisticsAPI + environment.logisticsAPIPlanningGeneticAlgRoute ,{headers ,params: params })
   }
 
 

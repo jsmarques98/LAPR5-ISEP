@@ -8,6 +8,7 @@ import ISectionServiice from './IServices/ISectionService';
 import { Planning } from '../domain/planning/planning';
 import { UniqueEntityID } from '../core/domain/UniqueEntityID';
 import { PlanningMap } from '../mappers/PlanningMap';
+import IPlanningGeneticDTO from '../dto/IPlanningGeneticDTO';
 
 
 const axios = require('axios');
@@ -116,12 +117,10 @@ public async deleteKnowledgeDataBase(){
 
     try {
       let route;
-      console.log(planningDTO);
       
 
       await axios.get(config.planningAPIURL+config.planningAPIBestRoutesURL,{ params: { truckName: planningDTO.truckName, deliveryDate:planningDTO.deliveryDate } }).
-      then((response) => {console.log(response.data)
-      ,route = response.data;}).catch((e) => {console.log(e)});
+      then((response) => {route = response.data;}).catch((e) => {console.log(e)});
     
       
       const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
@@ -145,7 +144,7 @@ public async deleteKnowledgeDataBase(){
       await axios.get(config.planningAPIURL+config.planningAPIHeuristicTimeURL,{ params: { truckName: planningDTO.truckName, deliveryDate:planningDTO.deliveryDate } }).
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
 
-      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route} as IPlanningDTO;
+      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
       throw e;
@@ -165,7 +164,7 @@ public async deleteKnowledgeDataBase(){
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
     
       
-      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route} as IPlanningDTO;
+      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
 
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
@@ -188,7 +187,7 @@ public async deleteKnowledgeDataBase(){
       await axios.get(config.planningAPIURL+config.planningAPIHeuristicTimeAndMassURL,{ params: { truckName: planningDTO.truckName, deliveryDate:planningDTO.deliveryDate } }).
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
 
-      const result = { truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route } as unknown as IPlanningDTO;
+      const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
 
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
@@ -222,26 +221,26 @@ public async deleteKnowledgeDataBase(){
 }
 
 
-  public async getGenetic(planningDTO : IPlanningDTO): Promise<Result<IPlanningDTO>> {
-    this.deleteKnowledgeDataBase()
-    this.loadWarehousesKnowledgeDataBase()
-    this.loadTrucksKnowledgeDataBase()
-    this.loadDeliveriesKnowledgeDataBase()
-    await this.loadSectionsKnowledgeDataBase()
-    try {
-      let route;
+public async getGenetic(planningDTO : IPlanningGeneticDTO): Promise<Result<IPlanningGeneticDTO>> {
+  this.deleteKnowledgeDataBase()
+  this.loadWarehousesKnowledgeDataBase()
+  this.loadTrucksKnowledgeDataBase()
+  this.loadDeliveriesKnowledgeDataBase()
+ await this.loadSectionsKnowledgeDataBase()
+  try {
+    let route;
 
-      await axios.get(config.planningAPIURL+config.planningAPIGeneticURL,{ params: {
-         date: '05/12/2022' , numberG: 6, 
-      dimensaoP: 7, percentagemC: 50, 
-      percentagemM: 30, valorReferencia: 340} }).
-      then((response) => {route = response.data;}).catch((e) => {console.log(e)});
-      const result = { deliveryId: route} as IPlanningDTO;
-      console.log(route)
-      return Result.ok<IPlanningDTO>(result);
-  } catch(e) {
-      throw e;
-  }
+    await axios.get(config.planningAPIURL+config.planningAPIGeneticURL,{ params: {
+       date: planningDTO.deliveryDate , numberG: planningDTO.numGer, 
+    dimensaoP: planningDTO.dimPop, percentagemC: planningDTO.perC, 
+    percentagemM: planningDTO.perM, valorReferencia: planningDTO.refVal} }).
+    then((response) => {route = response.data;}).catch((e) => {console.log(e)});
+    const result = { deliveryDate: planningDTO.deliveryDate, numGer:planningDTO.numGer, dimPop:planningDTO.dimPop, perC:planningDTO.perC, perM:planningDTO.perM, refVal:planningDTO.refVal, routeList: route} as IPlanningGeneticDTO;
+    console.log(route)
+    return Result.ok<IPlanningGeneticDTO>(result);
+} catch(e) {
+    throw e;
+}
 
-  }
+}
 }

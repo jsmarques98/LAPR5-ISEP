@@ -8,6 +8,7 @@ import { PlanningService } from '../planning.service';
 import {Warehouse} from '../../warehouses/warehouses'
 import { Delivery } from 'src/app/deliveries/delivery';
 import { DeliveryService } from 'src/app/deliveries/delivery.service';
+import { TruckService } from 'src/app/trucks/truck.service';
 
 
 @Component({
@@ -18,8 +19,7 @@ import { DeliveryService } from 'src/app/deliveries/delivery.service';
 export class CheckBestPossibleRouteComponent implements OnInit {
 
   planningForm = this.fb.group({
-    truckName: [''],
-    deliveryDate: [''],
+    deliveryDate: ['']
   });
 
   planning = new Planning();
@@ -27,28 +27,27 @@ export class CheckBestPossibleRouteComponent implements OnInit {
   deliveriesIDs;
   deliveries;
   custo;
+  trucks;
 
   selectedDelivery?: Delivery;
 
-  constructor(private fb: FormBuilder,private router: Router, private servicePlanning : PlanningService,private notification:MatSnackBar,private deliveryService : DeliveryService) { }
+  constructor(private fb: FormBuilder,private router: Router, private servicePlanning : PlanningService,private notification:MatSnackBar,private deliveryService : DeliveryService,private truckService : TruckService) {
+    this.getAllTrucks()
+   }
 
   ngOnInit(): void {
   }
 
   checkBestPossibleRoute(){ 
-    this.planning.truckName=this.planningForm.value.truckName!;
     this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
-
-   
     this.planning.deliveryDate= this.planning.deliveryDate.substring(8,10)+"/"+this.planning.deliveryDate.substring(5,7)+"/"+this.planning.deliveryDate.substring(0,4)
 
-
     this.servicePlanning.checkBestPossibleRoute(this.planning).subscribe(res => {
-      
-      if (res != null && res.routeList!=undefined) {
+
+      if (res != null && res.deliveryId!=undefined) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
-        this.deliveriesIDs = res.routeList[0];
-        this.custo=res.routeList[1] + " min";
+        this.deliveriesIDs = res.deliveryId;        
+        this.custo=res.time + " min";
 
          const arr: string[] = [];
          for (let i = 0; i < this.deliveriesIDs.length; i++) {
@@ -61,6 +60,7 @@ export class CheckBestPossibleRouteComponent implements OnInit {
             };
           })
         }
+        
         this.deliveries= arr;
       }else{
         this.deliveries=null;
@@ -73,16 +73,15 @@ export class CheckBestPossibleRouteComponent implements OnInit {
   }
 
   checkRouteHeuristicMass(){ 
-    this.planning.truckName=this.planningForm.value.truckName!;
     this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
     this.planning.deliveryDate= this.planning.deliveryDate.substring(8,10)+"/"+this.planning.deliveryDate.substring(5,7)+"/"+this.planning.deliveryDate.substring(0,4)
 
-
     this.servicePlanning.checkRouteHeuristicMass(this.planning).subscribe(res => {
-      if (res != null && res.routeList!=undefined) {
+      
+      if (res != null && res.deliveryId!=undefined) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
-         this.deliveriesIDs = res.routeList[0];
-         this.custo=res.routeList[1] + " min";
+         this.deliveriesIDs = res.deliveryId;
+         this.custo=res.time + " min";
 
 
          const arr: string[] = [];
@@ -107,16 +106,15 @@ export class CheckBestPossibleRouteComponent implements OnInit {
   }
 
   checkRouteHeuristicTime(){ 
-    this.planning.truckName=this.planningForm.value.truckName!;
     this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
     this.planning.deliveryDate= this.planning.deliveryDate.substring(8,10)+"/"+this.planning.deliveryDate.substring(5,7)+"/"+this.planning.deliveryDate.substring(0,4)
 
 
     this.servicePlanning.checkRouteHeuristicTime(this.planning).subscribe(res => {
-      if (res != null && res.routeList!=undefined) {
+      if (res != null && res.deliveryId!=undefined) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
-         this.deliveriesIDs = res.routeList[0];
-         this.custo=res.routeList[1] + " min";
+         this.deliveriesIDs = res.deliveryId;
+         this.custo=res.time + " min";
 
 
          const arr: string[] = [];
@@ -141,16 +139,15 @@ export class CheckBestPossibleRouteComponent implements OnInit {
   }
 
   checkRouteHeuristicTimeAndMass(){ 
-    this.planning.truckName=this.planningForm.value.truckName!;
     this.planning.deliveryDate=this.planningForm.value.deliveryDate!;
     this.planning.deliveryDate= this.planning.deliveryDate.substring(8,10)+"/"+this.planning.deliveryDate.substring(5,7)+"/"+this.planning.deliveryDate.substring(0,4)
 
 
     this.servicePlanning.checkRouteHeuristicTimeAndMass(this.planning).subscribe(res => {
-      if (res != null && res.routeList!=undefined) {
+      if (res != null && res.deliveryId!=undefined) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);
-         this.deliveriesIDs = res.routeList[0];
-         this.custo=res.routeList[1] + " min";
+         this.deliveriesIDs = res.deliveryId;
+         this.custo=res.time + " min";
 
 
          const arr: string[] = [];
@@ -172,7 +169,26 @@ export class CheckBestPossibleRouteComponent implements OnInit {
         this.mostrarNotificacao('Não existem entregas para o camião ou a data selecionadas!',true)
       };
     });
+    
   }
+
+  getAllTrucks(){
+    
+    this.truckService.getTrucks().subscribe(res => {
+      if (res != null) {
+        this.mostrarNotificacao('Armazéns obtidos com sucesso!',false)
+        
+        this.trucks = res.body;
+      }else{
+        this.mostrarNotificacao('Erro ao obter os armazéns!',true)
+      };
+
+  });
+}
+
+updateTruck(e) {
+  this.planning.truckName=e.target.value
+}
 
 onSelect(delivery: Delivery): void {
   this.selectedDelivery = delivery;

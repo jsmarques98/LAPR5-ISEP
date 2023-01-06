@@ -5,19 +5,27 @@
 <section style="margin-left:10%;padding:1px 16px;height:100%;">
   <form [formGroup] = "planningForm">
       <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Insert Truck and Date to see planning route:</h1>
-      <div  >
-        <input type="text" class="form-control" id="truckName" placeholder="Truck Name " formControlName="truckName">
-      </div>
+      <select #cricket (change)="updateTruck($event)">
+        <option value="default">Truck plate</option>
+        <option *ngFor="let truck of trucks" [value]="truck.name">
+            {{truck.plate}}
+        </option>
+    </select>
+      <br> 
       <br> 
       <div>
         <input type="date" class="form-control mb-3" placeholder="Delivery Date" id="deliveryDate" formControlName="deliveryDate">
       </div>
       <br>
+      <br>
       <button type="submit" class="btn btn-primary w-100" (click)="checkBestPossibleRoute()">Best Route</button>
+      <br>
       <br>
       <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicMass()">Heuristic Mass</button>
       <br>
+      <br>
       <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicTime()">Heuristic Time</button>
+      <br>
       <br>
       <button type="submit" class="btn btn-primary w-100" (click)="checkRouteHeuristicTimeAndMass()">Heuristic Time and Mass</button>
   </form>

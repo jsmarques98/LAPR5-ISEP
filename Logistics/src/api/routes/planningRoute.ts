@@ -49,10 +49,15 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.getRouteHeuristicTimeAndMass(req, res, next));
     
-    route.get('/gera',middlewares.isAuth,
+    route.get('/geneticAlg',middlewares.isAuth,
     celebrate({
       query: Joi.object().keys({
-        
+        deliveryDate:Joi.string(),
+        numGer:Joi.number(),
+        dimPop:Joi.number(),
+        perC:Joi.number(),
+        perM:Joi.number(),
+        refVal:Joi.number(),
       })
     }),
     (req, res, next) => ctrl.getGenetic(req, res, next));
