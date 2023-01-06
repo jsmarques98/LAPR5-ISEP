@@ -11,8 +11,6 @@ import { WarehouseService } from '../warehouse.service';
 })
 export class GetWarehousesComponent implements OnInit {
 
-  p: number = 1;
-  count: number = 5;
 
   warehouse;
   warehouses = null;

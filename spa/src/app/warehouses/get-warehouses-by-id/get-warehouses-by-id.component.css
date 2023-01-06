@@ -1,0 +1,39 @@
+div.info{
+    color:#369;font-family: Arial, Helvetica, sans-serif;
+}
+
+h2.info{
+    color:#369;font-family: Arial, Helvetica, sans-serif;
+}
+
+div.warehouses{
+    margin-left: 15%;
+}
+
+h2.title{
+    color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;
+}
+
+button.delete{
+    margin-top: 20px;
+}
+
+button.inactivate{
+    margin-top: 20px;
+}
+
+button.activate{
+    margin-top: 20px;
+}
+
+div.page{
+    width: auto;height: auto;margin-top: 20px;
+}
+
+div.divexit{
+    position: absolute;margin-top: 10px;
+}
+
+li{
+    color: #369;
+}

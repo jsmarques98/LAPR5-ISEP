@@ -64,7 +64,7 @@ describe('WarehouseService and GetWarehousesComponent integration test', () => {
       // Assert that the addWarehouse method was called on the service
       expect(warehouseService.getWarehouses).toHaveBeenCalled();
     });
-  });
+});
 
   
 
@@ -93,7 +93,7 @@ describe('WarehouseService and GetWarehousesByIdComponent integration test', () 
       // Assert that the addWarehouse method was called on the service
       expect(warehouseService.getWarehouseById).toHaveBeenCalled();
     });
-  });
+});
 
 
   // Integration test between WarehouseService and UpdateWarehousesComponent
@@ -121,4 +121,4 @@ describe('WarehouseService and UpdateWarehousesComponent integration test', () =
       // Assert that the addWarehouse method was called on the service
       expect(warehouseService.updateWarehouse).toHaveBeenCalled();
     });
-  });
+});

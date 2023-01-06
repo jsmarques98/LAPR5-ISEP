@@ -1,42 +1,37 @@
 
 
-<section style="margin-left:10%;padding:1px 16px;height:100%;">
-  <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Warehouses</h2>
-  <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="find"(click)="getWarehouses()">Find</button>
+<section>
+  <h2 class = "title">Warehouses</h2>
+  <button type="submit" class="btn btn-primary w-100" id="find"(click)="getWarehouses()">Find</button>
 </section>
 
-<section style="margin-left:10%;padding:1px 16px;height:auto;">
-  <ul class="warehouses" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
-    <li *ngFor="let warehouse of warehouses | paginate: {currentPage: p,itemsPerPage: count}">
+<section>
+  <ul class="warehouses">
+    <li *ngFor="let warehouse of warehouses ">
       <button [class.selected]="warehouse === selectedWarehouse" type="button" (click)="onSelect(warehouse)">
         <span class="name">{{warehouse.id}}</span>
       </button>
     </li>
-      <!--Including the pagination control.-->
-      <div class="text-right" style="width: 500px;color:black;">
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
-        <!--<mat-paginator #paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>-->      
-      </div>
-    <div style="margin-top: 20px;">
+    <div class="divexit">
       <button routerLink="/home">Exit</button>
     </div>
   </ul>
   
 
-  <div *ngIf="selectedWarehouse" style="margin-left: 15%;">
-    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Warehouse {{selectedWarehouse.id | uppercase}} Details</h2>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Designation: {{selectedWarehouse.designation}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Street: {{selectedWarehouse.street}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Door Number: {{selectedWarehouse.doorNumber}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Post Code: {{selectedWarehouse.postCode}}</div>  
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">City: {{selectedWarehouse.city}}</div> 
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Latitude: {{selectedWarehouse.latitude}}</div> 
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Longitude: {{selectedWarehouse.longitude}}</div> 
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Altitude: {{selectedWarehouse.altitude}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Active: {{selectedWarehouse.active}}</div>
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteWarehouse(selectedWarehouse.id)">Delete Warehouse</button>  
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Inactivate" (click)="inactivateWarehouse(selectedWarehouse.id)">Inactivate Warehouse</button>
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Activate" (click)="activateWarehouse(selectedWarehouse.id)">Activate Warehouse</button>   
+  <div class ="warehouses" *ngIf="selectedWarehouse">
+    <h2 class = "info">Warehouse {{selectedWarehouse.id | uppercase}} Details</h2>
+    <div class = "info">Designation: {{selectedWarehouse.designation}}</div>
+    <div class = "info">Street: {{selectedWarehouse.street}}</div>
+    <div class = "info">Door Number: {{selectedWarehouse.doorNumber}}</div>
+    <div class = "info">Post Code: {{selectedWarehouse.postCode}}</div>  
+    <div class = "info">City: {{selectedWarehouse.city}}</div> 
+    <div class = "info">Latitude: {{selectedWarehouse.latitude}}</div> 
+    <div class = "info">Longitude: {{selectedWarehouse.longitude}}</div> 
+    <div class = "info">Altitude: {{selectedWarehouse.altitude}}</div>
+    <div class = "info">Active: {{selectedWarehouse.active}}</div>
+    <button class = "delete" type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteWarehouse(selectedWarehouse.id)">Delete Warehouse</button>  
+    <button class = "inactivate" type="submit" class="btn btn-primary w-100" id="delete" id="Inactivate" (click)="inactivateWarehouse(selectedWarehouse.id)">Inactivate Warehouse</button>
+    <button class = "activate" type="submit" class="btn btn-primary w-100" id="delete" id="Activate" (click)="activateWarehouse(selectedWarehouse.id)">Activate Warehouse</button>   
 
   </div>  
 </section>

@@ -1,33 +1,33 @@
 
   
-  <section style="margin-left:10%;padding:1px 16px;height:100%;">
-    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Warehouses</h2>
+  <section>
+    <h2 class = "title">Warehouses</h2>
     <form [formGroup] = "warehouseForm">
         <div>
             <input type="text" class="form-control" id="warehouseId" placeholder="Id" formControlName="id">
         </div>
-        <button style="margin-top: 10px;" type="submit" class="btn btn-primary w-100" (click)="getWarehouseById()">Find</button>
+        <button type="submit" class="btn btn-primary w-100" (click)="getWarehouseById()">Find</button>
     </form>
-    <div style="margin-top: 20px;">
+    <div class="divexit">
       <button routerLink="/home">Exit</button>
     </div>
   </section>
   
-  <section style="margin-left:10%;padding:1px 16px;height:auto;">
-    <div *ngIf="visible" style="margin-left: 15%;">
-      <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Warehouse {{warehouse.id | uppercase}} Details</h2>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Designation: {{warehouse.designation}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Street: {{warehouse.street}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Door Number: {{warehouse.doorNumber}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Post Code: {{warehouse.postCode}}</div>  
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">City: {{warehouse.city}}</div> 
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Latitude: {{warehouse.latitude}}</div> 
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Longitude: {{warehouse.longitude}}</div> 
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Altitude: {{warehouse.altitude}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Active: {{warehouse.active}}</div>
-      <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteWarehouse(visible.id)">Delete Warehouse</button> 
-      <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Inactivate" (click)="inactivateWarehouse(visible.id)">Inactivate Warehouse</button>
-      <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Activate" (click)="activateWarehouse(visible.id)">Activate Warehouse</button>   
+  <section>
+    <div class ="warehouses" *ngIf="visible">
+      <h2 class = "info">Warehouse {{warehouse.id | uppercase}} Details</h2>
+      <div class = "info">Designation: {{warehouse.designation}}</div>
+      <div class = "info">Street: {{warehouse.street}}</div>
+      <div class = "info">Door Number: {{warehouse.doorNumber}}</div>
+      <div class = "info">Post Code: {{warehouse.postCode}}</div>  
+      <div class = "info">City: {{warehouse.city}}</div> 
+      <div class = "info">Latitude: {{warehouse.latitude}}</div> 
+      <div class = "info">Longitude: {{warehouse.longitude}}</div> 
+      <div class = "info">Altitude: {{warehouse.altitude}}</div>
+      <div class = "info">Active: {{warehouse.active}}</div>
+      <button class = "delete" type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteWarehouse(visible.id)">Delete Warehouse</button> 
+      <button class = "inactivate" type="submit" class="btn btn-primary w-100" id="Inactivate" (click)="inactivateWarehouse(visible.id)">Inactivate Warehouse</button>
+      <button class = "activate" type="submit" class="btn btn-primary w-100" id="Activate" (click)="activateWarehouse(visible.id)">Activate Warehouse</button>   
 
     </div>  
   </section>  
