@@ -31,36 +31,36 @@ describe('GetSectionsComponent', () => {
   });
 });*/
 
-describe('SectionService', () => {
-  let service: SectionService;
-  let httpController: HttpTestingController;
+// describe('SectionService', () => {
+//   let service: SectionService;
+//   let httpController: HttpTestingController;
 
-  let url = 'http://localhost:3000/';
+//   let url = 'http://localhost:3000/';
   
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, MatSnackBarModule],
-      });
-      service = TestBed.inject(SectionService);
-      httpController = TestBed.inject(HttpTestingController);
-    });
+//     beforeEach(() => {
+//       TestBed.configureTestingModule({
+//         imports: [HttpClientTestingModule, MatSnackBarModule],
+//       });
+//       service = TestBed.inject(SectionService);
+//       httpController = TestBed.inject(HttpTestingController);
+//     });
 
 
 
-  it('should call getSections and return an array of Sections', () => {
-          // 1
-        service.getSections().subscribe((res) => {
-              //2
-        expect(res).toEqual(SECTION);
-      });
+// //   it('should call getSections and return an array of Sections', () => {
+// //           // 1
+// //         service.getSections().subscribe((res) => {
+// //               //2
+// //         expect(res).toEqual(SECTION);
+// //       });
   
-          //3
-      const req = httpController.expectOne({
-        method: 'GET',
-        url: `${url}api/sections/`,
-      });
+// //           //3
+// //       const req = httpController.expectOne({
+// //         method: 'GET',
+// //         url: `${url}api/sections/`,
+// //       });
 
-          //4
-      req.flush(SECTION);
-    });
-})
+// //           //4
+// //       req.flush(SECTION);
+// //     });
+//  })

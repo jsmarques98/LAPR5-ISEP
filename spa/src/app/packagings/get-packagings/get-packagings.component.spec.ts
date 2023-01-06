@@ -56,4 +56,3 @@ describe('PackagingService', () => {
           request.flush(PACKAGING);
     });
 })
-}
