@@ -103,6 +103,19 @@ pipelines:
               MODE: 'command'
               PORT: '10982'
               SSH_KEY: '$MYKEY'
+              
+              
+    - step:
+        name: Stop WarehouseManagement
+        script:
+          - pipe: atlassian/ssh-run:0.4.1
+            variables:
+              SSH_USER: 'root'
+              SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+              COMMAND: 'pkill -f "dotnet run"'
+              MODE: 'command' 
+              PORT: '10790' 
+              SSH_KEY: '$MYKEY' 
 
     - step:
         name: WarehouseManagement Deployment to execute on Virtual Machine
@@ -114,6 +127,18 @@ pipelines:
               REMOTE_PATH: '/warehouseManagement'
               LOCAL_PATH: './WarehouseManagement'
               SSH_KEY: $MYKEY
-              EXTRA_ARGS: ["-P","10790"]     
+              EXTRA_ARGS: ["-P","10790"]
+              
+    - step:
+        name: Start WarehouseManagement
+        script:
+          - pipe: atlassian/ssh-run:0.4.1
+            variables:
+              SSH_USER: 'root'
+              SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+              COMMAND: '/deploy.sh'
+              MODE: 'command'
+              PORT: '10790'
+              SSH_KEY: '$MYKEY'
           
 
