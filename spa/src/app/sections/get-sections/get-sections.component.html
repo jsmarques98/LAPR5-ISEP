@@ -12,8 +12,8 @@
       </button>
     </li>
     <div class="text-right" style="width: 500px;color:black;height: auto;margin-top: 20px;">
-      <button (click)="back()">Back</button>
-      <button (click)="next()">Next</button>
+      <button [disabled]="this.skip===0" (click)="back()">Back</button>
+      <button [disabled]="this.limitNext" (click)="next()">Next</button>
       <select #cricket (change)="updateLimit($event)">
         <option value="5">5</option>
         <option value="10">10</option>

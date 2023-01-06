@@ -13,8 +13,8 @@
       </button>
     </li>
     <div class="page" >
-      <button (click)="back()">Back</button>
-      <button (click)="next()">Next</button>
+      <button [disabled]="this.skip===0" (click)="back()">Back</button>
+      <button [disabled]="this.limitNext" (click)="next()">Next</button>
       <select #cricket (change)="updateLimit($event)">
         <option value="5">5</option>
         <option value="10">10</option>

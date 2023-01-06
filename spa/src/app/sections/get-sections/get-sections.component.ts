@@ -39,6 +39,7 @@ export class GetSectionsComponent implements OnInit {
         this.mostrarNotificacao('Secções obtidas com sucesso!',false)
         this.sections = res;
       }else{
+        this.skip-=this.limit;
         this.limitNext=true
         this.mostrarNotificacao('Já obteve todas as Secções!',true)
       };
