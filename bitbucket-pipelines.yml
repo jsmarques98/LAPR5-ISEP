@@ -112,7 +112,7 @@ pipelines:
             variables:
               SSH_USER: 'root'
               SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
-              COMMAND: 'pkill -f "dotnet run"'
+              COMMAND: 'pm2 delete dotnet'
               MODE: 'command' 
               PORT: '10120' 
               SSH_KEY: '$MYKEY' 
