@@ -7,7 +7,7 @@
 
 <section style="margin-left:10%;padding:1px 16px;height:100%;">
   <ul class="deliveries" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
-    <li *ngFor="let delivery of deliveries| paginate: {currentPage: p,itemsPerPage: count}">
+    <li *ngFor="let delivery of deliveries">
       <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
         <span class="name">{{delivery.id}}</span>
       </button>

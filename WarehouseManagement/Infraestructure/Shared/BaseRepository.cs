@@ -23,6 +23,11 @@ namespace DDDSample1.Infrastructure.Shared
         {
             return await this._objs.ToListAsync();
         }
+
+            public async Task<List<TEntity>> GetLimitAsync(int skip,int take )
+        {
+            return await this._objs.Skip(skip).Take(take).ToListAsync();
+        }
         
         public async Task<TEntity> GetByIdAsync(TEntityId id)
         {

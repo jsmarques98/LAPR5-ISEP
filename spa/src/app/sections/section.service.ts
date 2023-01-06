@@ -30,7 +30,7 @@ export class SectionService {
     const token = localStorage.getItem('id_token')!;
     const params = new HttpParams().set('skip', skip).set('limit', limit);
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}
-    return this.http.get<Section[]>(environment.logisticsAPI+ environment.logisticsAPIPSections+environment.logisticsAPIPSectionsPagination,{headers:headers,params: params}).pipe(catchError(err => {
+    return this.http.get<Section[]>(environment.logisticsAPI+ environment.logisticsAPIPSections+environment.Pagination,{headers:headers,params: params}).pipe(catchError(err => {
       if (err.status == 201) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }

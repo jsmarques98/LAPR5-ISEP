@@ -7,6 +7,8 @@ namespace DDDSample1.Domain.Deliveries
     public interface IDeliveryService
     {
         Task<List<DeliveryDTO>> GetAllAsync();
+        
+        Task<List<DeliveryDTO>> GetLimitAsync(int skip,int take);
 
         Task<DeliveryDTO> GetByIdAsync(DeliveryId id);
 

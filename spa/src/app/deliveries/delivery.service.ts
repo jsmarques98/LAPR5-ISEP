@@ -23,6 +23,11 @@ export class DeliveryService {
       
   }
 
+  getDeliveriesLimit(skip:number, limit:number): Observable<any> {
+      
+    return this.http.get<Delivery[]>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries+environment.Pagination+skip+"/"+limit)
+  }
+
   getDeliveries(): Observable<any> {
       
     return this.http.get<Delivery[]>(environment.warehouseManagementAPI+ environment.warehouseManagementAPIDeliveries)

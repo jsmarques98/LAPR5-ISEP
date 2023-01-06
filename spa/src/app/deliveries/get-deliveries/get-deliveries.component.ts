@@ -30,8 +30,8 @@ export class GetDeliveriesComponent implements OnInit {
 
   getDeliveries(){ 
 
-    this.service.getDeliveries(this.skip,this.limit).subscribe(res => {
-      if (res != null) {
+    this.service.getDeliveriesLimit(this.skip,this.limit).subscribe(res => {
+      if (res.length!=0) {
         this.limitNext=false
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false)
         this.deliveries = res;
@@ -64,7 +64,7 @@ export class GetDeliveriesComponent implements OnInit {
     if(this.valueNext != 0){
       this.valueNext--
       this.skip-=this.limit;
-      this.getSections()
+      this.getDeliveries()
     }
   }
   
@@ -72,14 +72,14 @@ export class GetDeliveriesComponent implements OnInit {
     if (!this.limitNext) {
       this.valueNext++
       this.skip = Number(this.limit) + Number(this.skip);
-      this.getSections()
+      this.getDeliveries()
     }
   }
   
   updateLimit(e) {
       this.limit=e.target.value
       this.skip = 0
-      this.getSections() 
+      this.getDeliveries() 
   }
 
 

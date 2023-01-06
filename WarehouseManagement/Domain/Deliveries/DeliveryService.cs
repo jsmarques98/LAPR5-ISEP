@@ -24,10 +24,19 @@ namespace DDDSample1.Domain.Deliveries
 
         public async Task<List<DeliveryDTO>> GetAllAsync()
         {
-            var list = await this._repo.GetAllAsync();
-            
+           // var list = await this._repo.GetAllAsync();
+           var list = await this._repo.GetAllAsync();
+            Console.WriteLine(list.Count);
             List<DeliveryDTO> listDto = list.ConvertAll<DeliveryDTO>(delivery => DeliveryMapper.toDTO(delivery));
+            return listDto;
+        }
 
+          public async Task<List<DeliveryDTO>> GetLimitAsync(int skip,int take)
+        {
+           // var list = await this._repo.GetAllAsync();
+           var list = await this._repo.GetLimitAsync(skip,take);
+            Console.WriteLine(list.Count);
+            List<DeliveryDTO> listDto = list.ConvertAll<DeliveryDTO>(delivery => DeliveryMapper.toDTO(delivery));
             return listDto;
         }
 

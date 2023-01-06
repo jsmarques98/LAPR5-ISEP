@@ -26,6 +26,15 @@ namespace DDDSample1.Controllers
             return await _service.GetAllAsync();
         }
 
+          // GET: api/Deliveries
+        [HttpGet("pag/{skip}/{take}")]
+        public async Task<ActionResult<IEnumerable<DeliveryDTO>>> GetLimit(int skip,int take)
+        {
+       
+            
+            return await _service.GetLimitAsync(skip, take);
+        }
+
         // GET: api/Deliveries/5
         [HttpGet("{id}")]
         public async Task<ActionResult<DeliveryDTO>> GetGetById(String id)

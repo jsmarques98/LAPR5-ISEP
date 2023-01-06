@@ -28,7 +28,7 @@ export const environment = {
   logisticsAPIRoles:"roles/",
 
   logisticsAPIPSections:"sections/",
-  logisticsAPIPSectionsPagination:"pag/",
+  Pagination:"pag/",
 
   logisticsAPIPTrucks:"trucks/",
 
