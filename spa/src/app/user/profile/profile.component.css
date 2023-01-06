@@ -8,3 +8,7 @@ img {
     height: 200px;
     border-radius: 50%;
   }
+
+  div.home{
+    margin-top: 20px;
+  }

@@ -1,8 +1,8 @@
 
 
-<section style="margin-left:10%;padding:1px 16px;height:100%;">
+<section>
     <form [formGroup] = "deliveryForm">
-        <h1 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Delivery Information:</h1>
+        <h1 >Delivery Information:</h1>
         <div>
             <input type="text" class="form-control" id="deliveryId" placeholder="Id" formControlName="id">
         </div>
@@ -40,7 +40,7 @@
         <br>
         <button type="submit" class="btn btn-primary w-100" id="createDelivery"(click)="createDelivery()">Save</button>
     </form>
-    <div style="margin-top: 20px;">
+    <div class="exitbtn">
         <button routerLink="/home">Exit</button>
     </div>
 </section>

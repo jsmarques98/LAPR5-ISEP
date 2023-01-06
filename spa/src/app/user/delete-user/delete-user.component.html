@@ -1,25 +1,27 @@
 
-  <section style="margin-left:10%;padding:1px 16px;height:100%;">
-    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">User</h2>
+  <section >
+    <h2 class="tittle" >User</h2>
     <form [formGroup] = "userForm">
         <div>
             <input type="text" class="form-control" id="userEmail" placeholder="Email" formControlName="email">
         </div>
-        <button style="margin-top: 10px;" type="submit" class="btn btn-primary w-100" (click)="getUser()">Find</button>
+        <br>
+        <button class="find" type="submit" class="btn btn-primary w-100" (click)="getUser()">Find</button>
     </form>
-    <div style="margin-top: 20px;">
+    <div class="exit" >
       <button routerLink="/home">Exit</button>
     </div>
   </section>
   
-  <section style="margin-left:10%;padding:1px 16px;height:auto;">
-    <div *ngIf="visible" style="margin-left: 15%;">
-      <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">User Details</h2>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">First Name: {{user.userDTO.firstName}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Last Name: {{user.userDTO.lastName}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Email: {{user.userDTO.email}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Phone Number: {{user.userDTO.phoneNumber}}</div>  
-      <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteUser(visible.email)">Delete User</button> 
+  <section>
+    <div *ngIf="visible" >
+      <h2 class="info" >User Details</h2>
+      <div class="info" >First Name: {{user.userDTO.firstName}}</div>
+      <div class="info" >Last Name: {{user.userDTO.lastName}}</div>
+      <div class="info" >Email: {{user.userDTO.email}}</div>
+      <div class="info" >Phone Number: {{user.userDTO.phoneNumber}}</div> 
+      <br> 
+      <button class="delete" type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteUser(visible.email)">Delete User</button> 
     </div>  
   </section>  
     

@@ -1,18 +1,18 @@
 
 
-<section style="margin-left:10%;padding:1px 16px;height:100%;">
-  <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Deliveries</h2>
-  <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id ="find"(click)="getDeliveries()">Find</button>
+<section >
+  <h2 class = "tittle" >Deliveries</h2>
+  <button  type="submit" class="btn btn-primary w-100" id ="find"(click)="getDeliveries()">Find</button>
 </section>
 
-<section style="margin-left:10%;padding:1px 16px;height:100%;">
-  <ul class="deliveries" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
+<section >
+  <ul class="deliveries">
     <li *ngFor="let delivery of deliveries">
       <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
         <span class="name">{{delivery.id}}</span>
       </button>
     </li>
-    <div class="text-right" style="width: 500px;color:black;height: auto;margin-top: 20px;">
+    <div class="page" >
       <button (click)="back()">Back</button>
       <button (click)="next()">Next</button>
       <select #cricket (change)="updateLimit($event)">
@@ -21,19 +21,19 @@
         <option value="15">15</option>
       </select>
     </div>
-    <div style="position: absolute;margin-top: 10px;">
+    <div class="divexit" >
       <button routerLink="/home">Exit</button>
     </div> 
   </ul>
   
 
-  <div *ngIf="selectedDelivery" style="margin-left: 15%;">
-    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Delivery {{selectedDelivery.id | uppercase}} Details</h2>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">DeliveryDate: {{selectedDelivery.deliveryDate}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">LoadTime: {{selectedDelivery.loadTime}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">UnloadTime: {{selectedDelivery.unloadTime}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">TotalWeight: {{selectedDelivery.totalWeight}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">DeliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>  
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="delete" (click)="deleteDeliverie(selectedDelivery.id)">Delete Delivery</button>
+  <div class ="deliveries" *ngIf="selectedDelivery" >
+    <h2 class = "info" >Delivery {{selectedDelivery.id | uppercase}} Details</h2>
+    <div class = "info" >DeliveryDate: {{selectedDelivery.deliveryDate}}</div>
+    <div class = "info" >LoadTime: {{selectedDelivery.loadTime}}</div>
+    <div class = "info" >UnloadTime: {{selectedDelivery.unloadTime}}</div>
+    <div class = "info" >TotalWeight: {{selectedDelivery.totalWeight}}</div>
+    <div class = "info" >DeliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>  
+    <button class = "delete" type="submit" class="btn btn-primary w-100" id="delete" (click)="deleteDeliverie(selectedDelivery.id)">Delete Delivery</button>
   </div>
 </section>

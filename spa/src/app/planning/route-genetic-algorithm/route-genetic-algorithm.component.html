@@ -27,39 +27,21 @@
         <br>
 
         <button type="submit" class="btn btn-primary w-100" (click)="checkRouteGenetic()">Best Route</button>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary w-100" (click)="exit()">Exit</button>
+
     </form>
   </section>
   
-  <!-- <section >
-    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Route:</h2>
-    <ul class="deliveries" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
-      <li *ngFor="let delivery of deliveries">
-        <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
-          <span class="name">{{delivery.id}}</span>
-        </button>
-      </li>
-      <div style="margin-top: 20px;">
-        <button routerLink="/home">Exit</button>
-      </div>
-    </ul>
-  
-  
-    <div *ngIf="selectedDelivery" style="margin-left: 15%;">
-      <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">{{selectedDelivery.id | uppercase}} Details</h2>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">deliveryDate: {{selectedDelivery.deliveryDate}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">loadTime: {{selectedDelivery.loadTime}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">unloadTime: {{selectedDelivery.unloadTime}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">totalWeight: {{selectedDelivery.totalWeight}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">deliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>
-    </div>
-  </section> -->
+
 
 
   <section >
-    <ul class="deliveries" style="background-color:rgba(224, 255, 255, 0);">
+    <ul class="deliveries">
       <li *ngFor="let plan of deliveries; let i = index">
-        <h2>Truck {{trucks[i]}}</h2>
-        <ul class="deliveries" style="background-color:rgba(224, 255, 255, 0);">
+        <h2 class="info" >Truck {{trucks[i]}}</h2>
+        <ul class="deliveries">
           <li *ngFor="let delivery of plan">
             <button [class.selected]="delivery === selectedDelivery" type="button" (click)="onSelect(delivery)">
               <span class="name">{{delivery.id}}</span>
@@ -70,13 +52,13 @@
         <br>
         <br>
       </li>
-      <div *ngIf="selectedDelivery" style="margin-left: 15%; margin-top: -300px;position: static;">
-        <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">{{selectedDelivery.id | uppercase}} Details</h2>
-        <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">deliveryDate: {{selectedDelivery.deliveryDate}}</div>
-        <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">loadTime: {{selectedDelivery.loadTime}}</div>
-        <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">unloadTime: {{selectedDelivery.unloadTime}}</div>
-        <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">totalWeight: {{selectedDelivery.totalWeight}}</div>
-        <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">deliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>
+      <div class = "details " *ngIf="selectedDelivery" >
+        <h2 class="info" >{{selectedDelivery.id | uppercase}} Details</h2>
+        <div class="info" >deliveryDate: {{selectedDelivery.deliveryDate}}</div>
+        <div class="info"  >loadTime: {{selectedDelivery.loadTime}}</div>
+        <div class="info" >unloadTime: {{selectedDelivery.unloadTime}}</div>
+        <div class="info" >totalWeight: {{selectedDelivery.totalWeight}}</div>
+        <div class="info" >deliveryWarehouseId: {{selectedDelivery.deliveryWarehouseId}}</div>
       </div>
 
     </ul>

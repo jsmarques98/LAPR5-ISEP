@@ -101,4 +101,8 @@ export class RouteGeneticAlgorithmComponent implements OnInit {
     this.selectedDelivery = delivery;
   }
 
+  exit(){
+    this.router.navigate(["/home"])
+  }
+
 }
