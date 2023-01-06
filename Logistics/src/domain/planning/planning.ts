@@ -6,15 +6,15 @@ import IPlanningDTO from "../../dto/IPlanningDTO";
 
 
 interface PlanningProps {
-  truckPlate: Plate;
+  truckName: String;
   deliveryDate: String;
-  deliveryId: Array<String>;
+  deliveryId: [String];
   time: number;
 }
 
 export class Planning extends AggregateRoot<PlanningProps> {
-  get truckPlate(): Plate {
-    return this.props.truckPlate;
+  get truckName(): String {
+    return this.props.truckName;
   }
 
   get deliveryDate(): String {
@@ -34,7 +34,7 @@ export class Planning extends AggregateRoot<PlanningProps> {
   }
 
   public static create (planningDTO: IPlanningDTO, id?: UniqueEntityID): Result<Planning> {
-    const planning = new Planning({ truckPlate:Plate.create(planningDTO.truckPlate).getValue(), deliveryDate: planningDTO.deliveryDate, deliveryId: planningDTO.deliveryId, time: planningDTO.time});
+    const planning = new Planning({ truckName:(planningDTO.truckName), deliveryDate: planningDTO.deliveryDate, deliveryId: planningDTO.deliveryId, time: planningDTO.time});
 
     return Result.ok<Planning>( planning );
 }

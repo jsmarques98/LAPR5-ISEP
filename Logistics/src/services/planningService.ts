@@ -9,6 +9,7 @@ import { Planning } from '../domain/planning/planning';
 import { UniqueEntityID } from '../core/domain/UniqueEntityID';
 import { PlanningMap } from '../mappers/PlanningMap';
 import IPlanningGeneticDTO from '../dto/IPlanningGeneticDTO';
+import IPlanningRepo from './IRepos/IPlanningRepo';
 
 
 const axios = require('axios');
@@ -16,8 +17,9 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 @Service()
 export default class PlanningService implements IPlanningService {
-  planningRepo: any;
+
   constructor(
+    @Inject(config.repos.planning.name) private planningRepo : IPlanningRepo,
     @Inject(config.services.truck.name) private truckServiceInstance : ITruckService,
     @Inject(config.services.section.name) private sectionServiceInstance : ISectionServiice
   ) {}
@@ -124,7 +126,7 @@ public async deleteKnowledgeDataBase(){
     
       
       const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
-
+      this.createPlanning(result)
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
       throw e;
@@ -145,6 +147,7 @@ public async deleteKnowledgeDataBase(){
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
 
       const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
+
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
       throw e;
@@ -208,15 +211,10 @@ public async deleteKnowledgeDataBase(){
 
     const planningResult = planningOrError.getValue();
 
-    let aux= await this.planningRepo.exists(planningResult);
-    
-    if((aux).valueOf()){
-      return Result.fail<IPlanningDTO>(  ("Ja existe um planning com este domainId"));
-     }else{
-      await this.planningRepo.save(planningResult);
-    }
-      const planningDtoResult = PlanningMap.toDTO( planningResult ) as IPlanningDTO;
-      return Result.ok<IPlanningDTO>( planningDtoResult )
+    this.planningRepo.save(planningResult);
+  
+    const planningDtoResult = PlanningMap.toDTO( planningResult ) as IPlanningDTO;
+    return Result.ok<IPlanningDTO>( planningDtoResult )
 
 }
 
@@ -237,6 +235,8 @@ public async getGenetic(planningDTO : IPlanningGeneticDTO): Promise<Result<IPlan
     then((response) => {route = response.data;}).catch((e) => {console.log(e)});
     const result = { deliveryDate: planningDTO.deliveryDate, numGer:planningDTO.numGer, dimPop:planningDTO.dimPop, perC:planningDTO.perC, perM:planningDTO.perM, refVal:planningDTO.refVal, routeList: route} as IPlanningGeneticDTO;
     console.log(route)
+    
+    
     return Result.ok<IPlanningGeneticDTO>(result);
 } catch(e) {
     throw e;

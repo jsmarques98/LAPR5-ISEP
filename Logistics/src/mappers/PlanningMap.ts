@@ -12,14 +12,12 @@ export class PlanningMap extends Mapper<Planning> {
   
   public static toDTO( planning: Planning): IPlanningDTO {
     return {
-      id: planning.id.toString(),
-      truckPlate: planning.truckPlate.toString(),
+      domainId: planning.id.toString(),
+      truckName: planning.truckName,
       deliveryId: planning.deliveryId,
-      deliveryDate: planning.deliveryDate.toString(),
+      deliveryDate: planning.deliveryDate,
       time: planning.time,
-
-    
-    } as IPlanningDTO;
+    }  as IPlanningDTO;
   }
 
   public static toDomain (planning: any | Model<IPlanningPersistence & Document> ): Planning {
@@ -36,8 +34,9 @@ export class PlanningMap extends Mapper<Planning> {
   public static toPersistence (planning: Planning): any {
     return {
       domainId: planning.id.toString(),
-      truckPlate: planning.truckPlate.toString(),
+      truckName: planning.truckName,
       deliveryId: planning.deliveryId, 
+      deliveryDate: planning.deliveryDate, 
       time: planning.time,
 
     }

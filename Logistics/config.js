@@ -100,6 +100,10 @@ export default {
     packaging: {
       name: "PackagingRepo",
       path: "../repos/packagingRepo"
+    },
+    planning: {
+      name: "PlanningRepo",
+      path: "../repos/planningRepo"
     }
   },
 

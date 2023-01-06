@@ -96,6 +96,11 @@ export default async ({ expressApp }) => {
     path: config.repos.packaging.path
   }
 
+  const planningRepo = {
+    name: config.repos.planning.name,
+    path: config.repos.planning.path
+  }
+
   const roleService = {
     name: config.services.role.name,
     path: config.services.role.path
@@ -145,7 +150,8 @@ export default async ({ expressApp }) => {
       userRepo,
       truckRepo,
       sectionRepo,
-      packagingRepo
+      packagingRepo,
+      planningRepo
     ],
     services: [
       roleService,
