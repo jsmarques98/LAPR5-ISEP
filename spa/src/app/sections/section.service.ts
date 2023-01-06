@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Section } from './section';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, skip, throwError } from 'rxjs';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import { environment } from 'src/environments/environment';
 
@@ -26,10 +26,11 @@ export class SectionService {
   }
 
 
-  getSections(): Observable<any> {
+  getSections(skip:number, limit:number): Observable<any> {
     const token = localStorage.getItem('id_token')!;
-    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}  
-    return this.http.get<Section[]>(environment.logisticsAPI+ environment.logisticsAPIPSections,{headers}).pipe(catchError(err => {
+    const params = new HttpParams().set('skip', skip).set('limit', limit);
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'}
+    return this.http.get<Section[]>(environment.logisticsAPI+ environment.logisticsAPIPSections+environment.logisticsAPIPSectionsPagination,{headers:headers,params: params}).pipe(catchError(err => {
       if (err.status == 201) {
         this.mostrarNotificacao('POST EFETUADO COM SUCESSO!',false);
       }

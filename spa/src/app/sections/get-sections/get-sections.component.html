@@ -6,17 +6,21 @@
 
 <section style="margin-left:10%;padding:1px 16px;height:auto;">
   <ul class="sections" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;height: 60px">
-    <li *ngFor="let section of sections | paginate: {currentPage: p,itemsPerPage: count}">
+    <li *ngFor="let section of sections">
       <button [class.selected]="section === selectedSection" type="button" (click)="onSelect(section)">
         <span class="name">{{section.warehouseOrigin}} to {{section.warehouseDestiny}}</span>
       </button>
     </li>
-    <!--Including the pagination control.-->
-    <div class="text-right" style="width: 500px;color:black;position: absolute;margin-top: 100px;">
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
-      <!--<mat-paginator #paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>-->      
+    <div class="text-right" style="width: 500px;color:black;height: auto;margin-top: 20px;">
+      <button (click)="back()">Back</button>
+      <button (click)="next()">Next</button>
+      <select #cricket (change)="updateLimit($event)">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
     </div>
-    <div style="position: absolute;margin-top: 100px;">
+    <div style="margin-top: 10px;">
       <button routerLink="/home">Exit</button>
     </div>
   </ul>

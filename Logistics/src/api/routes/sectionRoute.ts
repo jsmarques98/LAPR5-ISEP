@@ -41,16 +41,16 @@ export default (app: Router) => {
     route.get('',middlewares.isAuth,
     celebrate({
       body: Joi.object({
-        skip:Joi.string().required(),
-        limit:Joi.string().required()
       }),
     }),
-    (req, res, next) => ctrl.getSection(req, res, next));
+    (req, res, next) => ctrl.getAllSections(req, res, next));
 
     
     route.get('/pag',middlewares.isAuth,
     celebrate({
-      body: Joi.object({
+      query: Joi.object({
+        skip:Joi.number().required(),
+        limit:Joi.number().required()
       }),
     }),
     (req, res, next) => ctrl.getSections(req, res, next));

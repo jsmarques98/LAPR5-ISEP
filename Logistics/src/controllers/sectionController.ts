@@ -66,7 +66,7 @@ export default class SectionController implements ISectionController /* TODO: ex
   public async getSections(req: Request, res: Response, next: NextFunction) {
     try {
       
-      const sectionOrError = await this.sectionServiceInstance.getSections(req.body.skip,req.body.limit) as Result<ISectionDTO[]>
+      const sectionOrError = await this.sectionServiceInstance.getSections(req.query.skip,req.query.limit) as Result<ISectionDTO[]>
 
       if (sectionOrError.isFailure) {
           return res.status(400).send();

@@ -11,8 +11,10 @@ import { DeliveryService } from '../delivery.service';
 })
 export class GetDeliveriesComponent implements OnInit {
 
-  p: number = 1;
-  count: number = 10;
+  skip:number;
+  limit:number;
+  valueNext:number;
+  limitNext:boolean;
 
   deliveries = null;
   selectedDelivery?: Delivery;
@@ -20,16 +22,22 @@ export class GetDeliveriesComponent implements OnInit {
   constructor(private router: Router, private service : DeliveryService,private notification:MatSnackBar) { }
 
   ngOnInit(): void {
+    this.skip=0
+    this.limit=5 
+    this.valueNext=0
+    this.limitNext=false
   }
 
   getDeliveries(){ 
 
-    this.service.getDeliveries().subscribe(res => {
+    this.service.getDeliveries(this.skip,this.limit).subscribe(res => {
       if (res != null) {
+        this.limitNext=false
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false)
         this.deliveries = res;
       }else{
-        this.mostrarNotificacao('Erro ao obter as entregas!',true)
+        this.limitNext=true
+        this.mostrarNotificacao('Já obteve todas as entregas!',true)
       };
     });
   }
@@ -50,6 +58,28 @@ export class GetDeliveriesComponent implements OnInit {
         this.mostrarNotificacao('Erro ao eliminar delivery!',true)
       };
     });
+  }
+
+  back(){
+    if(this.valueNext != 0){
+      this.valueNext--
+      this.skip-=this.limit;
+      this.getSections()
+    }
+  }
+  
+  next(){
+    if (!this.limitNext) {
+      this.valueNext++
+      this.skip = Number(this.limit) + Number(this.skip);
+      this.getSections()
+    }
+  }
+  
+  updateLimit(e) {
+      this.limit=e.target.value
+      this.skip = 0
+      this.getSections() 
   }
 
 

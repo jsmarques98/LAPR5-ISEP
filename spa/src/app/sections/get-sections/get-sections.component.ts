@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { skip } from 'rxjs';
 import { Section } from '../section';
 import { SectionService } from '../section.service';
 
@@ -11,8 +12,10 @@ import { SectionService } from '../section.service';
 })
 export class GetSectionsComponent implements OnInit {
 
-  p: number = 1;
-  count: number = 12;
+  skip:number;
+  limit:number;
+  valueNext:number;
+  limitNext:boolean;
 
   sections = null;
 
@@ -20,18 +23,24 @@ export class GetSectionsComponent implements OnInit {
   constructor(private router: Router, private service : SectionService,private notification:MatSnackBar) { }
 
   ngOnInit(): void {
+    this.skip=0
+    this.limit=5 
+    this.valueNext=0
+    this.limitNext=false
   }
 
 
 
   getSections(){ 
 
-    this.service.getSections().subscribe(res => {
-      if (res != null) {
+    this.service.getSections(this.skip,this.limit).subscribe(res => {
+      if (res.length!=0) {
+        this.limitNext=false
         this.mostrarNotificacao('Secções obtidas com sucesso!',false)
         this.sections = res;
       }else{
-        this.mostrarNotificacao('Erro ao obter as Secções!',true)
+        this.limitNext=true
+        this.mostrarNotificacao('Já obteve todas as Secções!',true)
       };
     });
   }
@@ -54,6 +63,27 @@ export class GetSectionsComponent implements OnInit {
     });
   }
 
+  back(){
+    if(this.valueNext != 0){
+      this.valueNext--
+      this.skip-=this.limit;
+      this.getSections()
+    }
+  }
+  
+  next(){
+    if (!this.limitNext) {
+      this.valueNext++
+      this.skip = Number(this.limit) + Number(this.skip);
+      this.getSections()
+    }
+  }
+  
+  updateLimit(e) {
+      this.limit=e.target.value
+      this.skip = 0
+      this.getSections() 
+  }
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
