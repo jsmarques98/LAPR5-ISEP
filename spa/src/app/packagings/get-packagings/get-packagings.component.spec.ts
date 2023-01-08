@@ -15,7 +15,7 @@ describe('PackagingService', () => {
   let service: PackagingService;
   let httpController: HttpTestingController;
 
-  let url = 'https://10.9.20.241:3000/';
+  let url = 'https://localhost:3000/';
   
     beforeEach(() => {
       TestBed.configureTestingModule({

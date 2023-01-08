@@ -36,7 +36,7 @@ describe('DeliveryService', () => {
   let service: DeliveryService;
   let httpController: HttpTestingController;
 
-  let url = 'http://10.9.20.120:5000/';
+  let url = 'https://localhost:5001/';
   
     beforeEach(() => {
       TestBed.configureTestingModule({

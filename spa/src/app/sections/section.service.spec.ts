@@ -11,7 +11,7 @@ describe('SectionService', () => {
     let service: SectionService;
     let httpController: HttpTestingController;
 
-    let url = 'http://10.9.20.241:3000/';
+    let url = 'http://localhost:3000/';
 
         beforeEach(() => {
         TestBed.configureTestingModule({
@@ -80,7 +80,7 @@ describe('SectionService', () => {
     let service: SectionService;
     let httpController: HttpTestingController;
 
-    let url = 'http://10.9.20.241:3000/';
+    let url = 'http://localhost:3000/';
 
         beforeEach(() => {
         TestBed.configureTestingModule({

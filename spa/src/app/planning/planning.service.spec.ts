@@ -16,7 +16,7 @@ describe('PlanningService', () => {
     let service: PlanningService;
     let httpController: HttpTestingController;
   
-    let url = 'http://10.9.20.241:3000/';
+    let url = 'http://localhost:3000/';
     
       beforeEach(() => {
         TestBed.configureTestingModule({
@@ -28,28 +28,27 @@ describe('PlanningService', () => {
   
 
 
-    it('get all ', () => {
+      it('get all ', () => {
         const planning: PlanningGenetic = {
-            deliveryDate:"01/01/2023",
-            numGer: 5,
-            dimPop: 5,
-            perC: 50,
-            perM: 30,
-            refVal: 500.
+          deliveryDate: "01/01/2023",
+          numGer: 5,
+          dimPop: 5,
+          perC: 50,
+          perM: 30,
+          refVal: 500
         };
         const response = {
-          "status": 200,
+          status: 200
         };
-    
-
-        service.checkGeneticAlgRoute(planning).subscribe((data) => {  
-          expect(data.body).toEqual(200);
+      
+        service.checkGeneticAlgRoute(planning).subscribe((data) => {
+          expect(data.status).toEqual(200);
         });
         const req = httpController.expectOne({
           method: 'GET',
-          url: `${url}api/plannings/geneticAlg/`,
+          url: `${url}api/plannings/geneticAlg?deliveryDate=01/01/2023&numGer=5&dimPop=5&perC=50&perM=30&refVal=500`,
         });
         req.flush(response);      
-    });
+      });
   });
 });

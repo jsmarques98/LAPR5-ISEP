@@ -23,14 +23,16 @@ export class GetWarehousesComponent implements OnInit {
 
   getWarehouses(){ 
 
-    this.service.getWarehouses().subscribe(res => {
-      if (res != null) {
-        this.showNotification('Armazéns obtidos com sucesso!',false)
-        this.warehouses = res;
-      }else{
+    let a = this.service.getWarehouses().subscribe(
+     (res) => {
+        console.log("Armazéns obtidos com sucesso");
+        this.warehouses = res.body;
+      },
+      (error) => {
         this.showNotification('Erro ao obter os armazéns!',true)
-      };
-    });
+      });
+    
+    return a;
   }
 
   onSelect(warehouse: Warehouse): void {

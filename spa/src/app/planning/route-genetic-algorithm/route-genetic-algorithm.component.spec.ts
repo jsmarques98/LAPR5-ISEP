@@ -28,7 +28,7 @@ describe('RouteGeneticAlgorithmComponent', () => {
         providers: [PlanningService,{ provide: MatSnackBar, useValue: mockSnackBar } ,{ provide: MAT_DIALOG_DATA, useValue: {} },]
       }).compileComponents();
   
-      fakeTruckService = jasmine.createSpyObj('TruckService', ['getTrucks']);
+      fakeTruckService = jasmine.createSpyObj('TruckService', ['getTrucks', 'checkGeneticAlgRoute']);
       fixture = TestBed.createComponent(RouteGeneticAlgorithmComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
