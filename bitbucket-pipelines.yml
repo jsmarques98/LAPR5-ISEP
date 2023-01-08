@@ -77,7 +77,7 @@ pipelines:
               SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
               COMMAND: 'pm2 delete node'
               MODE: 'command' 
-              PORT: '10982' 
+              PORT: '10241' 
               SSH_KEY: '$MYKEY' 
 
     - step:
@@ -90,7 +90,7 @@ pipelines:
               REMOTE_PATH: '/logisticsAPI'
               LOCAL_PATH: './Logistics'
               SSH_KEY: $MYKEY
-              EXTRA_ARGS: ["-P","10982"]
+              EXTRA_ARGS: ["-P","10241"]
               
     - step:
         name: Start Node
@@ -101,7 +101,7 @@ pipelines:
               SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
               COMMAND: '/deploy.sh'
               MODE: 'command'
-              PORT: '10982'
+              PORT: '10241'
               SSH_KEY: '$MYKEY'
               
               
