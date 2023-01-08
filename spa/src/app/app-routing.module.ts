@@ -24,6 +24,7 @@ import { DeleteUserComponent } from './user/delete-user/delete-user.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { UpdateUserInfoComponent } from './user/update-user-info/update-user-info.component';
 import { RouteGeneticAlgorithmComponent } from './planning/route-genetic-algorithm/route-genetic-algorithm.component';
+import { GetPlanningsComponent } from './planning/get-plannings/get-plannings.component';
 
 
 
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'updateUserInfo', component: UpdateUserInfoComponent },
   { path: 'geneticAlg', component: RouteGeneticAlgorithmComponent },
+  { path: 'getPlanning', component: GetPlanningsComponent },
   
 
 

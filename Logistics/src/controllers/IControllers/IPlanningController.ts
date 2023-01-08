@@ -6,4 +6,5 @@ export default interface IPlanningController  {
   getRouteHeuristicMass(req: Request, res: Response, next: NextFunction);
   getRouteHeuristicTimeAndMass(req: Request, res: Response, next: NextFunction);
   getGenetic(req: Request, res: Response, next: NextFunction);
+  getPlanning(req: Request, res: Response, next: NextFunction);
 }

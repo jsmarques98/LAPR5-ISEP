@@ -57,6 +57,11 @@ export class PlanningService {
     return this.http.get<Warehouse[]>(environment.logisticsAPI + environment.logisticsAPIPlanningGeneticAlgRoute ,{headers ,params: params })
   }
 
+  getPlannings(): Observable<any> {
+    const token = localStorage.getItem('id_token')!;
+    const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
+    return this.http.get<Planning[]>(environment.logisticsAPI+environment.logisticsAPIPlannngGet,{headers,observe:'response'});
+  }
 
   private mostrarNotificacao(mensagem: string, falha: boolean) {
     var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';

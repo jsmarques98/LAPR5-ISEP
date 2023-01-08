@@ -118,6 +118,22 @@ export default class PlanningController implements IPlanningController /* TODO: 
     }
   };
 
+  public async getPlanning(req: Request, res: Response, next: NextFunction) {
+    try {
+      const planningError = await this.planningServiceInstance.getPlannings()as Result<IPlanningDTO[]>;
+
+      if (planningError.isFailure) {
+        return res.status(404).send();
+      }
+
+      const truckDTO = planningError.getValue();
+      return res.json( truckDTO ).status(200);
+    }
+    catch (e) {
+      return next(e);
+    }
+  }
+    
 
 
 }

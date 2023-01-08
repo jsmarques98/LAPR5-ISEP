@@ -76,7 +76,10 @@ export default class PlanningRepo implements IPlanningRepo {
     else
       return null;
   }
-
+  public async findAll(): Promise<Planning[]> {
+    const planningRecord = await this.planningSchema.find();
+    return planningRecord !== null ? planningRecord.map((postRecord) => PlanningMap.toDomain(postRecord)): null  
+}
   
 
 

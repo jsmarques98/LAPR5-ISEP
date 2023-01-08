@@ -243,11 +243,25 @@ for (let index = 0; index < route.length; index+=2){
 }
 const result = { deliveryDate: planningDTO.deliveryDate, numGer:planningDTO.numGer, dimPop:planningDTO.dimPop, perC:planningDTO.perC, perM:planningDTO.perM, refVal:planningDTO.refVal, routeList: route} as IPlanningGeneticDTO;
 
-    
+   
     return Result.ok<IPlanningGeneticDTO>(result);
 } catch(e) {
     throw e;
 }
 
 }
+
+  public async getPlannings(): Promise<Result<IPlanningDTO[]>> {
+    try {
+      const allPlanning = await this.planningRepo.findAll();
+      if (allPlanning === null) {
+          return Result.fail<IPlanningDTO[]>("There is no registred plannings.");
+      }
+
+      const resultado = allPlanning.map((allPlanning) => PlanningMap.toDTO(allPlanning) as IPlanningDTO);
+      return Result.ok<IPlanningDTO[]>(resultado);
+  } catch(e) {
+      throw e;
+  }
+  }
 }

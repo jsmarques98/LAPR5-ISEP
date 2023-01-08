@@ -60,5 +60,13 @@ export default (app: Router) => {
         refVal:Joi.number(),
       })
     }),
-    (req, res, next) => ctrl.getGenetic(req, res, next));
+    (req, res, next) => ctrl.getGenetic(req, res, next));~
+
+    route.get('/planning',middlewares.isAuth,
+    celebrate({
+      query: Joi.object().keys({
+  
+      })
+    }),
+    (req, res, next) => ctrl.getPlanning(req, res, next));
 };

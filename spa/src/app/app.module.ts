@@ -37,6 +37,7 @@ import { DeleteUserComponent } from './user/delete-user/delete-user.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { UpdateUserInfoComponent } from './user/update-user-info/update-user-info.component';
 import { RouteGeneticAlgorithmComponent } from './planning/route-genetic-algorithm/route-genetic-algorithm.component';
+import { GetPlanningsComponent } from './planning/get-plannings/get-plannings.component';
 
 
 
@@ -72,7 +73,8 @@ import { RouteGeneticAlgorithmComponent } from './planning/route-genetic-algorit
     DeleteUserComponent,
     ProfileComponent,
     UpdateUserInfoComponent,
-    RouteGeneticAlgorithmComponent
+    RouteGeneticAlgorithmComponent,
+    GetPlanningsComponent
 
   ],
   imports: [

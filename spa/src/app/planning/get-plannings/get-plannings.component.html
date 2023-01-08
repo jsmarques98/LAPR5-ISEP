@@ -1,0 +1,25 @@
+<section style="padding:1px 16px;height:100%;">
+    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Plannings</h2>
+    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="find" (click)="getPlannings()">Find</button>
+  </section>
+  <section style="padding:1px 16px;height:auto;">
+    <ul class="trucks" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
+        <div *ngFor="let planning of plannings">
+          <button [class.selected]="planning === selectedPlanning" type="button" id="selectedPlanning" (click)="onSelect(planning)">
+            <span class="name">{{planning.truckName}}  and {{planning.deliveryDate}}</span>
+  
+          </button>
+        </div>
+      <div style="margin-top: 20px;">
+        <button routerLink="/home">Exit</button>
+      </div>
+    </ul>
+    
+    <div *ngIf="selectedPlanning" style="margin-left: 20%;">
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Delivery Date: {{selectedPlanning.deliveryDate}}</div>
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Truck Name : {{selectedPlanning.truckName}}</div>
+      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">deliveryId: {{selectedPlanning.deliveryId}}</div>
+    </div>
+  </section>
+    
+  
