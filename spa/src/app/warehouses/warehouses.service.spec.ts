@@ -16,7 +16,7 @@ describe('WarehouseService', () => {
     let service: WarehouseService;
     let httpController: HttpTestingController;
   
-    let url = 'http://localhost:5000/';
+    let url = 'http://10.9.20.120:5000/';
     
       beforeEach(() => {
         TestBed.configureTestingModule({
