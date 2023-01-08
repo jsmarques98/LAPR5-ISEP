@@ -42,19 +42,13 @@ export default class PlanningRepo implements IPlanningRepo {
    
     try {
       if(planningDocument===null){
-     
-        
-      console.log("save");
-      
+    
           const rawPlanning: any = PlanningMap.toPersistence(planning);
-          console.log(rawPlanning)
           const planningCreated = await this.planningSchema.create(rawPlanning);
-          console.log(planningCreated)
           return PlanningMap.toDomain(planningCreated);
         
     
-    }else{
-      console.log("update");
+      }else{
       ( planningDocument).deliveryId=planning.deliveryId;
       ( planningDocument).time=planning.time;
        planningDocument.save();
