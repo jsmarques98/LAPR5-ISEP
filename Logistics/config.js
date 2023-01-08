@@ -27,7 +27,7 @@ export default {
   jwtSecret: process.env.JWT_SECRET || "my sakdfho2390asjod$%jl)!sdjas0i secret",
 
   
-  planningAPIURL:"http://localhost:8000/",
+  planningAPIURL:"http://vs195.dei.isep.ipp.pt:8888/",
   WarehouseManagementApiURL:"https://10.9.20.120:5001/api/",
   planningAPIBestRoutesURL:   "bestRoute",
   planningAPIHeuristicTimeURL: "heuristicTime",
