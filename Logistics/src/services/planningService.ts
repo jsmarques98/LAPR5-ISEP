@@ -147,7 +147,8 @@ public async deleteKnowledgeDataBase(){
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
 
       const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
-
+  
+      this.createPlanning(result)
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
       throw e;
@@ -168,7 +169,8 @@ public async deleteKnowledgeDataBase(){
     
       
       const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
-
+  
+      this.createPlanning(result)
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
       throw e;
@@ -191,6 +193,7 @@ public async deleteKnowledgeDataBase(){
       then((response) => {route = response.data;}).catch((e) => {console.log(e)});
 
       const result = {truckName: planningDTO.truckName, deliveryDate: planningDTO.deliveryDate, deliveryId: route[0],time:route[1]} as IPlanningDTO;
+      this.createPlanning(result)
 
       return Result.ok<IPlanningDTO>(result);
   } catch(e) {
@@ -233,9 +236,13 @@ public async getGenetic(planningDTO : IPlanningGeneticDTO): Promise<Result<IPlan
     dimensaoP: planningDTO.dimPop, percentagemC: planningDTO.perC, 
     percentagemM: planningDTO.perM, valorReferencia: planningDTO.refVal} }).
     then((response) => {route = response.data;}).catch((e) => {console.log(e)});
-    const result = { deliveryDate: planningDTO.deliveryDate, numGer:planningDTO.numGer, dimPop:planningDTO.dimPop, perC:planningDTO.perC, perM:planningDTO.perM, refVal:planningDTO.refVal, routeList: route} as IPlanningGeneticDTO;
-    console.log(route)
-    
+for (let index = 0; index < route.length; index+=2){
+  const result = {truckName: route[index+1], deliveryDate: planningDTO.deliveryDate, deliveryId: route[index],time:null} as IPlanningDTO;
+  this.createPlanning(result)
+
+}
+const result = { deliveryDate: planningDTO.deliveryDate, numGer:planningDTO.numGer, dimPop:planningDTO.dimPop, perC:planningDTO.perC, perM:planningDTO.perM, refVal:planningDTO.refVal, routeList: route} as IPlanningGeneticDTO;
+
     
     return Result.ok<IPlanningGeneticDTO>(result);
 } catch(e) {
