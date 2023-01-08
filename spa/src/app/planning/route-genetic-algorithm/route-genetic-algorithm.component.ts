@@ -48,7 +48,7 @@ export class RouteGeneticAlgorithmComponent implements OnInit {
     this.deliveriesIDs = [];
     this.trucks = [];
 
-    this.servicePlanning.checkGeneticAlgRoute(this.planningGenetic).subscribe(res => {
+   return this.servicePlanning.checkGeneticAlgRoute(this.planningGenetic).subscribe(res => {
       
       if (res != null && res.routeList!=undefined) {
         this.mostrarNotificacao('Entregas obtidas com sucesso!',false);

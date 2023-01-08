@@ -49,7 +49,7 @@ export class PlanningService {
     return this.http.get<Warehouse[]>(environment.logisticsAPI +environment.logisticsAPIPlanningHeuristicTimeAndMass,{headers , params: params })
   }
 
-  checkGeneticAlgRoute(planning:PlanningGenetic): Observable<any> {
+  checkGeneticAlgRoute(planning:PlanningGenetic):  Observable<any> {
     const token = localStorage.getItem('id_token')!;
     const headers = {'Authorization' : 'Token ' + token,'content-type': 'application/json'} 
     let params = new HttpParams().set('deliveryDate', planning.deliveryDate).set('numGer', planning.numGer).set('dimPop', planning.dimPop).set('perC', planning.perC).set('perM', planning.perM).set('refVal', planning.refVal);

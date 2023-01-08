@@ -37,6 +37,7 @@ export class GetDeliveriesComponent implements OnInit {
         this.deliveries = res;
       }else{
         this.limitNext=true
+        this.skip-=this.limit;
         this.mostrarNotificacao('Já obteve todas as entregas!',true)
       };
     });

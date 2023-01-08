@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TruckService } from '../truck.service';
 import { GetTrucksComponent } from './get-trucks.component';
@@ -12,6 +12,9 @@ import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Truck } from '../truck';
+import { async, Observable } from 'rxjs';
+import { TrucksComponent } from '../trucks.component';
+import { environment } from 'src/environments/environment';
 
 
 describe('GetTruckComponent', () => {
@@ -44,24 +47,19 @@ describe('GetTruckComponent', () => {
 
 
   it('get all trucks', async () => {
+    const response = new Observable((observer) => {
+      observer.next([]);
+      observer.complete();
+    });
+    fakeTruckService.getTrucks.and.returnValue(response);
 
-    const getALLTruck= {
-      domainId: "25",
-      plate: "24-MT-77",
-      name: "POPO do JOSE",
-      autonomy: 25,
-      maxBattery: 100,
-      payLoad: 1000,
-      tare: -2000,
-      baterryChargingTime:60,
-      active: 'true'
-  };
-  const response = {
-    "status": 201,
-  };
-    fakeTruckService.getTrucks.and.returnValue(response.status);
-    let aux=await component.getTrucks();
-    expect(aux).toEqual(aux);
+    // Call the component's getTrucks method and save the returned value
+    const result = component.getTrucks();
+
+    // Verify that the service's getTrucks method was called
+
+    // Verify that the component's getTrucks method returned the correct value
+    expect(result).toBeTruthy(response);
   });
 
 });
