@@ -24,6 +24,7 @@ export const environment = {
   logisticsAPIPlanningHeuristicTime:"plannings/routeHeuristicTime",
   logisticsAPIPlanningGeneticAlgRoute:"plannings/geneticAlg",
   logisticsAPIPlanningHeuristicTimeAndMass:"plannings/routeHeuristicTimeAndMass",
+  logisticsAPIPlannngGet:"plannings/planning",
   logisticsAPIInactiveTrucks:"trucks/inactive",
   logisticsAPIActiveTrucks:"trucks/active",
   logisticsAPIRoles:"roles/",
