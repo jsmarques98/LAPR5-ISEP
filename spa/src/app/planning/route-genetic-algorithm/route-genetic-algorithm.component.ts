@@ -85,7 +85,7 @@ export class RouteGeneticAlgorithmComponent implements OnInit {
                 
       }else{
         this.deliveries=null;
-        this.mostrarNotificacao('Não existem entregas para o camião ou a data selecionadas!',true)
+        this.mostrarNotificacao('Não existem entregas para a data selecionadas!',true)
       };
     })
     

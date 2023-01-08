@@ -371,7 +371,7 @@ export default class RoadNetwork {
     exitButton.textContent = 'Exit';
     document.body.appendChild(exitButton);
     exitButton.addEventListener('click', () => {
-      window.location.href = 'http://localhost:4200/home';
+      window.location.href = 'https://vs113.dei.isep.ipp.pt:4200/home';
     });
 
   }

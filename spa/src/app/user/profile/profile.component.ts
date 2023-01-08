@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { DeleteUserService } from '../delete-user/delete-user.service';
 import { LoginService } from '../login/login.service';
 import { User } from '../user';
 
@@ -12,7 +14,7 @@ export class ProfileComponent implements OnInit {
   user:User;
   image;
   loginType;
-  constructor(private loginService: LoginService,private router: Router) { }
+  constructor(private loginService: LoginService,private router: Router, private deleteUserService : DeleteUserService) { }
 
   ngOnInit(): void {
     this.loginService.getUserDetails().subscribe(res => {
@@ -28,12 +30,19 @@ export class ProfileComponent implements OnInit {
   }
 
   logout():void{
-    this.loginService.logout();
+    this.loginService.logout().subscribe();
     this.router.navigate(["/login"])
   }
 
   updateInfo():void{
     this.router.navigate(["/updateUserInfo"])
   }
+
+  deleteAccount(){
+    this.deleteUserService.deleteUser(this.user.email).subscribe();
+    this.router.navigate(["/login"])
+  }
+
+
 
 }

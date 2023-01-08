@@ -1,20 +1,40 @@
 beforeEach(() =>{
-    cy.visit('/')
-    cy.wait(1000)
+  cy.visit('/login')
+  cy.get("#userEmail").type("admn.eletricgo@gmail.com");
+  cy.get("#userPassword").type("eletricgo");
+  cy.get("#loginbtn").click()
+  cy.wait(1000)
 })
 
 
-describe('Created truck', () => {
-    it('Visits the initial project page', () => {
+
+describe('Get planning', () => {
+    it('Get planning genetic algorithm valid data', () => {
         
-      cy.visit('/createPackagings')
-      cy.get("#packagingId").type("100")
-      cy.get("#packagingDeliveryId").type("4445")
-      cy.get("#packagingTruckId").type("2022-12-10")
-      cy.get("#packagingPositionX").type("7")
-      cy.get("#packagingPositionY").type("10")
-      cy.get("#packagingPositionZ").type("199")
-      cy.get("#createPackaging").click()
+      cy.get("#geneticAlg").click()
+      cy.get("#deliveryDate").type("2022-12-06")
+      cy.get("#numGer").type("5")
+      cy.get("#dimPop").type("2")
+      cy.get("#perC").type("10")
+      cy.get("#perM").type("15")
+      cy.get("#refValue").type("3")
+      cy.get("#check").click()
+
+      cy.wait(1000)
+
+    })
+
+    it('Get planning genetic algorithm wrong data', () => {
+        
+      cy.get("#geneticAlg").click()
+      cy.get("#deliveryDate").type("2021-12-06")
+      cy.get("#numGer").type("5")
+      cy.get("#dimPop").type("2")
+      cy.get("#perC").type("10")
+      cy.get("#perM").type("15")
+      cy.get("#refValue").type("3")
+      cy.get("#check").click()
+
       cy.wait(1000)
 
     })

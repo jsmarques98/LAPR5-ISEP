@@ -3,6 +3,7 @@ import { FormBuilder, Validators,FormsModule,ReactiveFormsModule } from '@angula
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     password: ['',Validators.required] 
   });
 
-  constructor(private fb: FormBuilder,private authService: SocialAuthService, private router: Router, private loginService : LoginService) {
+  constructor(private fb: FormBuilder,private authService: SocialAuthService, private router: Router, private loginService : LoginService,private notification:MatSnackBar) {
     localStorage.setItem("admin","");
     localStorage.setItem("warehouseManager","");
     localStorage.setItem("fleetManager","");
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit {
 
 
         }else{
-          this.router.navigate(["/login"])
+          this.mostrarNotificacao("falha na autenticação, verifique o email ou a password",true);
         }
       })
     });
@@ -91,9 +92,14 @@ export class LoginComponent implements OnInit {
 
 
       }else{
-        this.router.navigate(["/login"])
+        this.mostrarNotificacao("falha na autenticação, verifique o email ou a password",true);
       }
     })
+  }
+
+  private mostrarNotificacao(mensagem: string, falha: boolean) {
+    var snackbarColor = falha ? 'red-snackbar' : 'green-snackbar';
+    this.notification.open(mensagem, 'Close', {duration: 4000, panelClass: [snackbarColor]});
   }
 
 

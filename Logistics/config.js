@@ -28,7 +28,7 @@ export default {
 
   
   planningAPIURL:"http://localhost:8000/",
-  WarehouseManagementApiURL:"http://localhost:5000/api/",
+  WarehouseManagementApiURL:"http://10.9.20.120:5000/api/",
   planningAPIBestRoutesURL:   "bestRoute",
   planningAPIHeuristicTimeURL: "heuristicTime",
   planningAPIHeuristicMassURL: "heuristicMass",

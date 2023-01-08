@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  logisticsAPI:"http://localhost:3000/api/",
+  logisticsAPI:"http://10.9.20.241:3000/api/",
 
   logisticsAPILogin:"auth/ssosignin",
   logisticsAPISignIn:"auth/signin",
@@ -34,7 +34,7 @@ export const environment = {
   logisticsAPIPTrucks:"trucks/",
 
 
-  warehouseManagementAPI: "http://localhost:5000/api/",
+  warehouseManagementAPI: "http://10.9.20.120:5000/api/",
 
   warehouseManagementAPIDeliveries: "deliveries/",
   
