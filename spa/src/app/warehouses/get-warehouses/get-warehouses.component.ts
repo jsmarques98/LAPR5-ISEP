@@ -26,7 +26,7 @@ export class GetWarehousesComponent implements OnInit {
     let a = this.service.getWarehouses().subscribe(
      (res) => {
         console.log("Armazéns obtidos com sucesso");
-        this.warehouses = res.body;
+        this.warehouses = res;
       },
       (error) => {
         this.showNotification('Erro ao obter os armazéns!',true)
