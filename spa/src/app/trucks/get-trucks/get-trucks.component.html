@@ -1,35 +1,31 @@
-
-
-
-<section style="margin-left:10%;padding:1px 16px;height:100%;">
-  <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Trucks</h2>
-  <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="find" (click)="getTrucks()">Find</button>
+<section>
+  <h2 class="title">Trucks</h2>
+  <button type="submit" class="btn btn-primary w-100" id="find" (click)="getTrucks()">Find</button>
 </section>
-<section style="margin-left:10%;padding:1px 16px;height:auto;">
-  <ul class="trucks" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
+<section class="trucks">
+  <ul class="trucks">
       <div *ngFor="let truck of trucks">
         <button [class.selected]="truck === selectedTruck" type="button" id="selectedTruck" (click)="onSelect(truck)">
           <span class="name">{{truck.plate}}</span>
-
         </button>
       </div>
-    <div style="margin-top: 20px;">
+    <div class="exitbtn">
       <button routerLink="/home">Exit</button>
     </div>
   </ul>
   
-  <div *ngIf="selectedTruck" style="margin-left: 15%;">
-    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Truck {{selectedTruck.name | uppercase}} Details</h2>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Plate: {{selectedTruck.plate}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Autonomy: {{selectedTruck.autonomy}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Max Battery: {{selectedTruck.maxBattery}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Pay Load: {{selectedTruck.payLoad}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Tare: {{selectedTruck.tare}}</div>  
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Baterry Charging Time: {{selectedTruck.baterryChargingTime}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">Active: {{selectedTruck.active}}</div>
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteTruck(selectedTruck.plate)">Delete Truck</button>  
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Inactive" (click)="inactiveTruck(selectedTruck.plate)">Inactive Truck</button>
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="Activate" (click)="activateTruck(selectedTruck.plate)">Activate Truck</button>    
+  <div class="truckselect" *ngIf="selectedTruck">
+    <h2 class="truck">Truck {{selectedTruck.name | uppercase}} Details</h2>
+    <div class="truck">Plate: {{selectedTruck.plate}}</div>
+    <div class="truck">Autonomy: {{selectedTruck.autonomy}}</div>
+    <div class="truck">Max Battery: {{selectedTruck.maxBattery}}</div>
+    <div class="truck">Pay Load: {{selectedTruck.payLoad}}</div>
+    <div class="truck">Tare: {{selectedTruck.tare}}</div>  
+    <div class="truck">Baterry Charging Time: {{selectedTruck.baterryChargingTime}}</div>
+    <div class="truck">Active: {{selectedTruck.active}}</div>
+    <button type="submit" class="btn btn-primary w-100" id="Delete" (click)="deleteTruck(selectedTruck.plate)">Delete Truck</button>  
+    <button type="submit" class="btn btn-primary w-100" id="Inactive" (click)="inactiveTruck(selectedTruck.plate)">Inactive Truck</button>
+    <button type="submit" class="btn btn-primary w-100" id="Activate" (click)="activateTruck(selectedTruck.plate)">Activate Truck</button>    
   </div>
 </section>
   

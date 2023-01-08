@@ -1,17 +1,16 @@
- 
-<section style="margin-left:10%;padding:1px 16px;height:auto;">
-  <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">Sections</h2>
+<section >
+  <h2 class="title">Sections</h2>
   <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100"id="getSections" (click)="getSections()">Find</button>
 </section>
 
-<section style="margin-left:10%;padding:1px 16px;height:auto;">
-  <ul class="sections" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;height: 60px">
+<section class="sections">
+  <ul class="sections">
     <li *ngFor="let section of sections">
       <button [class.selected]="section === selectedSection" type="button" (click)="onSelect(section)">
         <span class="name">{{section.warehouseOrigin}} to {{section.warehouseDestiny}}</span>
       </button>
     </li>
-    <div class="text-right" style="width: 500px;color:black;height: auto;margin-top: 20px;">
+    <div class="text-right">
       <button [disabled]="this.skip===0" (click)="back()">Back</button>
       <button [disabled]="this.limitNext" (click)="next()">Next</button>
       <select #cricket (change)="updateLimit($event)">
@@ -20,19 +19,19 @@
         <option value="15">15</option>
       </select>
     </div>
-    <div style="margin-top: 10px;">
+    <div class="exitbtn">
       <button routerLink="/home">Exit</button>
     </div>
   </ul>
   
   
-  <div *ngIf="selectedSection" style="margin-left: 15%;">
-    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Section {{selectedSection.warehouseOrigin | uppercase}} to {{selectedSection.warehouseDestiny | uppercase}} Details</h2>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">duration: {{selectedSection.duration}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">distance: {{selectedSection.distance}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">energySpent: {{selectedSection.energySpent}}</div>
-    <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">extraTime: {{selectedSection.extraTime}}</div>
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="delete" (click)="deleteSection(selectedSection.id)">Delete Section</button>
+  <div class="secselect" *ngIf="selectedSection">
+    <h2 class="sec">Section {{selectedSection.warehouseOrigin | uppercase}} to {{selectedSection.warehouseDestiny | uppercase}} Details</h2>
+    <div class="sec">duration: {{selectedSection.duration}}</div>
+    <div class="sec">distance: {{selectedSection.distance}}</div>
+    <div class="sec">energySpent: {{selectedSection.energySpent}}</div>
+    <div class="sec">extraTime: {{selectedSection.extraTime}}</div>
+    <button type="submit" class="btn btn-primary w-100" id="delete" (click)="deleteSection(selectedSection.id)">Delete Section</button>
   </div>
 </section>
   

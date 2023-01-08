@@ -1,0 +1,45 @@
+section{
+    padding:1px 16px;
+    height:100%;
+}
+
+h2.title{
+    color:#369;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 150px;
+}
+
+button.btn btn-primary w-100{
+    margin-top: 20px;
+}
+
+section.trucks{
+    padding:1px 16px;
+    height:auto;
+    margin-left: -37px;
+}
+
+ul.trucks{
+    background-color:rgba(224, 255, 255, 0);
+    margin-top: 25px;
+    position: absolute;
+    color: #369;
+}
+
+div.exitbtn{
+    margin-top: 20px;
+}
+
+div.truckselect{
+    margin-left: 20%;
+}
+
+h2.truck{
+    color:#369;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.truck{
+    color:#369;
+    font-family: Arial, Helvetica, sans-serif;
+}

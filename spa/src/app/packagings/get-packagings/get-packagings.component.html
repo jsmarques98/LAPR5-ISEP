@@ -1,16 +1,16 @@
 
 
-<section style="margin-left:10%;padding:1px 16px;height:100%;">
-    <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;margin-top: 150px;">packagings</h2>
-    <button style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id ="find"(click)="getPackagings();getUniqueArrayDate();getUniqueArrayWarehouse();">Find</button>
-    <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="orderByDate" (click)="orderByDate()">Order by Date</button>
+<section>
+    <h2 class="title">Packagings</h2>
+    <button type="submit" class="btn btn-primary w-100" id ="find"(click)="getPackagings();getUniqueArrayDate();getUniqueArrayWarehouse();">Find</button>
+    <button *ngIf="flag" type="submit" class="btn btn-primary w-100" id="orderByDate" (click)="orderByDate()">Order by Date</button>
     <select [(ngModel)]="filterDate" *ngIf="flag" #cricket id="filterDate" (change)="filterDateAndWarehouse($event)">
       <option value="default" (click)="getUniqueArrayDate()">Filter by Date</option>
       <option *ngFor="let packaging of newArrayDate" [value]="packaging">
           {{packaging}}
       </option>
   </select>
-    <button *ngIf="flag" style="margin-top: 20px;" type="submit" class="btn btn-primary w-100" id="orderByWarehouse" (click)="orderByWarehouseId()">Order by WarehouseId</button>
+    <button *ngIf="flag" type="submit" class="btn btn-primary w-100" id="orderByWarehouse" (click)="orderByWarehouseId()">Order by WarehouseId</button>
     <select [(ngModel)]="filterWarehouse" *ngIf="flag" #cricket (change)="filterDateAndWarehouse($event)">
       <option value="default">Filter by WarehouseId</option>
       <option *ngFor="let packaging of newArrayWarehouse" [value]="packaging">
@@ -22,29 +22,28 @@
 
 </section>
   
-  <section style="margin-left:10%;padding:1px 16px;height:100%;">
-    <ul class="packagings" style="background-color:rgba(224, 255, 255, 0);margin-top: 25px;position: absolute;">
+  <section>
+    <ul class="packagings">
       <li *ngFor="let packaging of packagings">
         <button [class.selected]="packaging === selectedPackaging" type="button" (click)="onSelect(packaging)">
           <span class="name">{{packaging.id}}</span>
         </button>
       </li>
-      <div style="margin-top: 20px;">
+      <div class="exitbtn">
         <button routerLink="/home">Exit</button>
       </div> 
     </ul>
     
 
-    <div *ngIf="selectedPackaging" style="margin-left: 15%;">
-      <h2 style="color:#369;font-family: Arial, Helvetica, sans-serif;">Packaging {{selectedPackaging.id | uppercase}} Details</h2>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">positionX: {{selectedPackaging.positionX}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">positionY: {{selectedPackaging.positionY}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">positionZ: {{selectedPackaging.positionZ}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">truckPlate: {{selectedPackaging.truckPlate}}</div>
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">deliveryId: {{selectedPackaging.deliveryId}}</div>  
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">DeliveryDate: {{selectedPackaging.deliveryDate}}</div> 
-      <div style="color:#369;font-family: Arial, Helvetica, sans-serif;">DeliveryWarehouseId: {{selectedPackaging.deliveryWarehouseId}}</div> 
-     
+    <div class="packselect" *ngIf="selectedPackaging">
+      <h2 class="pack">Packaging {{selectedPackaging.id | uppercase}} Details</h2>
+      <div class="pack">positionX: {{selectedPackaging.positionX}}</div>
+      <div class="pack">positionY: {{selectedPackaging.positionY}}</div>
+      <div class="pack">positionZ: {{selectedPackaging.positionZ}}</div>
+      <div class="pack">truckPlate: {{selectedPackaging.truckPlate}}</div>
+      <div class="pack">deliveryId: {{selectedPackaging.deliveryId}}</div>  
+      <div class="pack">DeliveryDate: {{selectedPackaging.deliveryDate}}</div> 
+      <div class="pack" >DeliveryWarehouseId: {{selectedPackaging.deliveryWarehouseId}}</div> 
     </div>
   </section>
   

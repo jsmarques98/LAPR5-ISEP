@@ -1,0 +1,54 @@
+section{
+    padding:1px 16px;
+    height:100%;
+}
+
+h2.title{
+    color:#369;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 150px;
+}
+
+section.sections{
+    margin-left:10%;
+    padding:1px 16px;
+    height:auto;
+}
+
+ul.sections{
+    background-color:rgba(224, 255, 255, 0);
+    margin-top: 25px;
+    position: absolute;
+    height: 60px;
+    margin-left: -190px;
+    color: #369;
+}
+
+div.text-right{
+    width: 500px;
+    color:black;
+    height: auto;
+    margin-top: 20px;
+}
+
+div.exitbtn{
+    margin-top: 20px;
+}
+
+div.secselect{
+    margin-left: 15%;
+}
+
+h2.sec{
+    color:#369;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.sec{
+    color:#369;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button.btn btn-primary w-100{
+    margin-top: 20px;
+}

@@ -1,0 +1,14 @@
+section{
+    padding:1px 16px;
+    height:100%;
+}
+
+h1.title{
+    color:#369;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 150px;
+}
+
+div.exitbtn{
+    margin-top: 20px;
+}
