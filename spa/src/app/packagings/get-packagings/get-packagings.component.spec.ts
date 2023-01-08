@@ -11,31 +11,11 @@ import {
 import { environment } from 'src/environments/environment';
 
 
-  /*describe('GetPackagingsComponent', () => {
-  let component: GetPackagingsComponent;
-  let fixture: ComponentFixture<GetPackagingsComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ GetPackagingsComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(GetPackagingsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-}); */
-
 describe('PackagingService', () => {
   let service: PackagingService;
   let httpController: HttpTestingController;
 
-  let url = 'https://localhost:3000/';
+  let url = 'https://10.9.20.241:3000/';
   
     beforeEach(() => {
       TestBed.configureTestingModule({

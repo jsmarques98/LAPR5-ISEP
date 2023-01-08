@@ -15,7 +15,7 @@ describe('TruckService', () => {
     let service: TruckService;
     let httpController: HttpTestingController;
   
-    let url = 'http://localhost:3000/';
+    let url = 'http://10.9.20.241:3000/';
     
       beforeEach(() => {
         TestBed.configureTestingModule({
